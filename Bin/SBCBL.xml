@@ -1,0 +1,349 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SBCBL
+</name>
+</assembly>
+<members>
+<member name="M:SBCBL.Tickets.CSelectedTickets.AddTicket(SBCBL.Tickets.CTicket)">
+	<summary>
+ Add Wager
+ </summary>
+	<param name="poTicket"></param>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CSelectedTickets.GetTicket(System.String)">
+	<summary>
+ Get Wager by ID
+ </summary>
+	<param name="psTicketID"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CSelectedTickets.RemoveTickets(System.String)">
+	<summary>
+ Remove Wagers
+ </summary>
+	<param name="poTicketIDs"></param>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CSelectedTickets.getGameIDs">
+	<summary>
+ Get all selected GameID
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CSelectedTickets.SaveTickets(System.Double,System.String,System.String,System.String)">
+	<summary>
+ Save Wagers to DB
+ </summary>
+	<param name="pnRemainAmount"></param>
+	<param name="psAgentID"></param>
+	<param name="psPlayerID"></param>
+	<param name="psOrderBy"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.getMaxBetAmount(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},SBCBL.CacheUtils.CPlayerTemplate)">
+	<summary>
+ Return Maximum Bet Amount configured from SA
+ </summary>
+	<param name="poPlayerTemplate"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.getMinBetAmount(SBCBL.CacheUtils.CPlayerTemplate,SBCBL.CEnums.ETypeOfBet)">
+	<summary>
+ Return Minimum Bet Amount configured from SA
+ </summary>
+	<param name="poPlayerTemplate"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.AddTicketBet(SBCBL.Tickets.CTicketBet)">
+	<summary>
+ Add Wager's item
+ </summary>
+	<param name="poTicketBet"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.RemoveTicketBets(System.String)">
+	<summary>
+ Remove Wager's items
+ </summary>
+	<param name="poTicketBetIDs"></param>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.ParseOptions">
+	<summary>
+ Use to generate Ticket's options
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.Factorial(System.Int32,System.Int32)">
+	<summary>
+ Calculate N!/R!
+ </summary>
+	<param name="pnN"></param>
+	<param name="pnR"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.Combinatorial(System.Int32,System.Int32)">
+	<summary>
+ Calculate pnN choose pnR
+ </summary>
+	<param name="pnN"></param>
+	<param name="pnR"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.EnumCombinations(System.Int32,System.Collections.Generic.List{System.String}@,System.Int32,System.String)">
+	<summary>
+ Generate all possiable combinations
+ </summary>
+	<param name="pnItems">Remain items of each combination</param>
+	<param name="polstCombinations">All possibale combinations</param>
+	<param name="pnIndex">Begin position</param>
+	<param name="psItems">Contain position of bet in each combination</param>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.ReCalcParlayAmount">
+	<summary>
+ Calculation Win/Risk amount
+ </summary>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.ParseParlayOptions">
+	<summary>
+ Use to generate Parlay's options
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.GenerateParlay">
+	<summary>
+ Gnerate all possiable parlay tickets
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.CreateParlayTickets(System.Int32,SBCBL.Tickets.CTicketList@,System.Double,System.Int32,SBCBL.Tickets.CTicket)">
+	<summary>
+ Generate all possiable combinations
+ </summary>
+	<param name="pnItems">Remain items in each combination</param>
+	<param name="polstTickets">All possiable combinations</param>
+	<param name="pnBetAmount">Bet amount in each combination</param>
+	<param name="pnIndex">Start position</param>
+	<param name="poTicket">Contain all bets in each combination</param>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.ParseReverseOptions">
+	<summary>
+ Use to generate Reverse's options
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.ParseTeaserOptions">
+	<summary>
+ Use to generate Teaser's options
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Tickets.CTicket.ParseIfBetOptions">
+	<summary>
+ Use to generate Reverse's options
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Managers.CPlayerManager.UpdatePlayer(System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.String,System.String,System.String,System.String,System.Double,System.Double,System.Double,System.Double,System.Double)">
+	<summary>
+ psOldLogin: use to clear cache palyer infor
+ </summary>
+</member><member name="M:SBCBL.Managers.CPlayerManager.DeletePlayer(System.String,System.String,System.String)">
+	<summary>
+ psLogin: use to clear cache palyer infor
+ </summary>
+</member><member name="M:SBCBL.Tickets.CTicketBet.Validate(SBCBL.Tickets.COddRulesEngine,System.Boolean,System.Int32,System.Int32,System.Double,System.Int32)">
+	<summary>
+ This function's used to validate one bet when user place bet
+ </summary>
+	<param name="poOddsRules"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:SBCBL.Utils.CPropertiesSorter`1.SortQuery">
+	<summary>
+ The sort string used to perform the sort. Can sort on multiple fields.
+ Use the property names of the class and basic SQL Syntax.
+ 
+ Example: "LastName DESC, FirstName"
+ </summary>
+</member><member name="M:SBCBL.Utils.CPropertiesSorter`1.Compare(`0,`0)">
+	<summary>
+ This is an implementation of IComparer(Of T).Compare
+ Can sort on multiple fields, or just one.
+ </summary>
+</member><member name="M:SBCBL.Managers.CAgentManager.GetByID(System.String)">
+	<summary>
+ Get Agent's Info By AgentID
+ </summary>
+	<param name="psAgentID"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Managers.CAgentManager.GetAgentsBySuperID(System.String,System.Nullable{System.Boolean},System.Boolean,System.String)">
+	<summary>
+ Get all SubAgents of SuperAdmin
+ </summary>
+	<param name="psSuperAdminID"></param>
+	<param name="bpIsBettingLocked"></param>
+	<param name="pbIsLocked"></param>
+	<param name="psNameOrLogin"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Managers.CAgentManager.GetAgentsByAgentID(System.String,System.Nullable{System.Boolean},System.Boolean,System.String)">
+	<summary>
+ Get all SubAgents of Agent
+ </summary>
+	<param name="psAgentID"></param>
+	<param name="bpIsBettingLocked"></param>
+	<param name="pbIsLocked"></param>
+	<param name="psNameOrLogin"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Managers.CAgentManager.LockAgents(System.Collections.Generic.List{System.String},System.Boolean,System.String)">
+	<summary>
+ Lock/Unlock multi Agents
+ </summary>
+	<param name="pLstAgents"></param>
+	<param name="pbLocked"></param>
+	<param name="psUpdateBy"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Managers.CAgentManager.BettingLockAgents(System.Collections.Generic.List{System.String},System.Boolean,System.String)">
+	<summary>
+ BettingLock/BettingUnlock multi Agents
+ </summary>
+	<param name="pLstAgents"></param>
+	<param name="pbBettingLocked"></param>
+	<param name="psUpdateBy"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.CacheUtils.CGeneralUser.ConvertToEST(System.DateTime)">
+	<summary>
+ ADDS the timezone offset to the GMT time
+ </summary>
+</member><member name="M:SBCBL.CacheUtils.CGeneralUser.ConvertToGMT(System.DateTime)">
+	<summary>
+ SUBTRACTS the timezone offset from the local time to get to the GMT time
+ </summary>
+</member><member name="M:SBCBL.CacheUtils.CSysSettingList.GetSysSetting(System.String)">
+	<summary>
+ Use only: after get the list of settings by Category or (Category and SubCategory)
+ </summary>
+</member><member name="M:SBCBL.CacheUtils.CSysSettingList.GetValue(System.String)">
+	<summary>
+ Use only: after get the list of settings by Category or (Category and SubCategory)
+ </summary>
+</member><member name="M:SBCBL.CacheUtils.CSysSettingList.GetValue(System.String,System.String)">
+	<summary>
+ Use only: after get the list of settings by Category or (Category and SubCategory)
+ </summary>
+</member><member name="M:SBCBL.CacheUtils.CSysSettingList.GetBooleanValue(System.String)">
+	<summary>
+ Use only: after get the list of settings by Category or (Category and SubCategory)
+ </summary>
+</member><member name="M:SBCBL.CacheUtils.CSysSettingList.GetDoubleValue(System.String)">
+	<summary>
+ Use only: after get the list of settings by Category or (Category and SubCategory)
+ </summary>
+</member><member name="M:SBCBL.CacheUtils.CSysSettingList.GetIntegerValue(System.String)">
+	<summary>
+ Use only: after get the list of settings by Category or (Category and SubCategory)
+ </summary>
+</member><member name="P:SBCBL.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:SBCBL.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:SBCBL.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:SBCBL.Tickets.COddRulesEngine.GetMoneyLine(System.String,System.String,System.String,System.String,System.String,System.Double,System.Boolean,System.String,System.Int32,System.Boolean)">
+	<summary>
+ Return MoneyLine
+ </summary>
+	<param name="psGameID"></param>
+	<param name="psGameType"></param>
+	<param name="psTeam">Away(Over)|Home(Under)</param>
+	<param name="psContext">Current|1H|2H</param>
+	<param name="psBetType">MoneyLine|Spread|TotalPoints|Draw</param>
+	<param name="pnOdds">Odds for current line</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Managers.CSuperUserManager.GetSuperByID(System.String)">
+	<summary>
+ Get Super admin by ID
+ </summary>
+	<param name="psSuperID"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:SBCBL.UI.CSBCSession.SelectedGameTypes(System.String)">
+	<summary>
+ If psPlayerID is empty then get current player
+ </summary>
+</member><member name="P:SBCBL.UI.CSBCSession.SelectedBetType(System.String)">
+	<summary>
+ If psPlayerID is empty then get current player
+ </summary>
+</member><member name="M:SBCBL.UI.CSBCSession.IsExistedSelectedGameType(System.String,System.String)">
+	<summary>
+ If psPlayerID is empty then get current player
+ </summary>
+</member><member name="M:SBCBL.UI.CSBCSession.RemoveSelectedGameType(System.String,System.String)">
+	<summary>
+ If psPlayerID is empty then get current player
+ </summary>
+</member><member name="M:SBCBL.UI.CSBCSession.AddSelectedGameType(System.String,System.String)">
+	<summary>
+ If psPlayerID is empty then get current player
+ </summary>
+</member><member name="P:SBCBL.CacheUtils.CAgentPosition.WinAmountCurrentSpreadAway">
+	<summary>
+ total
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:SBCBL.CacheUtils.CAgentPosition.WinAmountCurrentMLAway">
+	<summary>
+ ''''''''Mline
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.CacheUtils.CPlayerTemplateLimitList.GetLimit(System.String)">
+	<summary>
+ Use it after get the list of limits by GameType
+ </summary>
+</member><member name="M:SBCBL.CacheUtils.CPlayerTemplateLimitList.GetLimitValue(System.String,SBCBL.CacheUtils.LimitName)">
+	<summary>
+ Use it after get the list of limits by GameType
+ </summary>
+</member><member name="M:SBCBL.std.GetEasternDate">
+	<summary>
+ Get Eastern Datetime
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Managers.CTeaserRuleManager.GetByID(System.String)">
+	<summary>
+ Get TeaserRule's Info By ID
+ </summary>
+	<param name="psTeaserRuleID"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:SBCBL.Managers.CTeaserRuleManager.LockTeaserRules(System.Collections.Generic.List{System.String},System.Boolean,System.String)">
+	<summary>
+ Lock/Unlock multi TeaserRules
+ </summary>
+	<param name="pLstTeaserRuleIDs"></param>
+	<param name="pbLocked"></param>
+	<param name="psUpdateBy"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

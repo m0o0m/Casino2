@@ -1,0 +1,173 @@
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+html,body {
+	height:100%;
+	width:100%;
+}
+body {
+	margin:0;
+	padding:0;
+	background:#222;
+	font-family:Arial, Helvetica, sans-serif;
+	background:url(../images/sport-img.jpg) no-repeat;
+	background-size:100% 100%;
+}
+header {
+	background:url(../images/diag-w.png) #111;
+	min-height:80px;
+	position:relative;
+	z-index:99;
+	border-bottom:1px solid #0CF;
+	padding:0;
+	border-top:5px solid #0cf;
+}
+
+footer {
+	position:absolute;
+	z-index:99;
+	bottom:0;
+	background:url(../images/diag-w.png) #111;
+	width:100%;
+	border-bottom:5px solid #0cf;
+}
+.logo {
+	color:#0cF;
+	text-transform:uppercase;
+	text-align:center;
+	font-size:36px;
+	line-height:36px;
+	font-family: 'Roboto', sans-serif;
+	font-weight:700;
+	letter-spacing:-2px;
+	padding:20px;
+}
+.logo span {
+	color:#eee;
+}
+.copyright {
+	color:#eee;
+	font-size:12px;
+	padding:20px;
+	text-align:center;
+	text-transform:uppercase;
+}
+.container {
+	width:980px;
+	margin:0 auto;
+}
+h1,h2,h3,h4,h5 {
+	font-family: 'Roboto', sans-serif;
+	
+	margin:0 0 25px;
+}
+a, a:visited {
+	color:#0cf;
+	text-decoration:none;
+}
+a:hover {
+	color:#0FF;
+}
+/* form */
+.login-wrap {
+	max-width:440px;
+	padding:20px 60px;
+	background:rgba(0,0,0,0.65);
+	margin:80px auto 0;
+	border-top:10px solid #0cf;
+}
+h3 {
+	font-weight:400;
+	color:#0cf;
+	font-size:20px;
+	margin:0 0 20px;
+	letter-spacing:4px;
+	text-transform:uppercase;
+	text-align:center;
+}
+.form-group {
+	margin-bottom:15px;
+	width:100%;
+}
+.form-control {
+	font-size:14px;
+	color:#444;
+	padding:10px;
+	border:0px solid #ddd;
+	width:100%;
+	box-sizing:border-box;
+}
+.remember-box {
+	font-size:12px;
+	color:#ddd;
+	text-align:center;
+}
+.submit-btn-box {
+	margin-top:20px;
+	text-align:center;
+}
+.submit-btn {
+	padding:8px 20px;
+	font-size:16px;
+	text-transform:uppercase;
+	color:#0CF;
+	border:1px solid #0cf;
+	transition:.5s;
+	background:rgba(0,0,0,0.5);
+	cursor:pointer;
+}
+.submit-btn:hover {
+	background:#0cf;
+	color:#111;
+	transition:.5s;
+}
+.login-links {
+	text-align:center;
+	margin-top:20px;
+	font-size:12px;
+	color:rgba(255,255,255,0.5);
+}
+.login-links a {
+	font-size:12px;
+}
+
+/* new clearfix */
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+	}
+
+* html .clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+@media (max-width:480px) {
+body {
+	margin:0;
+	padding:0;
+	background:#222;
+	font-family:Arial, Helvetica, sans-serif;
+	background:url(../images/sport-img.jpg) center no-repeat;
+	background-size:auto 100%;
+}
+.container {
+	width:100%;
+}
+.login-wrap {
+	max-width:100%;
+	padding:20px;
+	background:rgba(0,0,0,0.65);
+	margin:0 auto;
+	border-left:0;
+	border-right:0;
+}	
+}

@@ -1,0 +1,27 @@
+﻿<%@ Master Language="VB" CodeFile="CCPopup.master.vb" Inherits="SBCCallCenterAgents.CCPopup" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Pop-up page</title>
+
+ <link href="/SBS/Inc/Styles/styles.css" rel="stylesheet" type="text/css" />
+    <script src="/Inc/Scripts/std.js" language="javascript" type="text/javascript"></script>
+
+</head>
+<body >
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="sc" ScriptMode="Release" EnableScriptGlobalization="true"
+        EnableScriptLocalization="false" runat="server" EnablePageMethods="true" />
+    <div>
+        <table style="width: 100%">
+            <tr>
+                <td valign="top" nowrap="nowrap" style="width: 0px">
+                    <asp:ContentPlaceHolder ID="cphBody" runat="server" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>

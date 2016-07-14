@@ -1,0 +1,191 @@
+<log4net:event logger="SBCBL.Managers.COddRuleManager" timestamp="2016-05-08T07:07:23.192921-04:00" level="ERROR" thread="9" domain="/LM/W3SVC/2/ROOT-1-131071787476580506" identity="sbssuper" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>Cannot get  Subject OddRules by AgentID. SQL: SELECT Distinct * from OddRules WHERE AgentID=''</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties><log4net:exception><![CDATA[WebsiteLibrary.DBUtils.CSQLException: SELECT Distinct * from OddRules WHERE AgentID='' ---> System.Data.SqlClient.SqlException: Conversion failed when converting from a character string to uniqueidentifier.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.Common.DataAdapter.FillLoadDataRow(SchemaMapping mapping)
+   at System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   at System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 364
+   --- End of inner exception stack trace ---
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 367
+   at SBCBL.Managers.COddRuleManager.GetOddRulesByAgentID(String psAgentID) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\SBCBL\Managers\COddRuleManager.vb:line 110]]></log4net:exception></log4net:event>
+<log4net:event logger="ASP.sbs_inc_game_selectgame_ascx" timestamp="2016-05-08T07:09:06.8863031-04:00" level="ERROR" thread="26" domain="/LM/W3SVC/2/ROOT-1-131071787476580506" identity="kl101" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>goi</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties></log4net:event>
+<log4net:event logger="SBCBL.Managers.COddRuleManager" timestamp="2016-05-08T07:11:08.9877176-04:00" level="ERROR" thread="19" domain="/LM/W3SVC/2/ROOT-1-131071787476580506" identity="sbssuper" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>Cannot get  Subject OddRules by AgentID. SQL: SELECT Distinct * from OddRules WHERE AgentID=''</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties><log4net:exception><![CDATA[WebsiteLibrary.DBUtils.CSQLException: SELECT Distinct * from OddRules WHERE AgentID='' ---> System.Data.SqlClient.SqlException: Conversion failed when converting from a character string to uniqueidentifier.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.Common.DataAdapter.FillLoadDataRow(SchemaMapping mapping)
+   at System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   at System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 364
+   --- End of inner exception stack trace ---
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 367
+   at SBCBL.Managers.COddRuleManager.GetOddRulesByAgentID(String psAgentID) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\SBCBL\Managers\COddRuleManager.vb:line 110]]></log4net:exception></log4net:event>
+<log4net:event logger="ASP.sbs_inc_game_selectgame_ascx" timestamp="2016-05-08T07:11:59.1106056-04:00" level="ERROR" thread="26" domain="/LM/W3SVC/2/ROOT-1-131071787476580506" identity="kl101" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>goi</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties></log4net:event>
+<log4net:event logger="SBCBL.Managers.CAgentManager" timestamp="2016-05-08T07:17:09.9255515-04:00" level="ERROR" thread="23" domain="/LM/W3SVC/2/ROOT-1-131071787476580506" identity="sbssuper" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>Fails to get Agent by ID.SQL: SELECT TOP 1 * FROM Agents WHERE AgentID = ''</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties><log4net:exception><![CDATA[WebsiteLibrary.DBUtils.CSQLException: SELECT TOP 1 * FROM Agents WHERE AgentID = '' ---> System.Data.SqlClient.SqlException: Conversion failed when converting from a character string to uniqueidentifier.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.Common.DataAdapter.FillLoadDataRow(SchemaMapping mapping)
+   at System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   at System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 364
+   --- End of inner exception stack trace ---
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 367
+   at SBCBL.Managers.CAgentManager.GetByID(String psAgentID) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\SBCBL\Managers\CAgentManager.vb:line 119]]></log4net:exception></log4net:event>
+<log4net:event logger="SBCBL.Managers.CAgentManager" timestamp="2016-05-08T07:17:13.591558-04:00" level="ERROR" thread="9" domain="/LM/W3SVC/2/ROOT-1-131071787476580506" identity="sbssuper" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>Fails to get Agent by ID.SQL: SELECT TOP 1 * FROM Agents WHERE AgentID = ''</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties><log4net:exception><![CDATA[WebsiteLibrary.DBUtils.CSQLException: SELECT TOP 1 * FROM Agents WHERE AgentID = '' ---> System.Data.SqlClient.SqlException: Conversion failed when converting from a character string to uniqueidentifier.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.Common.DataAdapter.FillLoadDataRow(SchemaMapping mapping)
+   at System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   at System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 364
+   --- End of inner exception stack trace ---
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 367
+   at SBCBL.Managers.CAgentManager.GetByID(String psAgentID) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\SBCBL\Managers\CAgentManager.vb:line 119]]></log4net:exception></log4net:event>
+<log4net:event logger="SBCBL.Managers.COddRuleManager" timestamp="2016-05-08T07:29:02.6284033-04:00" level="ERROR" thread="16" domain="/LM/W3SVC/2/ROOT-1-131071787476580506" identity="sbssuper" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>Cannot get  Subject OddRules by AgentID. SQL: SELECT Distinct * from OddRules WHERE AgentID=''</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties><log4net:exception><![CDATA[WebsiteLibrary.DBUtils.CSQLException: SELECT Distinct * from OddRules WHERE AgentID='' ---> System.Data.SqlClient.SqlException: Conversion failed when converting from a character string to uniqueidentifier.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.Common.DataAdapter.FillLoadDataRow(SchemaMapping mapping)
+   at System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   at System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 364
+   --- End of inner exception stack trace ---
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 367
+   at SBCBL.Managers.COddRuleManager.GetOddRulesByAgentID(String psAgentID) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\SBCBL\Managers\COddRuleManager.vb:line 110]]></log4net:exception></log4net:event>
+<log4net:event logger="ASP.sbs_inc_game_selectgame_ascx" timestamp="2016-05-08T07:32:35.6155774-04:00" level="ERROR" thread="5" domain="/LM/W3SVC/2/ROOT-1-131071787476580506" identity="r101" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>goi</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties></log4net:event>
+<log4net:event logger="ASP.sbs_inc_game_selectgame_ascx" timestamp="2016-05-08T08:01:58.1534732-04:00" level="ERROR" thread="82" domain="/LM/W3SVC/2/ROOT-1-131071787476580506" identity="Kl101" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>goi</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties></log4net:event>
+<log4net:event logger="ASP._global_asax" timestamp="2016-05-08T12:29:24.9188578-04:00" level="ERROR" thread="7" domain="/LM/W3SVC/2/ROOT-1-131071985647472575" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>This is an invalid webresource request.</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties><log4net:exception>System.Web.HttpException (0x80004005): This is an invalid webresource request.
+   at System.Web.Handlers.AssemblyResourceLoader.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)</log4net:exception></log4net:event>
+<log4net:event logger="ASP._global_asax" timestamp="2016-05-08T12:33:11.056855-04:00" level="ERROR" thread="19" domain="/LM/W3SVC/2/ROOT-1-131071985647472575" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>This is an invalid webresource request.</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties><log4net:exception>System.Web.HttpException (0x80004005): This is an invalid webresource request.
+   at System.Web.Handlers.AssemblyResourceLoader.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)</log4net:exception></log4net:event>
+<log4net:event logger="ASP._global_asax" timestamp="2016-05-08T12:33:11.2128553-04:00" level="ERROR" thread="16" domain="/LM/W3SVC/2/ROOT-1-131071985647472575" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>This is an invalid webresource request.</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties><log4net:exception>System.Web.HttpException (0x80004005): This is an invalid webresource request.
+   at System.Web.Handlers.AssemblyResourceLoader.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)</log4net:exception></log4net:event>
+<log4net:event logger="ASP.sbs_inc_game_selectgame_ascx" timestamp="2016-05-08T17:38:34.6462387-04:00" level="ERROR" thread="17" domain="/LM/W3SVC/2/ROOT-1-131072167980280826" identity="l101" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>goi</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties></log4net:event>
+<log4net:event logger="ASP.sbs_inc_game_selectgame_ascx" timestamp="2016-05-08T17:43:42.5751795-04:00" level="ERROR" thread="9" domain="/LM/W3SVC/2/ROOT-1-131072167980280826" identity="l101" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>goi</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties></log4net:event>
+<log4net:event logger="ASP.sbs_inc_game_selectgame_ascx" timestamp="2016-05-08T17:44:32.7136676-04:00" level="ERROR" thread="24" domain="/LM/W3SVC/2/ROOT-1-131072167980280826" identity="l101" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>goi</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties></log4net:event>
+<log4net:event logger="SBCBL.Managers.CAgentManager" timestamp="2016-05-08T17:45:57.5310166-04:00" level="ERROR" thread="21" domain="/LM/W3SVC/2/ROOT-1-131072167980280826" identity="sbssuper" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>Fails to get Agent by ID.SQL: SELECT TOP 1 * FROM Agents WHERE AgentID = ''</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties><log4net:exception><![CDATA[WebsiteLibrary.DBUtils.CSQLException: SELECT TOP 1 * FROM Agents WHERE AgentID = '' ---> System.Data.SqlClient.SqlException: Conversion failed when converting from a character string to uniqueidentifier.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.Common.DataAdapter.FillLoadDataRow(SchemaMapping mapping)
+   at System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   at System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 364
+   --- End of inner exception stack trace ---
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 367
+   at SBCBL.Managers.CAgentManager.GetByID(String psAgentID) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\SBCBL\Managers\CAgentManager.vb:line 119]]></log4net:exception></log4net:event>
+<log4net:event logger="SBCBL.Managers.CAgentManager" timestamp="2016-05-08T17:46:00.1674212-04:00" level="ERROR" thread="29" domain="/LM/W3SVC/2/ROOT-1-131072167980280826" identity="sbssuper" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>Fails to get Agent by ID.SQL: SELECT TOP 1 * FROM Agents WHERE AgentID = ''</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties><log4net:exception><![CDATA[WebsiteLibrary.DBUtils.CSQLException: SELECT TOP 1 * FROM Agents WHERE AgentID = '' ---> System.Data.SqlClient.SqlException: Conversion failed when converting from a character string to uniqueidentifier.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.Common.DataAdapter.FillLoadDataRow(SchemaMapping mapping)
+   at System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   at System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 364
+   --- End of inner exception stack trace ---
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 367
+   at SBCBL.Managers.CAgentManager.GetByID(String psAgentID) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\SBCBL\Managers\CAgentManager.vb:line 119]]></log4net:exception></log4net:event>
+<log4net:event logger="SBCBL.Managers.CAgentManager" timestamp="2016-05-08T17:46:43.2390969-04:00" level="ERROR" thread="22" domain="/LM/W3SVC/2/ROOT-1-131072167980280826" identity="sbssuper" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>Fails to get Agent by ID.SQL: SELECT TOP 1 * FROM Agents WHERE AgentID = ''</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties><log4net:exception><![CDATA[WebsiteLibrary.DBUtils.CSQLException: SELECT TOP 1 * FROM Agents WHERE AgentID = '' ---> System.Data.SqlClient.SqlException: Conversion failed when converting from a character string to uniqueidentifier.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.Common.DataAdapter.FillLoadDataRow(SchemaMapping mapping)
+   at System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   at System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 364
+   --- End of inner exception stack trace ---
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 367
+   at SBCBL.Managers.CAgentManager.GetByID(String psAgentID) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\SBCBL\Managers\CAgentManager.vb:line 119]]></log4net:exception></log4net:event>
+<log4net:event logger="SBCBL.Managers.CAgentManager" timestamp="2016-05-08T17:47:08.6203414-04:00" level="ERROR" thread="31" domain="/LM/W3SVC/2/ROOT-1-131072167980280826" identity="sbssuper" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>Fails to get Agent by ID.SQL: SELECT TOP 1 * FROM Agents WHERE AgentID = ''</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties><log4net:exception><![CDATA[WebsiteLibrary.DBUtils.CSQLException: SELECT TOP 1 * FROM Agents WHERE AgentID = '' ---> System.Data.SqlClient.SqlException: Conversion failed when converting from a character string to uniqueidentifier.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.Common.DataAdapter.FillLoadDataRow(SchemaMapping mapping)
+   at System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   at System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 364
+   --- End of inner exception stack trace ---
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 367
+   at SBCBL.Managers.CAgentManager.GetByID(String psAgentID) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\SBCBL\Managers\CAgentManager.vb:line 119]]></log4net:exception></log4net:event>
+<log4net:event logger="SBCBL.Managers.CAgentManager" timestamp="2016-05-08T17:47:19.3843604-04:00" level="ERROR" thread="9" domain="/LM/W3SVC/2/ROOT-1-131072167980280826" identity="sbssuper" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>Fails to get Agent by ID.SQL: SELECT TOP 1 * FROM Agents WHERE AgentID = ''</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties><log4net:exception><![CDATA[WebsiteLibrary.DBUtils.CSQLException: SELECT TOP 1 * FROM Agents WHERE AgentID = '' ---> System.Data.SqlClient.SqlException: Conversion failed when converting from a character string to uniqueidentifier.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.Common.DataAdapter.FillLoadDataRow(SchemaMapping mapping)
+   at System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   at System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 364
+   --- End of inner exception stack trace ---
+   at WebsiteLibrary.DBUtils.CSQLDBUtils.getDataTable(String sql) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\WebsiteLibrary\DBUtils\CSQLDBUtils.vb:line 367
+   at SBCBL.Managers.CAgentManager.GetByID(String psAgentID) in G:\Working\ICC Inc\OldSBS\ChangeNewUI\TigerSb\SBCBL\Managers\CAgentManager.vb:line 119]]></log4net:exception></log4net:event>
+<log4net:event logger="ASP.sbs_inc_game_selectgame_ascx" timestamp="2016-05-08T21:06:30.7837519-04:00" level="ERROR" thread="50" domain="/LM/W3SVC/2/ROOT-1-131072286533937054" identity="L101" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>goi</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties></log4net:event>
+<log4net:event logger="ASP.sbs_inc_game_selectgame_ascx" timestamp="2016-05-08T21:07:00.455004-04:00" level="ERROR" thread="48" domain="/LM/W3SVC/2/ROOT-1-131072286533937054" identity="L101" username="IIS APPPOOL\ASP.NET v4.0"><log4net:message>goi</log4net:message><log4net:properties><log4net:data name="IP" value="167.114.101.74" /><log4net:data name="log4net:HostName" value="WINSBDB" /></log4net:properties></log4net:event>

@@ -1,0 +1,147 @@
+﻿Imports SBCBL.Managers
+Imports SBCBL.std
+Imports SBCBL.CacheUtils
+Imports System.Data
+
+Namespace SBCSuperAdmin
+    Partial Class OddsRulesSetup
+        Inherits SBCBL.UI.CSBCUserControl
+
+        Private Const YES As String = "Y"
+        Private Const LOWERTHAN As String = "LowerThan"
+        Private Const GREATERTHAN As String = "GreaterThan"
+        Private Const INCREASE As String = "Increase"
+        Private Const ISODDRULELOCKED As String = "IsOddRuleLocked"
+        Dim oSysManager As New CSysSettingManager()
+#Region "property"
+        Private Property OddRuleID() As String
+            Get
+                Return SafeString(ViewState("OddRuleID"))
+            End Get
+            Set(ByVal value As String)
+                ViewState("OddRuleID") = value
+            End Set
+        End Property
+
+        Public Property Title() As String
+            Get
+                Return SafeString(ViewState("Title"))
+            End Get
+            Set(ByVal value As String)
+                ViewState("Title") = value
+            End Set
+        End Property
+
+#End Region
+
+        Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+            If Not IsPostBack Then
+
+                bindOddsRules()
+            End If
+        End Sub
+        Private Sub bindOddsRules()
+
+            Dim oCCacheManager As CCacheManager = New CCacheManager()
+            'Dim odtOddsRule As DataTable = oCOddsRuleManager.GetALLOddsRules()
+            dgOddsRules.DataSource = oCCacheManager.GetAllOddsRules(SBCBL.std.GetSiteType)
+            dgOddsRules.DataBind()
+
+        End Sub
+
+        Protected Sub btnAdd_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+
+            If checkValid() Then
+                Dim oCCacheManager As CCacheManager = New CCacheManager()
+                'Dim oCOddsRuleManager As COddsRuleManager = New COddsRuleManager()
+                'oCOddsRuleManager.InsertOddsRules(System.Guid.NewGuid.ToString(), txtLowerThan.Text, txtGreaterThan.Text, txtIncrease.Text, chkOddRuleLocked.Checked)
+                oSysManager.AddSysSetting(
+
+                oCCacheManager.ClearAllOddsRules(SBCBL.std.GetSiteType)
+                bindOddsRules()
+                OddRuleID = Nothing
+                btnUpdate.Enabled = False
+                clearOddRuleInfor()
+                dgOddsRules.SelectedIndex = -1
+            End If
+
+        End Sub
+
+        Protected Sub btnUpdate_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
+
+            If checkValid() Then
+                Dim oCCacheManager As CCacheManager = New CCacheManager()
+                ' Dim oCOddsRuleManager As COddsRuleManager = New COddsRuleManager()
+                If Not String.IsNullOrEmpty(OddRuleID) Then
+                    oCOddsRuleManager.UpdateOddsRules(OddRuleID, txtLowerThan.Text, txtGreaterThan.Text, txtIncrease.Text, chkOddRuleLocked.Checked)
+                    oSysManager.UpdateValue(OddRuleID,"",
+                    oCCacheManager.ClearAllOddsRules(SBCBL.std.GetSiteType)
+                    oCCacheManager.ClearOddsRulesByID(OddRuleID)
+                    bindOddsRules()
+                    OddRuleID = Nothing
+                    btnUpdate.Enabled = False
+                    btnAdd.Enabled = True
+                    clearOddRuleInfor()
+                    dgOddsRules.SelectedIndex = -1
+                End If
+
+            End If
+
+        End Sub
+
+        Protected Sub dgOddsRules_ItemCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataGridCommandEventArgs) Handles dgOddsRules.ItemCommand
+            Dim oCCacheManager As CCacheManager = New CCacheManager()
+            Dim oCOddsRuleManager As COddsRuleManager = New COddsRuleManager()
+            OddRuleID = SafeString(e.CommandArgument)
+            Select Case UCase(e.CommandName)
+                Case "DELETEODDSRULES"
+                    oCOddsRuleManager.DeleteOddsRulesByID(OddRuleID)
+                    oCCacheManager.ClearAllOddsRules(SBCBL.std.GetSiteType)
+                    oCCacheManager.ClearOddsRulesByID(OddRuleID)
+                    OddRuleID = Nothing
+                    bindOddsRules()
+                    dgOddsRules.SelectedIndex = -1
+                Case "EDITODDSRULES"
+                    Dim oOddRule As COddsRule = oCCacheManager.GetOddsRulesByID(OddRuleID)
+                    bindOddRuleInfor(oOddRule.GreaterThan, oOddRule.Increase, oOddRule.LowerThan, oOddRule.IsOddRuleLocked)
+                    btnUpdate.Enabled = True
+                    btnAdd.Enabled = False
+                    dgOddsRules.SelectedIndex = e.Item.ItemIndex
+            End Select
+
+        End Sub
+
+        Private Function checkValid() As Boolean
+
+            If String.IsNullOrEmpty(txtGreaterThan.Text) Or String.IsNullOrEmpty(txtLowerThan.Text) Then
+                ClientAlert("Greater Than And Lower Than Musn't Be Empty ")
+                Return False
+            End If
+            If Not String.IsNullOrEmpty(txtGreaterThan.Text) AndAlso Not String.IsNullOrEmpty(txtLowerThan.Text) Then
+                If SafeDouble(txtGreaterThan.Text) >= SafeDouble(txtLowerThan.Text) Then
+                    ClientAlert("Greater Than, Lower Than Is Invalid")
+                    Return False
+                End If
+                If Not chkOddRuleLocked.Checked And SafeSingle(txtIncrease.Text) = 0 Then
+                    ClientAlert("Please Check Lock Or Input Increase")
+                    Return False
+                End If
+            End If
+
+            Return True
+
+        End Function
+        Private Sub clearOddRuleInfor()
+            txtGreaterThan.Text = ""
+            txtIncrease.Text = ""
+            txtLowerThan.Text = ""
+            chkOddRuleLocked.Checked = False
+        End Sub
+        Private Sub bindOddRuleInfor(ByVal psGreaterThan As Double, ByVal psIncrease As Single, ByVal psLowerThan As Double, ByVal pbOddRuleLocked As Boolean)
+            txtGreaterThan.Text = SafeString(psGreaterThan)
+            txtIncrease.Text = SafeString(psIncrease)
+            txtLowerThan.Text = SafeString(psLowerThan)
+            chkOddRuleLocked.Checked = SafeBoolean(pbOddRuleLocked)
+        End Sub
+    End Class
+End Namespace

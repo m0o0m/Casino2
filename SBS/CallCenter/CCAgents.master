@@ -1,0 +1,72 @@
+﻿<%@ Master Language="VB" CodeFile="CCAgents.master.vb" Inherits="SBS_Agents_Agent" %>
+
+<%@ Register Src="~/Inc/contentFileDB.ascx" TagName="contentFileDB" TagPrefix="uc1" %>
+<%@ Register Src="~/SBS/CallCenter/Inc/TopMenu.ascx" TagName="TopMenu" TagPrefix="uc1" %>
+<%@ Register Src="Inc/AgentTopMenu.ascx" TagName="AgentTopMenu" TagPrefix="uc2" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+       <asp:ContentPlaceHolder ID="cphHeader"  runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="/SBS/Inc/Styles/styles.css" rel="stylesheet" type="text/css" />
+    <link href="/SBS/Inc/Styles/SPopup.css" rel="stylesheet" type="text/css" />
+    <link href="/SBS/Inc/Styles/black.css" rel="stylesheet" type="text/css" runat="server"
+        id="lnkStyle" />
+    <link href="/SBS/Inc/Styles/tabContainer.css" rel="stylesheet" type="text/css" />
+
+
+    <script src="/Inc/Scripts/std.js" language="javascript" type="text/javascript"></script>
+
+    <script src="/Inc/Scripts/jQuery.js" language="javascript" type="text/javascript"></script>
+
+
+</head>
+<body>
+   <form id="form1" runat="server">
+    <asp:ScriptManager ID="sc" ScriptMode="Release" EnableScriptGlobalization="true"
+        EnableScriptLocalization="false" runat="server" EnablePageMethods="true" />
+    <div class="bg_header">
+        <table width="100%">
+            <tr>
+              <td valign="top" align="center" >
+		<div style="position:absolute;width:100%">
+    	        <img  id="imgLogo" runat="server" src="/images/Winsb.png" style="display:inline;"/>
+    	   	</div> 
+	   </td>
+                <td style="height: 87px; text-align: right; vertical-align: bottom;width:200px">
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 22px;" colspan="2">
+                    <div class="menu_left">
+                        <strong>
+                         <asp:Label ID="lblLoginId" runat="server" Font-Size="Medium" Style="margin-right: 10px;color:White;" Text=""></asp:Label>
+                       <asp:LinkButton runat="server" ID="lbnIPAlert" Text="IP Alert" Style="text-decoration: none; color: Red;position:relative;top:-1px" />  </strong>       
+                    </div>
+                    <div class="menu_right">
+                        <div>
+                            <asp:LinkButton ID="lbnLogout" runat="server" Text="Logout" CssClass="LogOut2" ToolTip="LOG OUT" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2">
+                    <uc1:TopMenu ID="ucTopMenu" runat="server" />
+                </td>
+            </tr>
+        </table></div>
+        <br style="clear:both" />
+        <br style="clear:both" />
+        <div style="min-height:400px">
+        <asp:ContentPlaceHolder ID="cphBody" runat="server">
+    </asp:ContentPlaceHolder>
+    </div>
+    
+    <div class="footer">
+        <center>Copyright &copy; 2011 by <b>NeoTech Resources LTD</b>. All right Reserved.</center> 
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿Imports SBCBL.CacheUtils
+Imports SBCBL.Managers
+Imports SBCBL.std
+Imports System.Data
+
+Namespace SBCSuperAdmins
+
+    Partial Class MoneyLineOff
+        Inherits SBCBL.UI.CSBCUserControl
+        Private _log As log4net.ILog = log4net.LogManager.GetLogger(Me.GetType())
+
+        Private Sub LoadLineOff()
+            Dim oGameTypeOnOffManager As New CGameTypeOnOffManager()
+            Dim odtMoneyLineOff As DataTable = oGameTypeOnOffManager.GetMoneyLineOffValues(UserSession.UserID.ToString, ddlSportType.SelectedValue)
+            If odtMoneyLineOff.Rows.Count > 0 Then
+                txtAwaySpreadGT = odtMoneyLineOff.Rows(0)("AwaySpreadMoneyGT")
+                txtAwaySpreadLT = odtMoneyLineOff.Rows(0)("AwaySpreadMoneyLT")
+            End If
+
+        End Sub
+
+        Protected Sub btnSave_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSave.Click
+           Dim oGameTypeOnOffManager As New CGameTypeOnOffManager()
+            If String.IsNullOrEmpty(ddlSportType.SelectedValue) Then
+                ClientAlert("Please Select Sport Type", True)
+                Return
+            End If
+            If oGameTypeOnOffManager.GetMoneyLineOff(UserSession.UserID.ToString) > 0 Then
+                oGameTypeOnOffManager.UpdateMoneyLineOff(UserSession.UserID.ToString, ddlSportType.SelectedValue, SafeInteger(txtAwaySpreadGT.Text), SafeInteger(txtAwaySpreadLT.Text))
+            Else
+                oGameTypeOnOffManager.InsertMoneyLineOff(UserSession.UserID.ToString, newGUID, ddlSportType.SelectedValue, SafeInteger(txtAwaySpreadGT.Text), SafeInteger(txtAwaySpreadLT.Text))
+            End If
+            ClientAlert("Money line off has been changed.", True)
+        End Sub
+
+        Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
+            bindGameType()
+        End Sub
+
+        Private Sub bindGameType()
+            Dim oGameTypes As List(Of CSysSetting) = (From oSetting As CSysSetting In UserSession.Cache.GetAllSysSettings(_sGameType) _
+                                                  Where SafeBoolean(oSetting.Value) And oSetting.SubCategory = "" _
+                                                  Order By oSetting.SubCategory, oSetting.Key _
+                                                  Select oSetting).ToList
+
+            ddlSportType.DataSource = oGameTypes
+            ddlSportType.DataTextField = "Key"
+            ddlSportType.DataValueField = "Key"
+            ddlSportType.DataBind()
+        End Sub
+
+        Protected Sub ddlSportType_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlSportType.SelectedIndexChanged
+            If ddlSportType.SelectedValue <> "" Then
+                LoadLineOff()
+            End If
+        End Sub
+    End Class
+End Namespace
