@@ -1,0 +1,111 @@
+﻿Imports SBCBL.CacheUtils
+Imports SBCBL.Managers
+Imports SBCBL.std
+Imports System.Data
+
+
+Namespace SBSAgents
+    Partial Class GameLineRestriction
+        Inherits SBCBL.UI.CSBCUserControl
+        Private _sGameType As String = SBCBL.std.GetSiteType & " GameType"
+        Private Sub bindGameType()
+            Dim oGameTypes As List(Of CSysSetting) = (From oSetting As CSysSetting In UserSession.Cache.GetAllSysSettings(_sGameType) _
+                                                  Where SafeBoolean(oSetting.Value) And oSetting.SubCategory = "" _
+                                                  Order By oSetting.SubCategory, oSetting.Key _
+                                                  Select oSetting).ToList
+
+            ddlSportType.DataSource = oGameTypes
+            ddlSportType.DataTextField = "Key"
+            ddlSportType.DataValueField = "Key"
+            ddlSportType.DataBind()
+        End Sub
+
+
+        Protected Sub btnSave_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSave.Click
+            If ddlSportType.SelectedValue = "" Then
+                ClientAlert("Please choose game type.", True)
+                Return
+            End If
+
+            If ddlContext.SelectedValue = "" Then
+                ClientAlert("Please choose game context.", True)
+                Return
+            End If
+
+            If SafeInteger(txtAwaySpreadGT.Text) > SafeInteger(txtAwaySpreadLT.Text) Then
+                ClientAlert("Input Away Spread Money Not Valid", True)
+                Return
+            End If
+
+            If SafeInteger(txtHomeSpreadGT.Text) > SafeInteger(txtHomeSpreadLT.Text) Then
+                ClientAlert("Input Home Spread Money Not Valid", True)
+                Return
+            End If
+
+            If SafeInteger(txtTotalPointGT.Text) > SafeInteger(txtTotalPointLT.Text) Then
+                ClientAlert("Input Total Point Not Valid", True)
+                Return
+            End If
+
+            Dim oGameTypeOnOffManager As New CGameTypeOnOffManager()
+            If oGameTypeOnOffManager.GetRestriction(UserSession.UserID.ToString) > 0 Then
+                oGameTypeOnOffManager.UpdateRestriction(UserSession.UserID.ToString, ddlSportType.SelectedValue, ddlContext.SelectedValue, SafeInteger(txtAwaySpreadGT.Text), SafeInteger(txtAwaySpreadLT.Text), SafeInteger(txtHomeSpreadGT.Text), SafeInteger(txtHomeSpreadLT.Text), SafeInteger(txtTotalPointGT.Text), SafeInteger(txtTotalPointLT.Text))
+            Else
+                oGameTypeOnOffManager.InsertRestriction(UserSession.UserID.ToString, newGUID, ddlSportType.SelectedValue, ddlContext.SelectedValue, SafeInteger(txtAwaySpreadGT.Text), SafeInteger(txtAwaySpreadLT.Text), SafeInteger(txtHomeSpreadGT.Text), SafeInteger(txtHomeSpreadLT.Text), SafeInteger(txtTotalPointGT.Text), SafeInteger(txtTotalPointLT.Text))
+
+            End If
+            ClientAlert("Your setting has been saved.", True)
+        End Sub
+
+        Protected Sub btnDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDelete.Click
+            Dim oGameTypeOnOffManager As New CGameTypeOnOffManager()
+            oGameTypeOnOffManager.DeleteXML(UserSession.UserID.ToString, "GameLineRestriction", "Condition")
+            LoadRules()
+        End Sub
+
+        Private Sub LoadRules()
+            If ddlContext.SelectedValue = "" Or ddlSportType.SelectedValue = "" Then
+                Return
+            End If
+            Dim oGameTypeOnOffManager As New CGameTypeOnOffManager()
+            Dim dtRestriction As DataTable = oGameTypeOnOffManager.GetRestrictionValues(UserSession.UserID.ToString)
+            If dtRestriction.Rows.Count <= 0 Then
+                Return
+            End If
+            txtTotalPointGT.Text = dtRestriction.Rows(0)("TotalPointGT")
+            txtTotalPointLT.Text = dtRestriction.Rows(0)("TotalPointLT")
+            txtAwaySpreadGT.Text = dtRestriction.Rows(0)("AwaySpreadMoneyGT")
+            txtAwaySpreadLT.Text = dtRestriction.Rows(0)("AwaySpreadMoneyLT")
+            txtHomeSpreadGT.Text = dtRestriction.Rows(0)("HomeSpreadMoneyGT")
+            txtHomeSpreadLT.Text = dtRestriction.Rows(0)("HomeSpreadMoneyLT")
+        End Sub
+
+        Protected Sub ddlContext_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlContext.SelectedIndexChanged
+            LoadRules()
+        End Sub
+
+        Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+            If Not IsPostBack Then
+                bindGameType()
+                LoadRules()
+            End If
+        End Sub
+
+        Protected Sub ddlSportType_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlSportType.SelectedIndexChanged
+            ResetGameType()
+        End Sub
+
+        Private Sub ResetGameType()
+            ddlContext.SelectedValue = ""
+            txtAwaySpreadGT.Text = ""
+            txtAwaySpreadLT.Text = ""
+            txtTotalPointGT.Text = ""
+            txtTotalPointLT.Text = ""
+            txtHomeSpreadGT.Text = ""
+            txtHomeSpreadLT.Text = ""
+        End Sub
+
+    End Class
+
+End Namespace
+

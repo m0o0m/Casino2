@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://www.lookupbyzip.com/lookupzip.asmx?wsdl" docRef="http://www.lookupbyzip.com/lookupzip.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://www.lookupbyzip.com/lookupzip.asmx" xmlns:q1="http://zipsite/" binding="q1:lookupZipSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://www.lookupbyzip.com/lookupzip.asmx" xmlns:q2="http://zipsite/" binding="q2:lookupZipSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

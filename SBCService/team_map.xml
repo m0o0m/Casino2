@@ -1,0 +1,190 @@
+<FeedMappings>
+  <Feed name="sportsoptions">
+    <GameType>
+      <Type feed="Baseball" value="MLB Baseball"/>
+      <Type feed="NBA" value="NBA Basketball"/>
+    </GameType>
+    <TeamNames>
+      <Team type="NBA Basketball" feed="LA Clippers" value="Los Angeles Clippers"/>
+      <Team type="NBA Basketball" feed="LA Lakers" value="Los Angeles Lakers"/>
+    </TeamNames>
+    <TeamNames_ABBR>
+      <Team ABBR="ARI" type="MLB Baseball" value="Arizona Diamondbacks" />
+      <Team ABBR="ATL" type="MLB Baseball" value="Atlanta Braves"/>
+      <Team ABBR="CUB"  type="MLB Baseball" value="Chicago Cubs"/>
+      <Team ABBR="CIN"  type="MLB Baseball" value="Cincinnati Reds"/>
+      <Team ABBR="COL"  type="MLB Baseball" value="Colorado Rockies"/>
+      <Team ABBR="FLA"	 type="MLB Baseball" value="Florida Marlins"  />
+      <Team ABBR="HOU"	 type="MLB Baseball" value="Houston Astros"  />
+      <Team ABBR="LAD"	 type="MLB Baseball" value="Los Angeles Dodgers"  />
+      <Team ABBR="MIL"	 type="MLB Baseball" value="Milwaukee Brewers"  />
+      <Team ABBR="MON"	 type="MLB Baseball" value="Montreal Expos"  />
+      <Team ABBR="NYM"	 type="MLB Baseball" value="New York Mets"  />
+      <Team ABBR="PHI"	 type="MLB Baseball" value="Philadelphia Phillies"  />
+      <Team ABBR="PIT"	 type="MLB Baseball" value="Pittsburgh Pirates"  />
+      <Team ABBR="SDG"	 type="MLB Baseball" value="San Diego Padres"  />
+      <Team ABBR="SFO"  type="MLB Baseball" 	value="San Francisco Giants"  />
+      <Team ABBR="STL"	 type="MLB Baseball" value="Saint Louis Cardinals"  />
+
+      <Team ABBR="LAA"	type="MLB Baseball" value="Los Angeles Angels"  />
+      <Team ABBR="BAL"	type="MLB Baseball" value="Baltimore Orioles"  />
+      <Team ABBR="BOS" type="MLB Baseball" value="Boston Red Sox"  />
+      <Team ABBR="CLE" type="MLB Baseball" value="Cleveland Indians"  />
+      <Team ABBR="CWS" type="MLB Baseball" value="Chicago White Sox"  />
+      <Team ABBR="DET" type="MLB Baseball" value="Detroit Tigers"  />
+      <Team ABBR="KAN" type="MLB Baseball" value="Kansas City Royals"  />
+      <Team ABBR="MIN" type="MLB Baseball" value="Minnesota Twins"  />
+      <Team ABBR="NYY" type="MLB Baseball" value="New York Yankees"  />
+      <Team ABBR="OAK" type="MLB Baseball" value="Oakland Athletics"  />
+      <Team ABBR="SEA" type="MLB Baseball" value="Seattle Mariners"  />
+      <Team ABBR="TAM" type="MLB Baseball" value="Tampa Bay Devil Rays"  />
+      <Team ABBR="TEX" type="MLB Baseball" value="Texas Rangers"  />
+      <Team ABBR="TOR" type="MLB Baseball" value="Toronto Blue Jays"  />
+      <Team ABBR="WAS" type="MLB Baseball" value="Washington Nationals"  />
+
+      <Team ABBR="ARI" type="MLB NL Baseball" value="Arizona Diamondbacks" />
+      <Team ABBR="ATL" type="MLB NL Baseball" value="Atlanta Braves"/>
+      <Team ABBR="CUB"  type="MLB NL Baseball" value="Chicago Cubs"/>
+      <Team ABBR="CIN"  type="MLB NL Baseball" value="Cincinnati Reds"/>
+      <Team ABBR="COL"  type="MLB NL Baseball" value="Colorado Rockies"/>
+      <Team ABBR="FLA"	 type="MLB NL Baseball" value="Florida Marlins"  />
+      <Team ABBR="HOU"	 type="MLB NL Baseball" value="Houston Astros"  />
+      <Team ABBR="LAD"	 type="MLB NL Baseball" value="Los Angeles Dodgers"  />
+      <Team ABBR="MIL"	 type="MLB NL Baseball" value="Milwaukee Brewers"  />
+      <Team ABBR="MON"	 type="MLB NL Baseball" value="Montreal Expos"  />
+      <Team ABBR="NYM"	 type="MLB NL Baseball" value="New York Mets"  />
+      <Team ABBR="PHI"	 type="MLB NL Baseball" value="Philadelphia Phillies"  />
+      <Team ABBR="PIT"	 type="MLB NL Baseball" value="Pittsburgh Pirates"  />
+      <Team ABBR="SDG"	 type="MLB NL Baseball" value="San Diego Padres"  />
+      <Team ABBR="SFO"  type="MLB NL Baseball" 	value="San Francisco Giants"  />
+      <Team ABBR="STL"	 type="MLB NL Baseball" value="Saint Louis Cardinals"  />
+
+      <Team ABBR="LAA"	type="MLB AL Baseball" value="Los Angeles Angels"  />
+      <Team ABBR="BAL"	type="MLB AL Baseball" value="Baltimore Orioles"  />
+      <Team ABBR="BOS" type="MLB AL Baseball" value="Boston Red Sox"  />
+      <Team ABBR="CLE" type="MLB AL Baseball" value="Cleveland Indians"  />
+      <Team ABBR="CWS" type="MLB AL Baseball" value="Chicago White Sox"  />
+      <Team ABBR="DET" type="MLB AL Baseball" value="Detroit Tigers"  />
+      <Team ABBR="KAN" type="MLB AL Baseball" value="Kansas City Royals"  />
+      <Team ABBR="MIN" type="MLB AL Baseball" value="Minnesota Twins"  />
+      <Team ABBR="NYY" type="MLB AL Baseball" value="New York Yankees"  />
+      <Team ABBR="OAK" type="MLB AL Baseball" value="Oakland Athletics"  />
+      <Team ABBR="SEA" type="MLB AL Baseball" value="Seattle Mariners"  />
+      <Team ABBR="TAM" type="MLB AL Baseball" value="Tampa Bay Devil Rays"  />
+      <Team ABBR="TEX" type="MLB AL Baseball" value="Texas Rangers"  />
+      <Team ABBR="TOR" type="MLB AL Baseball" value="Toronto Blue Jays"  />
+      <Team ABBR="WAS" type="MLB AL Baseball" value="Washington Nationals"  />
+
+      <Team ABBR="ARZ"  type="NFL Football " value="Arizona Cardinals"  />
+      <Team ABBR="ATL"  type="NFL Football " value="Atlanta Falcons"  />
+      <Team ABBR="BAL"  type="NFL Football " value="Baltimore Ravens"  />
+      <Team ABBR="BUF"  type="NFL Football " value="Buffalo Bills"  />
+      <Team ABBR="CAR"  type="NFL Football " value="Carolina Panthers"  />
+      <Team ABBR="CHI"  type="NFL Football " value="Chicago Bears"  />
+      <Team ABBR="CIN"  type="NFL Football " value="Cincinnati Bengals"  />
+      <Team ABBR="CLE"  type="NFL Football " value="Cleveland Browns"  />
+      <Team ABBR="DAL"  type="NFL Football " value="Dallas Cowboys"  />
+      <Team ABBR="DEN"  type="NFL Football " value="Denver Broncos"  />
+      <Team ABBR="DET"  type="NFL Football " value="Detroit Lions"  />
+      <Team ABBR="GB"  type="NFL Football " value="Green Bay Packers"  />
+      <Team ABBR="HOU"  type="NFL Football " value="Houston Texans"  />
+      <Team ABBR="IND"  type="NFL Football " value="Indianapolis Colts"  />
+      <Team ABBR="JAC"  type="NFL Football " value="Jacksonville Jaguars"  />
+      <Team ABBR="KC"  type="NFL Football " value="Kansas City Chiefs"  />
+      <Team ABBR="MIA"  type="NFL Football " value="Miami Dolphins"  />
+      <Team ABBR="MIN"  type="NFL Football " value="Minnesota Vikings"  />
+      <Team ABBR="NE"  type="NFL Football " value="New England Patriots"  />
+      <Team ABBR="NO"  type="NFL Football " value="New Orleans Saints"  />
+      <Team ABBR="NYG"  type="NFL Football " value="New York Giants"  />
+      <Team ABBR="NYJ"  type="NFL Football " value="New York Jets"  />
+      <Team ABBR="OAK"  type="NFL Football " value="Oakland Raiders"  />
+      <Team ABBR="PHI"  type="NFL Football " value="Philadelphia Eagles"  />
+      <Team ABBR="PIT"  type="NFL Football " value="Pittsburgh Steelers"  />
+      <Team ABBR="SD"  type="NFL Football " value="San Diego Chargers"  />
+      <Team ABBR="SEA"  type="NFL Football " value="Seattle Seahawks"  />
+      <Team ABBR="SF"  type="NFL Football " value="San Francisco 49ers"  />
+      <Team ABBR="STL"  type="NFL Football " value="Saint Louis Rams"  />
+      <Team ABBR="TB"  type="NFL Football " value="Tampa Bay Buccaneers"  />
+      <Team ABBR="TEN"  type="NFL Football " value="Tennessee Titans"  />
+      <Team ABBR="WAS"  type="NFL Football " value="Washington Redskins"  />
+
+      <Team ABBR="BOS" type="NBA Basketball"  value="Boston Celtics"  />
+      <Team ABBR="NJ" type="NBA Basketball"  value="New Jersey Nets"  />
+      <Team ABBR="NY" type="NBA Basketball"  value="New York Knicks"  />
+      <Team ABBR="PHI" type="NBA Basketball"  value="Philidelphia 76ers"  />
+      <Team ABBR="TOR" type="NBA Basketball"  value="Toronto Raptors"  />
+      <Team ABBR="ATL" type="NBA Basketball"  value="Atlanta Hawks"  />
+      <Team ABBR="CHA" type="NBA Basketball"  value="Charlotte Bobcats"  />
+      <Team ABBR="MIA" type="NBA Basketball"  value="Miami Heat"  />
+      <Team ABBR="ORL" type="NBA Basketball"  value="Orlando Magic"  />
+      <Team ABBR="WAS" type="NBA Basketball"  value="Washington Wizards"  />
+      <Team ABBR="CHI" type="NBA Basketball"  value="Chicago Bulls"  />
+      <Team ABBR="CLE" type="NBA Basketball"  value="Cleveland Cavaliers"  />
+      <Team ABBR="DET" type="NBA Basketball"  value="Detroit Pistons"  />
+      <Team ABBR="IND" type="NBA Basketball"  value="Indiana Pacers"  />
+      <Team ABBR="MIL" type="NBA Basketball"  value="Milwaukee Bucks"  />
+      <Team ABBR="DAL" type="NBA Basketball"  value="Dallas Mavericks"  />
+      <Team ABBR="HOU" type="NBA Basketball"  value="Houston Rockets"  />
+      <Team ABBR="MEM" type="NBA Basketball"  value="Memphis Grizzlies"  />
+      <Team ABBR="NO" type="NBA Basketball"  value="New Orleans Hornets"  />
+      <Team ABBR="SA" type="NBA Basketball"  value="San Antonio Spurs"  />
+      <Team ABBR="DEN" type="NBA Basketball"  value="Denver Nuggets"  />
+      <Team ABBR="MIN" type="NBA Basketball"  value="Minnesota Timberwolves"  />
+      <Team ABBR="POR" type="NBA Basketball"  value="Portland Trail Blazers"  />
+      <Team ABBR="OKC" type="NBA Basketball"  value="Oklahoma City Thunder"  />
+      <Team ABBR="UTA" type="NBA Basketball"  value="Utah Jazz"  />
+      <Team ABBR="GS" type="NBA Basketball"  value="Golden State Warriors"  />
+      <Team ABBR="LAC" type="NBA Basketball"  value="Los Angeles Clippers"  />
+      <Team ABBR="LAL" type="NBA Basketball"  value="Los Angeles Lakers"  />
+      <Team ABBR="PHO" type="NBA Basketball"  value="Phoenix Suns"  />
+      <Team ABBR="SAC" type="NBA Basketball"  value="Sacramento Kings"  />
+
+
+
+      <Team ABBR="ANA" type="NHL Hockey" value="Anaheim Ducks"  />
+      <Team ABBR="CGY" type="NHL Hockey" value="Calgary Flames"  />
+      <Team ABBR="CHI" type="NHL Hockey" value="Chicago Blackhawks"  />
+      <Team ABBR="COL" type="NHL Hockey" value="Colorado Avalanche"  />
+      <Team ABBR="CBJ" type="NHL Hockey" value="Columbus Blue Jackets"  />
+      <Team ABBR="DAL" type="NHL Hockey" value="Dallas Stars"  />
+      <Team ABBR="DET" type="NHL Hockey" value="Detroit Red Wings"  />
+      <Team ABBR="EDM" type="NHL Hockey" value="Edmonton Oilers"  />
+      <Team ABBR="LAK" type="NHL Hockey" value="Los Angeles Kings"  />
+      <Team ABBR="MIN" type="NHL Hockey" value="Minnesota Wild"  />
+      <Team ABBR="NAS" type="NHL Hockey" value="Nashville Predators"  />
+      <Team ABBR="PHO" type="NHL Hockey" value="Phoenix Coyotes"  />
+      <Team ABBR="SAN" type="NHL Hockey" value="San Jose Sharks"  />
+      <Team ABBR="STL" type="NHL Hockey" value="St. Louis Blues"  />
+      <Team ABBR="VAN" type="NHL Hockey" value="Vancouver Canucks"  />
+      <Team ABBR="ATL" type="NHL Hockey" value="Atlanta Thrashers"  />
+      <Team ABBR="BOS" type="NHL Hockey" value="Boston Bruins"  />
+      <Team ABBR="BUF" type="NHL Hockey" value="Buffalo Sabres"  />
+      <Team ABBR="CAR" type="NHL Hockey" value="Carolina Hurricanes"  />
+      <Team ABBR="FLA" type="NHL Hockey" value="Florida Panthers"  />
+      <Team ABBR="MON" type="NHL Hockey" value="Montreal Canadiens"  />
+      <Team ABBR="NJD" type="NHL Hockey" value="New Jersey Devils"  />
+      <Team ABBR="NYI" type="NHL Hockey" value="New York Islanders"  />
+      <Team ABBR="NYR" type="NHL Hockey" value="New York Rangers"  />
+      <Team ABBR="OTT" type="NHL Hockey" value="Ottawa Senators"  />
+      <Team ABBR="PHI" type="NHL Hockey" value="Philadelphia Flyers"  />
+      <Team ABBR="PIT" type="NHL Hockey" value="Pittsburgh Penguins"  />
+      <Team ABBR="TBL" type="NHL Hockey" value="Tampa Bay Lightning"  />
+      <Team ABBR="TOR" type="NHL Hockey" value="Toronto Maple Leafs"  />
+      <Team ABBR="WAS" type="NHL Hockey" value="Washington Capitals"  />
+
+      <Team ABBR="ATL" type="WNBA Basketball" value="Atlanta Dream"  />
+      <Team ABBR="CHI" type="WNBA Basketball" value="Chicago Sky"  />
+      <Team ABBR="CON" type="WNBA Basketball" value="Connecticut Sun"  />
+      <Team ABBR="IND" type="WNBA Basketball" value="Indiana Fever"  />
+      <Team ABBR="NY" type="WNBA Basketball" value="New York Liberty"  />
+      <Team ABBR="WAS" type="WNBA Basketball" value="Washington Mystics"  />
+      <Team ABBR="LA" type="WNBA Basketball" value="Los Angeles Sparks"  />
+      <Team ABBR="MIN" type="WNBA Basketball" value="Minnesota Lynx"  />
+      <Team ABBR="PHO" type="WNBA Basketball" value="Phoenix Mercuty"  />
+      <Team ABBR="SAN" type="WNBA Basketball" value="San Antonio Silver Stars"  />
+      <Team ABBR="SEA" type="WNBA Basketball" value="Seattle Storm"  />
+      <Team ABBR="TUL" type="WNBA Basketball" value="Tulsa Shock"  />
+
+    </TeamNames_ABBR>
+  </Feed>
+</FeedMappings>

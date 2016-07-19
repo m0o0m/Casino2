@@ -1,0 +1,35 @@
+﻿body
+{
+	margin:0;
+	padding:0;
+	background:black;
+	}
+.main_page
+{
+	width:952px;
+	margin:0 auto;		
+	}
+.header
+{
+		background-image:url(SBC/images/NewLogin/header.jpg) top left;
+		width:952px;
+		height:182px;
+	}
+#slideshowHeader img
+{
+		width:952px;
+		height:96px;
+	}	
+.left,.left img
+{
+	width:607px;
+	height:300px;
+	}	
+.right
+{
+    margin-right:10px;
+	}
+.pics img
+{
+     display: none;
+}		

@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1FFC3A4F-5898-40C6-AD34-098BD6DDEA22}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SBCBL</RootNamespace>
+    <AssemblyName>SBCBL</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>On</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>SBCBL.xml</DocumentationFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>SBCBL.xml</DocumentationFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Enyim.Caching, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\Enyim.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="FileDB, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\FileDB.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.83.1.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=4.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MemcachedProviders, Version=1.2.3102.35569, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\MemcachedProviders.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions.Design">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CacheUtils\CActivityNotes.vb" />
+    <Compile Include="CacheUtils\CAgent.vb" />
+    <Compile Include="CacheUtils\CAgentPosition.vb" />
+    <Compile Include="CacheUtils\CCacheManager.vb" />
+    <Compile Include="CacheUtils\CCallCenterAgent.vb" />
+    <Compile Include="CacheUtils\CEmailSettings.vb" />
+    <Compile Include="CacheUtils\CFixSpreadMoney.vb" />
+    <Compile Include="CacheUtils\CGame.vb" />
+    <Compile Include="CacheUtils\CGameHalfTimeDisplay.vb" />
+    <Compile Include="CacheUtils\CGameHalfTimeOFF.vb" />
+    <Compile Include="CacheUtils\CGameLine.vb" />
+    <Compile Include="CacheUtils\CGameTypeOnOff.vb" />
+    <Compile Include="CacheUtils\CGeneralUser.vb" />
+    <Compile Include="CacheUtils\CMemcachedManager.vb" />
+    <Compile Include="CacheUtils\COddsRule.vb" />
+    <Compile Include="CacheUtils\CGameTeamDisplay.vb" />
+    <Compile Include="CacheUtils\CPlayerJuice.vb" />
+    <Compile Include="CacheUtils\CPlayerTemplateLimit.vb" />
+    <Compile Include="CacheUtils\CPlayerTemplate.vb" />
+    <Compile Include="CacheUtils\CSysSetting.vb" />
+    <Compile Include="CacheUtils\CTeaserRule.vb" />
+    <Compile Include="CacheUtils\CWhiteLabelSettings.vb" />
+    <Compile Include="Managers\CActivityNotesManager.vb" />
+    <Compile Include="Managers\CAgentGameSettingManager.vb" />
+    <Compile Include="Managers\CAgentManager.vb" />
+    <Compile Include="Managers\CAsteriaManager.vb" />
+    <Compile Include="Managers\CCallCenterAgentManager.vb" />
+    <Compile Include="Managers\CCasinoMananger.vb" />
+    <Compile Include="Managers\CCustomizeLoginTemplateManager.vb" />
+    <Compile Include="Managers\CDataManager.vb" />
+    <Compile Include="Managers\CEmailsManager.vb" />
+    <Compile Include="Managers\CGameLineManager.vb" />
+    <Compile Include="CacheUtils\CPlayer.vb" />
+    <Compile Include="CacheUtils\CSuperAdmin.vb" />
+    <Compile Include="Managers\CGameManager.vb" />
+    <Compile Include="Managers\CIPTracesManager.vb" />
+    <Compile Include="Managers\COddRuleManager.vb" />
+    <Compile Include="Managers\CPlayerJuiceManager.vb" />
+    <Compile Include="Managers\CPlayerLimitManager.vb" />
+    <Compile Include="Managers\CPlayerManager.vb" />
+    <Compile Include="Managers\CPlayerTemplateManager.vb" />
+    <Compile Include="Managers\CPlayerTemplateLimitManager.vb" />
+    <Compile Include="Managers\CResetAccountBalance.vb" />
+    <Compile Include="Managers\CSubjectEmailManager.vb" />
+    <Compile Include="Managers\CSuperUserManager.vb" />
+    <Compile Include="Managers\CSysSettingManager.vb" />
+    <Compile Include="Managers\CTeaserRuleManager.vb" />
+    <Compile Include="Managers\CTicketBetManager.vb" />
+    <Compile Include="Managers\CTicketManager.vb" />
+    <Compile Include="CEnums.vb" />
+    <Compile Include="CFileDBKeys.vb" />
+    <Compile Include="Managers\CTransactionManager.vb" />
+    <Compile Include="Managers\CWeeklyChargeManager.vb" />
+    <Compile Include="Managers\CWhiteLabelSettingManager.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Security\CLoginHelper.vb" />
+    <Compile Include="Security\CLoginManager.vb" />
+    <Compile Include="Security\CSecurityException.vb" />
+    <Compile Include="std.vb" />
+    <Compile Include="Tickets\CDeletedTicket.vb" />
+    <Compile Include="Tickets\COddRulesEngine.vb" />
+    <Compile Include="Tickets\CSelectedTickets.vb" />
+    <Compile Include="Tickets\CTicket.vb" />
+    <Compile Include="Tickets\CTicketBet.vb" />
+    <Compile Include="UI\CSBCPage.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\CSBCReportControl.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\CLastSearchParams.vb" />
+    <Compile Include="UI\CLastSearchs.vb" />
+    <Compile Include="UI\CSBCUserControl.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\CSBCSession.vb" />
+    <Compile Include="Utils\CCasinoDES.vb" />
+    <Compile Include="Utils\CPropertiesSorter.vb" />
+    <Compile Include="Utils\CSerializedObjectCloner.vb" />
+    <Compile Include="Utils\CvioZip.vb" />
+    <Compile Include="Utils\CZipCodeLookup.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebsiteLibrary\WebsiteLibrary.vbproj">
+      <Project>{90BFB99C-3155-4B09-96AD-1CED32263508}</Project>
+      <Name>WebsiteLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,580 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="file:///E|/CUSTOMERS/part time/Templates/PlayerMaster.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Vegas Sportsbook</title>
+<!-- InstanceEndEditable -->
+<link rel="stylesheet" type="text/css" href="style.css" />
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+</head>
+<body>
+<div class="wrap">
+
+  <div class="titlevegas"> <img src="images/name.jpg" border="0" /> </div>
+  <div class="clear"></div>
+  
+  <!--menu start-->
+  <div class="menucontainer">
+  <div id="menu">
+  
+	<div class="item">
+	<div class="left"></div>
+	<div class="middle">
+		<A href="#" class="text">Open Bets</a>
+	</div>
+	<div class="right"></div>
+  </div>
+  
+  <div class="item">
+	<div class="left"></div>
+	<div class="middle">
+		<A href="history.html" class="text">History</a>
+	</div>
+	<div class="right"></div>
+  </div>
+  
+  <div class="item">
+	<div class="left"></div>
+	<div class="middle">
+		<A href="WeeklyBalance.html" class="text">Weekly Balance</a>
+	</div>
+	<div class="right"></div>
+  </div>
+  
+  <div class="item">
+	<div class="left"></div>
+	<div class="middle">
+		<A href="Account.html" class="text">Available $0.00</a>
+	</div>
+	<div class="right"></div>
+  </div>
+  
+  <div class="item">
+	<div class="left"></div>
+	
+   <div class="middle">
+		<A href="login.html" class="text">Logout</a>
+	</div>
+	<div class="right"></div>
+  
+  </div>
+  
+  </div>
+  </div>
+  <!----menu end-->
+  
+  <div style="clear:both;"></div>
+  
+  <!----sub menu start-->
+  <div id="submenu">
+	
+	<a href="BetTheBoard.html" class="item">Bet the Board</a>
+	<a href="Straight.html" class="item">Straight</a>
+	<a href="Parlay.html" class="item">Parlay</a>
+	<a href="Teaser.html" class="item">Teaser</a>
+	<a href="WinPush.html" class="item">If Win or Push</a>
+	<a href="Winonly.html" class="item">If Win Only</a>
+	<a href="ActionReverse.html" class="item">Action Reverse</a>
+	<a href="Futures.html" class="item">Futures / Props</a>
+	<a href="Horses.html" class="item">Hourses</a>
+	<a href="casino.html" class="item">Casino</a>
+	
+	
+  </div>
+   <!----sub menu end-->
+  
+  
+  
+  <div style="clear:both;"></div>
+  
+  <div id="content"><div id="content_small">
+  <!-- InstanceBeginEditable name="content" -->
+  <div style="float:left;width:50%;text-align:center;padding-left:8%;">
+  <table class="casinotabs" align="center">
+    <tbody>
+      <tr>
+        <td><input type="button" class="TabActive" value="ALL GAMES" onClick="OnCategoryClicked(0,&quot;LOBBYCAT_ALL&quot;,&quot;LOBBYCAT_ALL&quot;);"></td>
+        <td width="100%">&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="casinotabsbottom">
+    <tbody>
+      <tr>
+        <td><nobr><a href="#">REFRESH</a>&nbsp;|&nbsp;<a href="#" onClick="Logout();">LOGOUT</a></nobr></td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="casinoTab">
+    <tbody>
+      <tr>
+        <td class="casinoTab" colspan="7" align="center" valign="top"><div class="casinoTab">
+            <center>
+              <div class="tabdesc"></div>
+              <table class="casinogames">
+                <tbody>
+                  <tr>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBrown"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(13);"><img border="0" class="lobbyimg" alt="Blackjack" src="game/Blackjack.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBrown">Multihand Blackjack<br>
+                              6 deck<br>
+                              Min. Bet: $1, Max. Bet: $50</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBrown"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(23);"><img border="0" class="lobbyimg" alt="Blackjack" src="game/Blackjack.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBrown">Blackjack<br>
+                              6 deck<br>
+                              Min. Bet: $5, Max. Bet: $100</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBrown"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(136);"><img border="0" class="lobbyimg" alt="Blackjack Switch" src="game/BJSwitch.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBrown">Blackjack Switch<br>
+                              Switch cards between 2 hands!<br>
+                              Min. Bet: $1, Max. Bet: $50</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBrown"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(137);"><img border="0" class="lobbyimg" alt="Blackjack Double Exposure" src="game/BJDoubleExposure.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBrown">Blackjack Double Exposure<br>
+                              See both dealer cards!<br>
+                              Min. Bet: $1, Max. Bet: $50</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBrown"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(138);"><img border="0" class="lobbyimg" alt="Spanish Blackjack" src="game/BJSpanish21.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBrown">Spanish Blackjack<br>
+                              Min. Bet: $1, Max. Bet: $50</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconGreen"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(2);"><img border="0" class="lobbyimg" alt="Roulette" src="game/Roulette-American.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextGreen">Roulette<br>
+                              Min. Bet: $1, Max. Bet: $50</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconGreen"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(9);"><img border="0" class="lobbyimg" alt="Craps" src="game/Craps.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextGreen">Craps<br>
+                              Min. Bet: $1, Max. Bet: $100</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconGreen"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(11);"><img border="0" class="lobbyimg" alt="Baccarat" src="game/Baccarat.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextGreen">Baccarat<br>
+                              Min. Bet: $1, Max. Bet: $50</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconPurple"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(10);"><img border="0" class="lobbyimg" alt="Caribbean Stud Poker" src="game/Stud-Poker.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextPurple">Stud Poker<br>
+                              Min. Bet: $1, Max. Bet: $25</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconPurple"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(18);"><img border="0" class="lobbyimg" alt="Pai Gow Poker" src="game/Pai-Gow-Poker.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextPurple"><br>
+                              Min. Bet: $1, Max. Bet: $50</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconPurple"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(26);"><img border="0" class="lobbyimg" alt="Let It Ride Poker" src="game/LetitRide-Poker.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextPurple">Let It Ride Poker<br>
+                              Min. Bet: $1, Max. Bet: $25</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconPurple"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(36);"><img border="0" class="lobbyimg" alt="Three Card Poker" src="game/ThreeCard-poker.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextPurple">Dealer opens with single Q,<br>
+                              otherwise Pays 1:1 ante &amp; play<br>
+                              Min. Bet: $1, Max. Bet: $100</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconRed"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(3);"><img border="0" class="lobbyimg" alt="Video Poker - Jacks Or Better" src="game/JacksorBetter-VideoPoker.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextRed">Jacks or Better<br>
+                              Min. Bet: 25¢, Max. Bet: $25</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconRed"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(4);"><img border="0" class="lobbyimg" alt="Video Poker - Deuces Wild" src="game/DeucesWild-VideoPoker.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextRed">Deuces Wild<br>
+                              Min. Bet: 25¢, Max. Bet: $25</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconRed"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(5);"><img border="0" class="lobbyimg" alt="Video Poker - Jokers Wild" src="game/Jokers-Wild-VideoPoker.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextRed">Jokers Wild<br>
+                              Min. Bet: 25¢, Max. Bet: $25</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconRed"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(37);"><img border="0" class="lobbyimg" alt="Video Poker - Aces &amp; Eights" src="game/AcesAndEights-VideoPoker.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextRed">Aces and Eights<br>
+                              Min. Bet: 25¢, Max. Bet: $25</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconRed"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(131);"><img border="0" class="lobbyimg" alt="Video Poker - Double Bonus" src="game/DoubleBonus-VideoPoker.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextRed">Double Bonus<br>
+                              Min. Bet: 25¢, Max. Bet: $5</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconRed"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(132);"><img border="0" class="lobbyimg" alt="Video Poker - Double Double Bonus" src="game/DoubleDoubleBonus-VideoPoker.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextRed">Double Double Bonus<br>
+                              Min. Bet: 25¢, Max. Bet: $5</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconRed"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(133);"><img border="0" class="lobbyimg" alt="Video Poker - Jacks Or Better - 25 Line" src="game/JacksorBetter25-VideoPoker.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextRed">Jacks or Better<br>
+                              25 Lines!<br>
+                              Min. Bet: $2.50, Max. Bet: $31.25</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconRed"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(134);"><img border="0" class="lobbyimg" alt="Video Poker - Deuces Wild - 25 Line" src="game/DeucesWild25-VideoPoker.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextRed">Deuces Wild<br>
+                              25 Lines!<br>
+                              Min. Bet: $2.50, Max. Bet: $31.25</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconRed"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(135);"><img border="0" class="lobbyimg" alt="Video Poker - Jokers Wild - 25 Line" src="game/Jokers-Wild25-VideoPoker.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextRed">Jokers Wild<br>
+                              25 Lines!<br>
+                              Min. Bet: $2.50, Max. Bet: $31.25</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(6);"><img border="0" class="lobbyimg" alt="Slots - Touchdown Fever" src="game/TouchdownFever-Slot.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">Touchdown Fever<br>
+                              Dollar Slots<br>
+                              Min. Bet: $1, Max. Bet: $3</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(7);"><img border="0" class="lobbyimg" alt="Slots - Jurassic Fire" src="game/JurassicFire-slot.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">Jurassic Fire<br>
+                              Quarter Slots<br>
+                              Min. Bet: 25¢, Max. Bet: 75¢</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(38);"><img border="0" class="lobbyimg" alt="Slots - Wild 7s" src="game/Wild7s-slot.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">Slots - Wild 7s<br>
+                              Min. Bet: $1, Max. Bet: $15</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(40);"><img border="0" class="lobbyimg" alt="Five-Reel Fruity Fortune Slots" src="game/FruityFortune-Slot.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">Five-Reel Fruity Fortune Slots<br>
+                              Min. Bet: 25¢, Max. Bet: $45</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(41);"><img border="0" class="lobbyimg" alt="Five-Reel Serpent&#39;s Treasure Slots" src="game/SerpentsTreasure-Slot.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">Serpent's Treasure Slots<br>
+                              Min. Bet: 25¢, Max. Bet: $45</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(130);"><img border="0" class="lobbyimg" alt="Slots - Pirate&#39;s Revenge" src="game/PiratesRevenge-Slot.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">Pirate's Revenge Slots<br>
+                              Min. Bet: 5¢, Max. Bet: $2.25</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(152);"><img border="0" class="lobbyimg" alt="Slots - Victory Lane" src="game/SL3x3VL.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">3x3 Victory Lane Slots<br>
+                              Min. Bet: 5¢, Max. Bet: $1</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(153);"><img border="0" class="lobbyimg" alt="Five-Reel Bounty Hunter Slots" src="game/SL5RBH.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">Five-Reel Bounty Hunter Slots<br>
+                              Min. Bet: 25¢, Max. Bet: $9</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(154);"><img border="0" class="lobbyimg" alt="Slots - Knight&#39;s Conquest" src="game/SL5RKC.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">Knight's Conquest Slots<br>
+                              Min. Bet: 25¢, Max. Bet: $9</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(155);"><img border="0" class="lobbyimg" alt="Slots - Retro Sci-Fi" src="game/SL5RSF.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">Five-Reel Retro Sci-Fi Slots<br>
+                              Min. Bet: 5¢, Max. Bet: $9</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(178);"><img border="0" class="lobbyimg" alt="Slots - Forest Fairies" src="game/SL5RFR.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">Five-Reel Forest Fairies Slots<br>
+                              Min. Bet: 5¢, Max. Bet: $45</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(179);"><img border="0" class="lobbyimg" alt="Slots - Lost Ruins" src="game/SL5RLR.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">Five-Reel Lost Ruins Slots<br>
+                              Min. Bet: 5¢, Max. Bet: $45</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(191);"><img border="0" class="lobbyimg" alt="Slots - 5-Reel Fire" src="game/SL5R5F.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">5-Reel Fire Slots<br>
+                              Min. Bet: 5¢, Max. Bet: $45</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(192);"><img border="0" class="lobbyimg" alt="Slots - Barnyard Bucks" src="game/SL5RBB.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">Barnyard Bucks Slots<br>
+                              Min. Bet: 5¢, Max. Bet: $45</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(150);"><img border="0" class="lobbyimg" alt="Video Keno" src="game/VKENO.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">Video Keno<br>
+                              Min. Bet: 10¢, Max. Bet: $5</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td class="casinogames"><table class="casinogame" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr valign="bottom">
+                            <td valign="top" class="gameiconBlue"><a href="http://vegassb.net/casinog/aspNET/CasinoLobby/Games.aspx#" onClick="OnGameClicked(151);"><img border="0" class="lobbyimg" alt="Video Bingo" src="game/VBINGO.jpg"></a></td>
+                          </tr>
+                          <tr valign="middle" height="41">
+                            <td class="gametextBlue">Video Bingo - 8 Cards<br>
+                              Min. Bet: 25¢, Max. Bet: $40</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div align="center"></div>
+            </center>
+          </div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  </div>	  
+  <!-- InstanceEndEditable -->
+  </div>
+  </div>
+    <div style="clear:both;height:30px;"></div>
+  <div class="copyright">
+  	Copyright &copy; 2011 by <b>Vegas Sportsbook</b>. All right Reserved.
+  </div>
+</div>
+</body>
+<!-- InstanceEnd --></html>

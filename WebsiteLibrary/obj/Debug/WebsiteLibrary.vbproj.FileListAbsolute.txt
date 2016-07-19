@@ -1,0 +1,10 @@
+E:\Projects\77Bet\SourceCode\SBCBL\sbs(1)\SBS\SBSCode\WebsiteLibrary\bin\Debug\WebsiteLibrary.dll
+E:\Projects\77Bet\SourceCode\SBCBL\sbs(1)\SBS\SBSCode\WebsiteLibrary\bin\Debug\WebsiteLibrary.pdb
+E:\Projects\77Bet\SourceCode\SBCBL\sbs(1)\SBS\SBSCode\WebsiteLibrary\bin\Debug\AjaxControlToolkit.dll
+E:\Projects\77Bet\SourceCode\SBCBL\sbs(1)\SBS\SBSCode\WebsiteLibrary\bin\Debug\FileDB.dll
+E:\Projects\77Bet\SourceCode\SBCBL\sbs(1)\SBS\SBSCode\WebsiteLibrary\bin\Debug\FredCK.FCKeditorV2.dll
+E:\Projects\77Bet\SourceCode\SBCBL\sbs(1)\SBS\SBSCode\WebsiteLibrary\bin\Debug\ICSharpCode.SharpZipLib.dll
+E:\Projects\77Bet\SourceCode\SBCBL\sbs(1)\SBS\SBSCode\WebsiteLibrary\bin\Debug\log4net.dll
+E:\Projects\77Bet\SourceCode\SBCBL\sbs(1)\SBS\SBSCode\WebsiteLibrary\obj\Debug\WebsiteLibrary.vbprojResolveAssemblyReference.cache
+E:\Projects\77Bet\SourceCode\SBCBL\sbs(1)\SBS\SBSCode\WebsiteLibrary\obj\Debug\WebsiteLibrary.dll
+E:\Projects\77Bet\SourceCode\SBCBL\sbs(1)\SBS\SBSCode\WebsiteLibrary\obj\Debug\WebsiteLibrary.pdb

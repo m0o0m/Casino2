@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="Bin_zipcodes_lookupZip" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.lookupbyzip.com/lookupzip.asmx</Value>
+    </Setting>
+    <Setting Name="Bin_com_sportsinsights_www_DataService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.sportsinsights.com/dataservice/dataservice.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

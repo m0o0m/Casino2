@@ -1,0 +1,174 @@
+﻿<%@ Master Language="VB" CodeFile="SuperAdmin.master.vb" Inherits="SBSSuperAdmin.SuperAdmin" %>
+
+<%@ Register Src="~/SBS/SuperAdmins/Inc/TopMenu.ascx" TagName="TopMenu" TagPrefix="uc1" %>
+<%@ Register Src="Inc/PartnerTopMenu.ascx" TagName="PartnerTopMenu" TagPrefix="uc2" %>
+<%@ Register Src="~/Inc/SuperAdmins/ImpersonateUser.ascx" TagName="ImpersonateUser" TagPrefix="uc" %>
+<%@ Register Src="~/SBS/Shared/Layouts/Layout3/_cssLayout3.ascx" TagPrefix="uc" TagName="_cssLayout3" %>
+<%@ Register Src="~/SBS/Shared/Layouts/Layout3/_headScriptsLayout3.ascx" TagPrefix="uc" TagName="_headScriptsLayout3" %>
+<%@ Register Src="~/SBS/Shared/Layouts/Layout3/_scriptsLayout3.ascx" TagPrefix="uc" TagName="_scriptsLayout3" %>
+<%@ Register Src="~/SBS/Shared/Layouts/Common/_scriptCommon.ascx" TagPrefix="uc" TagName="_scriptCommon" %>
+<%@ Register Src="~/SBS/Shared/Layouts/Common/_cssCommon.ascx" TagPrefix="uc" TagName="_cssCommon" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>SuperAdmins</title>
+    <%--<link href="/SBS/Inc/Styles/styles.css" rel="stylesheet" type="text/css" />
+    <link href="/SBS/Inc/Styles/tabContainer.css" rel="stylesheet" type="text/css" />
+    <link href="/SBS/Inc/Styles/SuperStyles.css" rel="stylesheet" type="text/css" />--%>
+    <link href="/SBS/Inc/Styles/SPopup.css" rel="stylesheet" type="text/css" />
+    <%--<link href="/SBS/Inc/Styles/red.css" rel="stylesheet" type="text/css" runat="server" id="lnkStyle" />--%>
+    <link href="/SBS/Inc/Styles/DragableWindow.css" rel="stylesheet" type="text/css" />
+
+    <script src="/Inc/Scripts/std.js" language="javascript" type="text/javascript"></script>
+
+    <script src="/Inc/Scripts/jQuery.js" language="javascript" type="text/javascript"></script>
+
+    <script src="/Inc/Scripts/DragableWindow.js" language="javascript" type="text/javascript"></script>
+
+    <uc:_cssLayout3 runat="server" ID="_cssLayout3" />
+
+    <uc:_headScriptsLayout3 runat="server" ID="_headScriptsLayout3" />
+
+    <uc:_cssCommon runat="server" ID="_cssCommon" />
+
+    <style type="text/css">
+        .navbar-static-side { z-index: 1; position: relative; width: 100%; }
+            .navbar-static-side ul li { display: inline-block; vertical-align: top; float: left; }
+        #page-wrapper { position: relative; margin: 0 0 0 0px; padding: 0; }
+        .left-side-collapsed .navbar-static-side { width: 100%; }
+            .left-side-collapsed .navbar-static-side ul#side-menu li.user-panel { display: none; }
+            .left-side-collapsed .navbar-static-side ul#side-menu li.nav-hover a { }
+                .left-side-collapsed .navbar-static-side ul#side-menu li.nav-hover a span.menu-title { display: none !important; }
+                .left-side-collapsed .navbar-static-side ul#side-menu li.nav-hover a span.submenu-title { display: block !important; margin-left: 0; }
+            .left-side-collapsed .navbar-static-side ul#side-menu li.nav-hover ul.nav-second-level { display: block; position: absolute; top: 50px; left: 55px; width: 195px; }
+                .left-side-collapsed .navbar-static-side ul#side-menu li.nav-hover ul.nav-second-level li a { padding: 15px; }
+            .left-side-collapsed .navbar-static-side ul#side-menu li a span { display: none; }
+            .left-side-collapsed .navbar-static-side ul#side-menu li a i.fa { font-size: 18px; }
+            .left-side-collapsed .navbar-static-side ul#side-menu li a span.menu-title { position: absolute; left: 0; top: 60px; padding: 15px; margin-left: 0; width: 195px; color: #FFF; background-color: #66b0ea; background-image: -webkit-linear-gradient(#72baed,#54a1e6); background-image: linear-gradient(#72baed,#54a1e6); border-top: 1px solid #54a4de; border-right: 1px solid #54a4de; border-bottom: 1px solid #4c92d7; margin-right: -1px; margin-top: 0px; text-shadow: 0 1px #175bbe; box-shadow: inset 0 1px #8fc9fa,0 1px 1px 0 rgba(0,0,0,0.1); display: none; }
+            .left-side-collapsed .navbar-static-side ul#side-menu li ul.nav-second-level { display: none; position: absolute; top: 50px; left: 55px; width: 195px; }
+                .left-side-collapsed .navbar-static-side ul#side-menu li ul.nav-second-level li a i { display: none; }
+        .left-side-collapsed #page-wrapper { margin: 0 0 0 0px; }
+        .left-side-collapsed .navbar-static-side ul#side-menu li a span.menu-title { display: none; }
+
+        .ajax__calendar .ajax__calendar_container{ z-index: 1000;}
+        .hyperlink { cursor: pointer !important; cursor: auto; }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server" class="form-horizontal">
+        <asp:ScriptManager ID="sc" ScriptMode="Release" EnableScriptGlobalization="true"
+            EnableScriptLocalization="false" runat="server" EnablePageMethods="true" />
+        <div id="divLayoutContainer">
+            <div id="header-topbar-option-demo" class="page-header-topbar">
+                <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
+                    <div class="navbar-header">
+                        <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                        <a id="logo" href="/SBS/SuperAdmins/SuperAgentBalance.aspx" class="navbar-brand">
+                            <span class="fa fa-rocket"></span><span class="logo-text logo-cap" style="display: none">Super System</span><span class="logo-text-icon logo-cap">Super System</span>
+                            <img id="imgLogo" runat="server" src="/images/Winsb.png" style="display: inline;" />
+                        </a>
+                    </div>
+                    <div class="topbar-main">
+                        <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+                        <div class="news-update-box">
+                            <asp:LinkButton runat="server" ID="lbnIPAlert" Text="IP Alert" Style="text-decoration: none; color: Red; font-weight: bold; padding-right: 10px" />
+                        </div>
+
+                        <ul class="nav navbar navbar-top-links navbar-right mbn">
+                            <li class="dropdown topbar-user pull-right">
+                                <asp:LinkButton ID="lbnLogout" runat="server" Text="Logout" CssClass="LogOut" ToolTip="LOG OUT" />
+                            </li>
+                            <li class="pull-right">
+                                <uc:ImpersonateUser ID="ucImpersonateUser" runat="server" />
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div id="wrapper">
+                <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
+                    data-position="right" class="navbar-default navbar-static-side">
+                    <div class="sidebar-collapse menu-scroll">
+                        <ul id="side-menu" class="nav">
+                            <div class="clearfix"></div>
+                            <uc1:TopMenu ID="ucTopMenu" runat="server" />
+                            <uc2:PartnerTopMenu ID="ucPartnerTopMenu" runat="server" Visible="false" />
+                        </ul>
+                    </div>
+                </nav>
+
+                <div id="page-wrapper">
+                    <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+                        <div class="page-header pull-left">
+                            <div class="page-title">
+                                <% Dim menu As String = SBCBL.std.SafeString(Request.QueryString("MenuType"))
+                                    If menu.Equals("sys", StringComparison.OrdinalIgnoreCase) Then
+                                        menu = "System Management"
+                                    End If
+                                    If menu.Equals("report", StringComparison.OrdinalIgnoreCase) Then
+                                        menu = "Reports Management"
+                                    End If
+                                    If menu.Equals("game", StringComparison.OrdinalIgnoreCase) Then
+                                        menu = "Game Management"
+                                    End If
+                                    If String.IsNullOrWhiteSpace(menu) Then
+                                        menu = Page.Title
+                                    End If
+                                %>
+                                <%= menu%>
+                            </div>
+                        </div>
+                        <ol class="breadcrumb page-breadcrumb pull-right">
+                            <li>
+                                <a href="javascript:window.print();"></a>
+                            </li>
+                        </ol>
+                        <div class="clearfix">
+                        </div>
+                    </div>
+                    <div class="page-content">
+                        <asp:ContentPlaceHolder ID="cphContent" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+                <div id="footer">
+                    <div class="copyright">
+                        <a href="#">
+                            <asp:Literal ID="ltrCopyRight" runat="server" Text=""></asp:Literal></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <uc:_scriptsLayout3 runat="server" ID="_scriptsLayout3" />
+
+    <uc:_scriptCommon runat="server" ID="_scriptCommon" />
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+            FlashIP();
+        }
+
+        function FlashIP() {
+            var lbtnIPAlert = document.getElementById('<%=lbnIPAlert.ClientID%>');
+            if (lbtnIPAlert != null) {
+                setInterval(function () {
+
+                    if (lbtnIPAlert.style.display == "none") {
+                        lbtnIPAlert.style.display = "inline-block";
+                    }
+                    else
+                        lbtnIPAlert.style.display = "none";
+                }
+            , 500);
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+

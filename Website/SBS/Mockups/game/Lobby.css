@@ -1,0 +1,73 @@
+body {background-color: white; color: black;}
+table.casinogame {border-collapse: collapse; width: 59px;}
+td.gametext {text-align: left; color: white; font-family: Verdana,Arial,Helvetica; font-weight: bold; font-size: 7pt; background: url(../images/bottomtab.jpg) no-repeat; width: 202px; height: 41px; padding: 0px 10px 0px 10px;}
+td.gametextBlue {text-align: left; color: white; font-family: Verdana,Arial,Helvetica; font-weight: bold; font-size: 7pt; background: url(../images/bottomtab-blue.gif) no-repeat; width: 202px; height: 41px; padding: 0px 10px 0px 10px;}
+td.gametextRed {text-align: left; color: white; font-family: Verdana,Arial,Helvetica; font-weight: bold; font-size: 7pt; background: url(../images/bottomtab-red.gif) no-repeat; width: 202px; height: 41px; padding: 0px 10px 0px 10px;}
+td.gametextGreen {text-align: left; color: white; font-family: Verdana,Arial,Helvetica; font-weight: bold; font-size: 7pt; background: url(../images/bottomtab-green.gif) no-repeat; width: 202px; height: 41px; padding: 0px 10px 0px 10px;}
+td.gametextBrown {text-align: left; color: white; font-family: Verdana,Arial,Helvetica; font-weight: bold; font-size: 7pt; background: url(../images/bottomTab-brown.gif) no-repeat; width: 202px; height: 41px; padding: 0px 10px 0px 10px;}
+td.gametextPurple {text-align: left; color: white; font-family: Verdana,Arial,Helvetica; font-weight: bold; font-size: 7pt; background: url(../images/bottomtab-purple.gif) no-repeat; width: 202px; height: 41px; padding: 0px 10px 0px 10px;}
+td.gametextPink {text-align: left; color: white; font-family: Verdana,Arial,Helvetica; font-weight: bold; font-size: 7pt; background: url(../images/bottomTab-pink.gif) no-repeat; width: 202px; height: 41px; padding: 0px 10px 0px 10px;}
+td.gametextOrange {text-align: left; color: white; font-family: Verdana,Arial,Helvetica; font-weight: bold; font-size: 7pt; background: url(../images/bottomtab-orange.gif) no-repeat; width: 202px; height: 41px; padding: 0px 10px 0px 10px;}
+
+td.gameicon {background-color: #60606c; padding: 2px; text-align: center; vertical-align: middle;}
+td.gameiconBlue {background-color: #26476A; padding: 2px; text-align: center; vertical-align: middle;}
+td.gameiconRed {background-color: #BE2829; padding: 2px; text-align: center; vertical-align: middle;}
+td.gameiconGreen {background-color: #1A7C48; padding: 2px; text-align: center; vertical-align: middle;}
+td.gameiconBrown {background-color: #9E5B17; padding: 2px; text-align: center; vertical-align: middle;}
+td.gameiconPurple {background-color: #5A4870; padding: 2px; text-align: center; vertical-align: middle;}
+td.gameiconPink {background-color: #D49FC7; padding: 2px; text-align: center; vertical-align: middle;}
+td.gameiconOrange {background-color: #DE6b07; padding: 2px; text-align: center; vertical-align: middle;}
+
+font.subtext {color: white; font-family: Verdana,Arial,Helvetica; font-weight: bold; font-size: 7pt;}
+
+table.casinotabs {width: 725px; border: 0px; border-collapse: collapse; position: relative; top: 1px;}
+table.casinotabs td {padding: 0px; margin: 0px; vertical-align: bottom; height: 34px;}
+table.casinotabsbottom {width: 725px; border: 0px; border-collapse: collapse;}
+table.casinotabsbottom td {padding-top: 4px; padding-right: 6px; margin: 0px; text-align: right; background-image: url(../images/blendBackground.gif); height: 22px; font-family: Tahoma, Verdana, Arial; font-size: 7pt;}
+table.casinotabsbottom td a {color: White; font-weight: bold;}
+table.casinotabs td input {cursor: hand; padding-right: 20px; width: 150px; border: none; height: 34px; font: bold 11px Tahoma, Verdana, Arial; background-color: transparent;}
+table.casinotabs td input.TabActive {cursor: default; color: White; background-image: url(../images/TabActive.gif);}
+table.casinotabs td input.TabInActive {color: #dddddd; background-image: url(../images/TabInactive.gif);}
+table.casinotabs td input.ContestTabActive {cursor: default; color: White; background-image: url(../images/TabActive.gif);}
+table.casinotabs td input.ContestTabInActive {color: #dddddd; background-image: url(../images/TabInactive.gif);}
+table.casinotabs td input.TabInActiveOver {color: White; background-image: url(../images/TabInactiveOver.gif);}
+table.casinoTab {width: 725px; border: 1px solid #777777; border-collapse: collapse;}
+table.casinoTab td.casinoTab {background-color: #F4F4F4; text-align: center; padding: 0px; margin: 0px;}
+table.casinoTab div.tabdesc {padding-top: 5px; width: 600px; font-family: Tahoma; font-size: 12pt; color: #000080; text-align: center; margin-bottom: 0px; padding-bottom: 0px;}
+
+div.tiebreak {display: none;}
+div.tiebreak td {color: red;}
+table.contest {border: 2px solid #cccccc; width: 705px; border-collapse: collapse;}
+table.contest th {padding: 4px; font-family: Tahoma; font-size: 10pt; text-align: center; color: white; background-color: #1b63a5; border: 2px solid #cccccc;}
+table.contest td {padding: 4px; font-family: Tahoma; font-size: 10pt; text-align: center; border: 2px solid #cccccc;}
+table.contesthead {width: 705px; border-collapse: collapse;}
+table.contesthead td {font-family: Tahoma; font-size: 10pt; padding: 0px; margin: 0px; height: 28px; color: #eeeeee; text-align: left; padding-left: 10px; font-weight: bold; background: url(../images/gradientTop.gif);}
+table.contestnotes {width: 705px; border-collapse: collapse;}
+table.contestnotes td {font-family: Tahoma; font-size: 10pt; padding: 0px; margin: 0px; height: 28px; text-align: left; padding-left: 10px;}
+
+a.back {font-family: Tahoma; font-size: 10pt; color: black; font-weight: bold;}
+
+tr.rowEven {background-color: white;}
+tr.rowOdd {background-color: #F2F2ED;}
+
+table.contest td input {cursor: hand; border: none; width: 90px; height: 31px; font: 13px Tahoma, Verdana, Arial;}
+table.contest td input.ButtonPlay {color: white; font-weight: bold; background-image: url(../images/ButtonPlay.gif);}
+table.contest td input.ButtonRegister {color: black; font-weight: bold; background-image: url(../images/ButtonRegister.gif);}
+table.contest td input.ButtonScoreboard {color: black; background-image: url(../images/ButtonScoreboard.gif);}
+table.contest td input.ButtonPlayOver{color: white; background-image: url(../images/ButtonPlayOver.gif);}
+table.contest td input.ButtonRegisterOver {color: black;background-image: url(../images/ButtonRegisterOver.gif);}
+table.contest td input.ButtonScoreboardOver {color: black; background-image: url(../images/ButtonScoreboardOver.gif);}
+
+div.message {width: 550px; padding: 20px; font-family: Tahoma;}
+div.login {text-align: left; width: 200px;}
+
+table.casinogames td.casinogames {padding: 10px;}
+img.lobbyimg {width: 198px; height: 55px;}
+
+table.account {margin-bottom: 5px;}
+table.account th {padding: 0px 25px 0px 25px; text-align:center;}
+table.account td {padding: 0px 25px 0px 25px; color: #000080; text-align:center;}
+table.account a:link, table.account a:visited {color: Blue;}
+
+/* useful for iframe'd lobbies */
+/* table.casinoTab td.casinoTab div.casinoTab {overflow-y: auto; height: 500px;} */

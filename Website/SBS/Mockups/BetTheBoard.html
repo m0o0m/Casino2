@@ -1,0 +1,483 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/PlayerMaster.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Vegas Sportsbook</title>
+<!-- InstanceEndEditable -->
+<link rel="stylesheet" type="text/css" href="style.css" />
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+</head>
+<body>
+<div class="wrap">
+
+  <div class="titlevegas"> <img src="images/name.jpg" border="0" /> </div>
+  <div class="clear"></div>
+  
+  <!--menu start-->
+  <div class="menucontainer">
+  <div id="menu">
+  
+	<div class="item">
+	<div class="left"></div>
+	<div class="middle">
+		<A href="#" class="text">Open Bets</a>
+	</div>
+	<div class="right"></div>
+  </div>
+  
+  <div class="item">
+	<div class="left"></div>
+	<div class="middle">
+		<A href="history.html" class="text">History</a>
+	</div>
+	<div class="right"></div>
+  </div>
+  
+  <div class="item">
+	<div class="left"></div>
+	<div class="middle">
+		<A href="WeeklyBalance.html" class="text">Weekly Balance</a>
+	</div>
+	<div class="right"></div>
+  </div>
+  
+  <div class="item">
+	<div class="left"></div>
+	<div class="middle">
+		<A href="Account.html" class="text">Available $0.00</a>
+	</div>
+	<div class="right"></div>
+  </div>
+  
+  <div class="item">
+	<div class="left"></div>
+	
+   <div class="middle">
+		<A href="login.html" class="text">Logout</a>
+	</div>
+	<div class="right"></div>
+  
+  </div>
+  
+  </div>
+  </div>
+  <!----menu end-->
+  
+  <div style="clear:both;"></div>
+  
+  <!----sub menu start-->
+  <div id="submenu">
+	
+	<a href="BetTheBoard.html" class="item">Bet the Board</a>
+	<a href="Straight.html" class="item">Straight</a>
+	<a href="Parlay.html" class="item">Parlay</a>
+	<a href="Teaser.html" class="item">Teaser</a>
+	<a href="WinPush.html" class="item">If Win or Push</a>
+	<a href="Winonly.html" class="item">If Win Only</a>
+	<a href="ActionReverse.html" class="item">Action Reverse</a>
+	<a href="Futures.html" class="item">Futures / Props</a>
+	<a href="Horses.html" class="item">Hourses</a>
+	<a href="casino.html" class="item">Casino</a>
+	
+	
+  </div>
+   <!----sub menu end-->
+  
+  
+  
+  <div style="clear:both;"></div>
+  
+  <div id="content"><div id="content_small">
+  <!-- InstanceBeginEditable name="content" -->
+  <div style="width:100%;text-align:center;font-weight:bold;">Display the board by selecting one or more sports below..</div>
+  
+  	 <div style="clear:both;"></div>
+      <div style="width:100%;text-align:left;font-weight:bold;padding-top:20px;padding-bottom:10px;">
+      	<input type="submit" value="Continue" name="btnContinue" class="continue" />
+      </div>
+      <div style="clear:both;"></div>
+  	<table width="100%" border="0" cellspacing="2" cellpadding="2">
+   
+    
+  <tr class="sportHeader">
+    <td>Football</td>
+    <td>Basketball</td>
+    <td>Baseball</td>
+    <td>Hockey</td>
+    <td>Soccer</td>
+    <td>Other Sports</td>
+  </tr>
+  <tr>
+    <td valign="top">
+    	<!--football-->
+    <table width="80%" border="0" cellspacing="2" cellpadding="2" align="center">
+    <colgroup>
+    	<col align="left" valign="top"/>
+        <col align="left" valign="top"/>
+    </colgroup>
+  <tr>
+    <td><input type="checkbox" id="chkfootbal" /></td>
+    <td align="left"><font class="subSportHeader">NFL (Game)</font></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap" align="left">
+    	<input type="checkbox" name="chk" />
+        <font class="subSportHeader">1st Half</font>
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap" align="left">
+    	        <font class="subSportHeader">College</font>
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+     <td nowrap="nowrap" align="left">
+    	<font class="subSportHeader">Canadian</font>
+     </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap" align="left">
+    	<font class="subSportHeader">Arena</font>
+     </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+   <td nowrap="nowrap" align="left">
+    	<font class="subSportHeader">UFL</font>
+     </td>
+  </tr>
+</table>
+
+        	<!--football end-->
+    </td>
+    
+    
+    <td valign="top">
+    <!--BasketBall-->
+    <table width="80%" border="0" cellspacing="2" cellpadding="2" align="center">
+    <colgroup>
+    	<col align="left" valign="top"/>
+        <col align="left" valign="top"/>
+    </colgroup>
+  <tr>
+    <td></td>
+    <td align="left"><font class="subSportHeader">NBA</font></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap" align="left">
+    	
+        <font class="subSportHeader">NCAA</font>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" name="chk" /></td>
+    <td nowrap="nowrap" align="left">
+    	        <font class="subSportHeader">WNBA (Game)</font>
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+     <td nowrap="nowrap" align="left">
+    	<font class="subSportHeader">WNCAA</font>
+     </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap" align="left">
+    	<font class="subSportHeader">FIBA</font>
+     </td>
+  </tr>
+ 
+</table>
+    <!--BasketBall end-->
+    
+    </td>
+    <td valign="top">
+    	<!--BaseBall-->
+    <table width="80%" border="0" cellspacing="2" cellpadding="2" align="center">
+    <colgroup>
+    	<col align="left" valign="top"/>
+        <col align="left" valign="top"/>
+    </colgroup>
+  <tr>
+    <td><input type="checkbox" /></td>
+    <td align="left"><font class="subSportHeader">MLB (Game)</font></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap" align="left">
+    	<input type="checkbox" />
+        <font class="subSportHeader">1st 5 Innings</font>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td nowrap="nowrap" align="left">
+    	        <font class="subSportHeader">NCAA</font>
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+     <td nowrap="nowrap" align="left">
+    	<font class="subSportHeader">Classic</font>
+     </td>
+  </tr>
+ 
+ 
+</table>
+    <!--BasetBall end-->
+    </td>
+    <td valign="top">
+    <!--HOCKEY-->
+    <table width="80%" border="0" cellspacing="2" cellpadding="2" align="center">
+    <colgroup>
+    	<col align="left" valign="top"/>
+        <col align="left" valign="top"/>
+    </colgroup>
+  <tr>
+    <td></td>
+    <td align="left"><font class="subSportHeader">NHL</font></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap" align="left">
+    	
+        <font class="subSportHeader">NCAA</font>
+    </td>
+  </tr>
+  </table>
+    <!--HOCKEY end-->
+    </td>
+    <td valign="top">
+    <!--SOCCER-->
+    <table width="80%" border="0" cellspacing="2" cellpadding="2" align="center">
+    <colgroup>
+    	<col align="left" valign="top"/>
+        <col align="left" valign="top"/>
+    </colgroup>
+ 
+  <tr>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap" align="left">
+    	
+        <font class="subSportHeader">Live Betting</font>
+    </td>
+  </tr>
+   <tr>
+    <td><input type="checkbox" /></td>
+    <td nowrap="nowrap" align="left">
+    	<img src="images/teams/Premier.gif" border="0" width="16" height="11" /> &nbsp;
+        <font class="subSportHeader">Premier (Game)</font>
+    </td>
+  </tr>
+   <tr>
+    <td><input type="checkbox" /></td>
+    <td nowrap="nowrap" align="left">
+    	<img src="images/teams/La Liga.gif" border="0" width="16" height="11" /> &nbsp;
+        <font class="subSportHeader">La Liga (Game)</font>
+    </td>
+  </tr>
+   <tr>
+    <td><input type="checkbox" /></td>
+    <td nowrap="nowrap" align="left">
+    	<img src="images/teams/Serie A.gif" border="0" width="16" height="11" /> &nbsp;
+        <font class="subSportHeader">Serie A (Game)</font>
+    </td>
+  </tr>
+   <tr>
+    <td><input type="checkbox" /></td>
+    <td nowrap="nowrap" align="left">
+    	<img src="images/teams/Ligue 1.gif" border="0" width="16" height="11" /> &nbsp;
+        <font class="subSportHeader"> Ligue 1 (Game)</font>
+    </td>
+  </tr>
+   <tr>
+    <td><input type="checkbox" /></td>
+    <td nowrap="nowrap" align="left">
+    	<img src="images/teams/Bundesliga.gif" border="0" width="16" height="11" /> &nbsp;
+        <font class="subSportHeader">  Bundesliga (Game)</font>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" /></td>
+    <td nowrap="nowrap" align="left">
+    	
+        <font class="subSportHeader">  Americas (Game)</font>
+    </td>
+  </tr>
+   <tr>
+    <td></td>
+    <td nowrap="nowrap" align="left">
+<img src="images/teams/Austria.gif" border="0" width="16" height="11" />&nbsp;
+        <font class="subSportHeader"> Austria</font>
+    </td>
+  </tr>
+   <tr>
+    <td></td>
+    <td nowrap="nowrap" align="left">
+<img src="images/teams/Belgium.gif" border="0" width="16" height="11" />&nbsp;
+        <font class="subSportHeader"> Belgium</font>
+    </td>
+  </tr>
+   <tr>
+    <td><input type="checkbox" /></td>
+    <td nowrap="nowrap" align="left">
+<img src="images/teams/Denmark.gif" border="0" width="16" height="11" />&nbsp;
+        <font class="subSportHeader"> Denmark (Game) </font>
+    </td>
+  </tr>
+   <tr>
+    <td><input type="checkbox" /></td>
+    <td nowrap="nowrap" align="left">
+<img src="images/teams/Finland.gif" border="0" width="16" height="11" />&nbsp;
+        <font class="subSportHeader">  Ireland (Game) </font>
+    </td>
+  </tr>
+   <tr>
+    <td></td>
+    <td nowrap="nowrap" align="left">
+<img src="images/teams/Netherlands.gif" border="0" width="16" height="11" />&nbsp;
+        <font class="subSportHeader">Netherlands</font>
+    </td>
+  </tr>
+   <tr>
+    <td><input type="checkbox" /></td>
+    <td nowrap="nowrap" align="left">
+<img src="images/teams/Norway.gif" border="0" width="16" height="11" />&nbsp;
+        <font class="subSportHeader"> Norway (Game)</font>
+    </td>
+  </tr>
+   <tr>
+    <td><input type="checkbox" /></td>
+    <td nowrap="nowrap" align="left">
+<img src="images/teams/Portugal.gif" border="0" width="16" height="11" />&nbsp;
+        <font class="subSportHeader"> Portugal (Game)</font>
+    </td>
+  </tr>
+   <tr>
+    <td></td>
+    <td nowrap="nowrap" align="left">
+<img src="images/teams/Russia.gif" border="0" width="16" height="11" />&nbsp;
+        <font class="subSportHeader">Russia</font>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td nowrap="nowrap" align="left">
+<img src="images/teams/Scotland.gif" border="0" width="16" height="11" />&nbsp;
+        <font class="subSportHeader">Scotland</font>
+    </td>
+  </tr>
+   <tr>
+    <td></td>
+    <td nowrap="nowrap" align="left">
+<img src="images/teams/Sweden.gif" border="0" width="16" height="11" />&nbsp;
+        <font class="subSportHeader">Sweden</font>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td nowrap="nowrap" align="left">
+<img src="images/teams/Switzerland.gif" border="0" width="16" height="11" />&nbsp;
+        <font class="subSportHeader">Switzerland Intl</font>
+ 	
+    </td>
+  </tr>
+   <tr>
+    <td></td>
+    <td nowrap="nowrap" align="left">
+<img src="images/teams/Greece.gif" border="0" width="16" height="11" />&nbsp;
+        <font class="subSportHeader">Greece</font>
+ 	
+    </td>
+  </tr>
+   <tr>
+    <td></td>
+    <td nowrap="nowrap" align="left">
+<img src="images/teams/Japan.gif" border="0" width="16" height="11" />&nbsp;
+        <font class="subSportHeader">Japan</font>
+ 	
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" /></td>
+    <td nowrap="nowrap" align="left">
+<img src="images/teams/Australia.gif" border="0" width="16" height="11" />&nbsp;
+        <font class="subSportHeader">Australia (Game)</font>
+ 	
+    </td>
+  </tr>
+  </table>
+    <!--SOCCER END-->
+    
+    </td>
+    <td valign="top">
+    		<!--other sport-->
+    <table width="80%" border="0" cellspacing="2" cellpadding="2" align="center">
+    <colgroup>
+    	<col align="left" valign="top"/>
+        <col align="left" valign="top"/>
+    </colgroup>
+  <tr>
+    <td><input type="checkbox" id="chkfootbal" /></td>
+    <td align="left"><font class="subSportHeader">Tennis (Game)</font></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap" align="left">
+    	
+        <font class="subSportHeader">NASCAR</font>
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap" align="left">
+    	        <font class="subSportHeader">IndyCar</font>
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+     <td nowrap="nowrap" align="left">
+    	<font class="subSportHeader">Golf</font>
+     </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap" align="left">
+    	<font class="subSportHeader">Boxing</font>
+     </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+   <td nowrap="nowrap" align="left">
+    	<font class="subSportHeader">MMA</font>
+     </td>
+  </tr>
+</table>
+
+        <!--other sport end-->
+    
+    </td>
+  </tr>
+ 
+</table>
+
+  
+  
+  <!-- InstanceEndEditable -->
+  </div>
+  </div>
+    <div style="clear:both;height:30px;"></div>
+  <div class="copyright">
+  	Copyright &copy; 2011 by <b>Vegas Sportsbook</b>. All right Reserved.
+  </div>
+</div>
+</body>
+<!-- InstanceEnd --></html>

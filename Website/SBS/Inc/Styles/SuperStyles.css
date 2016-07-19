@@ -1,0 +1,850 @@
+﻿body
+{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    color: #959595;
+   /* background: #e4e4cb url(/SBS/images/main_bg.gif) repeat-x center 6px;*/
+    background-color: #e2e1e5;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+html, .main
+{
+    padding: 0;
+    margin: 0;
+}
+.main
+{
+   /* border-top: 6px solid #a9a96d;
+    background: #333333 url(/SBS/images/header_bg.jpg) repeat-x center top;
+    background:#e2e1e5 url(/SBS/images/bg_main.jpg) no-repeat center center;*/
+    padding: 0;
+     margin: 0;
+     background:transparent url(/SBS/images/bgmain.jpg) no-repeat center top;
+     background-attachment:fixed;
+     min-height:690px;
+}
+
+.header, .content, .fbg, .footer, form, ol, ol li, ul, .content .mainbar, .content
+{
+    margin: 0;
+    padding: 0;
+}
+.clr
+{
+    clear: both;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    font-size: 0;
+    line-height: 0;
+}
+
+/******Header*************/
+.header_resize
+{
+    margin: 0 auto;
+    padding: 0;
+    width: 970px;
+}
+
+.logo
+{
+    padding: 5px 0 0 0;
+    float: left;
+    width: auto;
+}
+/***********conttain************************/
+.content
+{
+     margin-bottom:3px;
+    /*filter: alpha(Opacity=90);
+    opacity:0.9;*/
+}
+.content_resize
+{
+    margin: 0 auto; /*padding:0 0 24px;*/ /*width:970px;*/
+    padding: 5px;
+    width: 960px;
+    background-color: #fff;
+}
+
+#register
+{
+    float: right;
+    font-size: 12px;
+    margin-top: 74px;
+    color: #f90;
+    display: inline;
+}
+#register a, #register a:visited
+{
+    color: #608bb7;
+    text-decoration: none;
+}
+#register a:hover
+{
+    color: #09C;
+}
+/***************fbg******************/
+.fbg
+{
+}
+.fbg_resize
+{
+    margin: 0 auto;
+    width: 922px;
+    padding: 24px 24px 12px;
+    border-top: 1px solid #ebebeb;
+    background-color: #fff;
+}
+/**************Footer*****************/
+.footer
+{
+    color: #888787;
+}
+.footer_resize
+{
+    margin: 0 auto;
+    padding: 12px 24px;
+    width: 922px;
+}
+.footer p.lf
+{
+    margin: 0;
+    padding: 24px 0;
+    float: left;
+}
+
+
+/********Menu************/
+
+.Menu_Left
+{
+    width: 18px;
+    height: 35px;
+    float: left;
+    background: url(/SBS/images/Menu_Left.png) top;
+}
+.Menu_Right
+{
+    width: 18px;
+    height: 35px;
+    float: right;
+    background: url(/SBS/images/Menu_Right.png) top;
+}
+#navbar
+{
+    margin: 0 auto;
+    padding: 0 18px;
+    height: 35px;
+   /* background: url(/SBS/images/menu.gif) repeat-x center top;*/
+   background:#d06d36 url(/SBS/images/menu_bg.png);
+    min-width: 780px;
+    width: 910px !important; /*780*/
+    width:900px;
+}
+
+#nav
+{
+    height: 35px;
+    line-height: 35px;
+    position: relative;
+}
+
+#nav ul
+{
+    margin: 0;
+    height: 35px;
+   /* border-left: 1px solid #eb7c3f;*/
+}
+#nav ul li
+{
+    list-style: none;
+    float: left;
+    font-size: 12px;
+    color: #fff;
+    font-weight: bold;
+    border-right: 1px solid #eb7c3f; /*width: 150px;*/
+    padding: 0 10px 0 10px;
+    cursor: pointer;
+}
+
+
+#nav ul div td
+{
+    min-width: 150px;
+    background: #d56528;
+    height: 30px;
+    color: #fff;
+    cursor: pointer;
+    padding: 0 5px 0 5px;
+}
+
+
+#nav ul div
+{
+    float: left;
+    position: absolute;
+    z-index: 999999;
+    display: none;
+    margin-left:-11px;
+}
+
+#nav ul li:hover div, #nav ul div:hover
+{
+    display: block;
+}
+
+#nav .selected
+{
+    color: yellow !important;
+    background: #eb7c3f url(/SBS/images/menu_a.gif) repeat-x center top;
+}
+
+#nav ul li:hover, #nav ul div td:hover
+{
+    color: yellow;
+    background: #eb7c3f url(/SBS/images/menu_a.gif) repeat-x center top;
+}
+
+
+
+#nav a, #nav a:visited
+{
+    color: #fff;
+    text-decoration: none;
+}
+
+#nav ul li a:active
+{
+    color:yellow;
+    text-decoration: none;
+}
+
+#nav a:hover
+{
+    color: yellow;
+}
+
+#nav ul div table
+{
+    float: left;
+}
+
+/*IMPORT FROM STYLES*/
+.gamebox
+{
+    margin-bottom: 10px;
+    font-size: .9em;
+    background: #fff;
+    color: #222;
+}
+.gametable_odd
+{
+    background: #f4ebd2;
+}
+.gametable_even
+{
+    background: #f1f1f1;
+}
+.game_num
+{
+    color: #005c91;
+}
+
+.tableheading
+{
+    font-weight: bold;
+    height: 30px;
+    /*background: url(/SBS/images/nav_bk.png) repeat-x;*/
+}
+.tableheading2
+{
+    font-weight: bold;
+    text-align: center;
+    background: #0fd5f8;
+    color: #222;
+    height: 24px;
+}
+
+.textInput
+{
+    border: 1px solid #999999;
+    font-family: Tahoma,Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    display: inline;
+    padding: 0px 2px 2px 4px;
+}
+.HighLightBlock
+{
+    border: solid 1px red;
+    background-color: #FFCC00;
+}
+.grn_txt
+{
+    color: #8cee00;
+}
+.org_txt
+{
+    color: #ff7200;
+}
+.blue_txt
+{
+    color: #009cff;
+}
+
+.bet_input
+{
+    width: 30px;
+}
+.hyperlink
+{
+    text-decoration: underline;
+    color: Blue;
+    cursor: pointer;
+}
+.nav_selected
+{
+    color: #000000;
+}
+/*betting*/
+
+#betfilter
+{
+    float: left;
+}
+#contentwrapper
+{
+    width: 70%;
+    margin: 25px auto;
+    min-width: 880px;
+    background: #fff;
+    border: 4px solid #f2a705;
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+#LastUpdate
+{
+    float: left;
+    font-size: .8em;
+}
+
+#updatelines
+{
+    color: #f1f1f1;
+    float: right;
+}
+.inputborder
+{
+    border: 1px solid #005c91;
+}
+.button
+{
+    color: red;
+    font-weight: bold;
+    font-size: 14px;
+}
+#sportnav
+{
+    position: relative;
+    left: 10px;
+}
+#sportselect
+{
+    height: 40px;
+    line-height: 40px;
+    background: url(/SBS/images/sportnav_bg.gif);
+    min-width: 780px;
+    margin-bottom: 12px;
+}
+#sportselect ul
+{
+    margin: 0px;
+    padding: 0;
+}
+#sportselect ul li
+{
+    margin: 0;
+    padding: 0px;
+    list-style: none;
+    float: left;
+    color: #ff7200;
+    min-width: 100px;
+}
+#sportselect ul div td
+{
+    background-color: #1e1e1e;
+    color: #ff7200;
+    min-width: 150px;
+}
+#sportselect ul div
+{
+    float: left;
+    position: absolute;
+    z-index: 999999;
+}
+div#sportselect ul li:hover, div#sportselect ul div td:hover
+{
+    color: #009cff;
+}
+
+div#sportselect ul div
+{
+    display: none;
+}
+
+div#sportselect ul li:hover div, div#sportselect ul div table:hover, div#sportselect ul div:hover
+{
+    display: block;
+}
+div#sportselect ul div table
+{
+    float: left;
+}
+
+div#sportselect ul li .selected, div#sportselect ul div td .selected
+{
+    color: #009cff;
+}
+
+/**************** menu coding *****************/
+.divider
+{
+    border-bottom: 1px dotted #555;
+    margin: 5px 0px;
+}
+.betinput_update
+{
+    border: 1px solid #b5f6ab;
+    background: #fff;
+    width: 100%;
+}
+.betinput_red
+{
+    border: 1px solid #fcbbbb;
+    background: #fff;
+    width: 100%;
+}
+.gamebox
+{
+    margin-bottom: 10px;
+    font-size: .9em;
+    background: #fff;
+    color: #222;
+}
+.gametable_odd
+{
+    background: #f4ebd2;
+}
+.gametable_even
+{
+    background: #f1f1f1;
+}
+.game_num
+{
+    color: #005c91;
+}
+
+#betpanel, #historypanel
+{
+    color: #fff;
+    width: 70%;
+    padding-top: 15px;
+    padding-bottom: 0px;
+    min-width: 800px;
+    margin: 0 auto;
+    min-height: 25px;
+    height: auto;
+    display: block;
+}
+#betpanel
+{
+    margin-bottom: 0px;
+}
+#betpanel div, #betpanel table
+{
+    height: 100%;
+}
+#leftcolumn
+{
+    width: 100%;
+    clear: both;
+    height: 20px;
+    display: inline;
+}
+
+#centercolumn
+{
+    width: 55%;
+    background: #fff;
+    float: left;
+    height: auto;
+    min-height: 300px;
+    border: 0px solid #777;
+    -moz-border-radius-bottomleft: 7px;
+    -webkit-border-bottom-left-radius: 7px;
+}
+#rightcolumn
+{
+    width: 45%;
+    background: #fff;
+    float: left;
+    border: 0px solid #777;
+    -moz-border-radius-topright: 7px;
+    -moz-border-radius-bottomright: 7px;
+    -webkit-border-top-right-radius: 7px;
+    -webkit-border-bottom-right-radius: 7px;
+}
+
+#LineType
+{
+    font-size: 14px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    background: url(/SBS/images/title_grn_bg.png) right;
+    padding-left: 7px;
+}
+#LineType a
+{
+    color: #009cff;
+    text-decoration: none;
+}
+/*end betting*/
+
+.chkBetActionSelect
+{
+    position: relative;
+    top: 2px;
+}
+/*Awger start*/
+.WagerHeaderImage
+{
+    background: Blue;
+    height: 30px;
+}
+/*Awger end*/
+.Bold
+{
+    font-weight: bolder;
+}
+.home
+{
+  width: 318px;
+
+}
+.playerInfo
+{
+    display: inline;
+    margin-right: 10px;
+}
+.playerInfo span
+{
+    color: #ff9900;
+}
+.tableheading
+{
+    color: White;
+}
+.userManagement
+{
+    width: 190px;
+}
+.gameManagement
+{
+    width: 252px;
+}
+.report
+{
+    width: 740px;
+}
+.systemManagement
+{
+    width: 142px;
+}
+#nav .sf-menu .itemMenu
+{
+    margin-left: -10px;
+    padding-right:1px;
+}
+.emailIcon
+{
+    border: none;
+    margin-bottom: -3px;
+    position: relative;
+    bottom: 2px;
+}
+.titleColor
+{
+    color: White;
+}
+
+
+/*Awger end*/
+.Bold
+{
+    font-weight: bolder;
+}
+
+.sportselectbox .sport_header
+{
+    height: 25px;
+    background: url(/SBS/images/tab_green.png) no-repeat;
+    line-height: 25px;
+}
+#Color
+{
+    position: fixed;
+    width: 60px;
+    height: 191px;
+    left: 3px;
+    top: 52px;
+    background: url(/SBS/images/ColorPane.png);
+    z-index: 3000;
+}
+#Color ul
+{
+    margin: 25px 0px auto 10px;
+    padding: 0;
+}
+
+#Color ul li
+{
+    float: left;
+    display: block;
+    margin: auto auto 9px 3px;
+}
+#Color ul a
+{
+    display: block;
+    width: 25px;
+    height: 25px;
+}
+#Color ul a:hover
+{
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+.bet_descript
+{
+    background: #6cbb5d;
+    font-weight: bold;
+}
+.MenuItem
+{
+    display: block;
+    width: 190px;
+    height: 25px;
+    text-align: center;
+    background: url(/SBS/images/tab_green.png) no-repeat;
+    text-align: left;
+    margin: 0 auto;
+    text-indent: 10px;
+    margin-top: 10px;
+}
+table .MenuItem a
+{
+    font-weight: 900;
+    color: Yellow;
+    line-height: 23px;
+    text-decoration: none;
+}
+.MenuItem a, .MenuItem a:visited
+{
+    color: #222;
+    text-decoration: none;
+}
+.MenuItem a:hover
+{
+    color: #fff;
+}
+
+/*menu start*/
+.sf-menu
+{
+    margin: 0;
+    padding: 0;
+    list-style: none; 
+    .z-index:1;
+    line-height:9px;
+   
+}
+.sf-menu ul
+{
+    position: absolute; /*  width: 10em; left offset of submenus need to match (see below) */
+}
+.wager
+{
+    width: 388px;
+}
+.accountInfo
+{
+    width: 370px;
+}
+.gameManager
+{
+   width: 668px;
+   
+}
+
+.sf-menu li:hover
+{
+    visibility: inherit; /* fixes IE7 'sticky bug' */
+}
+.sf-menu li
+{
+    float: left;
+    position: relative;
+   
+}
+
+.sf-menu a
+{
+    display: block;
+    position: relative;
+}
+.sf-menu li a
+{
+    top: 3px;
+}
+.sf-menu li ul li a
+{
+    top: -2px;
+}
+.sf-menu li:hover ul, .sf-menu li.sfHover ul
+{
+    left: 0;
+    top: 2.9em; /* match top ul list item height */
+    z-index: 99;
+}
+ul.sf-menu li:hover li ul, ul.sf-menu li.sfHover li ul
+{
+    top: -999em;
+}
+ul.sf-menu li li:hover ul, ul.sf-menu li li.sfHover ul
+{
+    /* left: 10em;  match ul width      top: 0;*/
+}
+ul.sf-menu li li:hover li ul, ul.sf-menu li li.sfHover li ul
+{
+    top: -999em;
+}
+ul.sf-menu li li li:hover ul, ul.sf-menu li li li.sfHover ul
+{
+    /*left : 10em;  match ul width      top: 0;*/
+}
+
+.sf-menu
+{
+    margin-bottom: 1em;
+    width:852px;
+}
+.sf-menu a
+{
+    padding: 6px;
+    text-decoration: none;
+}
+.firstSubmenu
+{
+    display: inline;
+    float: left;
+    padding:0;
+    height:28px;
+}
+/*
+#nav .sf-menu ul li
+{
+    background: none;
+}*/
+#nav .sf-menu ul li a:hover
+{
+    color: #ffff00;
+}
+#nav li
+{
+    font-size: 11px;
+    padding-left: 3px;
+    
+  
+}
+sf-menu li ul
+{
+    display: none;
+}
+/*menu end*/
+.textInput
+{
+    background-image: url(/SBS/images/inputfield.jpg);
+    background-repeat: repeat-x;
+    background-color: #FFFFFF;
+    border: 1px solid #c6c6c6;
+    color: Black; /*padding: 6px;*/
+    height: 20px;
+}
+
+/*=========STYLE FOR PLAYER HYPERLINK=================*/
+.itemplayer
+{
+    text-decoration: none;
+    font-weight: bold;
+    color: #2c5296;
+}
+
+.itemplayer:hover
+{
+    text-decoration: none;
+    font-weight: bold;
+    color: #940000;
+}
+
+
+/*=========STYLE FOR PLAYER HYPERLINK END=================*/
+.button
+{
+    background: url(/SBS/images/bgbutton.jpg) repeat-x;
+    text-decoration: none;
+    border: none;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: #FFF;
+    cursor: pointer;
+    height: 25px;
+    font-size: 11px;
+}
+.button:hover
+{
+    text-decoration: none;
+    border: none;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: #000;
+    cursor: pointer;
+    background: none;
+    background: url(/SBS/images/bgbutton.jpg) repeat-x;
+}
+
+.SubTitle
+{
+ width: 160px; 
+ height: 25px; 
+ background-image: url('/SBS/images/SubTitle_Blue.png');
+ background-repeat: no-repeat; 
+ text-align: center; 
+ padding-top: 4px; 
+ color: White;
+ font-weight: bold   
+}
+.Logout:a
+{
+    font-weight:bold;
+    color:#940000;
+    text-decoration:none;  
+}
+.Logout:hover
+{
+    font-weight:bold;
+    color:#000;
+    text-decoration:none;  
+}

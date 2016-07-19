@@ -1,0 +1,1197 @@
+/************************************888Casino*************************************************/
+body,table,tr,td,a
+{
+	font-family:Arial, Helvetica, sans-serif;
+	}
+.PropGameSelect
+{
+	width:260px;
+	margin:0 auto;
+	
+	text-align:left;
+	}
+.PropGameSelect td a
+{
+	font-size:15px;
+	font-weight:bold;
+	text-decoration:none;
+}
+table.casinogame
+{
+    border-collapse: collapse;
+    width: 59px;
+}
+td.gametext
+{
+    text-align: left;
+    color: white;
+    font-family: Verdana,Arial,Helvetica;
+    font-weight: bold;
+    font-size: 7pt;
+    background: url(game/bottomtab.jpg) no-repeat;
+    width: 202px;
+    height: 41px;
+    padding: 0px 10px 0px 10px;
+}
+td.gametextBlue
+{
+    text-align: left;
+    color: white;
+    font-family: Verdana,Arial,Helvetica;
+    font-weight: bold;
+    font-size: 7pt;
+    background: url(game/bottomtab-blue.gif) no-repeat;
+    width: 202px;
+    height: 41px;
+    padding: 0px 10px 0px 10px;
+}
+td.gametextRed
+{
+    text-align: left;
+    color: white;
+    font-family: Verdana,Arial,Helvetica;
+    font-weight: bold;
+    font-size: 7pt;
+    background: url(game/bottomtab-red.gif) no-repeat;
+    width: 202px;
+    height: 41px;
+    padding: 0px 10px 0px 10px;
+}
+td.gametextGreen
+{
+    text-align: left;
+    color: white;
+    font-family: Verdana,Arial,Helvetica;
+    font-weight: bold;
+    font-size: 7pt;
+    background: url(game/bottomtab-green.gif) no-repeat;
+    width: 202px;
+    height: 41px;
+    padding: 0px 10px 0px 10px;
+}
+td.gametextBrown
+{
+    text-align: left;
+    color: white;
+    font-family: Verdana,Arial,Helvetica;
+    font-weight: bold;
+    font-size: 7pt;
+    background: url(game/bottomTab-brown.gif) no-repeat;
+    width: 202px;
+    height: 41px;
+    padding: 0px 10px 0px 10px;
+}
+td.gametextPurple
+{
+    text-align: left;
+    color: white;
+    font-family: Verdana,Arial,Helvetica;
+    font-weight: bold;
+    font-size: 7pt;
+    background: url(game/bottomtab-purple.gif) no-repeat;
+    width: 202px;
+    height: 41px;
+    padding: 0px 10px 0px 10px;
+}
+td.gametextPink
+{
+    text-align: left;
+    color: white;
+    font-family: Verdana,Arial,Helvetica;
+    font-weight: bold;
+    font-size: 7pt;
+    background: url(game/bottomTab-pink.gif) no-repeat;
+    width: 202px;
+    height: 41px;
+    padding: 0px 10px 0px 10px;
+}
+td.gametextOrange
+{
+    text-align: left;
+    color: white;
+    font-family: Verdana,Arial,Helvetica;
+    font-weight: bold;
+    font-size: 7pt;
+    background: url(game/bottomtab-orange.gif) no-repeat;
+    width: 202px;
+    height: 41px;
+    padding: 0px 10px 0px 10px;
+}
+
+td.gameicon
+{
+    background-color: #60606c;
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+td.gameiconBlue
+{
+    background-color: #26476A;
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+td.gameiconRed
+{
+    background-color: #BE2829;
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+td.gameiconGreen
+{
+    background-color: #1A7C48;
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+td.gameiconBrown
+{
+    background-color: #9E5B17;
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+td.gameiconPurple
+{
+    background-color: #5A4870;
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+td.gameiconPink
+{
+    background-color: #D49FC7;
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+td.gameiconOrange
+{
+    background-color: #DE6b07;
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+font.subtext
+{
+    color: white;
+    font-family: Verdana,Arial,Helvetica;
+    font-weight: bold;
+    font-size: 7pt;
+}
+
+table.casinotabs
+{
+    width: 725px;
+    border: 0px;
+    border-collapse: collapse;
+    position: relative;
+    top: 1px;
+}
+table.casinotabs td
+{
+    padding: 0px;
+    margin: 0px;
+    vertical-align: bottom;
+    height: 34px;
+}
+table.casinotabsbottom
+{
+    width: 725px;
+    border: 0px;
+    border-collapse: collapse;
+}
+table.casinotabsbottom td
+{
+    padding-top: 4px;
+    padding-right: 6px;
+    margin: 0px;
+    text-align: right;
+    background-image: url(game/blendBackground.gif);
+    height: 22px;
+    font-family: Tahoma, Verdana, Arial;
+    font-size: 7pt;
+}
+table.casinotabsbottom td a
+{
+    color: White;
+    font-weight: bold;
+}
+table.casinotabs td input
+{
+    cursor: hand;
+    padding-right: 20px;
+    width: 150px;
+    border: none;
+    height: 34px;
+    font: bold 11px Tahoma, Verdana, Arial;
+    background-color: transparent;
+}
+table.casinotabs td input.TabActive
+{
+    cursor: default;
+    color: White;
+    background-image: url(game/TabActive.gif);
+}
+table.casinotabs td input.TabInActive
+{
+    color: #dddddd;
+    background-image: url(game/TabInactive.gif);
+}
+table.casinotabs td input.ContestTabActive
+{
+    cursor: default;
+    color: White;
+    background-image: url(game/TabActive.gif);
+}
+table.casinotabs td input.ContestTabInActive
+{
+    color: #dddddd;
+    background-image: url(game/TabInactive.gif);
+}
+table.casinotabs td input.TabInActiveOver
+{
+    color: White;
+    background-image: url(game/TabInactiveOver.gif);
+}
+table.casinoTab
+{
+    width: 725px;
+    border: 1px solid #777777;
+    border-collapse: collapse;
+}
+table.casinoTab td.casinoTab
+{
+    background-color: #F4F4F4;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
+table.casinoTab div.tabdesc
+{
+    padding-top: 5px;
+    width: 600px;
+    font-family: Tahoma;
+    font-size: 12pt;
+    color: #000080;
+    text-align: center;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+div.tiebreak
+{
+    display: none;
+}
+div.tiebreak td
+{
+    color: red;
+}
+table.contest
+{
+    border: 2px solid #cccccc;
+    width: 705px;
+    border-collapse: collapse;
+}
+table.contest th
+{
+    padding: 4px;
+    font-family: Tahoma;
+    font-size: 10pt;
+    text-align: center;
+    color: white;
+    background-color: #1b63a5;
+    border: 2px solid #cccccc;
+}
+table.contest td
+{
+    padding: 4px;
+    font-family: Tahoma;
+    font-size: 10pt;
+    text-align: center;
+    border: 2px solid #cccccc;
+}
+table.contesthead
+{
+    width: 705px;
+    border-collapse: collapse;
+}
+table.contesthead td
+{
+    font-family: Tahoma;
+    font-size: 10pt;
+    padding: 0px;
+    margin: 0px;
+    height: 28px;
+    color: #eeeeee;
+    text-align: left;
+    padding-left: 10px;
+    font-weight: bold;
+    background: url(game/gradientTop.gif);
+}
+table.contestnotes
+{
+    width: 705px;
+    border-collapse: collapse;
+}
+table.contestnotes td
+{
+    font-family: Tahoma;
+    font-size: 10pt;
+    padding: 0px;
+    margin: 0px;
+    height: 28px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+a.back
+{
+    font-family: Tahoma;
+    font-size: 10pt;
+    color: black;
+    font-weight: bold;
+}
+
+tr.rowEven
+{
+    background-color: white;
+}
+tr.rowOdd
+{
+    background-color: #F2F2ED;
+}
+
+table.contest td input
+{
+    cursor: hand;
+    border: none;
+    width: 90px;
+    height: 31px;
+    font: 13px Tahoma, Verdana, Arial;
+}
+table.contest td input.ButtonPlay
+{
+    color: white;
+    font-weight: bold;
+    background-image: url(game/ButtonPlay.gif);
+}
+table.contest td input.ButtonRegister
+{
+    color: black;
+    font-weight: bold;
+    background-image: url(game/ButtonRegister.gif);
+}
+table.contest td input.ButtonScoreboard
+{
+    color: black;
+    background-image: url(game/ButtonScoreboard.gif);
+}
+table.contest td input.ButtonPlayOver
+{
+    color: white;
+    background-image: url(game/ButtonPlayOver.gif);
+}
+table.contest td input.ButtonRegisterOver
+{
+    color: black;
+    background-image: url(game/ButtonRegisterOver.gif);
+}
+table.contest td input.ButtonScoreboardOver
+{
+    color: black;
+    background-image: url(game/ButtonScoreboardOver.gif);
+}
+
+div.message
+{
+    width: 550px;
+    padding: 20px;
+    font-family: Tahoma;
+}
+div.login
+{
+    text-align: left;
+    width: 200px;
+}
+
+table.casinogames td.casinogames
+{
+    padding: 10px;
+}
+img.lobbyimg
+{
+    width: 198px;
+    height: 55px;
+}
+
+table.account
+{
+    margin-bottom: 5px;
+}
+table.account th
+{
+    padding: 0px 25px 0px 25px;
+    text-align: center;
+}
+table.account td
+{
+    padding: 0px 25px 0px 25px;
+    color: #000080;
+    text-align: center;
+}
+table.account a:link, table.account a:visited
+{
+    color: Blue;
+}
+
+/* useful for iframe'd lobbies */
+/* table.casinoTab td.casinoTab div.casinoTab {overflow-y: auto; height: 500px;} */
+
+
+/************************************888Casino end*************************************************/
+
+
+/**************HISTORY-------------------------------------*/
+
+.TrGameOdd
+{
+    font-size: x-small;
+    color: black;
+    background-color: #C0C1D0;
+}
+.TrGameEven
+{
+    font-size: x-small;
+    color: black;
+    background-color: #DDDDE6;
+}
+.GameHeader,.tableheading
+{
+    font-weight: bolder;
+    font-size: x-small;
+    text-align: center;
+    background:#f5b011;
+}
+.GameHeader2
+{
+    font-weight: bolder;
+    font-size: 14px;
+    text-align: center;
+    background:gray;
+}
+.tableheading
+{
+	}
+.GameHeaderPending
+{
+    background:#A50502;
+	font-weight: bolder;
+    font-size: x-small;
+    text-align: center;
+	}
+.gameHeader th
+{
+	background:#f5b011;
+}
+.GameHeaderAgent
+{
+    font-weight: bolder;
+    background-color: #A50502;
+    text-align: center;
+}
+.Title
+{
+    color: white;
+    font-weight: bolder;
+    font-size: x-small;
+}
+.Link
+{
+    color: white;
+    font-weight: bolder;
+    font-size: x-small;
+}
+
+
+.Tr0
+{
+    font-size: x-small;
+    color: black;
+    background-color: #C0C1D0;
+}
+.Tr1
+{
+    font-size: x-small;
+    color: black;
+    background-color: #DDDDE6;
+}
+
+link
+{
+    color: #000000;
+    font-size: 12px;
+    text-decoration: none;
+}
+.link
+{
+    color: #000000;
+    font-size: 12px;
+    text-decoration: none;
+}
+.link:white
+{
+    color: #FFFFFF;
+    font-size: 12px;
+    text-decoration: none;
+}
+.link:hover
+{
+    text-decoration: none;
+}
+
+/**************HISTORY END-------------------------------------*/
+
+.titlevegas
+{
+    float: left;
+    width: 100%;
+    height: 70px;
+    text-align: center;
+}
+
+.leftpane
+{
+    float: left;
+    width: 50%;
+    text-align: right;
+}
+
+.rightpane
+{
+    float: left;
+    width: 47%;
+    margin-left: 20px;
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+
+.loginform
+{
+    float: left;
+    width: 49%;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.clear
+{
+    clear: both;
+    height: 10px;
+}
+
+.copyright
+{
+    width: 100%;
+    height: 20px;
+    padding-bottom: 5px;
+    color: #FFF;
+    font-size: 11px;
+    text-align: center;
+}
+
+.menucontainer
+{
+    width: 100%;
+    background: #303030;
+    text-align:center;
+}
+#menu
+{
+    width: 520px;
+  /* width:100%;*/
+    height: 30px;
+    text-align:center;
+    margin: 0 auto;
+    padding-left: 80px;
+}
+#menuAgent
+{
+    
+  /* width:100%;*/
+    height: 30px;
+    text-align:center;
+    margin: 0 auto;
+	display:inline-block;
+}
+
+#menu .item,#menuAgent .item
+{
+    float: left;
+    /*height: 30px;*/
+    height: 25px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    padding: 0 2px 0 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#menu .left,#menuAgent .left
+{
+    background: url(/images/mnu_left.png) no-repeat;
+    height: 29px;
+    width: 8px;
+    float: left;
+}
+#menu .middle,#menuAgent .middle
+{
+    background: url(/images/mnu_middle.png) repeat-x;
+    height: 22px;
+    float: left;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 7px;
+}
+#menu .right,#menuAgent .right
+{
+    background: url(/images/mnu_right.png) no-repeat;
+    height: 29px;
+    width: 8px;
+    float: left;
+}
+
+#menu .middle .text,#menuAgent .middle .text
+{
+    color: white;
+    font-weight: bold;
+    padding-top: 10px;
+    text-decoration: none;
+}
+
+#menu .middle .text:hover, #menuAgent .middle .text:hover
+{
+
+    font-weight: bold;
+    padding-top: 10px;
+    text-decoration: underline;
+}
+
+#submenu
+{
+    /*width: 100%; 80%*/
+    /*min-height: 20px;*/
+    min-height: 15px;
+   /* float: left;*/
+    
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #FFF;
+    font-weight: bold;
+    text-decoration: none;
+    width:800px;
+    margin:0 auto;
+}
+
+#submenu .item
+{
+    float: left;
+    color: #FFF;
+    font-weight: bold;
+    text-decoration: none;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: center;
+    border-left: 2px solid #FFF;
+}
+
+#submenu .item:hover
+{
+    font-weight: bold;
+    text-decoration: underline;
+}
+pre, xmp, plaintext, listing
+{
+    font-family: monospace;
+    white-space: pre;
+}
+
+.review
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 14pt;
+    text-decoration: underline;
+}
+.sportHeader
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 14pt;
+    text-decoration: underline;
+}
+.subSportHeader
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 12pt;
+    text-decoration: none;
+}
+.subSportHeaderLink
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 12pt;
+    text-decoration: underline;
+}
+.linkColor
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 12pt;
+    text-decoration: none;
+}
+#content
+{
+    width: 100%;
+    float: left;
+    padding: 5px;
+}
+#content_small
+{
+    width: 70%;
+    margin: 0 auto; /*border:1px solid red;*/
+}
+
+
+body
+{
+    font-family:Arial,Helvetica,sans-serif;
+    font-size: 12px;
+     /* background:#eaeff5;*/
+    padding: 0;
+    margin: 0; /*background:transparent url(/SBS/images/test.jpg) no-repeat top center;    */
+}
+form, ul, li, table
+{
+
+    font-size: 14px;
+}
+
+ul li
+{
+    list-style: none;
+    display: inline;
+}
+table tr td
+{
+    font-size: 12px;
+}
+table tr td table
+{
+    font-size: 12px;
+}
+
+
+.gameType
+{
+	
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left:30px;
+    position:relative;
+    top:7px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ul ,.lg
+{
+    margin: 0;
+    padding: 5px;
+    list-style-type: none;
+    margin-bottom:20px;
+    border:#e6e6e6 solid 1px
+}
+.lg li
+{
+	padding:4px;
+    display: inline-block;
+    
+    font-size: 12px;
+    line-height: 23px;
+    position:relative;
+  
+}
+.lg li input
+{
+	/*position:absolute;
+	left:-24px;*/
+	position:relative;
+	top:3px;
+	}
+
+.topMenu
+{
+    background: gray;
+    height: 25px;
+    font-weight: bold;
+}
+.topMenu li
+{
+    margin-top: 4px;
+    display: inline;
+    float: left;
+    border-right: white solid 1px;
+    padding-right: 7px;
+    margin-right: 15px;
+}
+.topMenu li a
+{
+    text-decoration: none;
+    color: White;
+}
+input.continue
+{
+	width:69px;
+	height:19px;
+    background:  url(/SBS/images/btn_continue.png);
+    border:none;
+    cursor:pointer;
+}
+input.update
+{
+	width:69px;
+	height:19px;
+    background:  url(/SBS/images/btnUpdate.png);
+    border:none;
+    cursor:pointer;
+}
+input.btnCancel
+{
+	width:100px;
+	height:19px;
+    background:  url(/SBS/images/btncancel.png);
+    border:none;
+    cursor:pointer;
+}
+
+
+.bettingtable
+{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #A50502;
+    text-decoration: none;
+    margin: 0 auto;
+    
+}
+.bettingtableTeaser
+{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    text-decoration: none;
+    margin: 0 auto;
+    color:Black;
+	border-collapse:collapse;
+	border:black solid 1px;
+}
+
+.bettingtableTeaser td
+{
+	height:20px;
+	border-collapse:collapse;
+	border:black solid 1px;
+}
+.bettingtableTeaser td,.bettingtableTeaser td a
+{
+ color:Black;
+ font-size:15px;
+}
+.bettingtable td
+{
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+}
+.underline
+{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.offering_pair_even td, .offering_pair_ td, .offering_pair_odd td
+{
+    font-size: 15px;
+}
+.offering_pair_odd
+{
+    font-size: 15px;
+    color: Black;
+    background: white;
+}
+.offering_pair_even, .offering_pair_
+{
+    background-color: #e6e6e6;
+    color: Black;
+    font-size: 15px;
+}
+.logo
+{
+    width: 45px;
+    height: 30px;
+}
+.table_lines
+{
+    font-size: 12px;
+    border:none;
+    width:100%;
+}
+.table_lines th
+{
+   color: white;
+   height:0px;
+  
+}
+
+.textInputBetAction
+{
+    border: gray solid 1px;
+    float: left;
+}
+.labelodd
+{
+    position: relative;
+    top: 3px;
+}
+.chkBetActionSelect
+{
+  position:relative;
+
+  float:left;
+  clear:both;
+}
+.chkBetActionSelect2
+{
+	position:relative;
+	top:2px;
+    float: left;
+   clear:both;
+    /*margin-left:-20px;*/
+}
+.chkBetActionSelect3
+{
+	position:relative;
+	top:3px;
+    float: left;
+   clear:both;
+    /*margin-left:-20px;*/
+}
+.picks
+{
+	width:800px;
+    background-color: #e6e6e6;
+    margin: 0 auto;
+    color:Black;
+    border-collapse:collapse;
+	border:black solid 1px;
+}
+.picks td
+{
+    font-size: 14px;
+    font-weight: bold;
+    color:black;
+}
+
+.calendardate
+{
+    color: #000;
+    background:#FFF;
+    
+}
+
+#content_small{
+	
+	width:70%;
+	margin:0 auto;
+	/*border:1px solid red;*/
+}
+#content_small #daterange table
+{
+   color:#000;
+}
+#divlogin
+{
+	float:left;
+	width:100%;	
+	color:#fff;
+}
+#divlogin .label
+{
+	width:30%;
+	float:left;
+	text-align:left;
+	height:15px;
+	padding-top:5px;	
+	color:#fff;
+}
+ .text
+{
+	color:White;
+	margin-left:7px;
+}
+#divlogin .button
+{
+	width:70%;	
+	float:right;
+	text-align:left;
+	height:20px;	
+}
+.mlaction
+{
+	position:relative;
+	top:2px;
+	}
+.bet_input
+{
+	width:40px;
+	}	
+.tree
+{	text-align:left;
+	list-style:none;
+	padding:0;
+	margin:0;
+	padding-left:10px;
+	/*background:url(/SBS/Images/buttonbottom.gif) no-repeat top left;*/
+}	
+.tree li
+{
+	margin-top:5px;
+	border-left:white dotted 1px;
+	text-align:left;
+	position:relative;
+	left:-10px;
+	
+	}
+.tree li a
+{
+	font-family: Verdana,Arial,Helvetica;
+	position:relative;
+	top:5px;
+	font-size:12px;
+	}
+.PlayerOPenBet	
+{
+	 background-color: #A50502;
+	 height:34px;
+	 padding-left:30px;
+	 padding-right:30px;
+	 margin-left:10px;
+	
+	}	
+.PlayerHistoryBet
+{
+	background-color: #A50502;
+	 height:34px;
+	 padding-left:25px;
+	 padding-right:30px;
+	 margin-left:5px;
+	}
+.hyperlink
+{
+	cursor:pointer;
+	color:black;
+	}			
+/************************/
+a { color: #543d25; font-size: 12px; text-decoration: none }
+.a { color: #543d25; font-size: 12px; text-decoration: none }
+a:link {color: #000000; text-decoration: none; }
+a:visited {color: #000000; text-decoration: none; }
+a.white:link {color: #FFFFFF; text-decoration: none; }
+a.black:link {color: #000000; text-decoration: none; }
+
+table td
+{
+	color:Black;	
+}
+.menu_left a
+{
+	position:relative;
+	top:3px;
+	color:white;
+	margin-left:10px;
+}
+
+.menu_right a
+{
+	color:white;
+	margin-left:5px;
+}
+.menu_right div
+{
+	margin-top:2px;
+	margin-left:40px;
+}
+
+.GameType
+{
+	text-indent:10px;
+	color:White;
+	font-weight:900;
+	background:url(/images/game_top_left.png)no-repeat left;
+}
+.tbl_wager
+{
+	margin-bottom: -5px;
+	float:left;
+	color:black;
+		
+}
+
+
+.footer center
+{
+	position:relative;
+	top:25px;	
+}
+.btn_agent
+{
+	display:inline-block;
+	background:url(/SBS/images/agent_button.png);
+	width:118px;
+	height:23px;
+	float:left;
+	line-height:17pt;
+	vertical-align:bottom;
+	text-align:center;
+	margin:1px;
+	}
+.agent_top_left
+{
+	background:url(/SBS/images/agent_left_panel.png);
+	width:278px;
+	height:40px;
+	float:right;
+}
+.LogOut2
+{
+	margin-left:10px;
+	font-weight:900;
+	font-size:14px;
+    text-decoration:none;
+}	
+		

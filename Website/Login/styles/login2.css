@@ -1,0 +1,263 @@
+
+body
+{
+    margin: 0px;
+    padding: 0px;
+    color: #FFFFFF;
+   /* background: url(../images/bg-login.jpg) repeat;*/
+    font-size: 12px;
+    font-family: Tahoma, Verdana, Helvetica;
+    overflow: hidden;
+    text-align: center;
+}
+
+#page-background {position:fixed; top:0; left:0;width:100%; height:100%; }
+#content {position:absolute; z-index:1; padding:10px; top:0; left:0; width:100%;}
+
+
+.flag
+{
+    margin-top: 20px;
+}
+
+
+.clear
+{
+    clear: both;
+}
+
+.title
+{
+    font-size: 1em;
+    font-weight: bold;
+    padding: 4px;
+}
+
+.inputlebel
+{
+    width: 160px;
+    float: left;
+    text-align: right;
+}
+
+.inputlebel-rtl
+{
+    width: 160px;
+    float: right;
+    text-align: left;
+}
+
+.inputbox
+{
+    color: #FFFFFF;
+    background: #0F141F;
+    width: 120px;
+    margin: 2px;
+    padding: 2px;
+    border: 1px solid #444E63;
+    cursor: pointer;
+}
+.inputbox:hover
+{
+    border: 1px solid #FF9900;
+}
+
+.button
+{
+    font-family: Tahoma, Verdana, Helvetica;
+    background: #00557F url(../images/bg-button-blue.gif) repeat-x;
+    color: #FFFFFF;
+    margin: 4px;
+    border: 0px;
+    padding-bottom: 2px;
+    cursor: pointer;
+    width: 60px;
+    height: 23px;
+}
+.button:hover
+{
+    background: #FF9933 url(../images/bg-button-red.gif) repeat-x;
+    text-decoration: underline;
+}
+
+
+
+/* IE => bad bad bad bad & cow and more!  */
+.mrm-elxis:after
+{
+    color: #666666;
+    font-size: 9px;
+    cursor: pointer;
+}
+
+.roundedtop
+{
+    background-image: url('../images/cornertop2.gif');
+    width:422px;
+    height: 21px;
+    font-size: 2px;
+}
+.roundedbot
+{
+    background-image: url('../images/cornerbot2.gif');
+    width:422px;
+    height: 21px;
+    font-size: 2px;
+}
+
+
+.loginbound
+{
+    float: left;
+    position: absolute;
+    width: 410px;
+    text-align: center;
+    top: 20%;
+    left: 35%;
+}
+.rounded-inside
+{
+    border-left: 2px solid #444E63;
+    border-right: 2px solid #444E63;
+    background: #171D2A;
+    padding-left: 10px;
+    padding-right: 10px;
+    width:398px;
+   *width:422px;
+    overflow:hidden;
+}
+#login-wrapper
+{
+    margin: 0;
+    padding: 12px;
+    text-indent: 4px;
+    text-align: center;
+    background: #171D2A;
+}
+
+.mrm20
+{
+    width: 410px;
+    margin-top: 20px;
+    float: left;
+    text-align: center;
+}
+.uip
+{
+    color: #666666;
+    font-size: 10px;
+    clear: both;
+    text-align: center;
+    display: inline;
+    position: absolute;
+    top: 75%;
+    left: 43%;
+}
+
+.menuitem
+{
+    font-weight: bold;
+    font-size: 12px;
+    color: silver;
+    text-decoration: none;
+}
+.menuitem:hover
+{
+    font-weight: bold;
+    font-size: 12px;
+    color: red;
+    text-decoration: none;
+}
+
+.menubot
+{
+     font-weight: bold;
+    font-size: 12px;
+    color: #171D2A;
+    text-decoration: none;   
+}
+.menubot:hover
+{
+    font-weight: bold;
+    font-size: 12px;
+    color: red;
+    text-decoration: none;
+}
+.verticalline
+{
+    color: #000;
+    text-decoration: none;
+}
+
+label
+{
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.usertext
+{
+    font-size: 10pt;
+    text-align: left;
+    vertical-align: middle;
+    width: 120px;
+    display: inline;
+    margin-right: 5px;
+    height: 25px;
+    float: left;
+}
+.textbox
+{
+    font-size: 10pt;
+    text-align: left;
+    vertical-align: middle;
+    width: 200px;
+    display: inline;
+    margin-right: 5px;
+    height: 25px;
+    float: left;
+}
+.loginError
+{
+    float: left;
+    text-align: center;
+    color: red;
+    font-size: 10pt;
+    padding: 2px 5px 2px 5px;
+    width: 390px;
+}
+
+.conditionlogin
+{
+    width: 400px;
+    float: left;
+    text-align: center;
+    font-size: 10pt;
+    color: Red;
+    padding: 5px 0px 5px 0px;
+}
+.textInput
+{
+    background-image: url(/login/images/inputfield.jpg);
+    background-repeat: repeat-x;
+    background-color: #FFFFFF;
+    border: 1px solid #c6c6c6;
+    color: Black;
+    height: 20px;
+}
+
+.loginbuton
+{
+    width: 87px;
+    height: 22px;
+    background-image: url('/SBS/images/buttonlogin.png');
+    background-repeat: no-repeat;
+    text-align: center; /* padding-top: 2px; */
+    padding-bottom: 2px;
+    color: White;
+    font-weight: bold;
+    background-color: Transparent;
+    border: none;
+    cursor: pointer;
+}
+/*CSS FOR LOGIN CONTROL END*/
