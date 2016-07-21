@@ -6,5 +6,7 @@
     End Function
 </script>
 
+<%--<link type="text/css" rel="stylesheet" href="<%=GetPath()%>styles/bootstrap.min.css">--%>
 <link type="text/css" rel="stylesheet" href="<%=GetPath()%>styles/ttl_style-document.css">
+
 

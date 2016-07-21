@@ -51,7 +51,17 @@
             });
         } catch (e) { }
 
+        // 
+        $(".divrptGameTypeShort .list-group-item > label").click(function () {
+            $(this).toggleClass("highlight");
+        });
+        $(".panel-heading").click(function () {
+            $(this).next(".panel-body").toggleClass("collapsed");
+        });
+
     });
+
+
 
 </script>
 
@@ -59,25 +69,28 @@
     <div class="col-lg-12">
 
         <div class="page-title-breadcrumb">
-            <div class="col-md-1 pull-left">
-                <span class="page-title">WagerType</span>
+            <div class="notif-valid pdL13">
+                <asp:Label ID="lbMessage" runat="server" Text=""></asp:Label>
             </div>
-            <div class="col-md-1 pull-left">
+            <%-- <div class="col-md-1 pull-left">
+                <span class="page-title">WagerType</span>
+            </div>--%>
+            <%--<div class="col-md-1 pull-left">
                 <span class="label label-dark pull-left mtm" style="margin-top: -1px !important; font-size: larger;">
                     <%=IIf(UserSession.SelectedBetType(Me.SelectedPlayerID) <> "PROP", BetType.Replace("BetTheBoard", "Straight").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board"), "Proposition/Future")%>
                 </span>
-            </div>
+            </div>--%>
 
             <% If (Not BetType.Equals("Teaser", StringComparison.OrdinalIgnoreCase)) Then%>
             <div class="col-md-4 pull-right">
-                <button type="button" class="btn btn-dark pull-right" style="margin-left: 10px;" onclick='$("#<%=btnContinue.ClientID%>").click()'>
+                <button type="button" class="btn btn-dark pull-right button-style-2 w110px right" style="margin-left: 10px;" onclick='$("#<%=btnContinue.ClientID%>").click()'>
                     Continue
                     <i class="fa fa-forward"></i>
                 </button>
-                <button type="button" class="btn btn-red pull-right" onclick='clearItem()'>
+                <%-- <button type="button" class="btn btn-red pull-right" onclick='clearItem()'>
                     Clear All
                     <i class="fa fa-times"></i>
-                </button>
+                </button>--%>
                 <%--<a class="text-red pointer" onclick="clearItem()">Clear</a>--%>
             </div>
             <% End If%>
@@ -91,7 +104,7 @@
 
 <div class="mbl"></div>
 
-<div class="panel" id="divrptGameTypeShort" runat="server">
+<div class="panel divrptGameTypeShort" id="divrptGameTypeShort" runat="server">
     <div class="panel-body">
         <%--<asp:Repeater runat="server" ID="rptGameTypeShort">
             <ItemTemplate>
@@ -105,17 +118,17 @@
         <div class="clearfix"></div>--%>
         <asp:Repeater runat="server" ID="rptGameType">
             <ItemTemplate>
-                <div class="col-md-4" id="<%#Container.ItemIndex%>">
-                    <div class="panel panel-grey">
-                        <div class="panel-heading">
+                <div class="col-md-4 game-type" id="<%#Container.ItemIndex%>">
+                    <div class="panel panel-grey box-sport-game mgT15">
+                        <div class="panel-heading box-title">
                             <%#Container.DataItem%>
-                            <span class="" style="margin-left: 7px;" >
+                            <%--<span class="" style="margin-left: 7px;" >
                                 <input id="<%#Container.ItemIndex%>_cbSelectAll" type="checkbox" onchange="toggleAllGameType(this);" />
                                 <label for="<%#Container.ItemIndex%>_cbSelectAll" style="font-size: 14px; color: #fff; position: relative; top: -2px">Select All</label>
                             </span>
-                            <i class="fa fa-plus pull-right" onclick="MiniGame(this,'gametype<%#Container.ItemIndex%>')" style="margin-left: 10px;"></i>
+                            <i class="fa fa-plus pull-right" onclick="MiniGame(this,'gametype<%#Container.ItemIndex%>')" style="margin-left: 10px;"></i>--%>
                         </div>
-                        <div class="panel-body" style="height: 300px; overflow-x: hidden; overflow-y:scroll; display: none;">
+                        <div class="panel-body">
                             <%--<div class="col-md-4">
                                 <button type="button" class="btn btn-primary" onclick="SelectAll(this)">SELECT ALL</button>
                             </div>
@@ -134,7 +147,7 @@
                                 <ItemTemplate>
                                     <div runat="server" id="game" style="max-height: 500px; overflow-y: auto;" class="gamelist">
                                         <asp:Button OnClick="lblGameType_Click" ID="btnGameType" runat="server" Text='<%#Container.DataItem.Replace("Sports","").Trim() %>' Style="display: none" />
-                                        <ul class="list-group" style="margin-bottom: 0px;">
+                                        <ul class="list-group <%=BetType %>" style="margin-bottom: 0px;">
                                             <li id="lichkCurrent" runat="server" class="list-group-item">
                                                 <asp:CheckBox ID="chkCurrent" class="chk" AutoPostBack="false" Visible="true" runat="server" />
                                                 <asp:Label ID="lblGameType" AssociatedControlID="chkCurrent" runat="server" Text='<%#SBCBL.std.SafeString(Container.DataItem).Replace("NCAA Football","College").Replace("CFL Football","Canadian").Replace("AFL Football","Arena").Replace("Football","").Replace("Basketball","").Replace("Baseball","").Replace("Hockey","").Trim() %> '></asp:Label><asp:Literal ID="lblGame" runat="server"></asp:Literal>
@@ -176,6 +189,14 @@
             </ItemTemplate>
         </asp:Repeater>
         <div class="clearfix"></div>
+        <% If (Not BetType.Equals("Teaser", StringComparison.OrdinalIgnoreCase) AND (Not BetType.Equals("Parlay", StringComparison.OrdinalIgnoreCase)) ) Then%>
+        <div class="col-md-4 pull-right">
+            <button type="button" class="btn btn-dark pull-right button-style-2 w110px right" style="margin-left: 10px;" onclick='$("#<%=btnContinue.ClientID%>").click()'>
+                Continue
+                    <i class="fa fa-forward"></i>
+            </button>
+        </div>
+        <% End If%>
     </div>
 </div>
 
@@ -237,17 +258,17 @@
         <div class="form-group" id="dvSubAgents" runat="server" visible="false">
             <label class="col-md-2 control-label">SubAgents</label>
             <div class="col-md-2">
-                <wlb:CDropDownList ID="ddlSubAgents" hasOptionalItem="true" OptionalText="All" CssClass="form-control"
-                    OptionalValue="" runat="server" AutoPostBack="true">
-                </wlb:CDropDownList>
+                <wlb:cdropdownlist id="ddlSubAgents" hasoptionalitem="true" optionaltext="All" cssclass="form-control"
+                    optionalvalue="" runat="server" autopostback="true">
+                </wlb:cdropdownlist>
             </div>
         </div>
         <div class="form-group" id="dvPlayer" runat="server" visible="false">
             <label class="col-md-2 control-label">Player</label>
             <div class="col-md-2">
-                <wlb:CDropDownList ID="ddlPlayers" hasOptionalItem="true" OptionalText="Choose player"
-                    CssClass="textInput" OptionalValue="" runat="server" AutoPostBack="false">
-                </wlb:CDropDownList>
+                <wlb:cdropdownlist id="ddlPlayers" hasoptionalitem="true" optionaltext="Choose player"
+                    cssclass="textInput" optionalvalue="" runat="server" autopostback="false">
+                </wlb:cdropdownlist>
             </div>
         </div>
     </div>
@@ -297,7 +318,7 @@
         $('#' + btnID).click();
     }
     $(document).ready(function () {
-        $('div[id$="divrptGameTypeShort"] .panel .panel-body div').each(function() {
+        $('div[id$="divrptGameTypeShort"] .panel .panel-body div').each(function () {
             if ($(this).find('ul li').length == 0)
                 $(this).remove();
         });

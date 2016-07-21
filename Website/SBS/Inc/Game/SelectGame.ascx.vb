@@ -692,13 +692,15 @@ Partial Class SBS_Agents_Inc_Game_SelectGame
             GetSelectTeaserGame(rptGameType)
             Dim olstGameType As List(Of String) = UserSession.SelectedGameTypes(Me.SelectedPlayerID)
             If olstGameType Is Nothing OrElse olstGameType.Count = 0 Then
-                ClientAlert("Please Select Game1")
+                'ClientAlert("Please Select Game1")
+                lbMessage.Text = "Please select at least one option to continue"
             Else
                 Response.Redirect(BetActionLink & String.Format("?PlayerID={0}", Me.SelectedPlayerID))
             End If
 
         Else
-            ClientAlert("Please Select A Player")
+            'ClientAlert("Please Select A Player")
+            lbMessage.Text = "Please Select A Player"
         End If
 
     End Sub
@@ -722,13 +724,15 @@ Partial Class SBS_Agents_Inc_Game_SelectGame
             '_log.Debug("sasdasdsa" + olstGameType.Count)
 
             If olstGameType Is Nothing OrElse olstGameType.Count = 0 Then
-                ClientAlert("Please Select Game2")
+                'ClientAlert("Please Select Game2")
+                lbMessage.Text = "Please select at least one option to continue"
             Else
                 Response.Redirect(BetActionLink & String.Format("?PlayerID={0}", Me.SelectedPlayerID))
             End If
 
         Else
-            ClientAlert("Please Select A Player")
+            'ClientAlert("Please Select A Player")
+            lbMessage.Text = "Please Select A Player"
         End If
 
     End Sub
