@@ -1,4 +1,5 @@
 ﻿Imports System.Data
+Imports System.Globalization
 
 Imports SBCBL.Managers
 Imports SBCBL.std
@@ -113,33 +114,27 @@ Namespace SBSPlayer
                 If oCountByTicketID IsNot Nothing Then
                     Dim nRowSpan As Integer = oCountByTicketID.ItemCount
 
-                    Dim lblTicket As Label = CType(oItem.FindControl("lblTicket"), Label)
+                    Dim lblTicket As Label = CType(oItem.FindControl("lblWagerType"), Label)
                     lblTicket.Text = nRowSpan.ToString() & " Teams<br/>" & lblTicket.Text
 
-                    'oItem.Cells(0).RowSpan = nRowSpan 'Internet/Phone
-                    'oItem.Cells(1).RowSpan = nRowSpan 'Ticket
-                    'oItem.Cells(2).RowSpan = nRowSpan 'TicketDate
-                    'oItem.Cells(5).RowSpan = nRowSpan 'Risk/Win
-
-                    oItem.Cells(0).RowSpan = nRowSpan 'Internet/Phone
-                    oItem.Cells(1).RowSpan = nRowSpan 'Ticket
-                    oItem.Cells(2).RowSpan = nRowSpan 'Ticket Date
-                    oItem.Cells(3).RowSpan = nRowSpan 'Player
-                    oItem.Cells(8).RowSpan = nRowSpan 'Risk/Win
+                    oItem.Cells(0).RowSpan = nRowSpan '**
+                    oItem.Cells(1).RowSpan = nRowSpan 'Ticket Date
+                    oItem.Cells(2).RowSpan = nRowSpan 'Ticket Number
+                    oItem.Cells(4).RowSpan = nRowSpan 'Method
+                    oItem.Cells(6).RowSpan = nRowSpan 'Game Type
+                    oItem.Cells(7).RowSpan = nRowSpan 'Risk
+                    oItem.Cells(8).RowSpan = nRowSpan 'Win
 
                     For nRowSpanStart As Integer = 1 To nRowSpan - 1
                         Dim oItemRowSpan As DataGridItem = dgTicketBets.Items(nRowSpanStart + nIndex)
                         oItemRowSpan.BackColor = oBackColor
 
-                        'oItemRowSpan.Cells(0).Visible = False
-                        'oItemRowSpan.Cells(1).Visible = False
-                        'oItemRowSpan.Cells(2).Visible = False
-                        'oItemRowSpan.Cells(5).Visible = False
-
                         oItemRowSpan.Cells(0).Visible = False
                         oItemRowSpan.Cells(1).Visible = False
                         oItemRowSpan.Cells(2).Visible = False
-                        oItemRowSpan.Cells(3).Visible = False
+                        oItemRowSpan.Cells(4).Visible = False
+                        oItemRowSpan.Cells(6).Visible = False
+                        oItemRowSpan.Cells(7).Visible = False
                         oItemRowSpan.Cells(8).Visible = False
                     Next
 
@@ -157,9 +152,13 @@ Namespace SBSPlayer
 
             ''total row
             Dim oTotalItem As DataGridItem = dgTicketBets.Items(dgTicketBets.Items.Count - 1)
-            oTotalItem.Cells(0).ColumnSpan = 3
-            oTotalItem.Cells(1).Visible = False
+            oTotalItem.Cells(0).Visible = False
+            oTotalItem.Cells(1).ColumnSpan = 5
             oTotalItem.Cells(2).Visible = False
+            oTotalItem.Cells(3).Visible = False
+            oTotalItem.Cells(4).Visible = False
+            'oTotalItem.Cells(1).Visible = False
+            'oTotalItem.Cells(2).Visible = False
             'oTotalItem.Cells(3).Visible = False
         End Sub
 
@@ -178,21 +177,32 @@ Namespace SBSPlayer
 
                 If e.Item.ItemIndex = Me.TicketBetsCount - 1 Then
                     e.Item.CssClass = "tableheading"
-                    e.Item.Cells(0).Text = "TOTAL"
-                    e.Item.Cells(5).Text = FormatNumber(Me.TotalBets, 0) & " BETS"
-                    e.Item.Cells(8).Text = String.Format("{0} / {1}", FormatNumber(Me.TotalRisk, Me.RoundMidPoint), FormatNumber(Me.TotalWin, Me.RoundMidPoint))
-
+                    'e.Item.Cells(0).Text = "TOTAL"
+                    'e.Item.Cells(5).Text = FormatNumber(Me.TotalBets, 0) & " BETS"
+                    'e.Item.Cells(8).Text = String.Format("{0} / {1}", FormatNumber(Me.TotalRisk, Me.RoundMidPoint), FormatNumber(Me.TotalWin, Me.RoundMidPoint))
+                    e.Item.Cells(5).Text = "Total"
+                    e.Item.Cells(6).Text = FormatNumber(Me.TotalRisk + SafeDouble(oTicketBet("RiskAmount")), 2)
                 Else
                     Dim sTicketType = GetTicketType(oTicketBet)
                     Dim sContext As String = SafeString(IIf(LCase(SafeString(oTicketBet("Context"))) = "current", "", "<b>" & SafeString(oTicketBet("Context")) & "</b><br/>"))
-                    CType(e.Item.FindControl("lblUserPhone"), Label).Text = SafeString(oTicketBet("TypeOfBet"))
-                    CType(e.Item.FindControl("lblSport"), Label).Text = SafeString(oTicketBet("GameType"))
-                    CType(e.Item.FindControl("lblTicket"), Label).Text = String.Format("{0}<br />#{1}{2}", sTicketType, oTicketBet("TicketNumber"), _
+
+                    CType(e.Item.FindControl("lblTicketDate"), Label).Text = SafeDate(oTicketBet("TransactionDate")) 
+                    CType(e.Item.FindControl("lblTicketNumber"), Label).Text = SafeString(oTicketBet("TicketNumber"))
+                    CType(e.Item.FindControl("lblMethod"), Label).Text = SafeString(oTicketBet("TypeOfBet")).Substring(0, 1)
+
+                    ' Game
+                    CType(e.Item.FindControl("lblIfBet"), Label).Text = "Gamefsdfsd "
+
+                    CType(e.Item.FindControl("lblWagerType"), Label).Text = String.Format("{0}<br />#{1}{2}", sTicketType, oTicketBet("TicketNumber"), _
                                         IIf(SafeString(oTicketBet("SubTicketNumber")) <> "", "-" & SafeString(oTicketBet("SubTicketNumber")), ""))
-                    CType(e.Item.FindControl("lblTicketDate"), Label).Text = SafeDate(oTicketBet("TransactionDate")) ').ToString()
-                    CType(e.Item.FindControl("lblSport"), Label).Text = SafeString(oTicketBet("GameType"))
-                    CType(e.Item.FindControl("lblPlaced"), Label).Text = SafeString(oTicketBet("GameDate"))
-                    CType(e.Item.FindControl("lblAction"), Label).Text = SafeString(oTicketBet("GameStatus"))
+                    
+                    CType(e.Item.FindControl("lblRisk"), Label).Text = FormatNumber(SafeDouble(oTicketBet("RiskAmount")), 2)
+                    CType(e.Item.FindControl("lblWin"), Label).Text = FormatNumber(SafeDouble(oTicketBet("WinAmount")), 2)
+                    
+                    
+                    'CType(e.Item.FindControl("lblSport"), Label).Text = SafeString(oTicketBet("GameType"))
+                    'CType(e.Item.FindControl("lblPlaced"), Label).Text = SafeString(oTicketBet("GameDate"))
+                    'CType(e.Item.FindControl("lblAction"), Label).Text = SafeString(oTicketBet("GameStatus"))
                     If UserSession.UserType = SBCBL.EUserType.SuperAdmin Or UserSession.UserType = SBCBL.EUserType.Agent Then
                         CType(e.Item.FindControl("lblPlayer"), Label).Text = SafeString(oTicketBet("PlayerName"))
                     Else
@@ -247,7 +257,7 @@ Namespace SBSPlayer
                             sScores = ""
                     End Select
 
-                    CType(e.Item.FindControl("lblScore"), Label).Text = sScores
+                    'CType(e.Item.FindControl("lblScore"), Label).Text = sScores
 
                     ''total bet
                     Dim sTicketID As String = CType(e.Item.FindControl("hfTicketID"), HiddenField).Value
@@ -330,7 +340,7 @@ Namespace SBSPlayer
                                 sDescription += getDetailByDraw(sHomeTeam, sAwayTeam, oTicketBet)
                         End Select
 
-                        CType(e.Item.FindControl("lblDescription"), Label).Text = sContext & sDescription
+                        'CType(e.Item.FindControl("lblDescription"), Label).Text = sContext & sDescription
                     End If
                     Dim sTicketBetID As String = SafeString(oTicketBet("TicketBetID"))
                     Dim sScore As String = SafeString(oTicketBet("AwayScore")) & SafeString(oTicketBet("HomeScore"))

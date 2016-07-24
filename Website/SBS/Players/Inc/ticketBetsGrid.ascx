@@ -9,7 +9,64 @@
     <SelectedItemStyle BackColor="#e6e6e6" />
     <FooterStyle CssClass="tableheading" HorizontalAlign="Center" />
     <Columns>
-        <asp:TemplateColumn HeaderText="Method" ItemStyle-HorizontalAlign="Center">
+        <asp:TemplateColumn HeaderText="**" ItemStyle-HorizontalAlign="Center">
+            <ItemTemplate>
+                <span onclick="ShowDetailWager(event, '24445906','W')" class="icon minus">+</span>
+            </ItemTemplate>
+        </asp:TemplateColumn>
+        <asp:TemplateColumn HeaderText="Date Time Accepted" ItemStyle-HorizontalAlign="Center">
+            <ItemTemplate>
+                <asp:Label ID="lblTicketDate" runat="server" />
+                <asp:Label ID="lblUserPhone" runat="server" />
+                <asp:HiddenField ID="hfTicketID" runat="server" Value='<%# Container.DataItem("TicketID") %>' />
+                <asp:panel ID="pnlPhoneDetail" runat="server" Visible="false">
+                <span>Taken By </span> <BR/>
+                <asp:Label ID="lblCAgentName" runat="server"  ></asp:Label> <BR />
+                <asp:LinkButton ID="lbtRecord" runat ="server" Visible="false" Text ="Recording"></asp:LinkButton>
+                </asp:panel>
+                <asp:HiddenField ID="hfFileName" runat="server" Value='<%#Container.DataItem("RecordingFile") %>' />  
+            </ItemTemplate>
+        </asp:TemplateColumn>
+        <asp:TemplateColumn HeaderText="Ticket #" ItemStyle-HorizontalAlign="Center">
+            <ItemTemplate>
+                <asp:Label ID="lblTicketNumber" runat="server" />
+            </ItemTemplate>
+        </asp:TemplateColumn>
+         <asp:TemplateColumn HeaderText="Player">
+            <ItemTemplate>
+                <asp:Label ID="lblPlayer" runat="server" />
+            </ItemTemplate>
+        </asp:TemplateColumn>
+        <asp:TemplateColumn HeaderText="Taken" ItemStyle-HorizontalAlign="Center">
+            <ItemTemplate>
+                <asp:Label ID="lblMethod" runat="server" />
+            </ItemTemplate>
+        </asp:TemplateColumn>
+        <asp:TemplateColumn HeaderText="Game">
+            <ItemTemplate>
+                <asp:Label ID="lblIfBet" runat="server" />
+                <asp:Label ID="lblGameType" runat="server" />
+                <asp:Label ID="lblAwayTeam" runat="server" />
+                <asp:Label ID="lblRiskWin" runat="server" />
+            </ItemTemplate>
+        </asp:TemplateColumn>
+        <asp:TemplateColumn HeaderText="Wager Type">
+            <ItemTemplate>
+                <asp:Label ID="lblWagerType" runat="server" />
+            </ItemTemplate>
+        </asp:TemplateColumn>
+        <asp:TemplateColumn HeaderText="Risk">
+            <ItemTemplate>
+                <asp:Label ID="lblRisk" runat="server" />
+            </ItemTemplate>
+        </asp:TemplateColumn>
+        <asp:TemplateColumn HeaderText="Win">
+            <ItemTemplate>
+                <asp:Label ID="lblWin" runat="server" />
+            </ItemTemplate>
+        </asp:TemplateColumn>
+        
+<%--        <asp:TemplateColumn HeaderText="Method" ItemStyle-HorizontalAlign="Center">
             <ItemTemplate>
                 <asp:Label ID="lblUserPhone" runat="server" />
                 <asp:HiddenField ID="hfTicketID" runat="server" Value='<%# Container.DataItem("TicketID") %>' />
@@ -19,7 +76,6 @@
                 <asp:LinkButton ID="lbtRecord" runat ="server" Visible="false" Text ="Recording"></asp:LinkButton>
                 </asp:panel>
                 <asp:HiddenField ID="hfFileName" runat="server" Value='<%#Container.DataItem("RecordingFile") %>' />  
-                
             </ItemTemplate>
         </asp:TemplateColumn>
         <asp:TemplateColumn HeaderText="Ticket" ItemStyle-HorizontalAlign="Center">
@@ -67,10 +123,10 @@
             <ItemTemplate>
                 <asp:Label ID="lblScore" runat="server" />
             </ItemTemplate>
-        </asp:TemplateColumn>
+        </asp:TemplateColumn>--%>
     </Columns>
 </asp:DataGrid>
-<table id="pnColor" visible=false  runat="server" class="table table-hover table-bordered">
+<table id="pnColor" visible="False"  runat="server" class="table table-hover table-bordered">
     <tr>
         <td style="background:#FFCC66; width: 20px"></td>
         <td>
