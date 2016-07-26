@@ -30,9 +30,9 @@ E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\bin\Debug\MemcachedProviders.dll
 E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\bin\Debug\WebsiteLibrary.dll
 E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\bin\Debug\AjaxControlToolkit.dll
 E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\bin\Debug\WebsiteLibrary.pdb
+E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\obj\Debug\SBCBL.vbprojResolveAssemblyReference.cache
 E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\obj\Debug\SBCBL.Resources.resources
 E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\obj\Debug\SBCBL.vbproj.GenerateResource.Cache
 E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\obj\Debug\SBCBL.dll
 E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\obj\Debug\SBCBL.xml
 E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\obj\Debug\SBCBL.pdb
-E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\obj\Debug\SBCBL.vbprojResolveAssemblyReference.cache

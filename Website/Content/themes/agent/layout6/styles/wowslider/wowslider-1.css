@@ -1,0 +1,369 @@
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext,cyrillic);
+
+#wowslider-container1 {
+    zoom: 1;
+    position: relative;
+    max-width: 938px;
+    margin: 0px auto 0px;
+    z-index: 90;
+    border: none;
+    text-align: left; /* reset align=center */
+}
+
+* html #wowslider-container1 {
+    width: 938px;
+}
+
+    #wowslider-container1 .ws_images ul {
+        position: relative;
+        width: 10000%;
+        height: auto;
+        left: 0;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-spacing: 0;
+        overflow: visible;
+        /*table-layout:fixed;*/
+    }
+
+        #wowslider-container1 .ws_images ul li {
+            width: 1%;
+            line-height: 0; /*opera*/
+            float: left;
+            font-size: 0;
+            padding: 0 0 0 0 !important;
+            margin: 0 0 0 0 !important;
+        }
+
+    #wowslider-container1 .ws_images {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+        #wowslider-container1 .ws_images a {
+            width: 100%;
+            display: block;
+            color: transparent;
+        }
+
+    #wowslider-container1 img {
+        max-width: none !important;
+    }
+
+    #wowslider-container1 .ws_images img {
+        width: 100%;
+        border: none 0;
+        max-width: none;
+        padding: 0;
+    }
+
+    #wowslider-container1 a {
+        text-decoration: none;
+        outline: none;
+        border: none;
+    }
+
+    #wowslider-container1 .ws_bullets {
+        font-size: 0px;
+        float: left;
+        position: absolute;
+        z-index: 70;
+    }
+
+        #wowslider-container1 .ws_bullets div {
+            position: relative;
+            float: right;
+            right: 0;
+        }
+
+    #wowslider-container1 a.wsl {
+        display: none;
+    }
+
+#wowslider-container1 {
+    box-shadow: none;
+}
+
+    #wowslider-container1 .ws_bullets {
+        padding: 10px;
+    }
+
+        #wowslider-container1 .ws_bullets a {
+            font: 14px/30px 'Open Sans',Arial,Helvetica,sans-serif;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            margin-left: 5px;
+            width: 30px;
+            height: 30px;
+            background: #000;
+            float: left;
+            position: relative;
+        }
+
+            #wowslider-container1 .ws_bullets a.ws_selbull, #wowslider-container1 .ws_bullets a:hover {
+                background-position: 0 100%;
+                background: #107191;
+                color: white;
+            }
+
+    #wowslider-container1 a.ws_next, #wowslider-container1 a.ws_prev {
+        position: absolute;
+        display: none;
+        top: 50%;
+        margin-top: -40px;
+        z-index: 60;
+        height: 78px;
+        width: 77px;
+        background-image: url(./arrows.png);
+    }
+
+    #wowslider-container1 a.ws_next {
+        background-position: 100% 0;
+        right: 10px;
+    }
+
+    #wowslider-container1 a.ws_prev {
+        left: 10px;
+        background-position: 0 0;
+    }
+
+    #wowslider-container1 a.ws_next:hover {
+        background-position: 100% 100%;
+    }
+
+    #wowslider-container1 a.ws_prev:hover {
+        background-position: 0 100%;
+    }
+
+    * html #wowslider-container1 a.ws_next, * html #wowslider-container1 a.ws_prev {
+        display: block;
+    }
+
+    #wowslider-container1:hover a.ws_next, #wowslider-container1:hover a.ws_prev {
+        display: block;
+    }
+    /* bottom center */
+    #wowslider-container1 .ws_bullets {
+        bottom: 0;
+        right: -120px;
+    }
+
+        #wowslider-container1 .ws_bullets div {
+            left: -50%;
+        }
+
+    #wowslider-container1 .ws-title {
+        position: absolute;
+        bottom: 10%;
+        left: 0px;
+        margin: 0 5px 15px 0;
+        z-index: 50;
+        padding: 12px;
+        color: #000000;
+        text-transform: uppercase;
+        background: #fff;
+        font-family: 'Open Sans',Arial,Helvetica,sans-serif;
+        font-size: 18px;
+        line-height: 20px;
+        font-weight: bold;
+        border-radius: 0 8px 8px 0;
+        -moz-border-radius: 0 8px 8px 0;
+        -webkit-border-radius: 0px 8px 8px 0px;
+        opacity: 0.8;
+        filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+        box-shadow: 1px 0 2px #000000;
+    }
+
+        #wowslider-container1 .ws-title div {
+            padding-top: 5px;
+            font-size: 14px;
+            font-weight: normal;
+            text-transform: none;
+        }
+
+    #wowslider-container1 .ws_images ul {
+        animation: wsBasic 32.2s infinite;
+        -moz-animation: wsBasic 32.2s infinite;
+        -webkit-animation: wsBasic 32.2s infinite;
+    }
+
+@keyframes wsBasic {
+    0% {
+        left: -0%;
+    }
+
+    9.94% {
+        left: -0%;
+    }
+
+    14.29% {
+        left: -100%;
+    }
+
+    24.22% {
+        left: -100%;
+    }
+
+    28.57% {
+        left: -200%;
+    }
+
+    38.51% {
+        left: -200%;
+    }
+
+    42.86% {
+        left: -300%;
+    }
+
+    52.8% {
+        left: -300%;
+    }
+
+    57.14% {
+        left: -400%;
+    }
+
+    67.08% {
+        left: -400%;
+    }
+
+    71.43% {
+        left: -500%;
+    }
+
+    81.37% {
+        left: -500%;
+    }
+
+    85.71% {
+        left: -600%;
+    }
+
+    95.65% {
+        left: -600%;
+    }
+}
+
+@-moz-keyframes wsBasic {
+    0% {
+        left: -0%;
+    }
+
+    9.94% {
+        left: -0%;
+    }
+
+    14.29% {
+        left: -100%;
+    }
+
+    24.22% {
+        left: -100%;
+    }
+
+    28.57% {
+        left: -200%;
+    }
+
+    38.51% {
+        left: -200%;
+    }
+
+    42.86% {
+        left: -300%;
+    }
+
+    52.8% {
+        left: -300%;
+    }
+
+    57.14% {
+        left: -400%;
+    }
+
+    67.08% {
+        left: -400%;
+    }
+
+    71.43% {
+        left: -500%;
+    }
+
+    81.37% {
+        left: -500%;
+    }
+
+    85.71% {
+        left: -600%;
+    }
+
+    95.65% {
+        left: -600%;
+    }
+}
+
+@-webkit-keyframes wsBasic {
+    0% {
+        left: -0%;
+    }
+
+    9.94% {
+        left: -0%;
+    }
+
+    14.29% {
+        left: -100%;
+    }
+
+    24.22% {
+        left: -100%;
+    }
+
+    28.57% {
+        left: -200%;
+    }
+
+    38.51% {
+        left: -200%;
+    }
+
+    42.86% {
+        left: -300%;
+    }
+
+    52.8% {
+        left: -300%;
+    }
+
+    57.14% {
+        left: -400%;
+    }
+
+    67.08% {
+        left: -400%;
+    }
+
+    71.43% {
+        left: -500%;
+    }
+
+    81.37% {
+        left: -500%;
+    }
+
+    85.71% {
+        left: -600%;
+    }
+
+    95.65% {
+        left: -600%;
+    }
+}

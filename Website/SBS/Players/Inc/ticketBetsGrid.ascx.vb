@@ -52,7 +52,7 @@ Namespace SBSPlayer
             End Get
         End Property
 
-        Public Sub LoadTicketBets(ByVal poTicketBets As DataTable, ByVal psContext As String, Optional gameType As String = Nothing, Optional ByVal pbIsTicker As Boolean = False)
+        Public Sub LoadTicketBets(ByVal poTicketBets As DataTable, ByVal psContext As String, Optional ByVal gameType As String = Nothing, Optional ByVal pbIsTicker As Boolean = False)
             IsLiveTicker = pbIsTicker
             If IsLiveTicker Then
                 pnColor.Visible = True

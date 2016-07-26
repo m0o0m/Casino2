@@ -3,7 +3,7 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box
 }
-.page-content {
+.page-content.custom-page-content {
     background: #fff;
     padding: 20px 13px 150px;
 }
@@ -52,6 +52,16 @@
     padding-right: 13px;
     display: inline-block;
 }
+
+/* login page */
+.errortxt {
+    color: #fff;
+    font: bold 12px arial;
+}
+.lblipmsg {
+    background: red !important;
+}
+
 
 
 .collapsed {

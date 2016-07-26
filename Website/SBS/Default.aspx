@@ -10,7 +10,7 @@
     <title>Sports Spicks System</title>
     <uc1:header ID="header1" runat="server" />
 </head>
-<body>
+<body class="home">
     <uc3:loginForm ID="loginForm1" runat="server" />
 </body>
 </html>
