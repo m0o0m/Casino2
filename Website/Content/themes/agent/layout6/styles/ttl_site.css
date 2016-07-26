@@ -64,6 +64,16 @@ i {
     display: inline-block;
 }
 
+/* History*/
+.btn-refresh-history {
+    background: transparent url("../images/icons/btn_reload.png") no-repeat scroll 100% center !important;
+    border: 0 none;
+    color: #fff;
+    cursor: pointer;
+    height: 32px !important;
+    width: 32px !important;
+}
+
 /* login page */
 .errortxt {
     color: #fff;
