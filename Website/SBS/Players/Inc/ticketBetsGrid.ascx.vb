@@ -52,7 +52,7 @@ Namespace SBSPlayer
             End Get
         End Property
 
-        Public Sub LoadTicketBets(ByVal poTicketBets As DataTable, ByVal psContext As String, Optional ByVal pbIsTicker As Boolean = False)
+        Public Sub LoadTicketBets(ByVal poTicketBets As DataTable, ByVal psContext As String, Optional gameType As String = Nothing, Optional ByVal pbIsTicker As Boolean = False)
             IsLiveTicker = pbIsTicker
             If IsLiveTicker Then
                 pnColor.Visible = True
@@ -61,10 +61,29 @@ Namespace SBSPlayer
             Me.TotalBets = 0
             Me.TotalRisk = 0
             Me.TotalWin = 0
+            Dim filter AS String = ""
             If Not String.IsNullOrEmpty(psContext) Then
-                poTicketBets.DefaultView.RowFilter = String.Format("Context like '%{0}'", psContext)
+                filter = String.Format("AND Context like '%{0}' ", psContext)
+            End If
+            If Not String.IsNullOrEmpty(gameType) Then
+                Dim listGameType AS List(Of String) = getListGameType(gameType)
+                If listGameType.Count > 0 Then
+                    Dim inGameType As String = ""
+
+                    For Each gt As String In listGameType
+                        inGameType+= "'"+ gt + "',"
+                    Next
+
+                    filter += String.Format("AND GameType in ({0}) ", inGameType.TrimEnd(CType(",", Char)))
+                End If
+            End If
+
+            If Not String.IsNullOrEmpty(filter) Then
+                poTicketBets.DefaultView.RowFilter = filter.Substring(3) 'remove first AND
                 poTicketBets = poTicketBets.DefaultView.ToTable()
             End If
+
+
             If poTicketBets.Rows.Count > 0 Then
                 Dim odrTotal As DataRow = poTicketBets.NewRow
                 odrTotal("TicketID") = newGUID()
@@ -191,7 +210,7 @@ Namespace SBSPlayer
                     CType(e.Item.FindControl("lblMethod"), Label).Text = SafeString(oTicketBet("TypeOfBet")).Substring(0, 1)
 
                     ' Game
-                    CType(e.Item.FindControl("lblIfBet"), Label).Text = "Gamefsdfsd "
+                    CType(e.Item.FindControl("lblIfBet"), Label).Text = SafeString(oTicketBet("GameType"))
 
                     CType(e.Item.FindControl("lblWagerType"), Label).Text = String.Format("{0}<br />#{1}{2}", sTicketType, oTicketBet("TicketNumber"), _
                                         IIf(SafeString(oTicketBet("SubTicketNumber")) <> "", "-" & SafeString(oTicketBet("SubTicketNumber")), ""))

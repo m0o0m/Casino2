@@ -35,3 +35,4 @@ E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\obj\Debug\SBCBL.vbproj.GenerateResour
 E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\obj\Debug\SBCBL.dll
 E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\obj\Debug\SBCBL.xml
 E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\obj\Debug\SBCBL.pdb
+E:\Projects\77Bet\SourceCode\SBSCode\SBCBL\obj\Debug\SBCBL.vbprojResolveAssemblyReference.cache
