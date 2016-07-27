@@ -295,32 +295,32 @@ Namespace SBSPlayer
                         End If
                     End If
 
-                    Dim sScores As String = "<b>{0}</b> - <b>{1}</b>"
-                    Select Case LCase(SafeString(oTicketBet("Context")))
-                        Case "current"
-                            sScores = String.Format(sScores, SafeString(oTicketBet("AwayScore")), SafeString(oTicketBet("HomeScore")))
+                    'Dim sScores As String = "<b>{0}</b> - <b>{1}</b>"
+                    'Select Case LCase(SafeString(oTicketBet("Context")))
+                    '    Case "current"
+                    '        sScores = String.Format(sScores, SafeString(oTicketBet("AwayScore")), SafeString(oTicketBet("HomeScore")))
 
-                        Case "1h"
-                            sScores = String.Format(sScores, SafeString(oTicketBet("AwayFirstHalfScore")), SafeString(oTicketBet("HomeFirstHalfScore")))
+                    '    Case "1h"
+                    '        sScores = String.Format(sScores, SafeString(oTicketBet("AwayFirstHalfScore")), SafeString(oTicketBet("HomeFirstHalfScore")))
 
-                        Case "2h"
-                            sScores = String.Format(sScores, SafeString(SafeInteger(oTicketBet("AwayScore")) - SafeInteger(oTicketBet("AwayFirstHalfScore"))), SafeString(SafeInteger(oTicketBet("HomeScore")) - SafeInteger(oTicketBet("HomeFirstHalfScore"))))
+                    '    Case "2h"
+                    '        sScores = String.Format(sScores, SafeString(SafeInteger(oTicketBet("AwayScore")) - SafeInteger(oTicketBet("AwayFirstHalfScore"))), SafeString(SafeInteger(oTicketBet("HomeScore")) - SafeInteger(oTicketBet("HomeFirstHalfScore"))))
 
-                        Case "1q"
-                            sScores = String.Format(sScores, SafeString(oTicketBet("AwayFirstQScore")), SafeString(oTicketBet("HomeFirstQScore")))
+                    '    Case "1q"
+                    '        sScores = String.Format(sScores, SafeString(oTicketBet("AwayFirstQScore")), SafeString(oTicketBet("HomeFirstQScore")))
 
-                        Case "2q"
-                            sScores = String.Format(sScores, SafeString(oTicketBet("AwaySecondQScore")), SafeString(oTicketBet("HomeSecondQScore")))
+                    '    Case "2q"
+                    '        sScores = String.Format(sScores, SafeString(oTicketBet("AwaySecondQScore")), SafeString(oTicketBet("HomeSecondQScore")))
 
-                        Case "3q"
-                            sScores = String.Format(sScores, SafeString(oTicketBet("AwayThirdQScore")), SafeString(oTicketBet("HomeThirdQScore")))
+                    '    Case "3q"
+                    '        sScores = String.Format(sScores, SafeString(oTicketBet("AwayThirdQScore")), SafeString(oTicketBet("HomeThirdQScore")))
 
-                        Case "4q"
-                            sScores = String.Format(sScores, SafeString(oTicketBet("AwayFourQScore")), SafeString(oTicketBet("HomeFourQScore")))
+                    '    Case "4q"
+                    '        sScores = String.Format(sScores, SafeString(oTicketBet("AwayFourQScore")), SafeString(oTicketBet("HomeFourQScore")))
 
-                        Case Else
-                            sScores = ""
-                    End Select
+                    '    Case Else
+                    '        sScores = ""
+                    'End Select
 
                     'CType(e.Item.FindControl("lblScore"), Label).Text = sScores
 
@@ -452,6 +452,7 @@ Namespace SBSPlayer
         Private Function getDetailBySpread(ByVal psHomeTeam As String, ByVal psAwayTeam As String, ByVal poTicketBet As DataRowView) As String
             Dim gameDate As Date = SafeDate(poTicketBet("GameDate"))
             Dim ticketStatus As String = SafeString(poTicketBet("TicketStatus"))
+            Dim sContext = SafeString(poTicketbet("Context"))
             Dim sGameType As String = SafeString(poTicketBet("GameType"))
             Dim nHomeSpread As Double = SafeDouble(poTicketBet("HomeSpread"))
             Dim nAwaySpread As Double = SafeDouble(poTicketBet("AwaySpread"))
@@ -473,7 +474,7 @@ Namespace SBSPlayer
             Dim rotationNumber As String = SafeString(IIf(nHomeSpreadMoney <> 0, SafeDouble(poTicketBet("HomeRotationNumber")), SafeDouble(poTicketBet("AwayRotationNumber"))))
 
             Dim regulationOnly = IIf(IsSoccer(SafeString(poTicketBet("GameType"))), "<b>Regualation Only</b>", "")
-            Dim gameBet = String.Format("<div class='baseline'><b>{0} {1}</b> for the Game {2}</div>", sSpread, sSpreadMoney, regulationOnly)
+            Dim gameBet = String.Format("<div class='baseline'><b>{0} {1}</b> for the {3} {2}</div>", sSpread, sSpreadMoney, regulationOnly, ContextFormat(sContext))
 
             Dim sRotationNumber = SafeString("<b class='gm-number'>[" & rotationNumber & "]</b>&nbsp;")
 
@@ -495,6 +496,7 @@ Namespace SBSPlayer
         Private Function getDetailByTotalPoints(ByVal psHomeTeam As String, ByVal psAwayTeam As String, ByVal poTicketBet As DataRowView) As String
             Dim sGameType As String = SafeString(poTicketBet("GameType"))
             Dim gameDate As Date = SafeDate(poTicketBet("GameDate"))
+            Dim sContext = SafeString(poTicketbet("Context"))
             Dim ticketStatus As String = SafeString(poTicketBet("TicketStatus"))
             Dim nTotalPoints As Double = SafeDouble(poTicketBet("TotalPoints")) + SafeDouble(poTicketBet("AddPoint"))
             Dim sTotalPoint As String = SafeString(nTotalPoints)
@@ -512,7 +514,7 @@ Namespace SBSPlayer
             Dim mustStarPitcher = GetMustStart(poTicketBet, sGameType)
 
             Dim regulationOnly = IIf(IsSoccer(SafeString(poTicketBet("GameType"))), "<b>Regualation Only</b>", "")
-            Dim gameBet = String.Format("<div class='baseline'>{0} <b>{1} {2}</b> for the Game {3} {4}</div>", sMsg, sTotalPoint, sMoney, regulationOnly, mustStarPitcher)
+            Dim gameBet = String.Format("<div class='baseline'>{0} <b>{1} {2}</b> for the {5} {3} {4}</div>", sMsg, sTotalPoint, sMoney, regulationOnly, mustStarPitcher, ContextFormat(sContext))
 
             Dim sChoiceTeam = String.Format("{0} {1}", psHomeTeam, IIf(String.IsNullOrEmpty(psAwayTeam), "", " - " & psAwayTeam))
 
@@ -534,6 +536,7 @@ Namespace SBSPlayer
         Private Function getDetailByTeamTotalPoints(ByVal psHomeTeam As String, ByVal psAwayTeam As String, ByVal poTicketBet As DataRowView) As String
             Dim sGameType As String = SafeString(poTicketBet("GameType"))
             Dim gameDate As Date = SafeDate(poTicketBet("GameDate"))
+            Dim sContext = SafeString(poTicketbet("Context"))
             Dim ticketStatus As String = SafeString(poTicketBet("TicketStatus"))
             Dim nTotalPoints As Double = SafeDouble(poTicketBet("TotalPoints")) + SafeDouble(poTicketBet("AddPoint"))
             Dim sTotalPoint As String = SafeString(nTotalPoints)
@@ -549,7 +552,7 @@ Namespace SBSPlayer
             Dim sMoney As String = SafeString(nMoney)
             Dim regulationOnly = IIf(IsSoccer(SafeString(poTicketBet("GameType"))), "<b>Regualation Only</b>", "")
 
-            Dim gameBet = String.Format("<div class='baseline'>{0} <b>{1} {2}</b> for the Game {3}</div>", sMsg, sTotalPoint, sMoney, regulationOnly)
+            Dim gameBet = String.Format("<div class='baseline'>{0} <b>{1} {2}</b> for the {4} {3}</div>", sMsg, sTotalPoint, sMoney, regulationOnly, ContextFormat(sContext))
 
             Dim sChoiceTeam = String.Format("{0} {1}", psHomeTeam, IIf(String.IsNullOrEmpty(psAwayTeam), "", " - " & psAwayTeam))
 
@@ -568,6 +571,7 @@ Namespace SBSPlayer
         Private Function getDetailByMoneyLine(ByVal psHomeTeam As String, ByVal psAwayTeam As String, ByVal poTicketbet As DataRowView) As String
             Dim gameDate As Date = SafeDate(poTicketbet("GameDate"))
             Dim sGameType As String = SafeString(poTicketbet("GameType"))
+            Dim sContext = SafeString(poTicketbet("Context"))
             Dim ticketStatus As String = SafeString(poTicketbet("TicketStatus"))
             Dim nHomeMoneyLine As Double = SafeDouble(poTicketbet("HomeMoneyLine"))
             Dim nAwayMoneyLine As Double = SafeDouble(poTicketbet("AwayMoneyLine"))
@@ -579,7 +583,7 @@ Namespace SBSPlayer
             Dim mustStarPitcher = GetMustStart(poTicketbet, sGameType)
 
             Dim regulationOnly = IIf(IsSoccer(sGameType), "<b>Regualation Only</b>", "")
-            Dim gameBet = String.Format("<div class='baseline'>Money Line <b>{0}</b> for the Game {1} {2}</div>", sMoneyLine, regulationOnly, mustStarPitcher)
+            Dim gameBet = String.Format("<div class='baseline'>Money Line <b>{0}</b> for the {3} {1} {2}</div>", sMoneyLine, regulationOnly, mustStarPitcher, ContextFormat(sContext))
 
             Dim sRotationNumber = SafeString("<b class='gm-number'>[" & rotationNumber & "]</b>&nbsp;")
 
@@ -602,11 +606,12 @@ Namespace SBSPlayer
             Dim sGameType As String = SafeString(poTicketbet("GameType"))
             Dim gameDate As Date = SafeDate(poTicketbet("GameDate"))
             Dim ticketStatus As String = SafeString(poTicketbet("TicketStatus"))
+            Dim sContext = SafeString(poTicketbet("Context"))
 
             Dim mustStarPitcher = GetMustStart(poTicketbet, sGameType)
 
             Dim regulationOnly = IIf(IsSoccer(sGameType), "<b>Regualation Only</b>", "")
-            Dim gameBet = String.Format("<div class='baseline'>Money Line <b>{0}</b> for the Game {1} {2}</div>", nDrawLine, regulationOnly, mustStarPitcher)
+            Dim gameBet = String.Format("<div class='baseline'>Money Line <b>{0}</b> for the {3} {1} {2}</div>", nDrawLine, regulationOnly, mustStarPitcher, ContextFormat(sContext))
 
             Dim sRotationNumber = ""
 
@@ -629,8 +634,9 @@ Namespace SBSPlayer
             Dim sPopDescription = SafeString(poTicketbet("PropDescription"))
             Dim sPropParticipantName = SafeString(poTicketbet("PropParticipantName"))
             Dim sPropMoneyLine = SafeString(poTicketbet("PropMoneyLine"))
+            Dim sContext = SafeString(poTicketbet("Context"))
 
-            Dim gameBet = String.Format("<div class='baseline'><b>{0}</b> for the Game {1}</div>", sPropMoneyLine, sPopDescription)
+            Dim gameBet = String.Format("<div class='baseline'><b>{0}</b> for the {2} {1}</div>", sPropMoneyLine, sPopDescription, ContextFormat(sContext))
 
             Dim htmlString As String = "<div class='baseline'><b class='gm-team'>" & sPropParticipantName & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
@@ -675,6 +681,34 @@ Namespace SBSPlayer
                 mustStarPitcher = String.Format("<i>{0}(must start) {1}(must start)</i>", sHomePitcher, sAwayPitcher)
             End If
             Return mustStarPitcher
+        End Function
+
+        Private Function ContextFormat(ByVal sContext As String) As String
+            Select Case LCase(sContext)
+                        Case "current"
+                            return "Game"
+
+                        Case "1h"
+                            return "1st Half"
+
+                        Case "2h"
+                            return "2nd Half"
+
+                        Case "1q"
+                            return "1st Quarter"
+
+                        Case "2q"
+                            return "2nd Quarter"
+
+                        Case "3q"
+                            return "3rd Quarter"
+
+                        Case "4q"
+                            return "4th Quarter"
+
+                        Case Else
+                            return ""
+                    End Select
         End Function
 
     End Class
