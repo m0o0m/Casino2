@@ -5,74 +5,7 @@
 <%@ Register Src="Inc/ticketBetsGrid.ascx" TagName="ticketBetsGrid" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="cphBody" runat="Server">
 
-    <%--<div class="row">
-        <div class="col-lg-12">
-            <div class="page-title-breadcrumb">
-                <div class="page-header pull-left">
-                    <div class="page-title pull-left mrm">
-                        Section
-                    </div>
-                    <span class="label label-grey pull-left" style="font-size: large">Open Bets</span>
-                </div>
-                <div class="clearfix">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="mbxl"></div>
-
-    <div class="panel panel-grey">
-        <div class="panel-heading">Filter</div>
-        <div class="panel-body ">
-            <div class="form-group">
-                <label class="col-md-2 control-label">Type Of Bet</label>
-                <div class="col-md-2">
-                    <cc1:CDropDownList ID="ddlTypeOfBet" runat="server" CssClass="form-control" hasOptionalItem="true"
-                        OptionalText="All" OptionalValue="All" AutoPostBack="true">
-                        <asp:ListItem Text="All" Value="All"></asp:ListItem>
-                        <asp:ListItem Text="Internet" Value="Internet"></asp:ListItem>
-                        <asp:ListItem Text="Phone" Value="Phone"></asp:ListItem>
-                    </cc1:CDropDownList>
-                </div>
-                <label class="col-md-1 control-label">Context</label>
-                <div class="col-md-2">
-                    <cc1:CDropDownList ID="ddlContext" runat="server" CssClass="form-control" AutoPostBack="true">
-                        <asp:ListItem Text="All" Value=""></asp:ListItem>
-                        <asp:ListItem Text="Current" Value="Current"></asp:ListItem>
-                        <asp:ListItem Text="1H" Value="1H"></asp:ListItem>
-                        <asp:ListItem Text="2H" Value="2H"></asp:ListItem>
-                        <asp:ListItem Text="Quarters" Value="Q"></asp:ListItem>
-                        <asp:ListItem Text="Proposition" Value="Proposition"></asp:ListItem>
-                    </cc1:CDropDownList>
-                </div>
-                <label class="col-md-1 control-label">Horses</label>
-                <div class="col-md-2">
-                    <cc1:CDropDownList ID="ddlHorse" runat="server" CssClass="form-control" AutoPostBack="true" Enabled="False">
-                        <asp:ListItem Text="All" Value=""></asp:ListItem>
-                    </cc1:CDropDownList>
-                </div>
-                <label class="col-md-1 control-label">Games</label>
-                <div class="col-md-2">
-                    <cc1:CDropDownList ID="ddlGameType" runat="server" CssClass="form-control" AutoPostBack="true">
-                        <asp:ListItem Text="All" Value=""></asp:ListItem>
-                        <asp:ListItem Text="Football" Value="Football"></asp:ListItem>
-                        <asp:ListItem Text="Baseball" Value="Baseball"></asp:ListItem>
-                        <asp:ListItem Text="Basketball" Value="Basketball"></asp:ListItem>
-                        <asp:ListItem Text="Hockey" Value="Hockey"></asp:ListItem>
-                        <asp:ListItem Text="Soccer" Value="Soccer"></asp:ListItem>
-                    </cc1:CDropDownList>
-                </div>
-                <label class="col-md-1 control-label">Free Plays</label>
-                <div class="col-md-2">
-                    <cc1:CDropDownList ID="ddlFreePlay" runat="server" CssClass="form-control" AutoPostBack="true" Enabled="False">
-                        <asp:ListItem Text="All" Value=""></asp:ListItem>
-                    </cc1:CDropDownList>
-                </div>
-            </div>
-
-        </div>
-    </div>--%>
+   
     <div class="clear mgB5">
         <button class="button-style-2 w110px">Print</button>
     </div>

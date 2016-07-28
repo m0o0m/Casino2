@@ -244,11 +244,10 @@ Namespace SBSPlayer
                     e.Item.Cells(6).Text = FormatNumber(Me.TotalRisk + SafeDouble(oTicketBet("RiskAmount")), 2)
                 Else
                     Dim sTicketType = GetTicketType(oTicketBet)
-                    Dim sContext As String = SafeString(IIf(LCase(SafeString(oTicketBet("Context"))) = "current", "", "<b>" & SafeString(oTicketBet("Context")) & "</b><br/>"))
 
                     CType(e.Item.FindControl("lblTicketDate"), Label).Text = SafeDate(oTicketBet("TransactionDate"))
                     CType(e.Item.FindControl("lblTicketNumber"), Label).Text = SafeString(oTicketBet("TicketNumber"))
-                    CType(e.Item.FindControl("lblMethod"), Label).Text = SafeString(oTicketBet("TypeOfBet")).Substring(0, 1)
+                    CType(e.Item.FindControl("lblMethod"), Label).Text = SafeString(oTicketBet("TypeOfBet")).FirstOrDefault()
 
                     ' Game
                     Dim gameType = SafeString(oTicketBet("GameType"))
@@ -463,14 +462,14 @@ Namespace SBSPlayer
             If IsSoccer(sGameType) Then
                 sSpread = safeVegass(AHFormat(nSpread))
             End If
-            sSpread = SafeString(IIf(nSpread = 0, "PK", sSpread))
+            sSpread = SafeString(IIf(nSpread = 0, "PK", safeVegass(sSpread)))
 
             Dim sChoiceTeam As String = SafeString(IIf(nHomeSpreadMoney <> 0, psHomeTeam, psAwayTeam))
 
             Dim nSpreadMoney As Double = SafeRound(IIf(nHomeSpreadMoney <> 0, nHomeSpreadMoney, nAwaySpreadMoney)) _
                                                 + SafeRound(poTicketBet("AddPointMoney"))
 
-            Dim sSpreadMoney As String = SafeString(IIf(nSpread > 0, IIf(nSpreadMoney = 100, "Even", "+" & nSpreadMoney), nSpreadMoney))
+            Dim sSpreadMoney As String = SafeString(IIf(nSpreadMoney > 0, IIf(nSpreadMoney = 100, "Even", "+" & nSpreadMoney), nSpreadMoney))
             Dim rotationNumber As String = SafeString(IIf(nHomeSpreadMoney <> 0, SafeDouble(poTicketBet("HomeRotationNumber")), SafeDouble(poTicketBet("AwayRotationNumber"))))
 
             Dim regulationOnly = IIf(IsSoccer(SafeString(poTicketBet("GameType"))), "<b>Regualation Only</b>", "")
@@ -484,7 +483,7 @@ Namespace SBSPlayer
 
             Dim htmlString As String = "<div class='baseline'>" & sRotationNumber & "<b class='gm-team'>" & sChoiceTeam & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
-            htmlString += "<span class='gm-status'>(" & ticketStatus & ")</span> </div>"
+            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketStatus) & ")</span> </div>"
             htmlString += gameBet
 
 
@@ -524,7 +523,7 @@ Namespace SBSPlayer
 
             Dim htmlString As String = "<div class='baseline'><b class='gm-team'>" & sChoiceTeam & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
-            htmlString += "<span class='gm-status'>(" & ticketStatus & ")</span> </div>"
+            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketStatus) & ")</span> </div>"
             htmlString += gameBet
 
             Return htmlString
@@ -562,7 +561,7 @@ Namespace SBSPlayer
 
             Dim htmlString As String = "<div class='baseline'><b class='gm-team'>" & sChoiceTeam & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
-            htmlString += "<span class='gm-status'>(" & ticketStatus & ")</span> </div>"
+            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketStatus) & ")</span> </div>"
             htmlString += gameBet
 
             Return htmlString
@@ -593,7 +592,7 @@ Namespace SBSPlayer
 
             Dim htmlString As String = "<div class='baseline'>" & sRotationNumber & "<b class='gm-team'>" & sChoiceTeam & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
-            htmlString += "<span class='gm-status'>(" & ticketStatus & ")</span> </div>"
+            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketStatus) & ")</span> </div>"
             htmlString += gameBet
 
 
@@ -619,7 +618,7 @@ Namespace SBSPlayer
 
             Dim htmlString As String = "<div class='baseline'>" & sRotationNumber & "<b class='gm-team'>" & sChoiceTeam & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
-            htmlString += "<span class='gm-status'>(" & ticketStatus & ")</span> </div>"
+            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketStatus) & ")</span> </div>"
             htmlString += gameBet
 
             Return htmlString
@@ -640,7 +639,7 @@ Namespace SBSPlayer
 
             Dim htmlString As String = "<div class='baseline'><b class='gm-team'>" & sPropParticipantName & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
-            htmlString += "<span class='gm-status'>(" & ticketStatus & ")</span> </div>"
+            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketStatus) & ")</span> </div>"
             htmlString += gameBet
 
             Return htmlString
@@ -709,6 +708,11 @@ Namespace SBSPlayer
                         Case Else
                             return ""
                     End Select
+        End Function
+
+        Private Function CustomUpperTitleCase(ByVal sTitle As String) As String
+            Dim ti As TextInfo = CultureInfo.CurrentCulture.TextInfo
+            Return ti.ToTitleCase(sTitle.ToLower())                    
         End Function
 
     End Class

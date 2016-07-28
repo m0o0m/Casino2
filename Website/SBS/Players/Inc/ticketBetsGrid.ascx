@@ -6,14 +6,12 @@
     <HeaderStyle CssClass="tableheading row-caption" HorizontalAlign="Center"  />
     <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" CssClass="row-content" />
     <AlternatingItemStyle HorizontalAlign="Center" />
-    <%--<SelectedItemStyle BackColor="#e6e6e6" />--%>
     <FooterStyle CssClass="tableheading" HorizontalAlign="Center" />
     <Columns>
         <asp:TemplateColumn HeaderText="**" ItemStyle-HorizontalAlign="Center">
             <ItemStyle Width="3%" />
             <ItemTemplate>
                 <span class="btn-show-game-details toggle-detail icon-toggle-1 h14px w14px mgR10" data-ticket-id="<%# Container.DataItem("TicketID") %>"></span>
-                <%--<span onclick="ShowDetailWager(event, '24445906','W')" class="icon minus">+</span>--%>
             </ItemTemplate>
         </asp:TemplateColumn>
         <asp:TemplateColumn HeaderText="Date Time Accepted" ItemStyle-HorizontalAlign="Center">
@@ -56,21 +54,9 @@
                     <asp:Literal ID="ltrSportGameTeam" runat="server"></asp:Literal>
                 </div>
                 <asp:Literal ID="ltrGameTeam" runat="server"></asp:Literal>
-                <%--<div class="baseline">
-                    <b class="gm-number">[25810]</b>&nbsp;<b class="gm-team">Porland Timber - La Galaxy</b>&nbsp;
-                    <span class="gm-date">02/23/2016</span>&nbsp;<span class="gm-time">(12:30 PM)</span>&nbsp;
-                    <span class="gm-status">(Pending)</span>
-                </div>
-                <div class="baseline">
-                    <asp:Literal ID="ltrGameBet" runat="server"></asp:Literal>
-                </div>--%>
                 <div class="baseline fz11">
                     <asp:Literal ID="ltrRiskWin" runat="server"></asp:Literal>
                 </div>
-                <%--<asp:Label ID="lblIfBet" runat="server" />
-                <asp:Label ID="lblGameType" runat="server" />
-                <asp:Label ID="lblAwayTeam" runat="server" />
-                <asp:Label ID="lblRiskWin" runat="server" />--%>
                 <asp:HiddenField ID="hfBetType" runat="server"/>  
             </ItemTemplate>
         </asp:TemplateColumn>
@@ -92,65 +78,6 @@
                 <asp:Label ID="lblWin" runat="server" />
             </ItemTemplate>
         </asp:TemplateColumn>
-        
-<%--        <asp:TemplateColumn HeaderText="Method" ItemStyle-HorizontalAlign="Center">
-            <ItemTemplate>
-                <asp:Label ID="lblUserPhone" runat="server" />
-                <asp:HiddenField ID="hfTicketID" runat="server" Value='<%# Container.DataItem("TicketID") %>' />
-                <asp:panel ID="pnlPhoneDetail" runat="server" Visible="false">
-                <span>Taken By </span> <BR/>
-                <asp:Label ID="lblCAgentName" runat="server"  ></asp:Label> <BR />
-                <asp:LinkButton ID="lbtRecord" runat ="server" Visible="false" Text ="Recording"></asp:LinkButton>
-                </asp:panel>
-                <asp:HiddenField ID="hfFileName" runat="server" Value='<%#Container.DataItem("RecordingFile") %>' />  
-            </ItemTemplate>
-        </asp:TemplateColumn>
-        <asp:TemplateColumn HeaderText="Ticket" ItemStyle-HorizontalAlign="Center">
-            <ItemTemplate>
-                <asp:Label ID="lblTicket" runat="server" />
-            </ItemTemplate>
-        </asp:TemplateColumn>
-        <asp:TemplateColumn HeaderText="Date Bet" ItemStyle-HorizontalAlign="Center">
-            <ItemTemplate>
-                <asp:Label ID="lblTicketDate" runat="server" />
-            </ItemTemplate>
-        </asp:TemplateColumn>
-        <asp:TemplateColumn HeaderText="Player">
-            <ItemTemplate>
-                <asp:Label ID="lblPlayer" runat="server" />
-            </ItemTemplate>
-        </asp:TemplateColumn>
-        <asp:TemplateColumn HeaderText="Game Date" ItemStyle-HorizontalAlign="Center">
-            <ItemTemplate>
-                <asp:Label ID="lblPlaced" runat="server" />
-            </ItemTemplate>
-        </asp:TemplateColumn>
-        <asp:TemplateColumn HeaderText="Sport Type">
-            <ItemTemplate>
-                <asp:Label ID="lblSport" runat="server" />
-            </ItemTemplate>
-        </asp:TemplateColumn>
-        <asp:TemplateColumn HeaderText="Description">
-            <ItemTemplate>
-                <asp:Label ID="lblDescription" runat="server" />
-            </ItemTemplate>
-        </asp:TemplateColumn>
-        <asp:TemplateColumn HeaderText="Status" ItemStyle-HorizontalAlign="Center" ItemStyle-Wrap="false">
-            <ItemTemplate>
-                <asp:Label ID="lblAction" runat="server" />
-            </ItemTemplate>
-        </asp:TemplateColumn>
-        <asp:TemplateColumn HeaderText="Risk / Win" ItemStyle-Wrap="false">
-            <ItemTemplate>
-                <asp:Label ID="lblRiskWin" runat="server" />
-            </ItemTemplate>
-        </asp:TemplateColumn>
-        <asp:TemplateColumn HeaderText="<nobr><a href='#'>Score (A/H)</a></nobr>"   ItemStyle-HorizontalAlign="Center"
-            ItemStyle-Wrap="false">
-            <ItemTemplate>
-                <asp:Label ID="lblScore" runat="server" />
-            </ItemTemplate>
-        </asp:TemplateColumn>--%>
     </Columns>
 </asp:DataGrid>
 <table id="pnColor" visible="False"  runat="server" class="table table-hover table-bordered">
