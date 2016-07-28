@@ -24,7 +24,7 @@
 </style>
 <div class="x-form-element" runat="Server" id="divPasswordEditor">
     <asp:Literal runat="server" ID="ltrPasswordCaption">Password</asp:Literal>
-    <asp:TextBox CssClass="form-control" ID="txtPassword" runat="server" 
+    <asp:TextBox CssClass="form-control input-field-2 h28px full-w" ID="txtPassword" runat="server" 
         MaxLength="10"></asp:TextBox>
     <asp:Label ID="lblAlert" runat="server" ForeColor="red" Font-Bold="true" Text="*"
         Visible="false"></asp:Label>
@@ -41,7 +41,7 @@
     </div>
     <span style="position: relative;" runat="server" id="spanConfirmPassword">
         <asp:Literal runat="server" ID="ltrConfirmPasswordCaption">Confirm Password</asp:Literal>
-        <asp:TextBox CssClass="form-control" ID="txtPasswordConfirm" runat="server" 
+        <asp:TextBox CssClass="form-control input-field-2 h28px full-w" ID="txtPasswordConfirm" runat="server" 
              MaxLength="10"></asp:TextBox>
         <asp:CompareValidator runat="server" Enabled="false" ID="cvPassword" ControlToCompare="txtPassword"
             ControlToValidate="txtPasswordConfirm" Display="dynamic" ErrorMessage="passwords don't not match">*</asp:CompareValidator><asp:CustomValidator

@@ -41,7 +41,8 @@ body {
     border-right: 4px solid #18455C;
 }
 
-b, .bold {
+
+b {
     font-weight: bold;
 }
 
@@ -56,12 +57,17 @@ strong {
 }
 
 .home .main-menu-area {
-    background: rgba(0, 0, 0, 0) url('../resources/images/icons/menu-mbg.jpg') no-repeat scroll left center;
+    background: rgba(0, 0, 0, 0) url('../images/icons/menu-mbg.jpg') no-repeat scroll left center;
     background-size: cover;
 }
 
 /* ===============================================
      CONTENT /////////////////////////////////////////////////////////// */
+
+.page-content.custom-page-content {
+    color: #000;
+}
+
 .gameplay .content {
     background: #FFF;
     padding-top: 20px;
@@ -113,20 +119,6 @@ strong {
     font-size: 20px;
     font-weight: bold;
 }
-
-
-.box-sport-game {
-    border: 1px solid #000;
-}
-
-    .box-sport-game > .box-title {
-        background: #0E2431;
-        padding: 5px 10px 0;
-        border-bottom: 5px solid #157199;
-        font-size: 14px;
-        font-weight: bolder;
-        color: #FFF;
-    }
 
 .lst-sport-match {
 }
@@ -181,6 +173,20 @@ strong {
     background: #0e2431 none repeat scroll 0 0;
     border: 1px solid #18455c;
 }
+
+
+.box-sport-game {
+    border: 1px solid #000;
+}
+
+    .box-sport-game > .box-title {
+        background: #0E2431;
+        padding: 5px 10px 0;
+        border-bottom: 5px solid #157199;
+        font-size: 14px;
+        font-weight: bolder;
+        color: #FFF;
+    }
 
 
 .box-sport-game-2 {
@@ -249,11 +255,11 @@ strong {
         }
 
             .box-table-1 > .contentd .rowd:nth-child(2n+1) {
-                background-image: url('../resources/images/icons/bg_gray.gif');
+                background-image: url('../images/icons/bg_gray.gif');
             }
 
             .box-table-1 > .contentd .rowd:nth-child(2n+2) {
-                background-image: url('../resources/images/icons/bg_white.gif');
+                background-image: url('../images/icons/bg_white.gif');
             }
 
 
@@ -370,9 +376,86 @@ strong {
     }
 
 
+
+
+/*Bet Detail*/
+.gamebetdetail .table {
+    border: 1px solid #000;
+    border-spacing: 0;
+}
+
+    .gamebetdetail .table tr > th,
+    .gamebetdetail .table tr > td {
+        border-right: 1px solid gray;
+        vertical-align: middle;
+    }
+
+        .gamebetdetail .table tr > th.nobdr,
+        .gamebetdetail .table tr > td.nobdr,
+        .gamebetdetail .table tr > th:last-child,
+        .gamebetdetail .table tr > td:last-child {
+            border-right-color: transparent;
+        }
+
+
+    .gamebetdetail .table > tbody > tr.gameheader {
+        background: #0E2431;
+    }
+
+        .gamebetdetail .table > tbody > tr.gameheader > td {
+            background: transparent;
+        }
+
+            .gamebetdetail .table > tbody > tr.gameheader > td span {
+                background: transparent;
+                font-size: 14px;
+                font-weight: normal;
+                color: #FFF;
+                margin: 0;
+            }
+
+
+    .gamebetdetail .table > tbody > tr.GameHeader2 {
+        background: #666666;
+    }
+
+        .gamebetdetail .table > tbody > tr.GameHeader2 > th {
+            background: transparent;
+            padding: 5px 10px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #FFF;
+        }
+
+    .gamebetdetail .table > tbody > tr.gamecontent > td {
+        background: transparent;
+        padding: 4px 10px;
+        font-size: 12px;
+        font-weight: normal;
+        color: #000;
+    }
+
+        .gamebetdetail .table > tbody > tr.gamecontent > td.game-number {
+            padding-right: 0;
+            font-weight: bold;
+        }
+
+            .gamebetdetail .table > tbody > tr.gamecontent > td.game-date,
+            .gamebetdetail .table > tbody > tr.gamecontent > td.game-number,
+            .gamebetdetail .table > tbody > tr.gamecontent > td.game-team,
+            .gamebetdetail .table > tbody > tr.gamecontent > td.game-date *,
+            .gamebetdetail .table > tbody > tr.gamecontent > td.game-number *,
+            .gamebetdetail .table > tbody > tr.gamecontent > td.game-team * {
+                vertical-align: baseline;
+            }
+
+
+
 /* ===============================================
      FOOTER /////////////////////////////////////////////////////////// */
 
 
 /* ===============================================
      PAGES /////////////////////////////////////////////////////////// */
+

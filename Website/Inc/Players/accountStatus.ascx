@@ -1,7 +1,46 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="accountStatus.ascx.vb"
     Inherits="SBCPlayer.accountStatus" %>
 
-<div class="row">
+<div>
+    <h2 class="title-style-1 pdB10">Account Balance</h2>
+    <table class="table-style-3 ly-w-1:2 center">
+        <tr>
+            <td class="caption ly-w-1:2">
+                <div class="baseline">
+                    <img src="../../Content/themes/agent/layout6/images/HmCrrnt.png" />
+                    <span>Current</span>
+                </div>
+            </td>
+            <td class="ly-w-1:2">
+                <a href="/SBS/Players/WeekBalance.aspx">$0.00</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="caption ly-w-1:2">
+                <div class="baseline">
+                    <img src="../../Content/themes/agent/layout6/images/HmAvbl.png" />
+                    <span>Available</span>
+                </div>
+            </td>
+            <td class="ly-w-1:2">$1.00
+            </td>
+        </tr>
+        <tr>
+            <td class="caption ly-w-1:2">
+                <div class="baseline">
+                    <img src="../../Content/themes/agent/layout6/images/HmPnd.png" />
+                    <span>Pending</span>
+                </div>
+            </td>
+            <td class="ly-w-1:2">
+                <a href="//PendingsWagers.aspx">$0.00</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<div class="row" style="display: none">
     <div class="col-lg-12">
         <div class="page-title-breadcrumb">
             <div class="page-header pull-left">
@@ -65,7 +104,7 @@
                             <td>Last Week`s Win/Loss Figure:
                             </td>
                             <td>
-                                <asp:Label ID="lblLastWeek"  runat="server" ForeColor="Blue" />
+                                <asp:Label ID="lblLastWeek" runat="server" ForeColor="Blue" />
                             </td>
                         </tr>
                     </tbody>
