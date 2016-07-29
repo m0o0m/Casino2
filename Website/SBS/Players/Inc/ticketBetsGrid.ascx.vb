@@ -475,7 +475,7 @@ Namespace SBSPlayer
             Dim regulationOnly = IIf(IsSoccer(SafeString(poTicketBet("GameType"))), "<b>Regualation Only</b>", "")
             Dim gameBet = String.Format("<div class='baseline'><b>{0} {1}</b> for the Game {2}</div>", sSpread, sSpreadMoney, regulationOnly)
 
-            Dim sRotationNumber = SafeString(IIf(GetTicketType(poTicketBet).Equals("Straight", StringComparison.CurrentCultureIgnoreCase), "", "<b class='gm-number'>[" & rotationNumber & "]</b>&nbsp;"))
+            Dim sRotationNumber = SafeString("<b class='gm-number'>[" & rotationNumber & "]</b>&nbsp;")
 
             If IsTennis(sGameType) OrElse IsGolf(sGameType) Then
                 sChoiceTeam = psAwayTeam & " - " & psHomeTeam
@@ -488,16 +488,6 @@ Namespace SBSPlayer
 
 
             Return htmlString
-
-            'If SafeString(poTicketBet("GameType")).Equals("Tennis", StringComparison.CurrentCultureIgnoreCase) OrElse SafeString(poTicketBet("GameType")).Equals("Golf", StringComparison.CurrentCultureIgnoreCase) Then
-            '    sDescription = SafeString(poTicketBet("AwayTeam")) & " / " & SafeString(poTicketBet("HomeTeam"))
-            '    Return String.Format("{2}<br/><b>{0}</b>dsd<br/>({3}){1} {4}", sChoiceTeam, sSpreadMoney, sDescription, IIf(nSpread = 0, "PK", IIf(nSpread > 0, "+" & sSpread, sSpread)), regulation)
-            'Else
-            '    Return String.Format("{0}<br/> tttt<b>{1} ({2})</b> for the Game {3}", sChoiceTeam, IIf(nSpread = 0, "PK", IIf(nSpread > 0, "+" & sSpread, sSpread)), sSpreadMoney, regulation).Replace("++", "+")
-            'End If
-
-
-
 
         End Function
 
@@ -522,17 +512,15 @@ Namespace SBSPlayer
             Dim mustStarPitcher = GetMustStart(poTicketBet, sGameType)
 
             Dim regulationOnly = IIf(IsSoccer(SafeString(poTicketBet("GameType"))), "<b>Regualation Only</b>", "")
-            Dim rotationNumber As String = SafeString(IIf(nOverMoney <> 0, SafeDouble(poTicketBet("HomeRotationNumber")), SafeDouble(poTicketBet("AwayRotationNumber"))))
             Dim gameBet = String.Format("<div class='baseline'>{0} <b>{1} {2}</b> for the Game {3} {4}</div>", sMsg, sTotalPoint, sMoney, regulationOnly, mustStarPitcher)
 
-            Dim sRotationNumber = SafeString(IIf(GetTicketType(poTicketBet).Equals("Straight", StringComparison.CurrentCultureIgnoreCase), "", "<b class='gm-number'>[" & rotationNumber & "]</b>&nbsp;"))
             Dim sChoiceTeam = String.Format("{0} {1}", psHomeTeam, IIf(String.IsNullOrEmpty(psAwayTeam), "", " - " & psAwayTeam))
 
             If IsTennis(sGameType) OrElse IsGolf(sGameType) Then
                 sChoiceTeam = psAwayTeam & " - " & psHomeTeam
             End If
 
-            Dim htmlString As String = "<div class='baseline'>" & sRotationNumber & "<b class='gm-team'>" & sChoiceTeam & "</b> "
+            Dim htmlString As String = "<div class='baseline'><b class='gm-team'>" & sChoiceTeam & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
             htmlString += "<span class='gm-status'>(" & ticketStatus & ")</span> </div>"
             htmlString += gameBet
@@ -563,16 +551,13 @@ Namespace SBSPlayer
 
             Dim gameBet = String.Format("<div class='baseline'>{0} <b>{1} {2}</b> for the Game {3}</div>", sMsg, sTotalPoint, sMoney, regulationOnly)
 
-            Dim rotationNumber As String = SafeString(IIf(nOverMoney <> 0, SafeDouble(poTicketBet("HomeRotationNumber")), SafeDouble(poTicketBet("AwayRotationNumber"))))
-
-            Dim sRotationNumber = SafeString(IIf(GetTicketType(poTicketBet).Equals("Straight", StringComparison.CurrentCultureIgnoreCase), "", "<b class='gm-number'>[" & rotationNumber & "]</b>&nbsp;"))
             Dim sChoiceTeam = String.Format("{0} {1}", psHomeTeam, IIf(String.IsNullOrEmpty(psAwayTeam), "", " - " & psAwayTeam))
 
             If IsTennis(sGameType) OrElse IsGolf(sGameType) Then
                 sChoiceTeam = psAwayTeam & " - " & psHomeTeam
             End If
 
-            Dim htmlString As String = "<div class='baseline'>" & sRotationNumber & "<b class='gm-team'>" & sChoiceTeam & "</b> "
+            Dim htmlString As String = "<div class='baseline'><b class='gm-team'>" & sChoiceTeam & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
             htmlString += "<span class='gm-status'>(" & ticketStatus & ")</span> </div>"
             htmlString += gameBet
@@ -596,7 +581,7 @@ Namespace SBSPlayer
             Dim regulationOnly = IIf(IsSoccer(sGameType), "<b>Regualation Only</b>", "")
             Dim gameBet = String.Format("<div class='baseline'>Money Line <b>{0}</b> for the Game {1} {2}</div>", sMoneyLine, regulationOnly, mustStarPitcher)
 
-            Dim sRotationNumber = SafeString(IIf(GetTicketType(poTicketbet).Equals("Straight", StringComparison.CurrentCultureIgnoreCase), "", "<b class='gm-number'>[" & rotationNumber & "]</b>&nbsp;"))
+            Dim sRotationNumber = SafeString("<b class='gm-number'>[" & rotationNumber & "]</b>&nbsp;")
 
             If IsTennis(sGameType) OrElse IsGolf(sGameType) Then
                 sChoiceTeam = psAwayTeam & " - " & psHomeTeam
@@ -609,13 +594,6 @@ Namespace SBSPlayer
 
 
             Return htmlString
-
-            'If SafeString(poTicketbet("GameType")).Equals("Tennis", StringComparison.CurrentCultureIgnoreCase) OrElse SafeString(poTicketbet("GameType")).Equals("Golf", StringComparison.CurrentCultureIgnoreCase) Then
-            '    sDescription = SafeString(poTicketbet("AwayTeam")) & " / " & SafeString(poTicketbet("HomeTeam"))
-            '    Return String.Format("{2}<br/><b>{0}</b><br/>{1}", sChoiceTeam, sMoneyLine, sDescription)
-            'Else
-            '    Return String.Format("{0}<br/> <b>{1}</b>", sChoiceTeam, sMoneyLine)
-            'End If
 
         End Function
 

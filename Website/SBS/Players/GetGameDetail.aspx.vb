@@ -29,36 +29,24 @@ Partial Class SBS_Players_GetGameDetail
                 Dim drawRotationNumber = SafeInteger(row("DrawRotationNumber"))
                 Dim homeTeam = SafeString(row("HomeTeam"))
                 Dim awayTeam = SafeString(row("AwayTeam"))
+                Dim draw = "Draw"
 
-                Dim sHomTeam = IIf(homeRotationNumber > 0, string.format("<b>[{0}]</b>{1}", homeRotationNumber, homeTeam), "")
-                Dim sAwayTeam = IIf(awayRotationNumber > 0, string.format("<br/><b>[{0}]</b>{1}", awayRotationNumber, awayTeam), "")
-                Dim sDraw = IIf(drawRotationNumber > 0, string.format("<br/><b>[{0}]</b>{1}", awayRotationNumber, awayTeam), "")
-
-                sDescription = String.Format("<td class='baseline'>{0} {1} {2}</td>", sHomTeam, sAwayTeam, sDraw)
-
-                'Select Case UCase(SafeString(row("BetType")))
-                '    Case "SPREAD"
-                '        sDescription = String.Format("<td>{0} {1} {2}</td>", ))
-                '    Case "TOTALPOINTS"
-                '        If SafeString(oTicketBet("HomePitcher_TicketBets")) <> "" AndAlso SafeString(oTicketBet("AwayPitcher_TicketBets")) <> "" Then
-                '            sHomeTeam = SafeString(oTicketBet("AwayTeam")) & "/" & sHomeTeam
-                '            sDescription = getDetailByTotalPoints(sHomeTeam, "", oTicketBet)
-                '        Else
-                '            sHomeTeam = sAwayTeam & "/" & sHomeTeam
-                '            sDescription = getDetailByTotalPoints(sHomeTeam, "", oTicketBet)
-                '        End If
-                '    Case "TEAMTOTALPOINTS"
-                '        sDescription = getDetailByTeamTotalPoints(IIf(SafeString(oTicketBet("TeamTotalName")).Equals("away"), sAwayTeam, sHomeTeam), "", oTicketBet)
-                '    Case "MONEYLINE"
-                '        sDescription = getDetailByMoneyLine(sHomeTeam, sAwayTeam, oTicketBet)
-                '    Case "DRAW"
-                '        sDescription = getDetailByDraw(sHomeTeam, sAwayTeam, oTicketBet)
-                'End Select
+                Dim betType = UCase(SafeString(row("BetType")) )
+                If betType.Equals("SPREAD") Or betType.Equals("MONEYLINE") Then
+                    homeTeam = SafeString(IIf(homeRotationNumber > 0, string.format("<b>[{0}]</b>{1}", homeRotationNumber, homeTeam), ""))
+                    awayTeam = SafeString(IIf(awayRotationNumber > 0, string.format("<br /><b>[{0}]</b>{1}", awayRotationNumber, awayTeam), ""))
+                    draw = SafeString(IIf(drawRotationNumber > 0, string.format("<br /><b>[{0}]</b>{1}", drawRotationNumber, draw), ""))
+                Else 
+                    homeTeam = SafeString(IIf(homeRotationNumber > 0, homeTeam, ""))
+                    awayTeam = SafeString(IIf(awayRotationNumber > 0, "<br />" & awayTeam, ""))
+                    draw = SafeString(IIf(drawRotationNumber > 0,"<br />" & draw, ""))
+                End If
+                
+                sDescription = String.Format("<td class='baseline'>{0} {1} {2}</td>", homeTeam, awayTeam, draw)
 
                 html += sDescription
             End If
 
-            
 	    Next
 
         html += "</tr>"

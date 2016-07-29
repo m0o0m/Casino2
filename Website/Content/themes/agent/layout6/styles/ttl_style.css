@@ -153,7 +153,7 @@ ul.menu-style-3 {
     }
 
         ul.menu-style-3 > li.selected {
-            background: rgba(0, 0, 0, 0) url('../resources/images/icons/oc-bg.png') no-repeat scroll center center;
+            background: rgba(0, 0, 0, 0) url('../images/icons/oc-bg.png') no-repeat scroll center center;
             background-size: cover;
             border-left: 1px solid #209ccf;
             border-right: 1px solid #010e16;
@@ -371,13 +371,13 @@ ul.menu-style-3 {
 
 .icon-toggle-1 {
     display: inline-block;
-    background: url('../resources/images/icons/plus.png') 0 0 scroll transparent;
+    background: url('../images/icons/plus.png') 0 0 scroll transparent;
     background-size: cover;
     cursor: pointer;
 }
 
     .icon-toggle-1.open {
-        background-image: url('../resources/images/icons/minus.png');
+        background-image: url('../images/icons/minus.png');
     }
 
 
