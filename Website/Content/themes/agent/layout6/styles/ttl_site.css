@@ -1,51 +1,62 @@
 ﻿* {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
+
+i {
+    font-style: italic;
+}
+
 .page-content.custom-page-content {
     background: #fff;
     padding: 20px 13px 150px;
 }
+
 .divrptGameTypeShort {
-    
-}
-.divrptGameTypeShort > .panel-body {
-    -moz-column-count: 2;
-    -webkit-column-count: 2;
-    column-count: 2;
-    -moz-column-gap: 13px;
-    -webkit-column-gap: 13px;
-    column-gap: 13px;
-}
-.divrptGameTypeShort .list-group-item > span {
-    display: none;
-}
-.divrptGameTypeShort .list-group-item > label {
-     border: 1px solid;
-    color: #000;
-    cursor: pointer;
-    padding: 6px 0 6px 30px;
-    display: block;
-    background: none;
 }
 
-.divrptGameTypeShort .BetIfAll .list-group-item > label {
-    padding: 6px 0 6px 55px;
-    background: url("../images/box.png") no-repeat 10px center;
-}
+    .divrptGameTypeShort > .panel-body {
+        -moz-column-count: 2;
+        -webkit-column-count: 2;
+        column-count: 2;
+        -moz-column-gap: 13px;
+        -webkit-column-gap: 13px;
+        column-gap: 13px;
+    }
 
-.divrptGameTypeShort .list-group-item > label:hover {
-    color: blue;
-}
-.divrptGameTypeShort .BetIfAll .list-group-item > label.highlight {
-    background: yellow url("../images/tick.png") no-repeat 35px center;
-    font-weight: bold;
-}
-.divrptGameTypeShort .list-group-item > label.highlight {
-    background: yellow url("../images/tick.png") no-repeat 10px center;
-    font-weight: bold;
-}
+    .divrptGameTypeShort .list-group-item > span {
+        display: none;
+    }
+
+    .divrptGameTypeShort .list-group-item > label {
+        border: 1px solid;
+        color: #000;
+        cursor: pointer;
+        padding: 6px 0 6px 30px;
+        display: block;
+        background: none;
+    }
+
+    .divrptGameTypeShort .BetIfAll .list-group-item > label {
+        padding: 6px 0 6px 55px;
+        background: url("../images/box.png") no-repeat 10px center;
+    }
+
+    .divrptGameTypeShort .list-group-item > label:hover {
+        color: blue;
+    }
+
+    .divrptGameTypeShort .BetIfAll .list-group-item > label.highlight {
+        background: yellow url("../images/tick.png") no-repeat 35px center;
+        font-weight: bold;
+    }
+
+    .divrptGameTypeShort .list-group-item > label.highlight {
+        background: yellow url("../images/tick.png") no-repeat 10px center;
+        font-weight: bold;
+    }
+
 .game-type {
     width: 100%;
     padding-left: 13px;
@@ -58,19 +69,173 @@
     color: #fff;
     font: bold 12px arial;
 }
+
 .lblipmsg {
     background: red !important;
 }
 
+/* table */
+.select-field-3 {
+    border: 1px solid #666;
+    background: #FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 5px;
+    border-radius: 3px;
+    color: #000;
+}
+
+.table-filter-style-1 {
+    background: #000000;
+}
+
+.table-style-1 {
+    border: 1px solid #000;
+}
+    .table-style-1 .row-caption {
+        background: #0E2431;
+    }
+
+        .table-style-1 .row-caption > td {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 0 10px 0 17px;
+        }
+
+    .table-style-1 .row-content {
+        background: #FFF;
+    }
+
+        .table-style-1 .row-content.row-straight {
+            background: #FFF;
+        }
+
+        .table-style-1 .row-content.row-parlay {
+            background: #F1E64E;
+        }
+
+        .table-style-1 .row-content.row-ifbet.odd {
+            background: #FFF;
+        }
+
+        .table-style-1 .row-content.row-ifbet.even {
+            background: #EFEFEF;
+        }
+
+        .table-style-1 .row-content.row-teaser {
+            background: #F59596;
+        }
+
+        .table-style-1 .row-content > td {
+            color: #000;
+            font-size: 13px;
+            padding: 5px 5px;
+            vertical-align: middle;
+        }
+
+            .table-style-1 .row-content > td .gm-type {
+                font-size: 13px;
+                font-weight: bold;
+                color: blue;
+                margin-bottom: 2px;
+            }
+
+            .table-style-1 .row-content > td .gm-sportname-team {
+                font-size: 11px;
+                color: darkred;
+            }
+
+            .table-style-1 .row-content > td .gm-date {
+                font-size: 11px;
+                color: darkred;
+            }
+
+            .table-style-1 .row-content > td .gm-time {
+                font-size: 11px;
+                color: darkgreen;
+            }
+
+            .table-style-1 .row-content > td .gm-status {
+                font-size: 11px;
+                color: darkred;
+            }
+
+    .table-style-1 .row-total {
+        background: #FFF;
+    }
+
+        .table-style-1 .row-total > td {
+            font-size: 15px;
+            color: #000;
+        }
+
+    .table-style-1 .row-detail {
+        background: #666666;
+    }
+
+        .table-style-1 .row-detail > td {
+            border-width: 2px;
+            border-style: solid;
+        }
+
+            .table-style-1 .row-detail > td table {
+                border-top-width: 1px;
+                border-top-style: solid;
+            }
+
+                .table-style-1 .row-detail > td table td {
+                    background: #A0E1FF;
+                    padding: 2px 1px;
+                    line-height: 20px;
+                    border-width: 1px;
+                    border-style: solid;
+                    border-top: none;
+                    border-bottom: none;
+                    font-size: 13px;
+                    color: #000;
+                }
+
+    .table-style-1 .row-straight + .row-detail > td,
+    .table-style-1 .row-straight + .row-detail > td table,
+    .table-style-1 .row-straight + .row-detail > td table td {
+        border-color: #FFF;
+    }
+
+    .table-style-1 .row-parlay + .row-detail > td,
+    .table-style-1 .row-parlay + .row-detail > td table,
+    .table-style-1 .row-parlay + .row-detail > td table td {
+        border-color: #F1E64E;
+    }
+
+    .table-style-1 .row-teaser + .row-detail > td,
+    .table-style-1 .row-teaser + .row-detail > td table,
+    .table-style-1 .row-teaser + .row-detail > td table td {
+        border-color: #F59596;
+    }
+
+    .table-style-1 .row-ifbet.odd + .row-detail > td,
+    .table-style-1 .row-ifbet.odd + .row-detail > td table,
+    .table-style-1 .row-ifbet.odd + .row-detail > td table td {
+        border-color: #FFF;
+    }
+
+    .table-style-1 .row-ifbet.even + .row-detail > td,
+    .table-style-1 .row-ifbet.even + .row-detail > td table,
+    .table-style-1 .row-ifbet.even + .row-detail > td table td {
+        border-color: #EFEFEF;
+    }
 
 
 .collapsed {
     display: none;
 }
-.clearfix:before, .clearfix:after{
-	content: " ";
-	display: table
+
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
 }
-.clearfix:after{
-	clear: both
+
+.clearfix:after {
+    clear: both;
 }

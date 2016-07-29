@@ -61,17 +61,17 @@ Namespace SBSPlayer
             Me.TotalBets = 0
             Me.TotalRisk = 0
             Me.TotalWin = 0
-            Dim filter AS String = ""
+            Dim filter As String = ""
             If Not String.IsNullOrEmpty(psContext) Then
                 filter = String.Format("AND Context like '%{0}' ", psContext)
             End If
             If Not String.IsNullOrEmpty(gameType) Then
-                Dim listGameType AS List(Of String) = getListGameType(gameType)
+                Dim listGameType As List(Of String) = getListGameType(gameType)
                 If listGameType.Count > 0 Then
                     Dim inGameType As String = ""
 
                     For Each gt As String In listGameType
-                        inGameType+= "'"+ gt + "',"
+                        inGameType += "'" + gt + "',"
                     Next
 
                     filter += String.Format("AND GameType in ({0}) ", inGameType.TrimEnd(CType(",", Char)))
@@ -111,24 +111,71 @@ Namespace SBSPlayer
         End Sub
 
         Private Sub formatDisplayGridWithRowSpan(ByVal poTicketbets As DataTable)
-            Dim oCountByTicketIDs As List(Of CItemCount) = (From oRow In poTicketbets.AsEnumerable _
-                Group oRow By sTicketID = SafeString(oRow.Field(Of Guid)("TicketID")) Into Count() _
-                Where Count >= 2 _
-                Select New CItemCount(sTicketID, Count)).ToList()
+            Dim oCountByTicketIDs As List(Of CItemCount) = (From oRow In poTicketbets.AsEnumerable
+                                                            Group oRow By sTicketID = SafeString(oRow.Field(Of Guid)("TicketID")) Into Count()
+                                                            Where Count >= 2
+                                                            Select New CItemCount(sTicketID, Count)).ToList()
 
             If oCountByTicketIDs.Count = 0 Then
                 Return
             End If
 
             Dim nIndex As Integer = 0
+            Dim alternateCount As Integer = 0
+            Dim betTypeForAlternate As String = ""
+            Dim ticketIdforAlternate As String = ""
             Dim oBackColor As Drawing.Color = Drawing.Color.White
 
             While nIndex < dgTicketBets.Items.Count - 1
                 Dim oItem As DataGridItem = dgTicketBets.Items(nIndex)
-                oItem.BackColor = oBackColor
 
+                Dim betType As String = SafeString(CType(oItem.FindControl("hfBetType"), HiddenField).Value)
                 Dim sTicketID As String = SafeString(CType(oItem.FindControl("hfTicketID"), HiddenField).Value)
                 Dim oCountByTicketID As CItemCount = oCountByTicketIDs.Find(Function(x) x.ItemID = sTicketID)
+
+
+                ' Row alternate
+                If Not betTypeForAlternate.Equals(betType) Then
+                    alternateCount = 1
+                ElseIf Not ticketIdforAlternate.Equals(sTicketID) And (betTypeForAlternate.Equals(betType) Or (betType.Contains("If Win") And betTypeForAlternate.Contains("Reverse")) Or (betType.Contains("Reverse") And betTypeForAlternate.Contains("If Win")) ) 
+                    alternateCount += 1
+                End If
+
+                betTypeForAlternate = SafeString( IIf(betType.Contains("Reverse"), "If Win", betType) )
+                ticketIdforAlternate = sTicketID
+
+                ' Row color
+                Select Case True
+                    Case betType.Contains("Straight")
+                        If (alternateCount Mod 2) = 0 Then
+                            oBackColor = System.Drawing.ColorTranslator.FromHtml("#ffffff")
+                        Else
+                            oBackColor = System.Drawing.ColorTranslator.FromHtml("#efefef")
+                        End If
+                    Case betType.Contains("Parlay")
+                        If (alternateCount Mod 2) = 0 Then
+                            oBackColor = System.Drawing.ColorTranslator.FromHtml("#ede56f")
+                        Else
+                            oBackColor = System.Drawing.ColorTranslator.FromHtml("#f1e64e")
+                        End If
+                    Case betType.Contains("Teaser")
+                        If (alternateCount Mod 2) = 0 Then
+                            oBackColor = System.Drawing.ColorTranslator.FromHtml("#f08080")
+                        Else
+                            oBackColor = System.Drawing.ColorTranslator.FromHtml("#f59596")
+                        End If
+                    Case betType.Contains("If Win") Or betType.Contains("Reverse")
+                        If (alternateCount Mod 2) = 0 Then
+                            oBackColor = System.Drawing.ColorTranslator.FromHtml("#efefef")
+                        Else
+                            oBackColor = System.Drawing.ColorTranslator.FromHtml("#ffffff")
+                        End If
+                    Case Else
+                        oBackColor = System.Drawing.ColorTranslator.FromHtml("#ffffff")
+                End Select
+              
+                oItem.BackColor = oBackColor
+
 
                 If oCountByTicketID IsNot Nothing Then
                     Dim nRowSpan As Integer = oCountByTicketID.ItemCount
@@ -155,6 +202,9 @@ Namespace SBSPlayer
                         oItemRowSpan.Cells(6).Visible = False
                         oItemRowSpan.Cells(7).Visible = False
                         oItemRowSpan.Cells(8).Visible = False
+
+                        Dim ltrIfBet As Literal = CType(oItemRowSpan.FindControl("ltrIfBet"), Literal)
+                        ltrIfBet.Visible = False
                     Next
 
                     nIndex += nRowSpan
@@ -162,11 +212,6 @@ Namespace SBSPlayer
                     nIndex += 1
                 End If
 
-                If oBackColor = System.Drawing.ColorTranslator.FromHtml("#E6E6E6") Then
-                    oBackColor = Drawing.Color.White
-                Else
-                    oBackColor = System.Drawing.ColorTranslator.FromHtml("#E6E6E6")
-                End If
             End While
 
             ''total row
@@ -176,9 +221,7 @@ Namespace SBSPlayer
             oTotalItem.Cells(2).Visible = False
             oTotalItem.Cells(3).Visible = False
             oTotalItem.Cells(4).Visible = False
-            'oTotalItem.Cells(1).Visible = False
-            'oTotalItem.Cells(2).Visible = False
-            'oTotalItem.Cells(3).Visible = False
+            oTotalItem.Cells(5).HorizontalAlign = HorizontalAlign.Center
         End Sub
 
         Private TicketBetsCount As Int32 = 0
@@ -195,33 +238,36 @@ Namespace SBSPlayer
                 Dim oTicketBet As DataRowView = CType(e.Item.DataItem, DataRowView)
 
                 If e.Item.ItemIndex = Me.TicketBetsCount - 1 Then
-                    e.Item.CssClass = "tableheading"
-                    'e.Item.Cells(0).Text = "TOTAL"
-                    'e.Item.Cells(5).Text = FormatNumber(Me.TotalBets, 0) & " BETS"
-                    'e.Item.Cells(8).Text = String.Format("{0} / {1}", FormatNumber(Me.TotalRisk, Me.RoundMidPoint), FormatNumber(Me.TotalWin, Me.RoundMidPoint))
+                    e.Item.CssClass = "row-total"
                     e.Item.Cells(5).Text = "Total"
+                    e.Item.Cells(5).Width = New Unit("10%")
                     e.Item.Cells(6).Text = FormatNumber(Me.TotalRisk + SafeDouble(oTicketBet("RiskAmount")), 2)
                 Else
                     Dim sTicketType = GetTicketType(oTicketBet)
                     Dim sContext As String = SafeString(IIf(LCase(SafeString(oTicketBet("Context"))) = "current", "", "<b>" & SafeString(oTicketBet("Context")) & "</b><br/>"))
 
-                    CType(e.Item.FindControl("lblTicketDate"), Label).Text = SafeDate(oTicketBet("TransactionDate")) 
+                    CType(e.Item.FindControl("lblTicketDate"), Label).Text = SafeDate(oTicketBet("TransactionDate"))
                     CType(e.Item.FindControl("lblTicketNumber"), Label).Text = SafeString(oTicketBet("TicketNumber"))
                     CType(e.Item.FindControl("lblMethod"), Label).Text = SafeString(oTicketBet("TypeOfBet")).Substring(0, 1)
 
                     ' Game
-                    CType(e.Item.FindControl("lblIfBet"), Label).Text = SafeString(oTicketBet("GameType"))
+                    Dim gameType = SafeString(oTicketBet("GameType"))
+                    Dim riskAmount = SafeDouble(oTicketBet("RiskAmount"))
+                    Dim winAmount = SafeDouble(oTicketBet("WinAmount"))
 
-                    CType(e.Item.FindControl("lblWagerType"), Label).Text = String.Format("{0}<br />#{1}{2}", sTicketType, oTicketBet("TicketNumber"), _
-                                        IIf(SafeString(oTicketBet("SubTicketNumber")) <> "", "-" & SafeString(oTicketBet("SubTicketNumber")), ""))
-                    
+                    If sTicketType.Contains("If Win") Or sTicketType.Contains("Reverse") Then
+                        CType(e.Item.FindControl("ltrIfBet"), Literal).Text = sTicketType
+                        CType(e.Item.FindControl("ltrRiskWin"), Literal).Text = String.Format("<span>Risking: {0}</span> <span>Win: {1}</span>", FormatNumber(riskAmount, 2), FormatNumber(winAmount, 2))
+                    End If
+
+                    CType(e.Item.FindControl("ltrSportGameTeam"), Literal).Text = String.Format("{0} - {1}", GetSportType(gameType), gameType)
+
+                    CType(e.Item.FindControl("lblWagerType"), Label).Text = sTicketType
+                    CType(e.Item.FindControl("hfBetType"), HiddenField).Value = sTicketType
+
                     CType(e.Item.FindControl("lblRisk"), Label).Text = FormatNumber(SafeDouble(oTicketBet("RiskAmount")), 2)
                     CType(e.Item.FindControl("lblWin"), Label).Text = FormatNumber(SafeDouble(oTicketBet("WinAmount")), 2)
-                    
-                    
-                    'CType(e.Item.FindControl("lblSport"), Label).Text = SafeString(oTicketBet("GameType"))
-                    'CType(e.Item.FindControl("lblPlaced"), Label).Text = SafeString(oTicketBet("GameDate"))
-                    'CType(e.Item.FindControl("lblAction"), Label).Text = SafeString(oTicketBet("GameStatus"))
+
                     If UserSession.UserType = SBCBL.EUserType.SuperAdmin Or UserSession.UserType = SBCBL.EUserType.Agent Then
                         CType(e.Item.FindControl("lblPlayer"), Label).Text = SafeString(oTicketBet("PlayerName"))
                     Else
@@ -284,25 +330,25 @@ Namespace SBSPlayer
                     ''risk/win
                     Dim nRisk As Double = SafeRound(oTicketBet("RiskAmount"))
                     Dim nWin As Double = SafeRound(oTicketBet("WinAmount"))
-                    CType(e.Item.FindControl("lblRiskWin"), Label).Text = String.Format("{0} / {1}", FormatNumber(nRisk, Me.RoundMidPoint), FormatNumber(nWin, Me.RoundMidPoint))
-                    If IsLiveTicker Then
-                        If 300 < nRisk AndAlso nRisk < 499 Then
-                            CType(CType(e.Item.FindControl("lblRiskWin"), Label).Parent, TableCell).BackColor = System.Drawing.ColorTranslator.FromHtml("#FFCC66")
-                        ElseIf 500 < nRisk AndAlso nRisk < 999 Then
-                            CType(CType(e.Item.FindControl("lblRiskWin"), Label).Parent, TableCell).BackColor = System.Drawing.ColorTranslator.FromHtml("#FF9900")
-                        ElseIf 1000 < nRisk AndAlso nRisk < 1999 Then
-                            CType(CType(e.Item.FindControl("lblRiskWin"), Label).Parent, TableCell).BackColor = System.Drawing.ColorTranslator.FromHtml("#FF6600")
-                        ElseIf 2000 < nRisk AndAlso nRisk < 2999 Then
-                            CType(CType(e.Item.FindControl("lblRiskWin"), Label).Parent, TableCell).BackColor = System.Drawing.ColorTranslator.FromHtml("#FF3300")
-                        ElseIf 3000 < nRisk AndAlso nRisk < 3999 Then
-                            CType(CType(e.Item.FindControl("lblRiskWin"), Label).Parent, TableCell).BackColor = System.Drawing.ColorTranslator.FromHtml("#00DD00")
-                        ElseIf 4000 < nRisk AndAlso nRisk < 4999 Then
-                            CType(CType(e.Item.FindControl("lblRiskWin"), Label).Parent, TableCell).BackColor = System.Drawing.ColorTranslator.FromHtml("#008800")
-                        ElseIf 5000 < nRisk Then
-                            CType(CType(e.Item.FindControl("lblRiskWin"), Label).Parent, TableCell).BackColor = System.Drawing.ColorTranslator.FromHtml("#0000FF")
+                    'CType(e.Item.FindControl("lblRiskWin"), Label).Text = String.Format("{0} / {1}", FormatNumber(nRisk, Me.RoundMidPoint), FormatNumber(nWin, Me.RoundMidPoint))
+                    'If IsLiveTicker Then
+                    '    If 300 < nRisk AndAlso nRisk < 499 Then
+                    '        CType(CType(e.Item.FindControl("lblRiskWin"), Label).Parent, TableCell).BackColor = System.Drawing.ColorTranslator.FromHtml("#FFCC66")
+                    '    ElseIf 500 < nRisk AndAlso nRisk < 999 Then
+                    '        CType(CType(e.Item.FindControl("lblRiskWin"), Label).Parent, TableCell).BackColor = System.Drawing.ColorTranslator.FromHtml("#FF9900")
+                    '    ElseIf 1000 < nRisk AndAlso nRisk < 1999 Then
+                    '        CType(CType(e.Item.FindControl("lblRiskWin"), Label).Parent, TableCell).BackColor = System.Drawing.ColorTranslator.FromHtml("#FF6600")
+                    '    ElseIf 2000 < nRisk AndAlso nRisk < 2999 Then
+                    '        CType(CType(e.Item.FindControl("lblRiskWin"), Label).Parent, TableCell).BackColor = System.Drawing.ColorTranslator.FromHtml("#FF3300")
+                    '    ElseIf 3000 < nRisk AndAlso nRisk < 3999 Then
+                    '        CType(CType(e.Item.FindControl("lblRiskWin"), Label).Parent, TableCell).BackColor = System.Drawing.ColorTranslator.FromHtml("#00DD00")
+                    '    ElseIf 4000 < nRisk AndAlso nRisk < 4999 Then
+                    '        CType(CType(e.Item.FindControl("lblRiskWin"), Label).Parent, TableCell).BackColor = System.Drawing.ColorTranslator.FromHtml("#008800")
+                    '    ElseIf 5000 < nRisk Then
+                    '        CType(CType(e.Item.FindControl("lblRiskWin"), Label).Parent, TableCell).BackColor = System.Drawing.ColorTranslator.FromHtml("#0000FF")
 
-                        End If
-                    End If
+                    '    End If
+                    'End If
 
                     If Me.__CurrentTicketID <> sTicketID Then
                         Me.__CurrentTicketID = sTicketID
@@ -313,66 +359,59 @@ Namespace SBSPlayer
                     End If
 
                     ''description
-                    Dim sHomeTeam As String = SafeString(oTicketBet("HomeTeam")) & " - H"
-                    Dim sAwayTeam As String = SafeString(oTicketBet("AwayTeam")) & " - A"
-                    If SafeString(oTicketBet("HomePitcher_TicketBets")) <> "" AndAlso SafeString(oTicketBet("AwayPitcher_TicketBets")) <> "" Then
-                        sHomeTeam += "<br/><span style='color:red'>" & SafeString(oTicketBet("AwayPitcher_TicketBets")) & " / " & SafeString(oTicketBet("HomePitcher_TicketBets")) & "</span>"
-                    End If
-                    If SafeString(oTicketBet("HomePitcher_TicketBets")) <> "" AndAlso SafeString(oTicketBet("AwayPitcher_TicketBets")) <> "" Then
-                        sAwayTeam += "<br/><span style='color:red'>" & SafeString(oTicketBet("AwayPitcher_TicketBets")) & " / " & SafeString(oTicketBet("HomePitcher_TicketBets")) & "</span>"
-                    End If
-
+                    Dim sHomeTeam As String = SafeString(oTicketBet("HomeTeam")) '& " - H"
+                    Dim sAwayTeam As String = SafeString(oTicketBet("AwayTeam")) '& " - A"
+                    'If SafeString(oTicketBet("HomePitcher_TicketBets")) <> "" AndAlso SafeString(oTicketBet("AwayPitcher_TicketBets")) <> "" Then
+                    '    sHomeTeam += "<br/><span style='color:red'>" & SafeString(oTicketBet("AwayPitcher_TicketBets")) & " / " & SafeString(oTicketBet("HomePitcher_TicketBets")) & "</span>"
+                    'End If
+                    'If SafeString(oTicketBet("HomePitcher_TicketBets")) <> "" AndAlso SafeString(oTicketBet("AwayPitcher_TicketBets")) <> "" Then
+                    '    sAwayTeam += "<br/><span style='color:red'>" & SafeString(oTicketBet("AwayPitcher_TicketBets")) & " / " & SafeString(oTicketBet("HomePitcher_TicketBets")) & "</span>"
+                    'End If
+                    Dim sDescription As String = ""
                     If UCase(SafeString(oTicketBet("IsForProp"))).Equals("Y") Then
-                        CType(e.Item.FindControl("lblDescription"), Label).Text = String.Format("{0}<br/><span style='color:red'>{1}</span><br/><span style='font-weight:900'>{2}</span><br/>", SafeString(oTicketBet("PropDescription")), SafeString(oTicketBet("PropParticipantName")), SafeString(oTicketBet("PropMoneyLine")))
+                        sDescription = getDetailForPop(sHomeTeam, sAwayTeam, oTicketBet)
                     Else
                         'Dim sDescription As String = IIf(String.IsNullOrEmpty(SafeString(oTicketBet("Description"))), "", SafeString(oTicketBet("Description")) & "<br/>")
-                        Dim sDescription As String = ""
+
                         'ClientAlert(SafeString(oTicketBet("gametype")), True)
                         If GetGameType.ContainsKey(SafeString(oTicketBet("gametype"))) AndAlso Not IsBasketball(SafeString(oTicketBet("gametype"))) AndAlso Not GetGameType(SafeString(oTicketBet("gametype"))).Equals("NFL Preseason") AndAlso Not GetGameType(SafeString(oTicketBet("gametype"))).Equals("NFL Football") Then
                             sDescription = IIf(String.IsNullOrEmpty(SafeString(oTicketBet("Description"))), "", SafeString(oTicketBet("Description")) & "<br/>")
                         End If
                         Select Case UCase(SafeString(oTicketBet("BetType")))
                             Case "SPREAD"
-                                sDescription += getDetailBySpread(sHomeTeam, sAwayTeam, oTicketBet)
+                                sDescription = getDetailBySpread(sHomeTeam, sAwayTeam, oTicketBet)
                             Case "TOTALPOINTS"
-                                sHomeTeam = Replace(sHomeTeam, " - H", "")
-                                sAwayTeam = Replace(sAwayTeam, " - A", "")
-
                                 If SafeString(oTicketBet("HomePitcher_TicketBets")) <> "" AndAlso SafeString(oTicketBet("AwayPitcher_TicketBets")) <> "" Then
                                     sHomeTeam = SafeString(oTicketBet("AwayTeam")) & "/" & sHomeTeam
-                                    sDescription += getDetailByTotalPoints(sHomeTeam, "", oTicketBet)
+                                    sDescription = getDetailByTotalPoints(sHomeTeam, "", oTicketBet)
                                 Else
-                                    sHomeTeam = sAwayTeam & " / " & sHomeTeam
-                                    sDescription += getDetailByTotalPoints(sHomeTeam, "", oTicketBet)
+                                    sHomeTeam = sAwayTeam & "/" & sHomeTeam
+                                    sDescription = getDetailByTotalPoints(sHomeTeam, "", oTicketBet)
                                 End If
                             Case "TEAMTOTALPOINTS"
-                                sHomeTeam = Replace(sHomeTeam, " - H", "")
-                                sAwayTeam = Replace(sAwayTeam, " - A", "")
-
-                                sDescription += getDetailByTeamTotalPoints(IIf(SafeString(oTicketBet("TeamTotalName")).Equals("away"), sAwayTeam, sHomeTeam), "", oTicketBet)
+                                sDescription = getDetailByTeamTotalPoints(IIf(SafeString(oTicketBet("TeamTotalName")).Equals("away"), sAwayTeam, sHomeTeam), "", oTicketBet)
                             Case "MONEYLINE"
-                                sDescription += getDetailByMoneyLine(sHomeTeam, sAwayTeam, oTicketBet)
+                                sDescription = getDetailByMoneyLine(sHomeTeam, sAwayTeam, oTicketBet)
                             Case "DRAW"
-                                sHomeTeam = Replace(sHomeTeam, " - H", "")
-                                sAwayTeam = Replace(sAwayTeam, " - A", "")
-
-                                sDescription += getDetailByDraw(sHomeTeam, sAwayTeam, oTicketBet)
+                                sDescription = getDetailByDraw(sHomeTeam, sAwayTeam, oTicketBet)
                         End Select
 
-                        'CType(e.Item.FindControl("lblDescription"), Label).Text = sContext & sDescription
                     End If
-                    Dim sTicketBetID As String = SafeString(oTicketBet("TicketBetID"))
-                    Dim sScore As String = SafeString(oTicketBet("AwayScore")) & SafeString(oTicketBet("HomeScore"))
 
-                    '' Check New Changes
-                    If LastScores.ContainsKey(sTicketBetID) Then
-                        If SafeString(LastScores.Item(sTicketBetID)) <> sScore Then
-                            e.Item.Cells(7).Attributes.Add("class", "HighLightBlock")
-                        End If
-                        _TempScore(sTicketBetID) = SafeString(LastScores.Item(sTicketBetID))
-                    Else
-                        _TempScore(sTicketBetID) = sScore
-                    End If
+                    CType(e.Item.FindControl("ltrGameTeam"), Literal).Text = sDescription
+
+                    'Dim sTicketBetID As String = SafeString(oTicketBet("TicketBetID"))
+                    'Dim sScore As String = SafeString(oTicketBet("AwayScore")) & SafeString(oTicketBet("HomeScore"))
+
+                    ''' Check New Changes
+                    'If LastScores.ContainsKey(sTicketBetID) Then
+                    '    If SafeString(LastScores.Item(sTicketBetID)) <> sScore Then
+                    '        e.Item.Cells(7).Attributes.Add("class", "HighLightBlock")
+                    '    End If
+                    '    _TempScore(sTicketBetID) = SafeString(LastScores.Item(sTicketBetID))
+                    'Else
+                    '    _TempScore(sTicketBetID) = sScore
+                    'End If
                 End If
             End If
         End Sub
@@ -411,34 +450,62 @@ Namespace SBSPlayer
         End Function
 
         Private Function getDetailBySpread(ByVal psHomeTeam As String, ByVal psAwayTeam As String, ByVal poTicketBet As DataRowView) As String
+            Dim gameDate As Date = SafeDate(poTicketBet("GameDate"))
+            Dim ticketStatus As String = SafeString(poTicketBet("TicketStatus"))
+            Dim sGameType As String = SafeString(poTicketBet("GameType"))
             Dim nHomeSpread As Double = SafeDouble(poTicketBet("HomeSpread"))
             Dim nAwaySpread As Double = SafeDouble(poTicketBet("AwaySpread"))
             Dim nHomeSpreadMoney As Double = SafeDouble(poTicketBet("HomeSpreadMoney"))
             Dim nAwaySpreadMoney As Double = SafeDouble(poTicketBet("AwaySpreadMoney"))
-            Dim sDescription As String
             Dim nSpread As Double = SafeDouble(IIf(nHomeSpreadMoney <> 0, nHomeSpread, nAwaySpread)) + SafeDouble(poTicketBet("AddPoint"))
             Dim sSpread As String = SafeString(nSpread)
-            If IsSoccer(SafeString(poTicketBet("gametype"))) Then
-                sSpread = AHFormat(nSpread)
+            If IsSoccer(sGameType) Then
+                sSpread = safeVegass(AHFormat(nSpread))
             End If
+            sSpread = SafeString(IIf(nSpread = 0, "PK", sSpread))
+
             Dim sChoiceTeam As String = SafeString(IIf(nHomeSpreadMoney <> 0, psHomeTeam, psAwayTeam))
 
             Dim nSpreadMoney As Double = SafeRound(IIf(nHomeSpreadMoney <> 0, nHomeSpreadMoney, nAwaySpreadMoney)) _
                                                 + SafeRound(poTicketBet("AddPointMoney"))
 
-            Dim sSpreadMoney As String = SafeString(nSpreadMoney)
-            If SafeString(poTicketBet("GameType")).Equals("Tennis", StringComparison.CurrentCultureIgnoreCase) OrElse SafeString(poTicketBet("GameType")).Equals("Golf", StringComparison.CurrentCultureIgnoreCase) Then
-                sDescription = SafeString(poTicketBet("AwayTeam")) & " / " & SafeString(poTicketBet("HomeTeam"))
-                Return String.Format("{2}<br/><b>{0}</b><br/>({3}){1}", sChoiceTeam, sSpreadMoney, sDescription, IIf(nSpread = 0, "PK", IIf(nSpread > 0, "+" & sSpread, sSpread)))
-            Else
-                Return String.Format("{0}<br/> <b>{1} ({2})</b>", sChoiceTeam, IIf(nSpread = 0, "PK", IIf(nSpread > 0, "+" & sSpread, sSpread)), sSpreadMoney).Replace("++", "+")
+            Dim sSpreadMoney As String = SafeString(IIf(nSpread > 0, IIf(nSpreadMoney = 100, "Even", "+" & nSpreadMoney), nSpreadMoney))
+            Dim rotationNumber As String = SafeString(IIf(nHomeSpreadMoney <> 0, SafeDouble(poTicketBet("HomeRotationNumber")), SafeDouble(poTicketBet("AwayRotationNumber"))))
+
+            Dim regulationOnly = IIf(IsSoccer(SafeString(poTicketBet("GameType"))), "<b>Regualation Only</b>", "")
+            Dim gameBet = String.Format("<div class='baseline'><b>{0} {1}</b> for the Game {2}</div>", sSpread, sSpreadMoney, regulationOnly)
+
+            Dim sRotationNumber = SafeString(IIf(GetTicketType(poTicketBet).Equals("Straight", StringComparison.CurrentCultureIgnoreCase), "", "<b class='gm-number'>[" & rotationNumber & "]</b>&nbsp;"))
+
+            If IsTennis(sGameType) OrElse IsGolf(sGameType) Then
+                sChoiceTeam = psAwayTeam & " - " & psHomeTeam
             End If
+
+            Dim htmlString As String = "<div class='baseline'>" & sRotationNumber & "<b class='gm-team'>" & sChoiceTeam & "</b> "
+            htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
+            htmlString += "<span class='gm-status'>(" & ticketStatus & ")</span> </div>"
+            htmlString += gameBet
+
+
+            Return htmlString
+
+            'If SafeString(poTicketBet("GameType")).Equals("Tennis", StringComparison.CurrentCultureIgnoreCase) OrElse SafeString(poTicketBet("GameType")).Equals("Golf", StringComparison.CurrentCultureIgnoreCase) Then
+            '    sDescription = SafeString(poTicketBet("AwayTeam")) & " / " & SafeString(poTicketBet("HomeTeam"))
+            '    Return String.Format("{2}<br/><b>{0}</b>dsd<br/>({3}){1} {4}", sChoiceTeam, sSpreadMoney, sDescription, IIf(nSpread = 0, "PK", IIf(nSpread > 0, "+" & sSpread, sSpread)), regulation)
+            'Else
+            '    Return String.Format("{0}<br/> tttt<b>{1} ({2})</b> for the Game {3}", sChoiceTeam, IIf(nSpread = 0, "PK", IIf(nSpread > 0, "+" & sSpread, sSpread)), sSpreadMoney, regulation).Replace("++", "+")
+            'End If
+
+
 
 
         End Function
 
 
         Private Function getDetailByTotalPoints(ByVal psHomeTeam As String, ByVal psAwayTeam As String, ByVal poTicketBet As DataRowView) As String
+            Dim sGameType As String = SafeString(poTicketBet("GameType"))
+            Dim gameDate As Date = SafeDate(poTicketBet("GameDate"))
+            Dim ticketStatus As String = SafeString(poTicketBet("TicketStatus"))
             Dim nTotalPoints As Double = SafeDouble(poTicketBet("TotalPoints")) + SafeDouble(poTicketBet("AddPoint"))
             Dim sTotalPoint As String = SafeString(nTotalPoints)
             If IsSoccer(SafeString(poTicketBet("gametype"))) Then
@@ -450,12 +517,36 @@ Namespace SBSPlayer
             Dim sMsg As String = SafeString(IIf(nOverMoney <> 0, "Over", "Under"))
             Dim nMoney As Double = SafeRound(IIf(nOverMoney <> 0, nOverMoney, nUnderMoney)) + SafeRound(poTicketBet("AddPointMoney"))
 
-            Dim sMoney As String = SafeString(nMoney)
-            Return String.Format("{0}{1}<br/> <b>{2} {3} ({4})</b>", psHomeTeam, IIf(String.IsNullOrEmpty(psAwayTeam), "", "<br/> " & psAwayTeam), sMsg, _
-                                 sTotalPoint, sMoney)
+            Dim sMoney As String = SafeString(IIf(nMoney > 0, IIf(nMoney = 100, "Even", "+" & nMoney), nMoney))
+
+            Dim mustStarPitcher = GetMustStart(poTicketBet, sGameType)
+
+            Dim regulationOnly = IIf(IsSoccer(SafeString(poTicketBet("GameType"))), "<b>Regualation Only</b>", "")
+            Dim rotationNumber As String = SafeString(IIf(nOverMoney <> 0, SafeDouble(poTicketBet("HomeRotationNumber")), SafeDouble(poTicketBet("AwayRotationNumber"))))
+            Dim gameBet = String.Format("<div class='baseline'>{0} <b>{1} {2}</b> for the Game {3} {4}</div>", sMsg, sTotalPoint, sMoney, regulationOnly, mustStarPitcher)
+
+            Dim sRotationNumber = SafeString(IIf(GetTicketType(poTicketBet).Equals("Straight", StringComparison.CurrentCultureIgnoreCase), "", "<b class='gm-number'>[" & rotationNumber & "]</b>&nbsp;"))
+            Dim sChoiceTeam = String.Format("{0} {1}", psHomeTeam, IIf(String.IsNullOrEmpty(psAwayTeam), "", " - " & psAwayTeam))
+
+            If IsTennis(sGameType) OrElse IsGolf(sGameType) Then
+                sChoiceTeam = psAwayTeam & " - " & psHomeTeam
+            End If
+
+            Dim htmlString As String = "<div class='baseline'>" & sRotationNumber & "<b class='gm-team'>" & sChoiceTeam & "</b> "
+            htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
+            htmlString += "<span class='gm-status'>(" & ticketStatus & ")</span> </div>"
+            htmlString += gameBet
+
+            Return htmlString
+
+            'Return String.Format("{0}{1}<br/> <b>{2} {3} ({4})</b>", psHomeTeam, IIf(String.IsNullOrEmpty(psAwayTeam), "", "<br/> " & psAwayTeam), sMsg,
+            '                    sTotalPoint, sMoney)
         End Function
 
         Private Function getDetailByTeamTotalPoints(ByVal psHomeTeam As String, ByVal psAwayTeam As String, ByVal poTicketBet As DataRowView) As String
+            Dim sGameType As String = SafeString(poTicketBet("GameType"))
+            Dim gameDate As Date = SafeDate(poTicketBet("GameDate"))
+            Dim ticketStatus As String = SafeString(poTicketBet("TicketStatus"))
             Dim nTotalPoints As Double = SafeDouble(poTicketBet("TotalPoints")) + SafeDouble(poTicketBet("AddPoint"))
             Dim sTotalPoint As String = SafeString(nTotalPoints)
             If IsSoccer(SafeString(poTicketBet("gametype"))) Then
@@ -468,30 +559,109 @@ Namespace SBSPlayer
             Dim nMoney As Double = SafeRound(IIf(nOverMoney <> 0, nOverMoney, nUnderMoney)) + SafeRound(poTicketBet("AddPointMoney"))
 
             Dim sMoney As String = SafeString(nMoney)
-            Return String.Format("{0}{1}<br/> <b>{2} {3} ({4})</b>", psHomeTeam, IIf(String.IsNullOrEmpty(psAwayTeam), "", "<br/> " & psAwayTeam), sMsg, _
-                                 sTotalPoint, sMoney)
+            Dim regulationOnly = IIf(IsSoccer(SafeString(poTicketBet("GameType"))), "<b>Regualation Only</b>", "")
+
+            Dim gameBet = String.Format("<div class='baseline'>{0} <b>{1} {2}</b> for the Game {3}</div>", sMsg, sTotalPoint, sMoney, regulationOnly)
+
+            Dim rotationNumber As String = SafeString(IIf(nOverMoney <> 0, SafeDouble(poTicketBet("HomeRotationNumber")), SafeDouble(poTicketBet("AwayRotationNumber"))))
+
+            Dim sRotationNumber = SafeString(IIf(GetTicketType(poTicketBet).Equals("Straight", StringComparison.CurrentCultureIgnoreCase), "", "<b class='gm-number'>[" & rotationNumber & "]</b>&nbsp;"))
+            Dim sChoiceTeam = String.Format("{0} {1}", psHomeTeam, IIf(String.IsNullOrEmpty(psAwayTeam), "", " - " & psAwayTeam))
+
+            If IsTennis(sGameType) OrElse IsGolf(sGameType) Then
+                sChoiceTeam = psAwayTeam & " - " & psHomeTeam
+            End If
+
+            Dim htmlString As String = "<div class='baseline'>" & sRotationNumber & "<b class='gm-team'>" & sChoiceTeam & "</b> "
+            htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
+            htmlString += "<span class='gm-status'>(" & ticketStatus & ")</span> </div>"
+            htmlString += gameBet
+
+            Return htmlString
         End Function
 
         Private Function getDetailByMoneyLine(ByVal psHomeTeam As String, ByVal psAwayTeam As String, ByVal poTicketbet As DataRowView) As String
+            Dim gameDate As Date = SafeDate(poTicketbet("GameDate"))
+            Dim sGameType As String = SafeString(poTicketbet("GameType"))
+            Dim ticketStatus As String = SafeString(poTicketbet("TicketStatus"))
             Dim nHomeMoneyLine As Double = SafeDouble(poTicketbet("HomeMoneyLine"))
             Dim nAwayMoneyLine As Double = SafeDouble(poTicketbet("AwayMoneyLine"))
-            Dim sDescription As String
             Dim sChoiceTeam As String = SafeString(IIf(nHomeMoneyLine <> 0, psHomeTeam, psAwayTeam))
             Dim nMoneyLine As Double = SafeDouble(IIf(nHomeMoneyLine <> 0, nHomeMoneyLine, nAwayMoneyLine))
-            Dim sMoneyLine As String = SafeString(nMoneyLine)
-            If SafeString(poTicketbet("GameType")).Equals("Tennis", StringComparison.CurrentCultureIgnoreCase) OrElse SafeString(poTicketbet("GameType")).Equals("Golf", StringComparison.CurrentCultureIgnoreCase) Then
-                sDescription = SafeString(poTicketbet("AwayTeam")) & " / " & SafeString(poTicketbet("HomeTeam"))
-                Return String.Format("{2}<br/><b>{0}</b><br/>{1}", sChoiceTeam, sMoneyLine, sDescription)
-            Else
-                Return String.Format("{0}<br/> <b>{1}</b>", sChoiceTeam, sMoneyLine)
+            Dim sMoneyLine As String = SafeString(IIf(nMoneyLine > 0, "+" & nMoneyLine, nMoneyLine))
+            Dim rotationNumber As String = SafeString(IIf(nHomeMoneyLine <> 0, SafeDouble(poTicketbet("HomeRotationNumber")), SafeDouble(poTicketbet("AwayRotationNumber"))))
+
+            Dim mustStarPitcher = GetMustStart(poTicketbet, sGameType)
+
+            Dim regulationOnly = IIf(IsSoccer(sGameType), "<b>Regualation Only</b>", "")
+            Dim gameBet = String.Format("<div class='baseline'>Money Line <b>{0}</b> for the Game {1} {2}</div>", sMoneyLine, regulationOnly, mustStarPitcher)
+
+            Dim sRotationNumber = SafeString(IIf(GetTicketType(poTicketbet).Equals("Straight", StringComparison.CurrentCultureIgnoreCase), "", "<b class='gm-number'>[" & rotationNumber & "]</b>&nbsp;"))
+
+            If IsTennis(sGameType) OrElse IsGolf(sGameType) Then
+                sChoiceTeam = psAwayTeam & " - " & psHomeTeam
             End If
+
+            Dim htmlString As String = "<div class='baseline'>" & sRotationNumber & "<b class='gm-team'>" & sChoiceTeam & "</b> "
+            htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
+            htmlString += "<span class='gm-status'>(" & ticketStatus & ")</span> </div>"
+            htmlString += gameBet
+
+
+            Return htmlString
+
+            'If SafeString(poTicketbet("GameType")).Equals("Tennis", StringComparison.CurrentCultureIgnoreCase) OrElse SafeString(poTicketbet("GameType")).Equals("Golf", StringComparison.CurrentCultureIgnoreCase) Then
+            '    sDescription = SafeString(poTicketbet("AwayTeam")) & " / " & SafeString(poTicketbet("HomeTeam"))
+            '    Return String.Format("{2}<br/><b>{0}</b><br/>{1}", sChoiceTeam, sMoneyLine, sDescription)
+            'Else
+            '    Return String.Format("{0}<br/> <b>{1}</b>", sChoiceTeam, sMoneyLine)
+            'End If
 
         End Function
 
         Private Function getDetailByDraw(ByVal psHomeTeam As String, ByVal psAwayTeam As String, ByVal poTicketbet As DataRowView) As String
             Dim nDrawLine As Double = SafeDouble(poTicketbet("DrawMoneyLine")) + SafeDouble(poTicketbet("AddPointMoney"))
+            Dim sGameType As String = SafeString(poTicketbet("GameType"))
+            Dim gameDate As Date = SafeDate(poTicketbet("GameDate"))
+            Dim ticketStatus As String = SafeString(poTicketbet("TicketStatus"))
 
-            Return String.Format("{0} - {1}<br/> <b>Draw {2}</b>", psHomeTeam, psAwayTeam, FormatNumber(nDrawLine, GetRoundMidPoint, TriState.UseDefault, TriState.False))
+            Dim mustStarPitcher = GetMustStart(poTicketbet, sGameType)
+
+            Dim regulationOnly = IIf(IsSoccer(sGameType), "<b>Regualation Only</b>", "")
+            Dim gameBet = String.Format("<div class='baseline'>Money Line <b>{0}</b> for the Game {1} {2}</div>", nDrawLine, regulationOnly, mustStarPitcher)
+
+            Dim sRotationNumber = ""
+
+            Dim sChoiceTeam = String.Format("Draw({0} vs {1})", psHomeTeam, psAwayTeam)
+
+            Dim htmlString As String = "<div class='baseline'>" & sRotationNumber & "<b class='gm-team'>" & sChoiceTeam & "</b> "
+            htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
+            htmlString += "<span class='gm-status'>(" & ticketStatus & ")</span> </div>"
+            htmlString += gameBet
+
+            Return htmlString
+
+            'Return "THis is draw" ' htmlString
+        End Function
+
+        Private Function getDetailForPop(ByVal psHomeTeam As String, ByVal psAwayTeam As String, ByVal poTicketbet As DataRowView) As String
+            Dim sGameType As String = SafeString(poTicketbet("GameType"))
+            Dim gameDate As Date = SafeDate(poTicketbet("GameDate"))
+            Dim ticketStatus As String = SafeString(poTicketbet("TicketStatus"))
+            Dim sPopDescription = SafeString(poTicketbet("PropDescription"))
+            Dim sPropParticipantName = SafeString(poTicketbet("PropParticipantName"))
+            Dim sPropMoneyLine = SafeString(poTicketbet("PropMoneyLine"))
+
+            Dim gameBet = String.Format("<div class='baseline'><b>{0}</b> for the Game {1}</div>", sPropMoneyLine, sPopDescription)
+
+            Dim htmlString As String = "<div class='baseline'><b class='gm-team'>" & sPropParticipantName & "</b> "
+            htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
+            htmlString += "<span class='gm-status'>(" & ticketStatus & ")</span> </div>"
+            htmlString += gameBet
+
+            Return htmlString
+
+            'Return "THis is draw" ' htmlString
         End Function
 
         Private Function FormatPoint(ByVal pnPoint As Double, ByVal psGameType As String) As String
@@ -499,6 +669,34 @@ Namespace SBSPlayer
                 Return AHFormat(pnPoint)
             End If
             Return FormatNumber(pnPoint, GetRoundMidPoint, TriState.UseDefault, TriState.False)
+        End Function
+
+        Private Function DenoteOfSportType(ByVal gameType As String) As String
+            Select Case True
+                Case IsFootball(gameType) Or IsBasketball(gameType)
+                    Return "Points"
+                Case IsBaseball(gameType)
+                    Return "Runs"
+                Case IsHockey(gameType) Or IsSoccer(gameType)
+                    Return "Goals"
+                Case Else
+                    Return ""
+            End Select
+        End Function
+
+        Private Function GetMustStart(ByVal poTicketbet As DataRowView, ByVal sGameType As String) As String
+            If Not IsBaseball(sGameType) Then
+                Return ""
+            End If
+
+            Dim mustStarPitcher = ""
+
+            If SafeString(poTicketbet("HomePitcher_TicketBets")) <> "" AndAlso SafeString(poTicketbet("AwayPitcher_TicketBets")) <> "" Then
+                Dim sHomePitcher = SafeString(poTicketbet("HomePitcher_TicketBets"))
+                Dim sAwayPitcher = SafeString(poTicketbet("AwayPitcher_TicketBets"))
+                mustStarPitcher = String.Format("<i>{0}(must start) {1}(must start)</i>", sHomePitcher, sAwayPitcher)
+            End If
+            Return mustStarPitcher
         End Function
 
     End Class
