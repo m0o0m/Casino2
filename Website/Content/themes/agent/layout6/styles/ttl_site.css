@@ -6,6 +6,7 @@
 .page-content {
     background: #fff;
     padding: 20px 13px 150px;
+    color:#000;
 }
 .divrptGameTypeShort {
     
@@ -63,4 +64,76 @@
 }
 .clearfix:after{
 	clear: both
+}
+
+
+/*Bet Detail*/
+.gamebetdetail .table {
+    border: 1px solid #000;
+}
+
+.gamebetdetail .table tr > th,
+.gamebetdetail .table tr > td {
+    border-right: 1px solid gray;
+    vertical-align: middle;
+}
+
+.gamebetdetail .table tr > th.nobdr,
+.gamebetdetail .table tr > td.nobdr,
+.gamebetdetail .table tr > th:last-child,
+.gamebetdetail .table tr > td:last-child {
+    border-right-color: transparent;
+}
+
+
+.gamebetdetail .table > tbody > tr.gameheader {
+    background: #0E2431;
+}
+
+.gamebetdetail .table > tbody > tr.gameheader > td {
+    background: transparent;
+}
+
+.gamebetdetail .table > tbody > tr.gameheader > td span {
+    background: transparent;
+    font-size: 14px;
+    font-weight: normal;
+    color: #FFF;
+    margin: 0;
+}
+
+
+.gamebetdetail .table > tbody > tr.GameHeader2 {
+    background: #666666;
+}
+
+.gamebetdetail .table > tbody > tr.GameHeader2 > th {
+    background: transparent;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFF;
+}
+
+.gamebetdetail .table > tbody > tr.gamecontent > td {
+    background: transparent;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: normal;
+    color: #000;
+}
+
+.gamebetdetail .table > tbody > tr.gamecontent > td.game-number {
+    padding-right: 0;
+    font-weight: bold;
+}
+
+.gamebetdetail .table > tbody > tr.gamecontent > td.game-date,
+.gamebetdetail .table > tbody > tr.gamecontent > td.game-number,
+.gamebetdetail .table > tbody > tr.gamecontent > td.game-team,
+.gamebetdetail .table > tbody > tr.gamecontent > td.game-date *,
+.gamebetdetail .table > tbody > tr.gamecontent > td.game-number *,
+.gamebetdetail .table > tbody > tr.gamecontent > td.game-team * {
+    vertical-align: baseline;
 }

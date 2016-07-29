@@ -139,6 +139,59 @@ ul.menu-style-2 {
         }
 
 
+
+ul.menu-style-3 {
+    display: table;
+    margin: 0 auto;
+}
+
+    ul.menu-style-3 > li {
+        display: table-cell;
+        padding: 22px 20px;
+        border-left: 1px solid #010e16;
+        border-right: 1px solid #010e16;
+    }
+
+        ul.menu-style-3 > li.selected {
+            background: rgba(0, 0, 0, 0) url('../resources/images/icons/oc-bg.png') no-repeat scroll center center;
+            background-size: cover;
+            border-left: 1px solid #209ccf;
+            border-right: 1px solid #010e16;
+        }
+
+        ul.menu-style-3 > li > a {
+            font: bold 18px Arial;
+            text-transform: uppercase;
+            display: block;
+            color: #96c4d6;
+            text-decoration: none;
+            text-shadow: 2px 2px 5px black;
+        }
+
+        ul.menu-style-3 > li.selected > a {
+            color: #fff;
+        }
+
+
+.link-nav-1 {
+}
+
+    .link-nav-1 > a {
+        border-bottom: 1px dotted #666;
+        color: #666;
+        font: bold 9px arial;
+        padding-bottom: 2px;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+    .link-nav-1 > span {
+        color: #ccc;
+        font: 12px arial;
+        margin: 0 5px;
+    }
+
+
 /* ========================================
      Table Style ////////////////////////////////////////////////////////// */
 
@@ -149,6 +202,44 @@ ul.menu-style-2 {
 
 /* ========================================
      Form Style ///////////////////////////////////////////////////////// */
+
+.input-style-1 {
+    background: #FFF;
+    padding: 7px 10px;
+    border-left: 1px solid #FFF;
+    border-top: 1px solid #FFF;
+    box-shadow: 1px 1px 7px 0 #333 inset;
+    border-radius: 8px;
+    font: bold 16px Arial;
+    color: #000;
+    text-align: center;
+}
+
+    .input-style-1::-webkit-input-placeholder {
+        text-align: left;
+        font: bold 12px Arial;
+        color: #333;
+    }
+
+    .input-style-1:-moz-placeholder {
+        text-align: left;
+        font: bold 12px Arial;
+        color: #333;
+    }
+
+    .input-style-1::-moz-placeholder {
+        text-align: left;
+        font: bold 12px Arial;
+        color: #333;
+    }
+
+    .input-style-1:-ms-input-placeholder {
+        text-align: left;
+        font: bold 12px Arial;
+        color: #333;
+    }
+
+
 
 .frm-search-1 {
     position: relative;
@@ -232,8 +323,8 @@ ul.menu-style-2 {
     color: #ffffff;
     cursor: pointer;
     font-size: 14px;
-    height: 24px;
-    margin: 5px;
+    /*height: 24px;*/
+    /*margin: 5px;*/
     padding: 0;
     vertical-align: baseline;
 }
@@ -244,9 +335,84 @@ ul.menu-style-2 {
     }
 
 
+.button-style-3 {
+    background: #157199 none repeat scroll 0 0;
+    border: 0 none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    /*height: 34px;*/
+    text-align: center;
+}
+
+    .button-style-3:hover {
+        font-weight: bold;
+    }
+
+.button-style-4 {
+    background: #000;
+    font: bold 14px Arial;
+    color: #FFF;
+    border: 2px solid #FFF;
+    border-radius: 8px;
+    text-transform: uppercase;
+}
+
+.button-style-5 {
+    background: #FF0000;
+    padding: 3px 6px;
+    font: bold 8px Arial;
+    text-shadow: 0 0 1px #FFF;
+    color: #FFF;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+
+.icon-toggle-1 {
+    display: inline-block;
+    background: url('../resources/images/icons/plus.png') 0 0 scroll transparent;
+    background-size: cover;
+    cursor: pointer;
+}
+
+    .icon-toggle-1.open {
+        background-image: url('../resources/images/icons/minus.png');
+    }
+
+
+.input-field-1 {
+    border: 1px solid #666;
+    background: #FAFAFA;
+    font-size: 12px;
+    color: blue;
+    padding: 0 3px;
+    box-shadow: 1px 0 6px -3px #999 inset;
+}
+
+.select-field-1 {
+    border: 1px solid #666;
+    background: #FFF;
+    font-size: 12px;
+    padding: 0 5px;
+}
+
+.select-field-2 {
+    border: 1px solid #666;
+    background: #E7E1D3;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 5px;
+    border-radius: 3px;
+    color: red;
+}
+
 /* ========================================
      Hyperlink Style //////////////////////////////////////////////////// */
 
+.link-1; {
+    color: blue;
+}
 
 /* ========================================
      Text Content Style /////////////////////////////////////////////// */
@@ -283,10 +449,37 @@ ul.menu-style-2 {
 .clr-i-secondary {
 }
 
+.clr-white {
+    color: #FFFFFF;
+}
+
+.clr-green {
+    color: green;
+}
+
+.clr-blue {
+    color: blue;
+}
+
+.clr-blue-1 {
+    color: #3399cc;
+}
+
+.clr-gray-1 {
+    color: #666666;
+}
+
+.clr-black {
+    color: #000;
+}
 
 /* ========================================
      Separator Style /////////////////////////////////////////////////// */
 
+.sp-1 {
+    height: 1px;
+    background: #18455c;
+}
 
 /* ========================================
       Loader Style /////////////////////////////////////////////////////// */

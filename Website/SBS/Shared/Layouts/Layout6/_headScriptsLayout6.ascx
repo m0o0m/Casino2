@@ -7,6 +7,7 @@
     End Function
 </script>
 
-
+<script src="<%=GetPath()%>script/wowslider/wowslider.js"></script>
+<script src="<%=GetPath()%>script/wowslider/wowslider.script.js"></script>
 <script src="<%=GetPath()%>script/jquery-1.10.2.min.js"></script>
 <script src="<%=GetPath()%>script/jquery-migrate-1.2.1.min.js"></script>

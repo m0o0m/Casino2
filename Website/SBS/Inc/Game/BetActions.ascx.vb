@@ -1055,12 +1055,13 @@ Partial Class SBS_Inc_Game_BetActions
         End If
         Dim lblGameType = CType(e.Item.FindControl("lblGameType"), Label)
         Dim lblGameDate = CType(e.Item.FindControl("lblGameDate"), Label)
+        Dim lblGameContext = CType(e.Item.FindControl("lblGameContext"), Label)
         Dim rptGameLines As Repeater = CType(e.Item.FindControl("rptGameLines"), Repeater)
         Dim oDT As DataTable = CType(e.Item.DataItem, KeyValuePair(Of String, DataTable)).Value
         If oDT IsNot Nothing AndAlso oDT.Rows.Count > 0 Then
             lblGameType.Text = oDT.Rows(0)("GameType").Replace("NCAA Football", "College Football").Replace("CFL Football", "Canadian Football").Replace("AFL Football", "Arena Football")
-            lblGameType.Text += "( " + oDT.Rows(0)("Context").Replace("Current", "Game").Replace("1H", "1st Half").Replace("2H", "2st Half").Replace("1Q", "1st Quarter").Replace("2Q", "2nd Quarter").Replace("3Q", "3rd Quarter").Replace("4Q", "4th Quarter") + " )"
-            lblGameDate.Text = "Line from : " + CType(oDT.Rows(0)("GameDate"), Date).ToString("MM/dd/yyyy")
+            lblGameContext.Text = "( " + oDT.Rows(0)("Context").Replace("Current", "Game").Replace("1H", "1st Half").Replace("2H", "2st Half").Replace("1Q", "1st Quarter").Replace("2Q", "2nd Quarter").Replace("3Q", "3rd Quarter").Replace("4Q", "4th Quarter") + " )"
+            'lblGameDate.Text = "Line from : " + CType(oDT.Rows(0)("GameDate"), Date).ToString("MM/dd/yyyy")
 
             ' show maximum wager
             Dim lblLimitWager = CType(e.Item.FindControl("lblLimitWager"), Label)
