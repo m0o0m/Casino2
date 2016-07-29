@@ -54,7 +54,7 @@
             <div class="frm-search-1">
                 <input type="text" name="" value="" placeholder="Search..." />
                 <button>
-                    <img class="h13px" src="../images/icons/Search-icon.png" />
+                    <img class="h13px" src="/Content/themes/agent/layout6/images/icons/Search-icon.png" />
                 </button>
             </div>
         </div>

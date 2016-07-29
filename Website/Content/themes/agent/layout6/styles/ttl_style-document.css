@@ -56,7 +56,7 @@ strong {
 }
 
 .home .main-menu-area {
-    background: rgba(0, 0, 0, 0) url('../images/icons/menu-mbg.jpg') no-repeat scroll left center;
+    background: rgba(0, 0, 0, 0) url('../resources/images/icons/menu-mbg.jpg') no-repeat scroll left center;
     background-size: cover;
 }
 
@@ -249,11 +249,11 @@ strong {
         }
 
             .box-table-1 > .contentd .rowd:nth-child(2n+1) {
-                background-image: url('../images/icons/bg_gray.gif');
+                background-image: url('../resources/images/icons/bg_gray.gif');
             }
 
             .box-table-1 > .contentd .rowd:nth-child(2n+2) {
-                background-image: url('../images/icons/bg_white.gif');
+                background-image: url('../resources/images/icons/bg_white.gif');
             }
 
 
