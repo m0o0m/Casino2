@@ -87,10 +87,6 @@ Partial Class SBS_Inc_Login_layout6LoginForm
                     ltrLogoName.Visible = False
                 End If
 
-                If Not String.IsNullOrEmpty(oWhiteLabel.CopyrightName) Then
-                    ltrCopywright.Text = oWhiteLabel.CopyrightName
-                End If
-
             End If
 
         Catch ex As Exception

@@ -4,6 +4,7 @@
 <%@ Register Src="layout1Header.ascx" TagName="layout1Header" TagPrefix="uc3" %>
 <%@ Register Src="layout4Header.ascx" TagName="layout4Header" TagPrefix="uc5" %>
 <%@ Register Src="layout5Header.ascx" TagName="layout5Header" TagPrefix="uc7" %>
+<%@ Register Src="layout6Header.ascx" TagName="layout6Header" TagPrefix="uc8" %>
 
 <% 
     Dim oSetting As New SBCBL.CacheUtils.CWhiteLabelSettings()
@@ -24,6 +25,10 @@ Case "template2"
 Case "template3"
 %>
 <uc7:layout5Header ID="layout5Header" runat="server" />
+<%
+Case "template4"
+%>
+<uc8:layout6Header ID="layout6Header" runat="server" />
 <%
 Case Else
 %>

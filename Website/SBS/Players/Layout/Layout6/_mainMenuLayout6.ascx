@@ -23,11 +23,11 @@
     <div class="main-menu-area">
         <ul class="main-menu menu-style-1 clear pdL10">
             <li class="<%= MenuActive({"Default.aspx?bettype=BetIfAll", "Default.aspx?bettype=Parlay", "Default.aspx?bettype=Teaser", "Default.aspx?bettype=Prop"}) %>">
-                <a href="#">Sports</a>
+                <a href="Default.aspx?bettype=BetIfAll">Sports</a>
             </li>
-            <li><a href="#">Casino</a></li>
+            <li><a href="Casino.aspx?bettype=casino">Casino</a></li>
             <li><a href="#">Account</a></li>
-            <li><a href="#">Pending</a></li>
+            <li class="<%= MenuActive({"OpenBet.aspx"})%>"><a href="OpenBet.aspx">Pending</a></li>
             <li><a href="#">Scores</a></li>
             <li><a href="#">Rules</a></li>
         </ul>
@@ -49,8 +49,6 @@
             <li class="<%= SubMenuActive("Default.aspx?bettype=Prop")%>">
                 <a href="Default.aspx?bettype=Prop">Future/ Props</a>
             </li>
-            
-            
         </ul>
         <div class="w260px right pdT8">
             <div class="frm-search-1">

@@ -71,7 +71,7 @@
                 <div id="page-wrapper">
                     <uc:_breadCrumbLayout4 runat="server" ID="_breadCrumbLayout4"  />
                     <uc:_mainMenuLayout6 runat="server" ID="_mainMenuLayout6" Visible="False" />
-                    <div class="page-content">
+                    <div class="page-content custom-page-content">
                         <asp:ContentPlaceHolder ID="cphBody" runat="server"></asp:ContentPlaceHolder>
                     </div>
                     

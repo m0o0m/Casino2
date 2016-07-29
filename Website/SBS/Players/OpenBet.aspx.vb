@@ -53,8 +53,10 @@ Namespace SBSPlayer
                 oTicketBets = (New CTicketManager).GetOpenTicketsByPlayer(UserSession.PlayerUserInfo.UserID, Nothing, SelectedTypeOfBet)
             End If
 
-            ucTicketBetsGrid.LoadTicketBets(oTicketBets, ddlContext.SelectedValue)
+            ucTicketBetsGrid.LoadTicketBets(oTicketBets, ddlContext.SelectedValue, ddlGameType.SelectedValue)
         End Sub
+
+        
 
 #End Region
 
@@ -69,6 +71,11 @@ Namespace SBSPlayer
         Protected Sub ddlContext_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlContext.SelectedIndexChanged
             bindTickets()
         End Sub
+
+        Protected Sub ddlGameType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlGameType.SelectedIndexChanged
+            bindTickets()
+        End Sub
+
     End Class
 
 End Namespace
