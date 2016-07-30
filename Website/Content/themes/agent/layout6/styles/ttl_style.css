@@ -8,11 +8,11 @@
      Heading - Title Style ///////////////////////////////////////////// */
 
 .ft-primary {
-    /*font-family: ;*/
+    font-family: Arial ;
 }
 
 .ft-secondary {
-    /*font-family: ;*/
+    font-family: sans-serif;
 }
 
 [class*="heading1"] {
@@ -59,7 +59,6 @@
     color: ;
     text-transform: ;*/
 }
-
 
 
 .title-style-1 {
@@ -379,6 +378,69 @@ ul.menu-style-3 {
                     text-decoration: underline;
                 }
 
+
+
+.gamebetdetail .table tr > td.woutbdr {
+    border: none;
+}
+
+
+.gamebetdetail .table tr[context="Current"] {
+    background: #FFFFFF;
+}
+
+    .gamebetdetail .table tr[context="Current"].offering_pair_odd {
+        background: #EFEFEF;
+    }
+
+/*.gamebetdetail .table tr[context="Current"].GameEven {
+        background: #EFEFEF;
+    }*/
+
+
+.gamebetdetail .table tr[context="1H"] {
+    background: #B5D8FF;
+}
+
+    .gamebetdetail .table tr[context="1H"].offering_pair_odd {
+        background: #CDE4FD;
+    }
+
+/*.gamebetdetail .table tr[context="1H"].OneH-Even {
+        background: #CDE4FD;
+    }*/
+
+.table-style-5 {
+    border: 1px solid #000;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+    .table-style-5 tr.caption {
+        background: #0E2431;
+    }
+
+        .table-style-5 tr.caption > td {
+            padding: 3px 15px;
+            font-size: 14px;
+            color: #FFF;
+            text-align: center;
+        }
+
+    .table-style-5 tr.content > td {
+        padding: 7px 15px;
+        font-size: 13px;
+        color: #000;
+    }
+
+        .table-style-5 tr.content > td a {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+
+
+
 /* ========================================
      Box Style /////////////////////////////////////////////////////////// */
 
@@ -667,9 +729,9 @@ ul.menu-style-3 {
         font-weight: bold;
     }
 
-
 .button-style-3 {
     background: #157199 none repeat scroll 0 0;
+    position: relative;
     border: 0 none;
     color: #fff;
     cursor: pointer;
@@ -681,6 +743,8 @@ ul.menu-style-3 {
     .button-style-3:hover {
         font-weight: bold;
     }
+
+
 
 .button-style-4 {
     background: #000;
@@ -700,6 +764,34 @@ ul.menu-style-3 {
     border-radius: 3px;
     text-transform: uppercase;
 }
+
+
+.button-style-6 {
+    background: #157199 none repeat scroll 0 0;
+    position: relative;
+    border: 0 none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    height: 34px;
+    text-align: center;
+    cursor: pointer;
+}
+
+    .button-style-6:hover {
+        font-weight: bold;
+    }
+
+    .button-style-6 input {
+        position: absolute;
+        left: 5px;
+        top: 15%;
+        height: 70%;
+        width: 100%;
+        background: inherit;
+    }
+
+
 
 
 .icon-toggle-1 {
@@ -769,6 +861,10 @@ ul.menu-style-3 {
     color: blue;
 }
 
+a.nonunderline {
+    text-decoration: none;
+}
+
 /* ========================================
      Text Content Style /////////////////////////////////////////////// */
 
@@ -821,6 +917,10 @@ ul.menu-style-3 {
 
 .clr-gray-1 {
     color: #666666;
+}
+
+.clr-gray-2 {
+    color: #CCC;
 }
 
 .clr-black {

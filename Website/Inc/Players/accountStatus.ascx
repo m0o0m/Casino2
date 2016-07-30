@@ -1,10 +1,8 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="accountStatus.ascx.vb"
     Inherits="SBCPlayer.accountStatus" %>
 
-<link href="../../Content/themes/agent/layout6/styles/_toan-linhtinh.css" rel="stylesheet" />
-
 <div>
-    <h2 class="title-style-1 pdB10">Account Balance</h2>
+    <h2 class="title-style-1 bold pdB10">Account Balance</h2>
     <table class="table-style-3 ly-w-1:2 center">
         <tr>
             <td class="caption ly-w-1:2">

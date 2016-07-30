@@ -42,11 +42,13 @@ body {
 }
 
 
-b {
+b,
+.bold {
     font-weight: bold;
 }
 
-strong {
+strong,
+.strong {
     font-weight: bolder;
 }
 
@@ -384,11 +386,6 @@ strong {
     border-spacing: 0;
 }
 
-
-    .gamebetdetail .table tr[context="1H"] {
-        background: #B5D8FF;
-    }
-
     .gamebetdetail .table tr > th,
     .gamebetdetail .table tr > td {
         border-right: 1px solid gray;
@@ -456,6 +453,27 @@ strong {
             .gamebetdetail .table > tbody > tr.gamecontent > td.game-team * {
                 vertical-align: baseline;
             }
+
+
+    .gamebetdetail .table tr > td.woutbdr {
+        border: none;
+    }
+
+    .gamebetdetail .table tr[context="Current"] {
+        background: #FFFFFF;
+    }
+
+        .gamebetdetail .table tr[context="Current"].offering_pair_odd {
+            background: #EFEFEF;
+        }
+
+    .gamebetdetail .table tr[context="1H"] {
+        background: #B5D8FF;
+    }
+
+        .gamebetdetail .table tr[context="1H"].offering_pair_odd {
+            background: #CDE4FD;
+        }
 
 
 
