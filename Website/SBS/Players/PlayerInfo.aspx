@@ -11,7 +11,7 @@
     <div id="historypanel" class="roundcorner" style="padding: 5px 5px 5px 5px; width: 98%;">
         <div class="row mbl">
             <div class="col-lg-12">
-                <ul id="generalTab" class="nav nav-tabs responsive hidden-xs hidden-sm">
+                <ul id="generalTab" class="tab-style-1 nav nav-tabs responsive hidden-xs hidden-sm clear">
                     <li id="tbChangePw" runat="server" class="active">
                         <asp:LinkButton runat="server" ID="lbnChangePass" CommandArgument="CHANGE_PASSWORD"
                             ToolTip="Change Password" Text="Change Player's password" CausesValidation="false" OnClick="lbnTab_Click" />
@@ -24,7 +24,7 @@
                         <asp:LinkButton runat="server" ID="lbnInboxEmail" CommandArgument="INBOX_EMAIL"
                             ToolTip="Inbox Email" Text="Inbox Email" CausesValidation="false" OnClick="lbnTab_Click" />
                     </li>
-                    <li  id="tbReplyEm" runat="server">
+                    <li id="tbReplyEm" runat="server">
                         <asp:LinkButton runat="server" ID="lbnReplyEmail" CommandArgument="REPLY_EMAIL"
                             ToolTip="Reply Email" Text="Reply Email" CausesValidation="false" OnClick="lbnTab_Click" />
                     </li>

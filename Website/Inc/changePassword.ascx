@@ -2,35 +2,50 @@
     Inherits="SBCWebsite.Inc_changePassword" %>
 <%@ Register Src="~/Inc/passwordEditor.ascx" TagName="passwordEditor" TagPrefix="uc1" %>
 
-<div class="panel panel-grey">
+<div class="panel panel-grey panel-style-1">
     <div class="panel-heading">Change Password</div>
-    <div class="panel-body">
+    <div class="panel-body pdTB10">
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Current Password</label>
-            <div class="col-md-2">
-                <asp:TextBox CssClass="form-control" ID="txtCurrentPassword" runat="server" TextMode="Password"
+
+        <div class="ly-fixed pd10">
+            <div class="ly-w-1:6 v-top-i pdT5">
+                <label class="control-label col-md-2">Current Password</label>
+            </div>
+            <div class="ly-w-1:6 v-top-i">
+                <asp:TextBox CssClass="form-control input-field-2 h28px full-w" ID="txtCurrentPassword" runat="server" TextMode="Password"
                     MaxLength="10" onkeypress="capsLock(event, 'divCapsLock')" />
             </div>
+            <div></div>
         </div>
-        <div class="form-group">
-            <div class="col-md-2 pl0">
-                <label class="control-label col-md-12">New Password</label>
-                <label class="control-label col-md-12" style="margin-top: 16px">Confirm New Password</label>
+
+        <div class="ly-fixed pd10">
+            <div class="ly-w-1:6 v-top-i pdT5">
+                <label class="block control-label col-md-2">New Password</label>
+                <label class="block control-label col-md-2 mgT30">Confirm New Password</label>
             </div>
-            <div class="col-md-2">
+            <div class="ly-w-1:6 v-top-i">
                 <uc1:passwordEditor runat="server" ID="psdPassword" Required="false" HorizontalAlign="false"
                     TextVisible="false" SetCheckCapsLockClientFunction="capsLock(event, 'divCapsLock')" />
                 <asp:HiddenField ID="hfdPassword" runat="server" />
             </div>
+            <div></div>
         </div>
-        <div class="form-group">
-            <div class="col-md-2 col-lg-offset-2">
-                <asp:Button ID="btnChangePassword" runat="server" CssClass="btn btn-grey" Text="Save Change"
+
+        <div class="ly-fixed pd10">
+            <div class="ly-w-1:6">
+            </div>
+            <div>
+                <asp:Button ID="btnChangePassword" runat="server" CssClass="btn btn-grey button-style-2 h26px w120px" Text="Save Change"
                     ToolTip="Change Password" />
                 <div id="divCapsLock" style="color: red; display: none;">
                     Caps Lock is ON.
                 </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2 col-lg-offset-2">
+                
             </div>
         </div>
     </div>
