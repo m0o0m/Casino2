@@ -1,0 +1,30 @@
+﻿
+.gamebetdetail .table tr > td.woutbdr {
+    border: none;
+}
+
+
+.gamebetdetail .table tr[context="Current"] {
+    background: #FFFFFF;
+}
+
+    .gamebetdetail .table tr[context="Current"].offering_pair_odd {
+        background: #EFEFEF;
+    }
+
+/*.gamebetdetail .table tr[context="Current"].GameEven {
+        background: #EFEFEF;
+    }*/
+
+
+.gamebetdetail .table tr[context="1H"] {
+    background: #B5D8FF;
+}
+
+    .gamebetdetail .table tr[context="1H"].offering_pair_odd {
+        background: #CDE4FD;
+    }
+
+/*.gamebetdetail .table tr[context="1H"].OneH-Even {
+        background: #CDE4FD;
+    }*/

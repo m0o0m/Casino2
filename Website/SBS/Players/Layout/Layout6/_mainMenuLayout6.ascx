@@ -43,8 +43,8 @@
             <li class="<%= SubMenuActive("Default.aspx?bettype=Teaser")%>">
                 <a href="Default.aspx?bettype=Teaser">Teasers</a>
             </li>
-            <li class="">
-                <a href="#">If Bets / Reverses</a>
+            <li class="<%= SubMenuActive("Default.aspx?bettype=IfBetReverse")%>">
+                <a href="Default.aspx?bettype=IfBetReverse">If Bets / Reverses</a>
             </li>
             <li class="<%= SubMenuActive("Default.aspx?bettype=Prop")%>">
                 <a href="Default.aspx?bettype=Prop">Future/ Props</a>

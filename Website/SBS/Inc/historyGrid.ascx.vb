@@ -522,7 +522,7 @@ Namespace SBSWebsite
             Dim gameDate As Date = SafeDate(poTicketbet("GameDate"))
             Dim sGameType As String = SafeString(poTicketbet("GameType"))
             Dim sContext = SafeString(poTicketbet("Context"))
-            Dim ticketStatus As String = (SafeString(poTicketbet("TicketStatus"))
+            Dim ticketStatus As String = (SafeString(poTicketbet("TicketStatus")))
             Dim nHomeMoneyLine As Double = SafeDouble(poTicketbet("HomeMoneyLine"))
             Dim nAwayMoneyLine As Double = SafeDouble(poTicketbet("AwayMoneyLine"))
             Dim sChoiceTeam As String = SafeString(IIf(nHomeMoneyLine <> 0, psHomeTeam, psAwayTeam))
