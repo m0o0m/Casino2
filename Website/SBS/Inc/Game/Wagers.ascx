@@ -209,11 +209,11 @@
                     ForeColor="black" runat="server" Text="Password:"></asp:Label>
                             <asp:TextBox ID="txtPassword" runat="server" Visible="true" TextMode="Password"
                     Width="180" MaxLength="50" CssClass="form-control input-field-2 h30px" Style="display: inline-block;"></asp:TextBox>
-                <asp:Button ID="btnSubmit" runat="server" Visible="true" Text="Confirm Bet(s)" Style="margin-left: 20px;"
-                    ToolTip="Confirm Bet(s)" CssClass="btn btn-dark button-style-2 w140px h24px" />
-                <asp:Button ID="btnCancel" runat="server" Text="Cancel Your Wager" Style="margin-left: 10px; margin-right: 25px;" CssClass="btn btn-red button-style-2 red w175px h24px"
+                <asp:Button ID="btnSubmit" runat="server" Visible="true" Text="Submit" Style="margin-left: 20px;"
+                    ToolTip="Confirm Bet(s)" CssClass="btn btn-dark button-style-2 w100px h24px" />
+                <asp:Button ID="btnCancel" runat="server" Text="Cancel Your Wager" Style="display: none; margin-left: 10px; margin-right: 25px;" CssClass="btn btn-red button-style-2 red w175px h24px"
                                 ToolTip="Cancel Your Wager" />
-                            <div class="clearfix"></div>
+                            <%--<div class="clearfix"></div>--%>
                         </div>
         </div>
 
