@@ -402,11 +402,12 @@ Partial Class SBS_Inc_Game_BetActions
         End If
 
         SetActiveMenu()
+        SetNavigationButton()
 
     End Sub
 
     Private Sub SetActiveMenu()
-        Select Case UCase(Session("BetTypeActive"))
+        Select Case UCase(BetTypeActive)
             Case "TEASER"
                 Me.Page.CurrentPageName = "Sport_Teaser"
             Case "PARLAY"
@@ -423,6 +424,35 @@ Partial Class SBS_Inc_Game_BetActions
                 Me.Page.CurrentPageName = "Sport_Straight"
             Case "IFBETREVERSE"
                 Me.Page.CurrentPageName = "Sport_IfBet"
+        End Select
+    End Sub
+
+    Private Sub SetNavigationButton()
+        Select Case UCase(BetTypeActive)
+            Case "TEASER"
+                btnMainMenu.Text = "Wager Menu"
+                btnUpdateLines.Text = "Refresh"
+            Case "PARLAY"
+                btnMainMenu.Text = "Wager Menu"
+                btnUpdateLines.Text = "Refresh"
+            Case "REVERSE"
+                btnMainMenu.Text = "Wager Menu"
+                btnUpdateLines.Text = "Refresh Lines"
+            Case "PROP"
+                btnMainMenu.Text = "Wager Menu"
+                btnUpdateLines.Text = "Refresh"
+            Case "IF WIN OR PUSH"
+                btnMainMenu.Text = "Wager Menu"
+                btnUpdateLines.Text = "Refresh Lines"
+            Case "IF WIN"
+                btnMainMenu.Text = "Wager Menu"
+                btnUpdateLines.Text = "Refresh Lines"
+            Case "BETIFALL"
+                btnMainMenu.Text = "Main Menu"
+                btnUpdateLines.Text = "Refresh"
+            Case Else
+                btnMainMenu.Text = "Wager Menu"
+                btnUpdateLines.Text = "Refresh"
         End Select
     End Sub
 
@@ -3026,4 +3056,13 @@ PropGame:
 
     End Sub
 
+    Protected Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
+        Dim selectedBetTypeActive As String = UCase(BetTypeActive)
+
+        If( (selectedBetTypeActive = "REVERSE" ) OR (selectedBetTypeActive = "IF WIN" ) OR (selectedBetTypeActive = "IF WIN OR PUSH" )) Then
+            Response.Redirect("Default.aspx?bettype=IfBetReverse")
+        Else 
+            Response.Redirect(String.Format("Default.aspx?bettype={0}", BetTypeActive))
+        End If
+    End Sub
 End Class

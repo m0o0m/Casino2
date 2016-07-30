@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="right pdR20">
-                <button class="button-style-3 w110px h24px">Main Menu</button>
+                <asp:Button ID="btnMainMenu" class="button-style-3 w110px h24px" runat="server" Text="Main Menu"></asp:Button>
                 <asp:Button ID="btnUpdateLines" class="update button-style-3 w110px h24px" runat="server" Text="Refresh"></asp:Button>
             </div>
         </div>
