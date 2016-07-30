@@ -81,9 +81,9 @@
                 </span>
             </div>--%>
 
-            <% If (Not BetType.Equals("Teaser", StringComparison.OrdinalIgnoreCase)) Then%>
+            <% If (Not BetType.Equals("Teaser", StringComparison.OrdinalIgnoreCase) And (Not BetType.Equals("IfBetReverse", StringComparison.OrdinalIgnoreCase))) Then%>
             <div class="col-md-4 pull-right">
-                <button type="button" class="btn btn-dark pull-right button-style-2 w110px right" style="margin-left: 10px;" onclick='$("#<%=btnContinue.ClientID%>").click()'>
+                <button type="button" class="btn btn-dark pull-right button-style-2 w110px h24px right" style="margin-left: 10px;" onclick='$("#<%=btnContinue.ClientID%>").click()'>
                     Continue
                     <i class="fa fa-forward"></i>
                 </button>
@@ -189,9 +189,25 @@
             </ItemTemplate>
         </asp:Repeater>
         <div class="clearfix"></div>
-        <% If (Not BetType.Equals("Teaser", StringComparison.OrdinalIgnoreCase) AND (Not BetType.Equals("Parlay", StringComparison.OrdinalIgnoreCase)) ) Then%>
-        <div class="col-md-4 pull-right">
-            <button type="button" class="btn btn-dark pull-right button-style-2 w110px right" style="margin-left: 10px;" onclick='$("#<%=btnContinue.ClientID%>").click()'>
+        <% If (BetType.Equals("IfBetReverse", StringComparison.OrdinalIgnoreCase)) Then%>
+        <div class="clear pdLR13 mgT40">
+            <div class="ly-w-1:2 left pdLR13 text-center">
+                <div class="mgB5">
+                    <button  type="button" class="button-style-3 w220px" onclick='$("#<%=btnContinue.ClientID%>").click()'>If Bet (If Win Only)</button></div>
+                <div>
+                    <a href="Default.aspx?bettype=Default.aspx?bettype=If Win or Push" class="button-style-3 w220px">If Bet (If Win, Push or Cancel)</a></div>
+            </div>
+            <div class="ly-w-1:2 left pdLR13 text-center">
+                <div class="mgB5">
+                    <a href="#" class="button-style-3 w220px">Win Reverse</a></div>
+                <div>
+                    <a href="Default.aspx?bettype=Reverse" class="button-style-3 w220px">Action Reverse</a></div>
+            </div>
+        </div>
+        <% End If%>
+        <% If (Not BetType.Equals("Teaser", StringComparison.OrdinalIgnoreCase) And (Not BetType.Equals("IfBetReverse", StringComparison.OrdinalIgnoreCase))) Then%>
+        <div class="col-md-4 pull-right pdT15">
+            <button type="button" class="btn btn-dark pull-right button-style-2 w110px h24px right" style="margin-left: 10px;" onclick='$("#<%=btnContinue.ClientID%>").click()'>
                 Continue
                     <i class="fa fa-forward"></i>
             </button>
@@ -258,17 +274,17 @@
         <div class="form-group" id="dvSubAgents" runat="server" visible="false">
             <label class="col-md-2 control-label">SubAgents</label>
             <div class="col-md-2">
-                <wlb:cdropdownlist id="ddlSubAgents" hasoptionalitem="true" optionaltext="All" cssclass="form-control"
-                    optionalvalue="" runat="server" autopostback="true">
-                </wlb:cdropdownlist>
+                <wlb:CDropDownList ID="ddlSubAgents" hasOptionalItem="true" OptionalText="All" CssClass="form-control"
+                    OptionalValue="" runat="server" AutoPostBack="true">
+                </wlb:CDropDownList>
             </div>
         </div>
         <div class="form-group" id="dvPlayer" runat="server" visible="false">
             <label class="col-md-2 control-label">Player</label>
             <div class="col-md-2">
-                <wlb:cdropdownlist id="ddlPlayers" hasoptionalitem="true" optionaltext="Choose player"
-                    cssclass="textInput" optionalvalue="" runat="server" autopostback="false">
-                </wlb:cdropdownlist>
+                <wlb:CDropDownList ID="ddlPlayers" hasOptionalItem="true" OptionalText="Choose player"
+                    CssClass="textInput" OptionalValue="" runat="server" AutoPostBack="false">
+                </wlb:CDropDownList>
             </div>
         </div>
     </div>
