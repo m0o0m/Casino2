@@ -15,20 +15,26 @@
             <div class="user-info-balance-area left">
                 <div class="info-balance-name baseline mgB20">
                     <label>User ID:</label>
-                    <span><asp:Literal ID="lblUser" runat="server"></asp:Literal></span>
+                    <asp:Literal ID="lblUser" runat="server"></asp:Literal>
                 </div>
                 <div class="user-info-balance">
                     <div class="info-balance-itm baseline">
                         <label>Current Balance:</label>
-                        <span><asp:Label ID="lblThisWeek" runat="server" /></span>
+                        <a href="/SBS/Players/WeekBalance.aspx">
+                            <asp:Label ID="lblThisWeek" runat="server" />
+                        </a>
                     </div>
                     <div class="info-balance-itm baseline mgT5">
                         <label>Available:</label>
-                        <span><asp:Label ID="lblAvailableBalance" runat="server" /></span>
+                        <a href="/SBS/Players/PlayerAccount.aspx">
+                            <asp:Label ID="lblAvailableBalance" runat="server" />
+                        </a>
                     </div>
                     <div class="info-balance-itm baseline mgT5">
                         <label>Pending:</label>
-                        <span><asp:Label ID="lblPendingAmount" runat="server" /></span>
+                        <a href="/SBS/Players/OpenBet.aspx">
+                            <asp:Label ID="lblPendingAmount" runat="server" />
+                        </a>
                     </div>
                 </div>
             </div>

@@ -2,16 +2,15 @@
 
 
 <script runat="server">
-    Public Function MenuActive(ByVal pageNames As String()) As String
-        if pageNames.Any(Function(pageName) Request.Url.AbsoluteUri.ToLower().Contains(pageName.ToLower())) Then
+    Public Function MenuActive(ByVal pageName As String) As String
+        If Me.Page.CurrentPageName.ToLower().Contains(pageName.ToLower()) Then
             Return "active"
         End If
         Return String.Empty
     End Function
 
-
     Public Function SubMenuActive(ByVal pageName As String) As String
-        If Request.Url.AbsoluteUri.ToLower().Contains(pageName.ToLower()) Then
+        If Me.Page.CurrentPageName.ToLower().Equals(pageName.ToLower()) Then
             Return "current"
         End If
         Return String.Empty
@@ -22,40 +21,40 @@
 <div class="navigation-area">
     <div class="main-menu-area">
         <ul class="main-menu menu-style-1 clear pdL10">
-            <li class="<%= MenuActive({"Default.aspx?bettype=BetIfAll", "Default.aspx?bettype=Parlay", "Default.aspx?bettype=Teaser", "Default.aspx?bettype=IfBetReverse", "Default.aspx?bettype=Prop"})%>">
-                <a href="#">Sports</a>
+            <li class="<%= MenuActive("Sport") %>">
+                <a href="Default.aspx?bettype=BetIfAll">Sports</a>
                 <ul class="sub-menu menu-style-2 clear pdL10 left pdT12">
-                    <li class="<%= SubMenuActive("Default.aspx?bettype=BetIfAll")%>">
+                    <li class="<%= SubMenuActive("Sport_Straight")%>">
                         <a href="Default.aspx?bettype=BetIfAll">Straights</a>
                     </li>
-                    <li class="<%= SubMenuActive("Default.aspx?bettype=Parlay")%>">
+                    <li class="<%= SubMenuActive("Sport_Parlay")%>">
                         <a href="Default.aspx?bettype=Parlay">Parlays</a>
                     </li>
-                    <li class="<%= SubMenuActive("Default.aspx?bettype=Teaser")%>">
+                    <li class="<%= SubMenuActive("Sport_Teaser")%>">
                         <a href="Default.aspx?bettype=Teaser">Teasers</a>
                     </li>
-                    <li class="<%= SubMenuActive("Default.aspx?bettype=IfBetReverse")%>">
+                    <li class="<%= SubMenuActive("Sport_IfBet")%>">
                         <a href="Default.aspx?bettype=IfBetReverse">If Bets / Reverses</a>
                     </li>
-                    <li class="<%= SubMenuActive("Default.aspx?bettype=Prop")%>">
+                    <li class="<%= SubMenuActive("Sport_Prop")%>">
                         <a href="Default.aspx?bettype=Prop">Future/ Props</a>
                     </li>
                 </ul>
             </li>
-            <li><a href="#">Casino</a></li>
-            <li class="<%= MenuActive({"PlayerAccount.aspx", "WeekBalance.aspx", "History.aspx", "Setting.aspx"}) %>">
+            <li class="<%= MenuActive("Casino") %>"><a href="/SBS/Players/Casino.aspx?bettype=casino">Casino</a></li>
+            <li class="<%= MenuActive("Account") %>">
                 <a href="WeekBalance.aspx">Account</a>
                 <ul class="sub-menu menu-style-2 clear pdL10 left pdT12">
-                    <li class="<%= SubMenuActive("PlayerAccount.aspx")%>"><a href="PlayerAccount.aspx">Account</a></li>
-                    <li class="<%= SubMenuActive("WeekBalance.aspx")%>"><a href="WeekBalance.aspx">Daily Figure</a></li>
+                    <li class="<%= SubMenuActive("Account_Account")%>"><a href="PlayerAccount.aspx">Account</a></li>
+                    <li class="<%= SubMenuActive("Account_DailyFigure")%>"><a href="WeekBalance.aspx">Daily Figure</a></li>
                     <li class=""><a href="#">Account History</a></li>
-                    <li class="<%= SubMenuActive("History.aspx")%>"><a href="History.aspx">Wager History</a></li>
-                    <li class=""><a href="#">Settings</a></li>
+                    <li class="<%= SubMenuActive("Account_WagerHistory")%>"><a href="History.aspx">Wager History</a></li>
+                    <li class="<%= SubMenuActive("Account_Setting")%>"><a href="/SBS/Players/PlayerInfo.aspx">Settings</a></li>
                 </ul>
             </li>
-            <li class="<%= MenuActive({"OpenBet.aspx"})%>"><a href="OpenBet.aspx">Pending</a></li>
-            <li><a href="#">Scores</a></li>
-            <li><a href="#">Rules</a></li>
+            <li class="<%= MenuActive("Pending")%>"><a href="OpenBet.aspx">Pending</a></li>
+            <li><a href="http://scores.sportsoptions.com/scores/today.html" target="_blank">Scores</a></li>
+            <li class="<%= MenuActive("Rule")%>"><a href="/SBS/Players/Rules.aspx">Rules</a></li>
         </ul>
     </div>
     

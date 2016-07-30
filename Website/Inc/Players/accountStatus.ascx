@@ -14,7 +14,7 @@
                 </div>
             </td>
             <td class="ly-w-1:2">
-                <a href="/SBS/Players/WeekBalance.aspx">$<asp:Label ID="lblCurrentBalance" runat="server" /></a>
+                <a href="/SBS/Players/WeekBalance.aspx">$<asp:Label ID="lblThisWeek" runat="server" ForeColor="Blue" /></a>
             </td>
         </tr>
         <tr>
@@ -77,7 +77,7 @@
                             <td>Original Balance
                             </td>
                             <td>
-                                <%--<asp:Label ID="lblCurrentBalance" runat="server" ForeColor="Blue" />--%>
+                                <asp:Label ID="lblCurrentBalance" runat="server" ForeColor="Blue" />
                             </td>
                         </tr>
                         <tr>
@@ -98,7 +98,7 @@
                             <td>This Week`s Win/Loss Figure:
                             </td>
                             <td>
-                                <asp:Label ID="lblThisWeek" runat="server" ForeColor="Blue" />
+                                <%--<asp:Label ID="lblThisWeek" runat="server" ForeColor="Blue" />--%>
                             </td>
                         </tr>
                         <tr>

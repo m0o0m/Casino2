@@ -15,7 +15,7 @@ Namespace SBCPlayer
         End Sub
 
         Private Sub loadAccountStatus()
-            Dim curBalance = SafeRound(UserSession.PlayerUserInfo.OriginalAmount)
+            Dim curBalance = SafeRound(UserSession.PlayerUserInfo.WeeklyBalanceAmount)
             lblCurrentBalance.Text = curBalance.ToString("N2")
             If curBalance < 0 Then
                 lblCurrentBalance.ForeColor = Color.Red
