@@ -1,0 +1,45 @@
+﻿
+
+/* SBS/Players/PlayerAccount.aspx */
+
+.title-style-1 {
+    font-family: Arial;
+    font-size: 18px;
+    color: #000;
+}
+
+
+.table-style-3 {
+    border: 1px solid gray;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+    .table-style-3 tr {
+    }
+
+        .table-style-3 tr td {
+            border: 1px solid gray;
+            font-size: 18px;
+            font-weight: bold;
+            color: #296592;
+            padding: 5px 10px 0;
+            text-align: center;
+        }
+
+            .table-style-3 tr td.caption {
+                font-family: Arial;
+                font-size: 15px;
+                font-weight: bold;
+                color: #2c2c2c;
+                text-align: left;
+            }
+
+            .table-style-3 tr td a {
+                text-decoration: none;
+            }
+
+                .table-style-3 tr td a:hover {
+                    text-decoration: underline;
+                }
+

@@ -8,20 +8,20 @@ Namespace SBSPlayer
     Partial Class WeekBalance
         Inherits SBCBL.UI.CSBCPage
 
-        Private Sub bindWeek()
-            Dim oDate As Date = GetEasternMondayOfCurrentWeek()
-            Dim olstWeek As New Dictionary(Of String, String)
+        'Private Sub bindWeek()
+        '    Dim oDate As Date = GetEasternMondayOfCurrentWeek()
+        '    Dim olstWeek As New Dictionary(Of String, String)
 
-            For nIndex As Integer = 1 To 8
-                Dim oTemp As Date = oDate.AddDays((nIndex - 1) * -7)
-                olstWeek.Add(oTemp.ToString("MM/dd/yyyy") & " - " & oTemp.AddDays(6).ToString("MM/dd/yyyy"), oTemp.ToString("MM/dd/yyyy"))
-            Next
+        '    For nIndex As Integer = 1 To 8
+        '        Dim oTemp As Date = oDate.AddDays((nIndex - 1) * -7)
+        '        olstWeek.Add(oTemp.ToString("MM/dd/yyyy") & " - " & oTemp.AddDays(6).ToString("MM/dd/yyyy"), oTemp.ToString("MM/dd/yyyy"))
+        '    Next
 
-            ddlWeeks.DataSource = olstWeek
-            ddlWeeks.DataTextField = "Key"
-            ddlWeeks.DataValueField = "value"
-            ddlWeeks.DataBind()
-        End Sub
+        '    ddlWeeks.DataSource = olstWeek
+        '    ddlWeeks.DataTextField = "Key"
+        '    ddlWeeks.DataValueField = "value"
+        '    ddlWeeks.DataBind()
+        'End Sub
 
         Protected Sub Page_Init1(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
             PageTitle = "Weekly Figures"
@@ -32,7 +32,7 @@ Namespace SBSPlayer
             If Not IsPostBack Then
                 'txtDateFrom.Text = GetLastMondayOfDate(GetEasternDate()).ToShortDateString
                 'txtDateTo.Text = GetEasternDate().ToShortDateString
-                bindWeek()
+                'bindWeek()
                 LoadPlayerDashboard()
             End If
         End Sub
@@ -49,13 +49,22 @@ Namespace SBSPlayer
             'If oEndDate = Date.MinValue Then
             '    oEndDate = GetEasternDate()
             '    txtDateFrom.Text = oEndDate.ToShortDateString()
-            'End If
+            'End IflbnWed
 
             'oEndDate = oEndDate.AddDays(1)
 
-            Dim oStarDate As Date = SafeDate(ddlWeeks.SelectedValue)
-            Dim oEndDate As Date = SafeDate(oStarDate.AddDays(6))
-            Dim oTickets As DataTable = (New CPlayerManager()).GetPlayerDashboard(UserSession.UserID, oStarDate, oEndDate, UserSession.PlayerUserInfo.TimeZone)
+            Dim oTickets As DataTable = new DataTable()
+            Dim listMonday = GetListMonday()
+            For Each monday As DateTime In listMonday
+                Dim oStarDate As Date = monday
+                Dim oEndDate As Date = monday.AddDays(6)
+                Dim weekBalance As DataTable = (New CPlayerManager()).GetPlayerDashboard(UserSession.UserID, oStarDate, oEndDate, UserSession.PlayerUserInfo.TimeZone)
+                oTickets.Merge(weekBalance)
+            Next
+
+            'Dim oStarDate As Date = SafeDate(ddlWeeks.SelectedValue)
+            'Dim oEndDate As Date = SafeDate(oStarDate.AddDays(6))
+            'Dim oTickets As DataTable = (New CPlayerManager()).GetPlayerDashboard(UserSession.UserID, oStarDate, oEndDate, UserSession.PlayerUserInfo.TimeZone)
 
             dgPlayers.DataSource = oTickets
             dgPlayers.DataBind()
@@ -111,7 +120,8 @@ Namespace SBSPlayer
                     Response.Redirect("History.aspx?dateRange=" & SafeString(e.CommandArgument))
                 Case "VIEW_HISTORY"
                     Dim odate = SafeDate(e.CommandArgument)
-                    Response.Redirect("History.aspx?dateRange=" & SafeDate(e.CommandArgument).ToShortDateString() & "-" & SafeDate(e.CommandArgument).ToShortDateString())
+                    'Response.Redirect("History.aspx?dateRange=" & SafeDate(e.CommandArgument).ToShortDateString() & "-" & SafeDate(e.CommandArgument).ToShortDateString())
+                    Response.Redirect("HistoryDetail.aspx?date=" & SafeDate(e.CommandArgument).ToShortDateString())
             End Select
         End Sub
 
@@ -124,6 +134,9 @@ Namespace SBSPlayer
 
         Protected Sub dgPlayers_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.DataGridItemEventArgs) Handles dgPlayers.ItemDataBound
             If e.Item.ItemType = ListItemType.AlternatingItem OrElse e.Item.ItemType = ListItemType.Item Then
+                Dim currentMonday = FirstDayInWeek(Today)
+                Dim monday = SafeDate(e.Item.DataItem("ThisMonday"))
+                CType(e.Item.FindControl("ltrWeekOf"), Literal).Text = IIf(currentMonday = monday, "Current Week", monday.ToString("MM/dd/yyyy"))
                 CType(e.Item.FindControl("lbnMon"), LinkButton).Text = SafeInteger(e.Item.DataItem(1))
                 CType(e.Item.FindControl("lbnTues"), LinkButton).Text = SafeInteger(e.Item.DataItem(2))
                 CType(e.Item.FindControl("lbnWed"), LinkButton).Text = SafeInteger(e.Item.DataItem(3))
@@ -131,13 +144,15 @@ Namespace SBSPlayer
                 CType(e.Item.FindControl("lbnFri"), LinkButton).Text = SafeInteger(e.Item.DataItem(5))
                 CType(e.Item.FindControl("lbnSat"), LinkButton).Text = SafeInteger(e.Item.DataItem(6))
                 CType(e.Item.FindControl("lbnSun"), LinkButton).Text = SafeInteger(e.Item.DataItem(7))
-                If SafeString(e.Item.DataItem(8)) <> "" Then
+                Dim pending = SafeDouble(e.Item.DataItem("Pending"))
+                If pending > 0 Then
                     Dim sDate As String() = SafeString(e.Item.DataItem(0)).Split("-".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
                     Dim sLink As String = String.Format("window.location='OpenBet.aspx?PlayerID={0}", SafeString(UserSession.UserID))
                     sLink += "&SDate={0}&EDate={1}'"
                     sLink = String.Format(sLink, sDate(0), sDate(1))
                     Dim lblPending As Label = CType(e.Item.FindControl("lblPending"), Label)
-                    lblPending.CssClass = "hyperlink"
+                    lblPending.Text = FormatNumber(pending, SBCBL.std.GetRoundMidPoint)
+                    lblPending.CssClass = "week-balance-peding"
                     lblPending.Attributes.Add("onClick", sLink)
                 End If
 
@@ -149,6 +164,29 @@ Namespace SBSPlayer
                 trchart.Visible = False
             End If
         End Sub
+
+        Public Function FirstDayInWeek(ByVal datetime As DateTime) As DateTime
+            Dim monday As DateTime = datetime.AddDays((Today.DayOfWeek - DayOfWeek.Monday) * -1)
+
+            Return monday
+        End Function
+
+        Protected Function GetListMonday() As List(Of DateTime)
+            Dim currentMonday As DateTime = FirstDayInWeek(Today)
+            Dim lasMonday As DateTime = FirstDayInWeek(Today.AddMonths(-3))
+            Dim listMonday = new List(Of DateTime)
+
+            ' Add current week
+            listMonday.Add(currentMonday)
+
+            Dim tempMonday = currentMonday.AddDays(-7)
+            While (lasMonday < tempMonday)
+                listMonday.Add(tempMonday)
+
+                tempMonday = tempMonday.AddDays(-7)
+            End While
+            Return listMonday
+        End Function
     End Class
 
 End Namespace

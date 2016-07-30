@@ -1,53 +1,34 @@
-﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ticketBetsGrid.ascx.vb"
-    Inherits="SBSPlayer.ticketBetsGrid" %>
-      
-<asp:DataGrid ID="dgTicketBets" runat="server" Width="100%" AutoGenerateColumns="false" 
-    CssClass="table table-hover table-bordered table-style-1" align="center">
+﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="historyGridDetail.ascx.vb"
+    Inherits="SBSWebsite.historyGridDetail" %>
+<asp:DataGrid ID="grdHistory" runat="server" Width="100%"  AutoGenerateColumns="false"  
+     CssClass="table table-hover table-bordered table-style-1" align="center">
     <HeaderStyle CssClass="tableheading row-caption" HorizontalAlign="Center"  />
     <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" CssClass="row-content" />
     <AlternatingItemStyle HorizontalAlign="Center" />
     <FooterStyle CssClass="tableheading" HorizontalAlign="Center" />
     <Columns>
         <asp:TemplateColumn HeaderText="**" ItemStyle-HorizontalAlign="Center">
-            <ItemStyle Width="3%" />
+            <HeaderStyle Width="2%"></HeaderStyle>
             <ItemTemplate>
-                <span class="btn-show-game-details toggle-detail icon-toggle-1 h14px w14px mgR10" data-ticket-id="<%# Container.DataItem("TicketID") %>"></span>
+                <span class="btn-show-game-details toggle-detail icon-toggle-1 h14px w14px mgR10" onclick="ShowGameDetail(this);" data-ticket-id="<%# Container.DataItem("TicketID") %>"></span>
             </ItemTemplate>
         </asp:TemplateColumn>
         <asp:TemplateColumn HeaderText="Date Time Accepted" ItemStyle-HorizontalAlign="Center">
-            <ItemStyle Width="10%"></ItemStyle>
+            <HeaderStyle Width="10%"></HeaderStyle>
             <ItemTemplate>
                 <asp:Label ID="lblTicketDate" runat="server" />
-                <asp:Label ID="lblUserPhone" runat="server" />
                 <asp:HiddenField ID="hfTicketID" runat="server" Value='<%# Container.DataItem("TicketID") %>' />
-                <asp:panel ID="pnlPhoneDetail" runat="server" Visible="false">
-                <span>Taken By </span> <BR/>
-                <asp:Label ID="lblCAgentName" runat="server"  ></asp:Label> <BR />
-                <asp:LinkButton ID="lbtRecord" runat ="server" Visible="false" Text ="Recording"></asp:LinkButton>
-                </asp:panel>
                 <asp:HiddenField ID="hfFileName" runat="server" Value='<%#Container.DataItem("RecordingFile") %>' />  
             </ItemTemplate>
         </asp:TemplateColumn>
         <asp:TemplateColumn HeaderText="Ticket #" ItemStyle-HorizontalAlign="Center">
-            <ItemStyle Width="9%"></ItemStyle>
+            <HeaderStyle Width="5%"></HeaderStyle>
             <ItemTemplate>
                 <b><asp:Label ID="lblTicketNumber" runat="server" /></b>
             </ItemTemplate>
         </asp:TemplateColumn>
-         <asp:TemplateColumn HeaderText="Player">
-             <ItemStyle Width="10%"></ItemStyle>
-            <ItemTemplate>
-                <asp:Label ID="lblPlayer" runat="server" />
-            </ItemTemplate>
-        </asp:TemplateColumn>
-        <asp:TemplateColumn HeaderText="Taken" ItemStyle-HorizontalAlign="Center">
-            <ItemStyle Width="5%"></ItemStyle>
-            <ItemTemplate>
-                <asp:Label ID="lblMethod" runat="server" />
-            </ItemTemplate>
-        </asp:TemplateColumn>
-        <asp:TemplateColumn HeaderText="Game">
-            <ItemStyle Width="45%" HorizontalAlign="Left"></ItemStyle>
+        <asp:TemplateColumn HeaderText="Description" ItemStyle-HorizontalAlign="Left">
+            <HeaderStyle Width="45%" HorizontalAlign="Left"></HeaderStyle>
             <ItemTemplate>
                 <div class="gm-type"><asp:Literal ID="ltrIfBet" runat="server"></asp:Literal></div>
                 <div class="gm-sportname-team baseline">
@@ -58,82 +39,36 @@
                     <asp:Literal ID="ltrRiskWin" runat="server"></asp:Literal>
                 </div>
                 <asp:HiddenField ID="hfBetType" runat="server"/>  
+                <asp:HiddenField ID="hfContext" runat="server"/>  
             </ItemTemplate>
         </asp:TemplateColumn>
-        <asp:TemplateColumn HeaderText="Wager Type">
-            <ItemStyle Width="10%"></ItemStyle>
+        <asp:TemplateColumn HeaderText="Type">
+            <HeaderStyle Width="10%"></HeaderStyle>
             <ItemTemplate>
                 <asp:Label ID="lblWagerType" runat="server" />
             </ItemTemplate>
         </asp:TemplateColumn>
         <asp:TemplateColumn HeaderText="Risk">
-            <ItemStyle Width="10%"></ItemStyle>
+            <HeaderStyle Width="10%"></HeaderStyle>
             <ItemTemplate>
                 <asp:Label ID="lblRisk" runat="server" />
             </ItemTemplate>
         </asp:TemplateColumn>
         <asp:TemplateColumn HeaderText="Win">
-            <ItemStyle Width="10%"></ItemStyle>
+            <HeaderStyle Width="10%"></HeaderStyle>
             <ItemTemplate>
                 <asp:Label ID="lblWin" runat="server" />
             </ItemTemplate>
         </asp:TemplateColumn>
+        <asp:TemplateColumn HeaderText="Result">
+            <HeaderStyle Width="10%"></HeaderStyle>
+            <ItemTemplate>
+                <asp:Label ID="lblResult" runat="server" CssClass="bold" />
+            </ItemTemplate>
+        </asp:TemplateColumn>
     </Columns>
 </asp:DataGrid>
-<table id="pnColor" visible="False"  runat="server" class="table table-hover table-bordered">
-    <tr>
-        <td style="background:#FFCC66; width: 20px"></td>
-        <td>
-           From 300 to 499
-        </td>
-    </tr>
-     <tr>
-        <td style="background:#FF9900"></td>
-        <td>
-         From 500 to 999
-        </td>
-    </tr>
-    <tr>
-        <td style="background:#FF6600"></td>
-        <td>
-         From 1000 to 1999
-        </td>
-    </tr>
-    <tr>
-        <td style="background:#FF3300"></td>
-        <td>
-         From 2000 to 2999
-        </td>
-    </tr>
-    <tr>
-        <td style="background:#00DD00"></td>
-        
-        <td>
-          From 3000 to 3999
-        </td>
-    </tr>
-    <tr>
-        <td style="background:#008800"></td>
-       
-        <td>
-            From 4000 to 4999
-        </td>
-    </tr>
-    <tr>
-        <td style="background:#FFCC66"></td>
-        <td>
-            From 5000 to 5999
-        
-        </td>
-    </tr>
-      <tr>
-        <td style="background:#0000FF"></td>
-        <td>
-         From 6000 to max
-        
-        </td>
-    </tr>
-</table>
+
 
 <script>
     Array.prototype.removeTicketId = function (ticketId, all) {
@@ -155,27 +90,27 @@
                 break;
             }
         }
-        
+
         return isExisted;
     };
 
     var ticketIds = new Array();
-    $(".btn-show-game-details").click(function () {
+    function ShowGameDetail(element) {
         var
-            $this = $(this),
+            $this = $(element),
             $td = $this.parent(),
             rowspan = $td.attr("rowspan") || 1,
             $tr = $td.parent(),
             ticketId = $this.data("ticket-id");
 
-        if ($(this).hasClass("open")) {
-            $(this).removeClass("open");
+        if ($this.hasClass("open")) {
+            $this.removeClass("open");
             $("#game-detail-" + ticketId).fadeOut();
-            
+
             return;
         } else {
             var detailBox = $("#game-detail-" + ticketId);
-            
+
             if (detailBox.length > 0) {
                 detailBox.slideDown();
                 $this.addClass("open");
@@ -184,29 +119,25 @@
                     $tr = $tr.next();
 
                 if (ticketIds.isExistedTicketId(ticketId)) return;
-                
+
                 ticketIds.push(ticketId);
 
                 $.ajax({
                     type: "POST",
-                    url: "/SBS/Players/GetGameDetail.aspx/GetGameDetail",
+                    url: "/SBS/Players/GetGameDetail.aspx/GetGameDetailForHistory",
                     data: '{ticketId: "' + ticketId + '" }',
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
                         var borderColor = $tr.css("background-color");
-                        $tr.after('<tr id="game-detail-' + ticketId + '" class="row-detail"><td colspan="8"></td></tr>');
+                        $tr.after('<tr id="game-detail-' + ticketId + '" class="row-detail"><td colspan="9"></td></tr>');
                         $("#game-detail-" + ticketId + " > td").html(response.d).css("border-color", borderColor);
                         $("#game-detail-" + ticketId + " > td td, #game-detail-" + ticketId + " > td table").css("border-color", borderColor);
                         $this.addClass("open");
                         ticketIds.removeTicketId(ticketId, false);
                     }
                 });
-
-                
             }
         }
-    });
-
-   
+    }
 </script>

@@ -323,7 +323,7 @@ ul.menu-style-3 {
         .table-style-2 tr td a,
         .table-style-2 tr td span {
             text-decoration: none;
-            color: black !important;
+            color: black;
         }
 
             .table-style-2 tr td a:hover {

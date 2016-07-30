@@ -16,19 +16,19 @@ Namespace SBCPlayer
 
         Private Sub loadAccountStatus()
             Dim curBalance = SafeRound(UserSession.PlayerUserInfo.OriginalAmount)
-            lblCurrentBalance.Text = curBalance
+            lblCurrentBalance.Text = curBalance.ToString("N2")
             If curBalance < 0 Then
                 lblCurrentBalance.ForeColor = Color.Red
             End If
 
             Dim pendingAmt = SafeRound(UserSession.PlayerUserInfo.PendingAmount)
-            lblPendingAmount.Text = pendingAmt
+            lblPendingAmount.Text = pendingAmt.ToString("N2")
             If pendingAmt < 0 Then
                 lblPendingAmount.ForeColor = Color.Red
             End If
 
             Dim avaiBalance = SafeRound(UserSession.PlayerUserInfo.BalanceAmount)
-            lblAvailableBalance.Text = avaiBalance
+            lblAvailableBalance.Text = avaiBalance.ToString("N2")
             If avaiBalance < 0 Then
                 lblAvailableBalance.ForeColor = Color.Red
             End If

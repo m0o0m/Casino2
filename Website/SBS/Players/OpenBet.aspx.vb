@@ -25,13 +25,18 @@ Namespace SBSPlayer
 
         Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
             PageTitle = "Pending Bets"
-            MenuTabName = "OPEN_BET"            
+            MenuTabName = "OPEN_BET"
         End Sub
 
         Protected Sub Page_Load1(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
             If Not Me.IsPostBack Then
                 'tmrRefresh.Enabled = True
                 bindTickets()
+            End If
+
+            If StartDate <> "" AndAlso EndDate <> "" Then
+                pnGoBackBottom.Visible = True
+                pnGoBackTop.Visible = True
             End If
         End Sub
 
@@ -56,7 +61,7 @@ Namespace SBSPlayer
             ucTicketBetsGrid.LoadTicketBets(oTicketBets, ddlContext.SelectedValue, ddlGameType.SelectedValue)
         End Sub
 
-        
+
 
 #End Region
 

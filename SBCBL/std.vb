@@ -388,7 +388,7 @@ Public Class std
 
         Select Case UCase(psGameType)
             Case "NBA BASKETBALL", "NCAA BASKETBALL LIVE", "NBA BASKETBALL LIVE", "NCAA BASKETBALL", "WNBA BASKETBALL", "WNBA BASKETBALL LIVE", _
-            "WNCAA BASKETBALL", "NCAA BASKETBALL", "WNCAA BASKETBALL"
+            "WNCAA BASKETBALL", "NCAA BASKETBALL", "WNCAA BASKETBALL", "OLYMPICS BASKETBALL"
 
                 bResult = True
 
@@ -402,8 +402,8 @@ Public Class std
     Public Shared Function GetSportType(ByVal psGameType As String) As String
         Select Case UCase(psGameType)
             Case "NCAA BASKETBALL LIVE", "NBA BASKETBALL LIVE", "NBA BASKETBALL", "NCAA BASKETBALL", "WNBA BASKETBALL", "WNBA BASKETBALL LIVE", _
-            "WNCAA BASKETBALL", "NCAA BASKETBALL", "WNCAA BASKETBALL"
-                Return "basketball"
+            "WNCAA BASKETBALL", "NCAA BASKETBALL", "WNCAA BASKETBALL", "OLYMPICS BASKETBALL" 
+                Return "Basketball"
             Case "NHL HOCKEY", "NCAA HOCKEY"
                 Return "Hockey"
             Case "MLB AL BASEBALL", "MLB NL BASEBALL", "MLB BASEBALL LIVE", "MLB BASEBALL", "MLB BASEBALL LIVE", "NCAA BASEBALL"
@@ -518,6 +518,7 @@ Public Class std
         oGameType("WNBA Basketball") = "WNBA Basketball"
         'oGameType("WNBA Basketball Live") = "WNBA Basketball Live"
         oGameType("WNCAA Basketball") = "WNCAA Basketball"
+        oGameType("Olympics Basketball") = "Olympics Basketball"
 
         '' Baseball
         oGameType("MLB AL Baseball") = "MLB AL Baseball"

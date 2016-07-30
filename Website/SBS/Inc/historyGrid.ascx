@@ -17,7 +17,7 @@
         <asp:TemplateColumn HeaderText="**" ItemStyle-HorizontalAlign="Center">
             <ItemStyle Width="3%" />
             <ItemTemplate>
-                <span class="btn-show-game-details toggle-detail icon-toggle-1 h14px w14px mgR10" data-ticket-id="<%# Container.DataItem("TicketID") %>"></span>
+                <span class="btn-show-game-details toggle-detail icon-toggle-1 h14px w14px mgR10" onclick="ShowGameDetail(this);" data-ticket-id="<%# Container.DataItem("TicketID") %>"></span>
             </ItemTemplate>
         </asp:TemplateColumn>
         <asp:TemplateColumn HeaderText="Date Time Accepted" ItemStyle-HorizontalAlign="Center">
@@ -75,6 +75,7 @@
                     <asp:Literal ID="ltrRiskWin" runat="server"></asp:Literal>
                 </div>
                 <asp:HiddenField ID="hfBetType" runat="server"/>  
+                <asp:HiddenField ID="hfContext" runat="server"/>  
             </ItemTemplate>
         </asp:TemplateColumn>
         <asp:TemplateColumn HeaderText="Wager Type">
@@ -97,3 +98,76 @@
         </asp:TemplateColumn>
     </Columns>
 </asp:DataGrid>
+
+
+<script>
+    Array.prototype.removeTicketId = function (ticketId, all) {
+        for (var i = this.length - 1; i >= 0; i--) {
+            if (this[i] === ticketId) {
+                this.splice(i, 1);
+                if (!all)
+                    break;
+            }
+        }
+        return this;
+    };
+
+    Array.prototype.isExistedTicketId = function (ticketId) {
+        var isExisted = false;
+        for (var i = this.length - 1; i >= 0; i--) {
+            if (this[i] === ticketId) {
+                isExisted = true;
+                break;
+            }
+        }
+
+        return isExisted;
+    };
+
+    var ticketIds = new Array();
+    function ShowGameDetail(element) {
+        var
+            $this = $(element),
+            $td = $this.parent(),
+            rowspan = $td.attr("rowspan") || 1,
+            $tr = $td.parent(),
+            ticketId = $this.data("ticket-id");
+
+        if ($this.hasClass("open")) {
+            $this.removeClass("open");
+            $("#game-detail-" + ticketId).fadeOut();
+
+            return;
+        } else {
+            var detailBox = $("#game-detail-" + ticketId);
+
+            if (detailBox.length > 0) {
+                detailBox.slideDown();
+                $this.addClass("open");
+            } else {
+                for (var i = 1; i < rowspan; ++i)
+                    $tr = $tr.next();
+
+                if (ticketIds.isExistedTicketId(ticketId)) return;
+
+                ticketIds.push(ticketId);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/SBS/Players/GetGameDetail.aspx/GetGameDetailForHistory",
+                    data: '{ticketId: "' + ticketId + '" }',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        var borderColor = $tr.css("background-color");
+                        $tr.after('<tr id="game-detail-' + ticketId + '" class="row-detail"><td colspan="9"></td></tr>');
+                        $("#game-detail-" + ticketId + " > td").html(response.d).css("border-color", borderColor);
+                        $("#game-detail-" + ticketId + " > td td, #game-detail-" + ticketId + " > td table").css("border-color", borderColor);
+                        $this.addClass("open");
+                        ticketIds.removeTicketId(ticketId, false);
+                    }
+                });
+            }
+        }
+    }
+</script>

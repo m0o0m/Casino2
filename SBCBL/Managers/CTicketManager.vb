@@ -104,7 +104,7 @@ Namespace Managers
             Return odtTickets
         End Function
 
-        Public Function GetOpenTicketsByTicketId(ByVal tickerId As String, Optional ByVal psTypeOfBet As String = "All") As DataTable
+        Public Function GetOpenTicketsByTicketId(ByVal ticketId As String, Optional ByVal psTypeOfBet As String = "All") As DataTable
             Dim odtTickets As DataTable = Nothing
 
             Dim oGameDate = DateTime.Now.ToUniversalTime().AddHours(-5)
@@ -116,7 +116,7 @@ Namespace Managers
             If Not psTypeOfBet.Equals("All", StringComparison.OrdinalIgnoreCase) Then
                 oWhere.AppendANDCondition("t.TypeOfBet = " & SQLString(psTypeOfBet))
             End If
-            oWhere.AppendANDCondition("t.TicketID = " & SQLString(tickerId))
+            oWhere.AppendANDCondition("t.TicketID = " & SQLString(ticketId))
             oWhere.AppendANDCondition("isnull(t.TicketStatus,'Open') in ('Open', 'Pending')")
 
             Dim sSQL As String = "SELECT t.*, tb.*, g.* , a.Name as AgentName, TeaserRuleName, p.PhoneLogin as PlayerName,CallCenterAgents.Login, tb.HomePitcher as HomePitcher_TicketBets , tb.AwayPitcher as AwayPitcher_TicketBets " & vbCrLf & _
@@ -517,6 +517,82 @@ Namespace Managers
             oWhere.AppendANDCondition("t.PlayerID=" & SQLString(psPlayerID))
             oWhere.AppendANDCondition("ISNULL(tb.TicketBetStatus,'OPEN') <> 'OPEN' ")
             oWhere.AppendANDCondition(getSQLDateRange("t.TicketCompletedDate", SafeString(poTransFromDate), SafeString(poTransToDate)))
+
+            Dim sSQL As String = "SELECT t.*, tb.*,g.*, TeaserRuleName,ce.Login as CAgentLoginName, tb.HomePitcher as HomePitcher_TicketBets , tb.AwayPitcher as AwayPitcher_TicketBets   " & vbCrLf & _
+                "FROM Tickets t " & vbCrLf & _
+                "INNER JOIN TicketBets tb ON tb.TicketID=t.TicketID " & vbCrLf & _
+                "INNER JOIN Games g ON g.GameID=tb.GameID " & vbCrLf & _
+                "LEFT OUTER JOIN TeaserRules tr on t.TeaserRuleID = tr.TeaserRuleID" & vbCrLf & _
+                "LEFT OUTER JOIN CallCenterAgents ce on t.OrderBy =ce.CallCenterAgentID" & vbCrLf & _
+                oWhere.SQL & vbCrLf & _
+                "  ORDER BY t.TicketNumber , t.SubTicketNumber, t.TicketID, g.Gamedate , t.TicketType "
+            log.Debug("Get the list of history tickets by player. SQL: " & sSQL)
+
+            Dim odbSQL As New CSQLDBUtils(SBC_CONNECTION_STRING, "")
+
+            Try
+                odtTickets = odbSQL.getDataTable(sSQL)
+            Catch ex As Exception
+                log.Error("Cannot get the list of history tickets by player. SQL: " & sSQL, ex)
+            Finally
+                odbSQL.closeConnection()
+            End Try
+
+            Return odtTickets
+        End Function
+
+        Public Function GetHistoryTicketsByPlayerWithTicketStatus(ByVal ticketId As String ) As DataTable
+            Dim odtTickets As DataTable = Nothing
+
+            Dim oWhere As New CSQLWhereStringBuilder
+            
+            'oWhere.AppendANDCondition("t.PlayerID=" & SQLString(psPlayerID))
+            oWhere.AppendANDCondition("t.TicketID = " & SQLString(ticketId))
+            oWhere.AppendANDCondition("ISNULL(tb.TicketBetStatus,'OPEN') IN ('WIN', 'LOSE', 'CANCELED') ")
+
+            Dim sSQL As String = "SELECT t.*, tb.*,g.*, TeaserRuleName,ce.Login as CAgentLoginName, tb.HomePitcher as HomePitcher_TicketBets , tb.AwayPitcher as AwayPitcher_TicketBets   " & vbCrLf & _
+                "FROM Tickets t " & vbCrLf & _
+                "INNER JOIN TicketBets tb ON tb.TicketID=t.TicketID " & vbCrLf & _
+                "INNER JOIN Games g ON g.GameID=tb.GameID " & vbCrLf & _
+                "LEFT OUTER JOIN TeaserRules tr on t.TeaserRuleID = tr.TeaserRuleID" & vbCrLf & _
+                "LEFT OUTER JOIN CallCenterAgents ce on t.OrderBy =ce.CallCenterAgentID" & vbCrLf & _
+                oWhere.SQL & vbCrLf & _
+                "  ORDER BY t.TicketNumber , t.SubTicketNumber, t.TicketID, g.Gamedate , t.TicketType "
+            log.Debug("Get the list of history tickets by player. SQL: " & sSQL)
+
+            Dim odbSQL As New CSQLDBUtils(SBC_CONNECTION_STRING, "")
+
+            Try
+                odtTickets = odbSQL.getDataTable(sSQL)
+            Catch ex As Exception
+                log.Error("Cannot get the list of history tickets by player. SQL: " & sSQL, ex)
+            Finally
+                odbSQL.closeConnection()
+            End Try
+
+            Return odtTickets
+        End Function
+
+        Public Function GetHistoryTicketsByPlayerWithTicketStatus(ByVal psPlayerID As String _
+                                                , ByVal poTransFromDate As Date, ByVal poTransToDate As Date, ByVal psStatus As List(Of String) ) As DataTable
+            Dim odtTickets As DataTable = Nothing
+
+            Dim oWhere As New CSQLWhereStringBuilder
+            'If Not psTypeOfBet.Equals("All", StringComparison.OrdinalIgnoreCase) Then
+            '    oWhere.AppendANDCondition("t.TypeOfBet = " & SQLString(psTypeOfBet))
+            'End If
+            If psStatus.Count > 0 Then
+                Dim status = ""
+                For Each sStatus As String In psStatus
+                    status += "'" & sStatus.ToUpper() & "',"
+                Next
+                status = status.TrimEnd(CType(",", Char))
+                oWhere.AppendANDCondition("ISNULL(t.TicketStatus,'OPEN') IN ("& status &")")
+            End If
+            
+            oWhere.AppendANDCondition("t.PlayerID=" & SQLString(psPlayerID))
+            oWhere.AppendANDCondition("ISNULL(tb.TicketBetStatus,'OPEN') <> 'OPEN' ")
+            oWhere.AppendANDCondition(getSQLDateRange("t.TransactionDate", SafeString(poTransFromDate), SafeString(poTransToDate)))
 
             Dim sSQL As String = "SELECT t.*, tb.*,g.*, TeaserRuleName,ce.Login as CAgentLoginName, tb.HomePitcher as HomePitcher_TicketBets , tb.AwayPitcher as AwayPitcher_TicketBets   " & vbCrLf & _
                 "FROM Tickets t " & vbCrLf & _
