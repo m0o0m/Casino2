@@ -1053,14 +1053,14 @@ Partial Class SBS_Inc_Game_BetActions
         If e.Item.ItemType = ListItemType.Footer Or e.Item.ItemType = ListItemType.Header Or e.Item.ItemType = ListItemType.Pager Then
             Return
         End If
-        Dim lblGameType = CType(e.Item.FindControl("lblGameType"), Label)
+        'Dim lblGameType = CType(e.Item.FindControl("lblGameType"), Label)
         Dim lblGameDate = CType(e.Item.FindControl("lblGameDate"), Label)
-        Dim lblGameContext = CType(e.Item.FindControl("lblGameContext"), Label)
+        'Dim lblGameContext = CType(e.Item.FindControl("lblGameContext"), Label)
         Dim rptGameLines As Repeater = CType(e.Item.FindControl("rptGameLines"), Repeater)
         Dim oDT As DataTable = CType(e.Item.DataItem, KeyValuePair(Of String, DataTable)).Value
         If oDT IsNot Nothing AndAlso oDT.Rows.Count > 0 Then
-            lblGameType.Text = oDT.Rows(0)("GameType").Replace("NCAA Football", "College Football").Replace("CFL Football", "Canadian Football").Replace("AFL Football", "Arena Football")
-            lblGameContext.Text = "( " + oDT.Rows(0)("Context").Replace("Current", "Game").Replace("1H", "1st Half").Replace("2H", "2st Half").Replace("1Q", "1st Quarter").Replace("2Q", "2nd Quarter").Replace("3Q", "3rd Quarter").Replace("4Q", "4th Quarter") + " )"
+            'lblGameType.Text = oDT.Rows(0)("GameType").Replace("NCAA Football", "College Football").Replace("CFL Football", "Canadian Football").Replace("AFL Football", "Arena Football")
+            'lblGameContext.Text = "( " + oDT.Rows(0)("Context").Replace("Current", "Game").Replace("1H", "1st Half").Replace("2H", "2st Half").Replace("1Q", "1st Quarter").Replace("2Q", "2nd Quarter").Replace("3Q", "3rd Quarter").Replace("4Q", "4th Quarter") + " )"
             'lblGameDate.Text = "Line from : " + CType(oDT.Rows(0)("GameDate"), Date).ToString("MM/dd/yyyy")
 
             ' show maximum wager
@@ -1091,6 +1091,8 @@ Partial Class SBS_Inc_Game_BetActions
 
     Protected Sub rptGameLines_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.RepeaterItemEventArgs)
         If e.Item.ItemType = ListItemType.AlternatingItem OrElse e.Item.ItemType = ListItemType.Item Then
+            Dim lblGameContext = CType(e.Item.FindControl("lblGameContext"), Label)
+            lblGameContext.Text = e.Item.DataItem("Context").Replace("Current", "Game").Replace("1H", "1st Half").Replace("2H", "2st Half").Replace("1Q", "1st Quarter").Replace("2Q", "2nd Quarter").Replace("3Q", "3rd Quarter").Replace("4Q", "4th Quarter").ToString()
             If SafeString(ViewState("OddEven")) = "odd" Then
                 ViewState("OddEven") = "even"
             Else
@@ -1098,6 +1100,7 @@ Partial Class SBS_Inc_Game_BetActions
             End If
             _bHaveBettingData = True
             ' Dim ltlTitle As Literal = CType(e.Item.FindControl("ltlTitle"), Literal)
+
             Dim lblDescription As Literal = CType(e.Item.FindControl("lblDescription"), Literal)
             Dim trDescription As HtmlTableRow = CType(e.Item.FindControl("trDescription"), HtmlTableRow)
             Dim trtop As HtmlTableRow = CType(e.Item.FindControl("trtop"), HtmlTableRow)
@@ -1163,13 +1166,13 @@ Partial Class SBS_Inc_Game_BetActions
                 If CType(ViewState("Title"), String).Equals(sTitle) Then
                     '  ltlTitle.Visible = False
                     'thGameLineHeader.Visible = False
-                    e.Item.FindControl("tdSpread").Visible = False
-                    e.Item.FindControl("tdTotal").Visible = False
+                    e.Item.FindControl("tdSpread").Visible = True
+                    e.Item.FindControl("tdTotal").Visible = True
                     e.Item.FindControl("tdTeamTotal").Visible = False
-                    e.Item.FindControl("tdMLine").Visible = False
-                    e.Item.FindControl("tdTeam").Visible = False
-                    e.Item.FindControl("tdDate").Visible = False
-                    e.Item.FindControl("tdNum").Visible = False
+                    e.Item.FindControl("tdMLine").Visible = True
+                    e.Item.FindControl("tdTeam").Visible = True
+                    e.Item.FindControl("tdDate").Visible = True
+                    e.Item.FindControl("tdNum").Visible = True
                     'e.Item.FindControl("trLoad").Visible = False
                 Else
                     ViewState("Title") = sTitle
@@ -1254,6 +1257,7 @@ Partial Class SBS_Inc_Game_BetActions
                 Dim trCircle As HtmlControl = e.Item.FindControl("trCircle")
                 trCircle.Visible = True
             End If
+            Dim lblGameTypeHeader As Label = CType(e.Item.FindControl("lblGameTypeHeader"), Label)
             Dim lblAwaySpread As Label = CType(e.Item.FindControl("lblAwaySpread"), Label)
             Dim lblAwayTotal As Label = CType(e.Item.FindControl("lblAwayTotal"), Label)
             Dim lblHomeSpread As Label = CType(e.Item.FindControl("lblHomeSpread"), Label)
@@ -1333,7 +1337,7 @@ Partial Class SBS_Inc_Game_BetActions
             getTeamJuice(nAwaySpread, nHomeSpread, bAwaySpreadJuice, bHomeSpreadJuice, bAwayMoneyLineJuice, bHomeMoneyLineJuice)
             '''''''''''''''end set juice'''''''''''''''
 
-
+            lblGameTypeHeader.Text = SafeString(oData("GameType"))
             Dim nTotalPointsTeam As Double = 0
             Dim nMoneyLine As Double
             Dim nTotalPoints As Double = 0
