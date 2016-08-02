@@ -4,7 +4,7 @@
 <%@ Register Assembly="WebsiteLibrary" Namespace="WebsiteLibrary" TagPrefix="wlb" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="cphBody" runat="Server">
     
-    <div class="row">
+    <div class="row" style="display: none">
         <div class="col-lg-12">
             <div class="page-title-breadcrumb">
                 <div class="page-header pull-left">
@@ -21,13 +21,13 @@
 
     <div class="mbxl"></div>
 
-    <div class="panel panel-grey">
-        <div class="panel-heading">Filter</div>
+    <div class="panel panel-grey box-title-1">
+        <div class="panel-heading" style="display: none">Filter:</div>
         <div class="panel-body">
-            <div class="form-group">
-                <label class="col-md-2 control-label">Date Range</label>
-                <div class="col-md-4">
-                    <wlb:CDropDownList ID="ddlWeeks" runat="server" CssClass="form-control" hasOptionalItem="false"
+            <div class="form-group clear">
+                <label class="col-md-2 control-label left mgT5 mgR10 fz12 clr-white">Date Range: </label>
+                <div class="col-md-4 left">
+                    <wlb:CDropDownList ID="ddlWeeks" runat="server" CssClass="form-control select-field-2 black h26px" hasOptionalItem="false"
                         AutoPostBack="true" OnSelectedIndexChanged="SelectedIndexChanged" />
                 </div>
             </div>
@@ -35,15 +35,15 @@
     </div>
 
     <div class="panel panel-grey">
-        <div class="panel-heading">Result</div>
+        <div class="panel-heading" style="display: none">Result</div>
         <div class="panel-body">
             <asp:DataGrid ID="dgPlayers" runat="server" AutoGenerateColumns="false"
-                CssClass="table table-hover table-bordered">
+                CssClass="table table-hover table-bordered table-style-2 full-w">
                 <HeaderStyle CssClass="tableheading" HorizontalAlign="Center" />
                 <ItemStyle HorizontalAlign="Center" />
                 <AlternatingItemStyle HorizontalAlign="Center" />
                 <Columns>
-                    <asp:TemplateColumn HeaderText="Week Of" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="210px">
+                    <asp:TemplateColumn HeaderText="Week Start" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="">
                         <ItemTemplate>
                             <asp:LinkButton ID="lbnWeekOf" runat="server" CommandName="VIEW_WEEK_HISTORY" 
                                 CommandArgument='<%# Container.DataItem("Title") %>' Text='<%# Container.DataItem("Title") %>'
@@ -51,64 +51,79 @@
                             <asp:HiddenField ID="HFMonday" Value='<%# Container.DataItem("ThisMonday") %>' runat="server" />
                         </ItemTemplate>
                     </asp:TemplateColumn>
-                    <asp:TemplateColumn HeaderText="Mon" ItemStyle-Width="75px">
+                    <asp:TemplateColumn HeaderText="Previous <br> Balance" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="110px">
+                        <ItemTemplate>
+                            0
+                        </ItemTemplate>
+                    </asp:TemplateColumn>
+                    <asp:TemplateColumn HeaderText="Mon" ItemStyle-Width="65px">
                         <ItemTemplate>
                             <asp:LinkButton ID="lbnMon" runat="server" CommandName="VIEW_HISTORY" Font-Underline="false"
                                 CommandArgument='<%# Container.DataItem("ThisMonday")%>' Text='<%#Container.DataItem("Mon")%>' ForeColor='<%# If(Container.DataItem("Mon") < 0, Drawing.Color.Red, Drawing.Color.Blue)%>' />
                         </ItemTemplate>
                     </asp:TemplateColumn>
-                    <asp:TemplateColumn HeaderText="Tues" ItemStyle-Width="75px">
+                    <asp:TemplateColumn HeaderText="Tues" ItemStyle-Width="65px">
                         <ItemTemplate>
                             <asp:LinkButton ID="lbnTues" runat="server" CommandName="VIEW_HISTORY"
                                 CommandArgument='<%# SBCBL.std.SafeDate( Container.DataItem("ThisMonday")).AddDays(1) %>'
                                 Text='<%#Container.DataItem("Tues")%>'  ForeColor='<%# If(Container.DataItem("Tues") < 0, Drawing.Color.Red, Drawing.Color.Blue)%>' />
                         </ItemTemplate>
                     </asp:TemplateColumn>
-                    <asp:TemplateColumn HeaderText="Wed" ItemStyle-Width="75px">
+                    <asp:TemplateColumn HeaderText="Wed" ItemStyle-Width="65px">
                         <ItemTemplate>
                             <asp:LinkButton ID="lbnWed" runat="server" CommandName="VIEW_HISTORY"
                                 CommandArgument='<%# SBCBL.std.SafeDate( Container.DataItem("ThisMonday")).AddDays(2) %>'
                                 Text='<%#Container.DataItem("Wed") %>' ForeColor='<%# If(Container.DataItem("Wed") < 0, Drawing.Color.Red, Drawing.Color.Blue)%>' />
                         </ItemTemplate>
                     </asp:TemplateColumn>
-                    <asp:TemplateColumn HeaderText="Thurs" ItemStyle-Width="75px">
+                    <asp:TemplateColumn HeaderText="Thurs" ItemStyle-Width="65px">
                         <ItemTemplate>
                             <asp:LinkButton ID="lbnThurs" runat="server" CommandName="VIEW_HISTORY" Font-Underline="false"
                                 CommandArgument='<%# SBCBL.std.SafeDate( Container.DataItem("ThisMonday")).AddDays(3) %>'
                                 Text='<%#Container.DataItem("Thurs")%>' ForeColor='<%# If(Container.DataItem("Thurs") < 0, Drawing.Color.Red, Drawing.Color.Blue)%>' />
                         </ItemTemplate>
                     </asp:TemplateColumn>
-                    <asp:TemplateColumn HeaderText="Fri" ItemStyle-Width="75px">
+                    <asp:TemplateColumn HeaderText="Fri" ItemStyle-Width="65px">
                         <ItemTemplate>
                             <asp:LinkButton ID="lbnFri" runat="server" CommandName="VIEW_HISTORY" 
                                 CommandArgument='<%# SBCBL.std.SafeDate( Container.DataItem("ThisMonday")).AddDays(4) %>'
                                 Text='<%#Container.DataItem("Fri")%>' ForeColor='<%# If(Container.DataItem("Fri") < 0, Drawing.Color.Red, Drawing.Color.Blue)%>' />
                         </ItemTemplate>
                     </asp:TemplateColumn>
-                    <asp:TemplateColumn HeaderText="Sat" ItemStyle-Width="75px">
+                    <asp:TemplateColumn HeaderText="Sat" ItemStyle-Width="65px">
                         <ItemTemplate>
                             <asp:LinkButton ID="lbnSat" runat="server" CommandName="VIEW_HISTORY" 
                                 CommandArgument='<%# SBCBL.std.SafeDate( Container.DataItem("ThisMonday")).AddDays(5) %>'
                                 Text='<%#Container.DataItem("Sat")%>' ForeColor='<%# If(Container.DataItem("Sat") < 0, Drawing.Color.Red, Drawing.Color.Blue)%>' />
                         </ItemTemplate>
                     </asp:TemplateColumn>
-                    <asp:TemplateColumn HeaderText="Sun" ItemStyle-Width="75px">
+                    <asp:TemplateColumn HeaderText="Sun" ItemStyle-Width="65px">
                         <ItemTemplate>
                             <asp:LinkButton ID="lbnSun" runat="server" CommandName="VIEW_HISTORY" 
                                 CommandArgument='<%# SBCBL.std.SafeDate( Container.DataItem("ThisMonday")).AddDays(6) %>'
                                 Text='<%#Container.DataItem("Sun")%>' ForeColor='<%# If(Container.DataItem("Sun") < 0, Drawing.Color.Red, Drawing.Color.Blue)%>' />
                         </ItemTemplate>
                     </asp:TemplateColumn>
-                    <asp:TemplateColumn HeaderText="Total" ItemStyle-Width="75px">
+                    <asp:TemplateColumn HeaderText="Weekly <br> Balance" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="90px">
+                        <ItemTemplate>
+                            0
+                        </ItemTemplate>
+                    </asp:TemplateColumn>
+                    <asp:TemplateColumn HeaderText="Deposits and <br> Withdrawals" ItemStyle-Width="130px">
                         <ItemTemplate>
                             <asp:Label ID="lblTotal" runat="server" Text='<%#SBCBL.std.SafeInteger(Container.DataItem("Net"))%>'
                                  ForeColor='<%# If(Container.DataItem("Net") < 0, Drawing.Color.Red, Drawing.Color.Blue)%>' ></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateColumn>
-                    <asp:TemplateColumn HeaderText="Pending" ItemStyle-Width="75px">
+                    <asp:TemplateColumn HeaderText="Pending" ItemStyle-Width="95px">
                         <ItemTemplate>
                             <asp:Label ID="lblPending" runat="server" Text='<%# FormatNumber(SBCBL.std.SafeDouble(Container.DataItem("Pending")), SBCBL.std.GetRoundMidPoint) %>'
                                  ForeColor='<%# If(Container.DataItem("Pending") < 0, Drawing.Color.Red, Drawing.Color.Blue)%>' ></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateColumn>
+                    <asp:TemplateColumn HeaderText="Balance" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="95px">
+                        <ItemTemplate>
+                            0
                         </ItemTemplate>
                     </asp:TemplateColumn>
                 </Columns>

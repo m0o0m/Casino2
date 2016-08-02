@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="InboxEmail.ascx.vb" Inherits="SBCPlayer.InboxEmail" %>
  <%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="fck" %>
  <asp:DataGrid ID="dgEmailInbox" runat="server" AutoGenerateColumns="false" Width="100%" ItemStyle-ForeColor="Black"
-    CssClass="table table-hover table-bordered">
+    CssClass="table table-hover table-bordered table-style-1">
     <HeaderStyle CssClass="tableheading" ForeColor="Black" HorizontalAlign="Center" />
     <ItemStyle HorizontalAlign="Left" />
       <Columns >
