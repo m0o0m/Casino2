@@ -104,6 +104,46 @@ Namespace Managers
             Return odtTickets
         End Function
 
+        Public Function GetOpenTicketsByTicketId(ByVal tickerId As String, Optional ByVal psTypeOfBet As String = "All") As DataTable
+            Dim odtTickets As DataTable = Nothing
+
+            Dim oGameDate = DateTime.Now.ToUniversalTime().AddHours(-5)
+            If oGameDate.IsDaylightSavingTime() Then
+                oGameDate.AddHours(1)
+            End If
+
+            Dim oWhere As New CSQLWhereStringBuilder
+            If Not psTypeOfBet.Equals("All", StringComparison.OrdinalIgnoreCase) Then
+                oWhere.AppendANDCondition("t.TypeOfBet = " & SQLString(psTypeOfBet))
+            End If
+            oWhere.AppendANDCondition("t.TicketID = " & SQLString(tickerId))
+            oWhere.AppendANDCondition("isnull(t.TicketStatus,'Open') in ('Open', 'Pending')")
+
+            Dim sSQL As String = "SELECT t.*, tb.*, g.* , a.Name as AgentName, TeaserRuleName, p.PhoneLogin as PlayerName,CallCenterAgents.Login, tb.HomePitcher as HomePitcher_TicketBets , tb.AwayPitcher as AwayPitcher_TicketBets " & vbCrLf & _
+                "FROM Tickets t " & vbCrLf & _
+                "INNER JOIN TicketBets tb ON tb.TicketID=t.TicketID " & vbCrLf & _
+                "INNER JOIN Games g ON g.GameID=tb.GameID " & vbCrLf & _
+                "INNER JOIN Players p ON p.PlayerID=t.PlayerID" & vbCrLf & _
+                "INNER JOIN Agents a ON a.AgentID=t.AgentID " & vbCrLf & _
+                "LEFT OUTER JOIN TeaserRules tr ON t.TeaserRuleID=tr.TeaserRuleID" & vbCrLf & _
+                "LEFT OUTER JOIN CallCenterAgents ON t.OrderBy=CallCenterAgents.CallCenterAgentID " & vbCrLf & _
+                oWhere.SQL & vbCrLf & _
+                " ORDER BY t.TicketNumber , t.SubTicketNumber ,  t.TransactionDate DESC ,  t.TicketID, t.TicketType, AgentName"
+            log.Debug("Get the list of tickets by player. SQL: " & sSQL)
+
+            Dim odbSQL As New CSQLDBUtils(SBC_CONNECTION_STRING, "")
+
+            Try
+                odtTickets = odbSQL.getDataTable(sSQL)
+            Catch ex As Exception
+                log.Error("Cannot get the list of tickets by player. SQL: " & sSQL, ex)
+            Finally
+                odbSQL.closeConnection()
+            End Try
+
+            Return odtTickets
+        End Function
+
         Public Function GetOpenTicketsByAgentPosition(ByVal psContext As String, ByVal psAgentID As String, ByVal poTransToDate As Date, ByVal psAwayTeam As String, ByVal psHomeTeam As String, ByVal psBetType As String, Optional ByVal psTypeOfBet As String = "All", Optional ByVal plstGameType As List(Of String) = Nothing) As DataTable
             Dim odtTickets As DataTable = Nothing
             '' Check gamedate also
