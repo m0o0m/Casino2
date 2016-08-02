@@ -70,6 +70,7 @@
 
 ul.menu-style-1 {
     background: #FFF;
+    position: relative;
 }
 
     ul.menu-style-1 > li {
@@ -101,6 +102,17 @@ ul.menu-style-1 {
 
         ul.menu-style-1 > li > a:hover {
             text-decoration: none;
+        }
+
+        ul.menu-style-1 > li > ul {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+        }
+
+        ul.menu-style-1 > li.active > ul {
+            display: block;
         }
 
 

@@ -63,6 +63,11 @@ strong {
 
 /* ===============================================
      CONTENT /////////////////////////////////////////////////////////// */
+
+.page-content.custom-page-content {
+    color: #000;
+}
+
 .gameplay .content {
     background: #FFF;
     padding-top: 20px;
