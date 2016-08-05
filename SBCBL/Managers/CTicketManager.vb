@@ -548,7 +548,7 @@ Namespace Managers
             
             'oWhere.AppendANDCondition("t.PlayerID=" & SQLString(psPlayerID))
             oWhere.AppendANDCondition("t.TicketID = " & SQLString(ticketId))
-            oWhere.AppendANDCondition("ISNULL(tb.TicketBetStatus,'OPEN') IN ('WIN', 'CLOSE', 'CANCELED') ")
+            oWhere.AppendANDCondition("ISNULL(tb.TicketBetStatus,'OPEN') IN ('WIN', 'LOSE', 'CANCELED') ")
 
             Dim sSQL As String = "SELECT t.*, tb.*,g.*, TeaserRuleName,ce.Login as CAgentLoginName, tb.HomePitcher as HomePitcher_TicketBets , tb.AwayPitcher as AwayPitcher_TicketBets   " & vbCrLf & _
                 "FROM Tickets t " & vbCrLf & _

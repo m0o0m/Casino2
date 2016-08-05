@@ -136,6 +136,30 @@
 </table>
 
 <script>
+    Array.prototype.removeTicketId = function (ticketId, all) {
+        for (var i = this.length - 1; i >= 0; i--) {
+            if (this[i] === ticketId) {
+                this.splice(i, 1);
+                if (!all)
+                    break;
+            }
+        }
+        return this;
+    };
+
+    Array.prototype.isExistedTicketId = function (ticketId) {
+        var isExisted = false;
+        for (var i = this.length - 1; i >= 0; i--) {
+            if (this[i] === ticketId) {
+                isExisted = true;
+                break;
+            }
+        }
+        
+        return isExisted;
+    };
+
+    var ticketIds = new Array();
     $(".btn-show-game-details").click(function () {
         var
             $this = $(this),
@@ -159,6 +183,10 @@
                 for (var i = 1; i < rowspan; ++i)
                     $tr = $tr.next();
 
+                if (ticketIds.isExistedTicketId(ticketId)) return;
+                
+                ticketIds.push(ticketId);
+
                 $.ajax({
                     type: "POST",
                     url: "/SBS/Players/GetGameDetail.aspx/GetGameDetail",
@@ -171,13 +199,14 @@
                         $("#game-detail-" + ticketId + " > td").html(response.d).css("border-color", borderColor);
                         $("#game-detail-" + ticketId + " > td td, #game-detail-" + ticketId + " > td table").css("border-color", borderColor);
                         $this.addClass("open");
-                        console.log(borderColor);
+                        ticketIds.removeTicketId(ticketId, false);
                     }
                 });
-            }
 
-            
+                
+            }
         }
-        
     });
+
+   
 </script>
