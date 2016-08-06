@@ -12,9 +12,17 @@ i {
     background: #fff;
     padding: 20px 13px 150px;
 }
-
-.divrptGameTypeShort {
+.table-style-2 tr td span.week-balance-peding {
+    cursor: pointer;
+    text-decoration: underline ;
+    -moz-text-decoration-color: #b30000 ; /* Code for Firefox */
+    text-decoration-color: #b30000 ;
 }
+.table-style-2 tr td span.week-balance-peding:hover {
+    -moz-text-decoration-color: black ; /* Code for Firefox */
+    text-decoration-color: black ;
+}
+
 
     .divrptGameTypeShort > .panel-body {
         -moz-column-count: 2;

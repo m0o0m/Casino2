@@ -122,9 +122,6 @@ Namespace SBSPlayer
 
                 tempMonday = tempMonday.AddDays(-7)
             End While
-
-            
-
         End Sub
 
     End Class
