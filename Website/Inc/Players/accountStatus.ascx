@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="accountStatus.ascx.vb"
     Inherits="SBCPlayer.accountStatus" %>
 
+<link href="../../Content/themes/agent/layout6/styles/_toan-linhtinh.css" rel="stylesheet" />
+
 <div>
     <h2 class="title-style-1 pdB10">Account Balance</h2>
     <table class="table-style-3 ly-w-1:2 center">
@@ -12,7 +14,7 @@
                 </div>
             </td>
             <td class="ly-w-1:2">
-                <a href="/SBS/Players/WeekBalance.aspx">$0.00</a>
+                <a href="/SBS/Players/WeekBalance.aspx">$<asp:Label ID="lblCurrentBalance" runat="server" /></a>
             </td>
         </tr>
         <tr>
@@ -22,8 +24,7 @@
                     <span>Available</span>
                 </div>
             </td>
-            <td class="ly-w-1:2">$1.00
-            </td>
+            <td class="ly-w-1:2">$<asp:Label ID="lblAvailableBalance" runat="server" /></td>
         </tr>
         <tr>
             <td class="caption ly-w-1:2">
@@ -33,7 +34,7 @@
                 </div>
             </td>
             <td class="ly-w-1:2">
-                <a href="//PendingsWagers.aspx">$0.00</a>
+                <a href="/SBS/Players/OpenBet.aspx">$<asp:Label ID="lblPendingAmount" runat="server" /></a>
             </td>
         </tr>
     </table>
@@ -59,7 +60,7 @@
     </div>
 </div>
 
-<div class="row mt20">
+<div class="row mt20" style="display: none">
     <div class="col-lg-12">
         <div class="panel panel-grey">
             <div class="panel-heading">Figures</div>
@@ -76,21 +77,21 @@
                             <td>Original Balance
                             </td>
                             <td>
-                                <asp:Label ID="lblCurrentBalance" runat="server" ForeColor="Blue" />
+                                <%--<asp:Label ID="lblCurrentBalance" runat="server" ForeColor="Blue" />--%>
                             </td>
                         </tr>
                         <tr>
                             <td>Amount at Risk
                             </td>
                             <td>
-                                <asp:Label ID="lblPendingAmount" runat="server" ForeColor="Blue" />
+                                <%--<asp:Label ID="lblPendingAmount" runat="server" ForeColor="Blue" />--%>
                             </td>
                         </tr>
                         <tr>
                             <td>Available Balance
                             </td>
                             <td>
-                                <asp:Label ID="lblAvailableBalance" runat="server" ForeColor="Blue" />
+                                <%--<asp:Label ID="lblAvailableBalance" runat="server" ForeColor="Blue" />--%>
                             </td>
                         </tr>
                         <tr>
