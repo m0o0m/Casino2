@@ -22,36 +22,40 @@ Partial Class SBS_Players_GetGameDetail
     <WebMethod()>
     Public Shared Function GetGameDetail(ByVal ticketId As String) As String
         Dim data = (New CTicketManager).GetOpenTicketsByTicketId(ticketId)
+        Dim grouped = data.AsEnumerable().GroupBy(Function(rw) rw("GameID")).[Select](Function(grouping) New With {Key .GameId = grouping.Key.ToString(), Key .Row = grouping})
+
         Dim html = "<div class='row-detail-caption pdTB10 pdLR2'><b class='fz13 clr-white'>Game Detail</b></div>"
         html += "<table class='full-w'cellspacing='0' cellpadding='0' border='0'>"
         html += "<tr>"
-        For Each row As DataRow In data.Rows
-            If UCase(SafeString(row("IsForProp"))).Equals("Y") Then
-                html += String.Format("<td>{0}</td>", SafeString(row("PropDescription")))
-            Else
-                Dim sDescription As String = ""
-                Dim homeRotationNumber = SafeInteger(row("HomeRotationNumber"))
-                Dim awayRotationNumber = SafeInteger(row("AwayRotationNumber"))
-                Dim drawRotationNumber = SafeInteger(row("DrawRotationNumber"))
-                Dim homeTeam = SafeString(row("HomeTeam"))
-                Dim awayTeam = SafeString(row("AwayTeam"))
-                Dim draw = "Draw"
 
-                Dim betType = UCase(SafeString(row("BetType")))
-                If betType.Equals("SPREAD") Or betType.Equals("MONEYLINE") Then
-                    homeTeam = SafeString(IIf(homeRotationNumber > 0, String.Format("<b>[{0}]</b>{1}", homeRotationNumber, homeTeam), ""))
-                    awayTeam = SafeString(IIf(awayRotationNumber > 0, String.Format("<br /><b>[{0}]</b>{1}", awayRotationNumber, awayTeam), ""))
-                    draw = SafeString(IIf(drawRotationNumber > 0, String.Format("<br /><b>[{0}]</b>{1}", drawRotationNumber, draw), ""))
+        For Each g In grouped
+            Dim sDescription As String = ""
+            For Each row As DataRow In g.Row
+                If UCase(SafeString(row("IsForProp"))).Equals("Y") Then
+                    sDescription += String.Format("<div>{0}</div>", SafeString(row("PropDescription")))
                 Else
-                    homeTeam = SafeString(IIf(homeRotationNumber > 0, homeTeam, ""))
-                    awayTeam = SafeString(IIf(awayRotationNumber > 0, "<br />" & awayTeam, ""))
-                    draw = SafeString(IIf(drawRotationNumber > 0, "<br />" & draw, ""))
+                    Dim homeRotationNumber = SafeInteger(row("HomeRotationNumber"))
+                    Dim awayRotationNumber = SafeInteger(row("AwayRotationNumber"))
+                    Dim drawRotationNumber = SafeInteger(row("DrawRotationNumber"))
+                    Dim homeTeam = SafeString(row("HomeTeam"))
+                    Dim awayTeam = SafeString(row("AwayTeam"))
+                    Dim draw = "Draw"
+
+                    Dim betType = UCase(SafeString(row("BetType")))
+                    If betType.Equals("SPREAD") Or betType.Equals("MONEYLINE") Then
+                        homeTeam = SafeString(IIf(homeRotationNumber > 0, String.Format("<b>[{0}]</b>{1}", homeRotationNumber, homeTeam), ""))
+                        awayTeam = SafeString(IIf(awayRotationNumber > 0, String.Format("<b>[{0}]</b>{1}", awayRotationNumber, awayTeam), ""))
+                        draw = SafeString(IIf(drawRotationNumber > 0, String.Format("<b>[{0}]</b>{1}", drawRotationNumber, draw), ""))
+                    Else
+                        homeTeam = SafeString(IIf(homeRotationNumber > 0, homeTeam, ""))
+                        awayTeam = SafeString(IIf(awayRotationNumber > 0, awayTeam, ""))
+                        draw = SafeString(IIf(drawRotationNumber > 0, draw, ""))
+                    End If
+
+                    sDescription += String.Format("<div>{0}</div> <div>{1}</div> <div>{2}</div>", homeTeam, awayTeam, draw)
                 End If
-
-                sDescription = String.Format("<td class='baseline'>{0} {1} {2}</td>", homeTeam, awayTeam, draw)
-
-                html += sDescription
-            End If
+            Next
+            html += String.Format("<td class='baseline'>{0}</td>", sDescription)
 
         Next
 
@@ -135,10 +139,10 @@ Partial Class SBS_Players_GetGameDetail
                         draw = SafeString(IIf(drawRotationNumber > 0, draw, ""))
                     End If
 
-                    
+
                     sDescription += String.Format("<div>{0}</div> <div>{1}</div> <div>{2}</div>", homeTeam, awayTeam, draw)
                 End If
-                
+
             Next
 
             html += String.Format("<td class='baseline'>{0}</td>", sDescription)
