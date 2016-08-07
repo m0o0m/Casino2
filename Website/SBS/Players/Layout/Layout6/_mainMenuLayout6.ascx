@@ -49,7 +49,7 @@
                     <li class="<%= SubMenuActive("Account_DailyFigure")%>"><a href="WeekBalance.aspx">Daily Figure</a></li>
                     <li class=""><a href="#">Account History</a></li>
                     <li class="<%= SubMenuActive("Account_WagerHistory")%>"><a href="History.aspx">Wager History</a></li>
-                    <li class=""><a href="#">Settings</a></li>
+                    <li class="<%= SubMenuActive("Account_Setting")%>"><a href="/SBS/Players/PlayerInfo.aspx">Settings</a></li>
                 </ul>
             </li>
             <li class="<%= MenuActive("Pending")%>"><a href="OpenBet.aspx">Pending</a></li>

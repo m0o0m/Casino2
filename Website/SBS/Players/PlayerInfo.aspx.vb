@@ -13,6 +13,7 @@ Namespace SBSPlayer
         Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
             PageTitle = "Account Status"
             MenuTabName = "ACCOUNT_STATUS"
+            CurrentPageName = "Account_Setting"
         End Sub
 
         Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
