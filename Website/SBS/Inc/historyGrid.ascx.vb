@@ -197,7 +197,7 @@ Namespace SBSWebsite
                     alternateCount = 1
                 ElseIf Not ticketIdforAlternate.Equals(sTicketID) And (betTypeForAlternate.Equals(sBetType) Or (sBetType.Contains("If Win") And betTypeForAlternate.Contains("Reverse")) Or (sBetType.Contains("Reverse") And betTypeForAlternate.Contains("If Win")))
                     If sBetType.Contains("Straight") Then
-                        If Not contextForAlternate.Equals(sContext) Then
+                        If Not (contextForAlternate.Equals(sContext) Or (sContext.Contains(contextForAlternate)) ) Then
                             alternateCount = 1
                         Else
                             alternateCount += 1
@@ -210,8 +210,9 @@ Namespace SBSWebsite
 
 
                 betTypeForAlternate = SafeString(IIf(sBetType.Contains("Reverse"), "If Win", sBetType))
-                contextForAlternate = sContext
                 ticketIdforAlternate = sTicketID
+                contextForAlternate = SafeString(IIf(sContext.Contains("q"), "q", sContext))
+                
 
                 ' Row color
                 Select Case True
@@ -246,23 +247,23 @@ Namespace SBSWebsite
 
                             Case "2q"
                                 If (alternateCount Mod 2) = 0 Then
-                                    oBackColor = System.Drawing.ColorTranslator.FromHtml("#ffffff")
+                                    oBackColor = System.Drawing.ColorTranslator.FromHtml("#faa833")
                                 Else
-                                    oBackColor = System.Drawing.ColorTranslator.FromHtml("#efefef")
+                                    oBackColor = System.Drawing.ColorTranslator.FromHtml("#fab450")
                                 End If
 
                             Case "3q"
                                 If (alternateCount Mod 2) = 0 Then
-                                    oBackColor = System.Drawing.ColorTranslator.FromHtml("#ffffff")
+                                    oBackColor = System.Drawing.ColorTranslator.FromHtml("#faa833")
                                 Else
-                                    oBackColor = System.Drawing.ColorTranslator.FromHtml("#efefef")
+                                    oBackColor = System.Drawing.ColorTranslator.FromHtml("#fab450")
                                 End If
 
                             Case "4q"
                                 If (alternateCount Mod 2) = 0 Then
-                                    oBackColor = System.Drawing.ColorTranslator.FromHtml("#ffffff")
+                                    oBackColor = System.Drawing.ColorTranslator.FromHtml("#faa833")
                                 Else
-                                    oBackColor = System.Drawing.ColorTranslator.FromHtml("#efefef")
+                                    oBackColor = System.Drawing.ColorTranslator.FromHtml("#fab450")
                                 End If
                             Case Else
                                 oBackColor = System.Drawing.ColorTranslator.FromHtml("#efefef")
@@ -514,7 +515,7 @@ Namespace SBSWebsite
 
         Private Function getDetailBySpread(ByVal psHomeTeam As String, ByVal psAwayTeam As String, ByVal poTicketBet As DataRowView) As String
             Dim gameDate As Date = SafeDate(poTicketBet("GameDate"))
-            Dim ticketStatus As String = SafeString(poTicketBet("TicketStatus"))
+            Dim ticketBetStatus As String = SafeString(poTicketBet("TicketBetStatus"))
             Dim sContext = SafeString(poTicketBet("Context"))
             Dim sGameType As String = SafeString(poTicketBet("GameType"))
             Dim nHomeSpread As Double = SafeDouble(poTicketBet("HomeSpread"))
@@ -546,7 +547,7 @@ Namespace SBSWebsite
 
             Dim htmlString As String = "<div class='baseline'>" & sRotationNumber & "<b class='gm-team'>" & sChoiceTeam & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
-            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketStatus) & ")</span> </div>"
+            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketBetStatus) & ")</span> </div>"
             htmlString += gameBet
 
 
@@ -559,7 +560,7 @@ Namespace SBSWebsite
             Dim sGameType As String = SafeString(poTicketBet("GameType"))
             Dim gameDate As Date = SafeDate(poTicketBet("GameDate"))
             Dim sContext = SafeString(poTicketBet("Context"))
-            Dim ticketStatus As String = SafeString(poTicketBet("TicketStatus"))
+            Dim ticketBetStatus As String = SafeString(poTicketBet("TicketBetStatus"))
             Dim nTotalPoints As Double = SafeDouble(poTicketBet("TotalPoints")) + SafeDouble(poTicketBet("AddPoint"))
             Dim sTotalPoint As String = SafeString(nTotalPoints)
             If IsSoccer(SafeString(poTicketBet("gametype"))) Then
@@ -586,7 +587,7 @@ Namespace SBSWebsite
 
             Dim htmlString As String = "<div class='baseline'><b class='gm-team'>" & sChoiceTeam & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
-            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketStatus) & ")</span> </div>"
+            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketBetStatus) & ")</span> </div>"
             htmlString += gameBet
 
             Return htmlString
@@ -599,7 +600,7 @@ Namespace SBSWebsite
             Dim sGameType As String = SafeString(poTicketBet("GameType"))
             Dim gameDate As Date = SafeDate(poTicketBet("GameDate"))
             Dim sContext = SafeString(poTicketBet("Context"))
-            Dim ticketStatus As String = SafeString(poTicketBet("TicketStatus"))
+            Dim ticketBetStatus As String = SafeString(poTicketBet("TicketBetStatus"))
             Dim nTotalPoints As Double = SafeDouble(poTicketBet("TotalPoints")) + SafeDouble(poTicketBet("AddPoint"))
             Dim sTotalPoint As String = SafeString(nTotalPoints)
             If IsSoccer(SafeString(poTicketBet("gametype"))) Then
@@ -624,7 +625,7 @@ Namespace SBSWebsite
 
             Dim htmlString As String = "<div class='baseline'><b class='gm-team'>" & sChoiceTeam & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
-            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketStatus) & ")</span> </div>"
+            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketBetStatus) & ")</span> </div>"
             htmlString += gameBet
 
             Return htmlString
@@ -634,7 +635,7 @@ Namespace SBSWebsite
             Dim gameDate As Date = SafeDate(poTicketbet("GameDate"))
             Dim sGameType As String = SafeString(poTicketbet("GameType"))
             Dim sContext = SafeString(poTicketbet("Context"))
-            Dim ticketStatus As String = SafeString(poTicketbet("TicketStatus"))
+            Dim ticketBetStatus As String = SafeString(poTicketbet("TicketBetStatus"))
             Dim nHomeMoneyLine As Double = SafeDouble(poTicketbet("HomeMoneyLine"))
             Dim nAwayMoneyLine As Double = SafeDouble(poTicketbet("AwayMoneyLine"))
             Dim sChoiceTeam As String = SafeString(IIf(nHomeMoneyLine <> 0, psHomeTeam, psAwayTeam))
@@ -655,7 +656,7 @@ Namespace SBSWebsite
 
             Dim htmlString As String = "<div class='baseline'>" & sRotationNumber & "<b class='gm-team'>" & sChoiceTeam & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
-            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketStatus) & ")</span> </div>"
+            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketBetStatus) & ")</span> </div>"
             htmlString += gameBet
 
 
@@ -667,7 +668,7 @@ Namespace SBSWebsite
             Dim nDrawLine As Double = SafeDouble(poTicketbet("DrawMoneyLine")) + SafeDouble(poTicketbet("AddPointMoney"))
             Dim sGameType As String = SafeString(poTicketbet("GameType"))
             Dim gameDate As Date = SafeDate(poTicketbet("GameDate"))
-            Dim ticketStatus As String = SafeString(poTicketbet("TicketStatus"))
+            Dim ticketBetStatus As String = SafeString(poTicketbet("TicketBetStatus"))
             Dim sContext = SafeString(poTicketbet("Context"))
 
             Dim sDrawLine As String = SafeString(IIf(nDrawLine > 0, "+" & nDrawLine, nDrawLine))
@@ -683,7 +684,7 @@ Namespace SBSWebsite
 
             Dim htmlString As String = "<div class='baseline'>" & sRotationNumber & "<b class='gm-team'>" & sChoiceTeam & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
-            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketStatus) & ")</span> </div>"
+            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketBetStatus) & ")</span> </div>"
             htmlString += gameBet
 
             Return htmlString
@@ -694,7 +695,7 @@ Namespace SBSWebsite
         Private Function getDetailForPop(ByVal psHomeTeam As String, ByVal psAwayTeam As String, ByVal poTicketbet As DataRowView) As String
             Dim sGameType As String = SafeString(poTicketbet("GameType"))
             Dim gameDate As Date = SafeDate(poTicketbet("GameDate"))
-            Dim ticketStatus As String = SafeString(poTicketbet("TicketStatus"))
+            Dim ticketBetStatus As String = SafeString(poTicketbet("TicketBetStatus"))
             Dim sPopDescription = SafeString(poTicketbet("PropDescription"))
             Dim sPropParticipantName = SafeString(poTicketbet("PropParticipantName"))
             Dim sPropMoneyLine = SafeString(poTicketbet("PropMoneyLine"))
@@ -704,7 +705,7 @@ Namespace SBSWebsite
 
             Dim htmlString As String = "<div class='baseline'><b class='gm-team'>" & sPropParticipantName & "</b> "
             htmlString += "<span class='gm-date'>" & gameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & gameDate.ToString("HH:mm tt") & ")</span>&nbsp;"
-            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketStatus) & ")</span> </div>"
+            htmlString += "<span class='gm-status'>(" & CustomUpperTitleCase(ticketBetStatus) & ")</span> </div>"
             htmlString += gameBet
 
             Return htmlString

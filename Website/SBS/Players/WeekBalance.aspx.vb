@@ -49,7 +49,7 @@ Namespace SBSPlayer
             'If oEndDate = Date.MinValue Then
             '    oEndDate = GetEasternDate()
             '    txtDateFrom.Text = oEndDate.ToShortDateString()
-            'End If
+            'End IflbnWed
 
             'oEndDate = oEndDate.AddDays(1)
 
@@ -120,7 +120,8 @@ Namespace SBSPlayer
                     Response.Redirect("History.aspx?dateRange=" & SafeString(e.CommandArgument))
                 Case "VIEW_HISTORY"
                     Dim odate = SafeDate(e.CommandArgument)
-                    Response.Redirect("History.aspx?dateRange=" & SafeDate(e.CommandArgument).ToShortDateString() & "-" & SafeDate(e.CommandArgument).ToShortDateString())
+                    'Response.Redirect("History.aspx?dateRange=" & SafeDate(e.CommandArgument).ToShortDateString() & "-" & SafeDate(e.CommandArgument).ToShortDateString())
+                    Response.Redirect("HistoryDetail.aspx?date=" & SafeDate(e.CommandArgument).ToShortDateString())
             End Select
         End Sub
 
