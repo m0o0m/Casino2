@@ -384,6 +384,11 @@ strong {
     border-spacing: 0;
 }
 
+
+    .gamebetdetail .table tr[context="1H"] {
+        background: #B5D8FF;
+    }
+
     .gamebetdetail .table tr > th,
     .gamebetdetail .table tr > td {
         border-right: 1px solid gray;
@@ -427,6 +432,8 @@ strong {
             font-weight: bold;
             color: #FFF;
         }
+
+
 
     .gamebetdetail .table > tbody > tr.gamecontent > td {
         background: transparent;

@@ -32,6 +32,8 @@ Partial Class SBS_Inc_Game_BetActions
     Private _bHaveBettingData As Boolean = False
     Private _nOFFTeamTotal As Integer = 99999999
     Private _Description As String = ""
+    Public _contextGame As Integer = 1
+    Public _context1H As Integer = 1
 
 #Region "Properties"
     Public ReadOnly Property IfBetOrdinal() As String
@@ -1129,7 +1131,13 @@ Partial Class SBS_Inc_Game_BetActions
             'Dim thGameLineHeader As HtmlTableCell = CType(e.Item.FindControl("thGameLineHeader"), HtmlTableCell)
             Dim sAddedGame As String = CType(e.Item.Parent.Parent.Parent.Parent, RepeaterItem).DataItem.ToString.Replace(SafeString(e.Item.DataItem("GameType")) + " ADDED GAME", "<span class='add_game'>(ADDED GAME)</span>")
 
-
+            If e.Item.DataItem("Context") = "Current" Then
+                _contextGame += 1
+                _context1H = 1
+            ElseIf e.Item.DataItem("Context") = "1H" Then
+                _contextGame = 1
+                _context1H += 1
+            End If
             If Not sAddedGame.Contains("ADDED GAME") Then
                 sAddedGame = ""
             End If
@@ -1279,6 +1287,7 @@ Partial Class SBS_Inc_Game_BetActions
                 Dim trCircle As HtmlControl = e.Item.FindControl("trCircle")
                 trCircle.Visible = True
             End If
+
             Dim lblGameTypeHeader As Label = CType(e.Item.FindControl("lblGameTypeHeader"), Label)
             Dim lblAwaySpread As Label = CType(e.Item.FindControl("lblAwaySpread"), Label)
             Dim lblAwayTotal As Label = CType(e.Item.FindControl("lblAwayTotal"), Label)
@@ -1757,7 +1766,7 @@ Partial Class SBS_Inc_Game_BetActions
 
         End If
 
-        LogInfo(_log, "rptGameLines_ItemDataBound")
+            LogInfo(_log, "rptGameLines_ItemDataBound")
     End Sub
 
     Protected Sub BetGame(ByVal bSetWinAmount As Boolean, ByVal sender As Object, ByVal pbFavorite As Boolean, ByVal poData As DataRow, ByVal ddlBuyPoint As CDropDownList, ByVal pbIsCheckPitcher As Boolean, Optional ByVal pbPropGame As Boolean = False)
@@ -2911,11 +2920,13 @@ PropGame:
                 Dim bBuyPoint As Boolean = UCase(psBetType) <> "MONEYLINE" AndAlso _
                 UCase(psContext) = "CURRENT" AndAlso pnBetPoint >= -110 AndAlso pnBetPoint <= -100 _
                 AndAlso (IsFootball(psGameType) OrElse IsBasketball(psGameType))
+
                 If bBuyPoint Then
 
                     ''Single Parlay
                     Dim oDicItem As New DictionaryEntry(SafeString(pnJuice) & "   " & SafeString(If(pnBetPoint = -100, 100, pnBetPoint)), "")
                     olstDic.Add(oDicItem)
+
                     If IsFootball(psGameType) Then
                         '' OFF 3: From +3 to +3 1/2 | From -3 to -2 1/2
                         '' ON 3: From +2 1/2 to +3 | From -3 1/2 to -3
@@ -2948,7 +2959,6 @@ PropGame:
                     ddlBuyPoint.Visible = True
                     lblOdd.Visible = False
                 End If
-
 
             End If
 

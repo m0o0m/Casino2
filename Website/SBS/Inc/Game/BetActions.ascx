@@ -2,6 +2,7 @@
 <%@ Register Assembly="WebsiteLibrary" Namespace="WebsiteLibrary" TagPrefix="wlb" %>
 <%@ Register Src="~/SBS/Inc/Game/Wagers.ascx" TagName="Wagers" TagPrefix="uc" %>
 
+<link href="../../../Content/themes/agent/layout6/styles/_bet-action.css" rel="stylesheet" />
 
 <div class="row">
     <div class="col-lg-12">
@@ -32,7 +33,7 @@
                         Win
                     </div>
                     <div class="clr-black">
-                        <input type="radio" name="rdC" value="" />
+                        <input type="radio" name="rdC" value="" checked />
                         Base Amount
                     </div>
                 </div>
@@ -120,20 +121,20 @@
                                                     </td>
                                                 </tr>
                                                 <asp:Repeater runat="server" ID="rptGameLines" OnItemDataBound="rptGameLines_ItemDataBound">
-                                                    <ItemTemplate >
+                                                    <ItemTemplate>
                                                         <%--<tr context='<%#Container.DataItem("Context")%>'>
                                                         <th class="ThSport" id="thGameLineHeader" runat="server" colspan="8" align="left">
                                                         <asp:Literal ID="ltlTitle" runat="server"></asp:Literal>
                                                         </th>
                                                         </tr>--%>
                                                         <tr>
-                                                            <td colspan="7" class="itm-game-bet">
+                                                            <td colspan="7" class="itm-game-bet woutbdr">
                                                                 <div class="caption ly-fixed">
                                                                     <div class="pdL10 fz14 lh-2">
                                                                         <asp:Label ID="lblGameTypeHeader" runat="server" Text="" class="lh25"></asp:Label>
                                                                     </div>
-                                                                    <div class="w200px clear pdR10 v-top-i ">
-                                                                        <button class="button-style-2 w110px right">Continue</button>
+                                                                    <div class="w200px clear pdR10 pdT2 v-top-i ">
+                                                                        <button class="button-style-2 w110px h24px right">Continue</button>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -141,15 +142,15 @@
 
                                                         <tr context='<%# Container.DataItem("Context")%>' class='<%# "GameHeader2 " + If(Container.ItemIndex Mod 2 = 0, "", "success") & If(SBCBL.std.SafeDate(Container.DataItem("GameDate")).DayOfWeek = DayOfWeek.Monday, " mondaygame", "")%>'>
                                                             <th colspan="3">
-                                                                <span id="tdDate" runat="server">
-                                                                    <!--Date-->
-                                                                </span>
-                                                                <span id="tdNum" runat="server">
-                                                                    <!--#-->
-                                                                </span>
-                                                                <span id="tdTeam" runat="server">
-                                                                    <asp:Label ID="lblGameContext" runat="server"  Text=""></asp:Label>
-                                                                </span>
+                                                                    <span id="tdDate" runat="server">
+                                                                        <!--Date-->
+                                                                    </span>
+                                                                    <span id="tdNum" runat="server">
+                                                                        <!--#-->
+                                                                    </span>
+                                                                    <span id="tdTeam" runat="server">
+                                                                        <asp:Label ID="lblGameContext" runat="server" Text=""></asp:Label>
+                                                                    </span>
                                                             </th>
                                                             <th id="tdSpread" runat="server" align="left">
                                                                 <%#GetSpreadTitle(CType(Container.Parent.Parent.Parent.Parent, RepeaterItem).DataItem, "Spread")%>
@@ -165,7 +166,7 @@
                                                             </th>
                                                         </tr>
 
-                                                        <tr class='gamecontent<%# " offering_pair_" + SBCBL.std.SafeString(ViewState("OddEven")) & If(Container.ItemIndex Mod 2 = 0, "", " success") & If(SBCBL.std.SafeDate(Container.DataItem("GameDate")).DayOfWeek = DayOfWeek.Monday, " mondaygame", "")%>' context='<%#Container.DataItem("Context")%>'>
+                                                        <tr class='gamecontent<%# " offering_pair_" + SBCBL.std.SafeString(ViewState("OddEven")) & If(Container.ItemIndex Mod 2 = 0, "", " success") & If(SBCBL.std.SafeDate(Container.DataItem("GameDate")).DayOfWeek = DayOfWeek.Monday, " mondaygame", "") & If(_contextGame Mod 2 = 1, "", " GameEven") & If(_context1H Mod 2 = 1, "", " OneH-Even")%>' context='<%#Container.DataItem("Context")%>'>
                                                             <td class="game-date nobdr" width="100">
                                                                 <%--<%#SBCBL.std.SafeDate(Container.DataItem("GameDate")).ToString("f", System.Globalization.CultureInfo.CreateSpecificCulture("en-US")).Substring(0, 3)%>--%>
                                                                 <%--&nbsp;--%>
@@ -188,7 +189,7 @@
                                                                     AutoPostBack="false" />
                                                                 <asp:RadioButton ID="rdSelectAwaySpread" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkSelectAwaySpread" runat="server" CssClass="chkBetActionSelect" Style="margin-top: 2px" />
-                                                                <wlb:CDropDownList ID="ddlBuyPointAwaySpread" runat="server" hasOptionalItem="false" Visible="false" />
+                                                                <wlb:CDropDownList ID="ddlBuyPointAwaySpread" CssClass="select-field-1 w110px h21px" runat="server" hasOptionalItem="False" Visible="False" />
                                                                 <asp:Label ID="lblAwaySpread" runat="server" class="labelodd" />
                                                             </td>
 
@@ -214,7 +215,7 @@
                                                                     AutoPostBack="false" />
                                                                 <asp:RadioButton ID="rdSelectAwayTotal" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkSelectAwayTotal" CssClass="chkBetActionSelect" runat="server" />
-                                                                <wlb:CDropDownList ID="ddlBuyPointAwayTotal" runat="server" hasOptionalItem="false" Visible="false" />
+                                                                <wlb:CDropDownList CssClass="select-field-1 w110px h21px" ID="ddlBuyPointAwayTotal" runat="server" hasOptionalItem="false" Visible="false" />
                                                                 <asp:Label ID="lblAwayTotal" runat="server" class="labelodd" />
                                                             </td>
 
@@ -233,8 +234,8 @@
                                                                 <asp:Literal ID="lblAwayTeamTotalPointsUnderMoney" runat="server"></asp:Literal>
                                                             </td>
                                                         </tr>
-                                                      
-                                                          <tr class='gamecontent <%# " offering_pair_" + SBCBL.std.SafeString(ViewState("OddEven")) & If(Container.ItemIndex Mod 2 = 0, "", " success") & If(SBCBL.std.SafeDate(Container.DataItem("GameDate")).DayOfWeek = DayOfWeek.Monday, " mondaygame", "")%>' context='<%#Container.DataItem("Context")%>'>
+
+                                                        <tr class='gamecontent <%# " offering_pair_" + SBCBL.std.SafeString(ViewState("OddEven")) & If(Container.ItemIndex Mod 2 = 0, "", " success") & If(SBCBL.std.SafeDate(Container.DataItem("GameDate")).DayOfWeek = DayOfWeek.Monday, " mondaygame", "") & If(_contextGame Mod 2 = 1, "", " GameEven") & If(_context1H Mod 2 = 1, "", " OneH-Even")%>' context='<%#Container.DataItem("Context")%>'>
                                                             <td class="game-date nobdr">
                                                                 <%#SBCBL.std.SafeDate(Container.DataItem("GameDate")).ToString("hh:mm tt")%>
                                                             </td>
@@ -254,11 +255,11 @@
                                                                     AutoPostBack="false" />
                                                                 <asp:RadioButton ID="rdSelectHomeSpread" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkSelectHomeSpread" CssClass="chkBetActionSelect" runat="server" Style="margin-top: 2px" />
-                                                                <wlb:CDropDownList ID="ddlBuyPointHomeSpread" runat="server" hasOptionalItem="false" Visible="false" />
+                                                                <wlb:CDropDownList ID="ddlBuyPointHomeSpread" class="select-field-1 w110px h21px" runat="server" hasOptionalItem="false" Visible="false" />
                                                                 <asp:Label ID="lblHomeSpread" runat="server" class="labelodd" />
                                                             </td>
-                                                              
-                                                              <td id="tdMLine3" runat="server">
+
+                                                            <td id="tdMLine3" runat="server">
                                                                 <asp:TextBox ID="txtMoneyHomeMLine" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);"
                                                                     AutoPostBack="false" />
                                                                 <asp:RadioButton ID="rdSelectHomeMLine" runat="server" CssClass="chkBetActionSelect" />
@@ -280,7 +281,7 @@
                                                                 <asp:RadioButton ID="rdSelectHomeTotal" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkSelectHomeTotal" CssClass="chkBetActionSelect" runat="server" />
                                                                 <asp:Label ID="Label1" runat="server" class="labelodd" />
-                                                                <wlb:CDropDownList ID="ddlBuyPointHomeTotal" runat="server" hasOptionalItem="false" Visible="false" />
+                                                                <wlb:CDropDownList ID="ddlBuyPointHomeTotal" class="select-field-1 w110px h21px" runat="server" hasOptionalItem="false" Visible="false" />
                                                                 <asp:Label ID="lblHomeTotal" runat="server" class="labelodd" />
                                                             </td>
 
@@ -301,23 +302,24 @@
                                                                     <asp:Literal ID="lblHomeTeamTotalPointsUnderMoney" runat="server"></asp:Literal></div>
                                                             </td>
                                                         </tr>
-                                                     
-                                                           <tr id="trDraw" runat="server" visible="false" class='gamecontent <%#getCssClass() & If(Container.ItemIndex Mod 2 = 0, "", " success") & If(SBCBL.std.SafeDate(Container.DataItem("GameDate")).DayOfWeek = DayOfWeek.Monday, " mondaygame", "")%>' context='<%#Container.DataItem("Context")%>'>
+                                                        <tr id="trDraw" runat="server" visible="false" class='<%# "gamecontent " + getCssClass() & If(Container.ItemIndex Mod 2 = 0, "", " success") & If(SBCBL.std.SafeDate(Container.DataItem("GameDate")).DayOfWeek = DayOfWeek.Monday, " mondaygame", "") & If(_contextGame Mod 2 = 1, "", " Game-Even") & If(_context1H Mod 2 = 1, "", " OneH-Even ")%>' context='<%#Container.DataItem("Context")%>'>
                                                             <td class="game-date nobdr"></td>
                                                             <td class="game-number nobdr">
                                                                 <asp:Literal ID="Literal2" runat="server" Text='<%#Container.DataItem("DrawRotationNumber")%>'></asp:Literal>
                                                             </td>
-                                                            <td class="game-team">Draw</td>
+                                                            <td class="game-team">
+                                                                <span style="font-weight: 800">Draw</span>
+                                                            </td>
                                                             <td></td>
-                                                            
-                                                            <td id="tdDrawLast" runat="server"></td>
-                                                            <td colspan="3">
+                                                            <td>
                                                                 <asp:TextBox ID="txtMoneyDraw" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);"
                                                                     AutoPostBack="false" />
                                                                 <asp:RadioButton ID="rdSelectDraw" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkSelectDraw" CssClass="chkBetActionSelect" runat="server" />
                                                                 <asp:Label ID="lblDrawMoney" runat="server" Width="60" class="labelodd" />
                                                             </td>
+                                                            <td id="tdDrawLast" runat="server"></td>
+                                                            
 
                                                         </tr>
 
@@ -404,7 +406,7 @@
 
 
                     </div>
-                    <div class="gameHeaderLoad" style="margin-top: 20px; float: left;">
+                    <div class="gameHeaderLoad none" style="margin-top: 20px; float: left;">
                         <div id="dvBottomIfBet" runat="server"><%--Please select one wager from the chart below for your <b><%=IfBetOrdinal%></b> if-bet selection.--%></div>
                         <div id="dvBottomOtherBet" runat="server">
                             <%=getHeader().Replace("below", "above")%>
@@ -412,7 +414,7 @@
                         </div>
                     </div>
                     <br />
-                    <div class="row">
+                    <div class="row none">
                         <div class="col-md-2 pull-right" style="margin-right: 20px;">
                             <button type="button" class="btn btn-dark pull-right" onclick='continueBet(this);'>
                                 Continue
