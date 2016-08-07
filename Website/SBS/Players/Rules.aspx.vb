@@ -6,6 +6,7 @@ Partial Class SBS_Players_Rules
     Protected Sub Page_Init(sender As Object, e As EventArgs) Handles Me.Init
         PageTitle = "Rules"
         MenuTabName = "ACCOUNT_RULES"
+        CurrentPageName ="Rule"
     End Sub
 
 End Class

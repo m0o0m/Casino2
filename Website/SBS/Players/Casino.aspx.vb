@@ -10,6 +10,7 @@ Partial Class SBS_Players_Casino
         MenuTabName = "CASINO"
         PageTitle = "Casino"
         DisplaySubTitlle(Me.Master, "Casino")
+        CurrentPageName = "Casino"
     End Sub
 
     Protected Sub lbnCasino_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lbnCasino.Click

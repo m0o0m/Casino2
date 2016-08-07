@@ -41,7 +41,7 @@
                     </li>
                 </ul>
             </li>
-            <li><a href="#">Casino</a></li>
+            <li class="<%= MenuActive("Casino") %>"><a href="/SBS/Players/Casino.aspx?bettype=casino">Casino</a></li>
             <li class="<%= MenuActive("Account") %>">
                 <a href="WeekBalance.aspx">Account</a>
                 <ul class="sub-menu menu-style-2 clear pdL10 left pdT12">
@@ -53,8 +53,8 @@
                 </ul>
             </li>
             <li class="<%= MenuActive("Pending")%>"><a href="OpenBet.aspx">Pending</a></li>
-            <li><a href="#">Scores</a></li>
-            <li><a href="#">Rules</a></li>
+            <li><a href="http://scores.sportsoptions.com/scores/today.html" target="_blank">Scores</a></li>
+            <li class="<%= MenuActive("Rule")%>"><a href="/SBS/Players/Rules.aspx">Rules</a></li>
         </ul>
     </div>
 
