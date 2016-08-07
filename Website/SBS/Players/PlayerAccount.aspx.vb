@@ -9,6 +9,7 @@ Namespace SBSPlayer
             SubMenuActive = "ACCOUNT_STATUS"
             MenuTabName = "ACCOUNT_STATUS"
             DisplaySubTitlle(Me.Master, "Account Status")
+            CurrentPageName = "Account_Account"
         End Sub
     End Class
 End Namespace

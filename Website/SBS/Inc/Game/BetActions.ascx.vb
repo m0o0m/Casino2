@@ -396,6 +396,28 @@ Partial Class SBS_Inc_Game_BetActions
         If UserSession.SelectedGameTypes(Me.SelectedPlayerID).Count <= 0 AndAlso pnBetAction.Visible Then
             Response.Redirect(BackLink)
         End If
+
+        SetActiveMenu()
+
+    End Sub
+
+    Private Sub SetActiveMenu()
+        Select Case UCase(Session("BetTypeActive"))
+            Case "TEASER"
+                Me.Page.CurrentPageName = "Sport_Teaser"
+            Case "PARLAY"
+                Me.Page.CurrentPageName = "Sport_Parlay"
+            Case "REVERSE"
+                Me.Page.CurrentPageName = "Sport_IfBet"
+            Case "PROP"
+                Me.Page.CurrentPageName = "Sport_Prop"
+            Case "IF WIN OR PUSH"
+                Me.Page.CurrentPageName = "Sport_IfBet"
+            Case "IF WIN"
+                Me.Page.CurrentPageName = "Sport_IfBet"
+            Case "BETIFALL"
+                Me.Page.CurrentPageName = "Sport_Straight"
+        End Select
     End Sub
 
     'Protected Sub btnUpdateLines_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnUpdateLines.Click, lbtUpdateLineTop.Click

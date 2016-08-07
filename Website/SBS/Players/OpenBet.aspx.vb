@@ -26,6 +26,7 @@ Namespace SBSPlayer
         Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
             PageTitle = "Pending Bets"
             MenuTabName = "OPEN_BET"
+            CurrentPageName ="Pending"
         End Sub
 
         Protected Sub Page_Load1(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load

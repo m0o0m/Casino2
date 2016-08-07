@@ -6,6 +6,8 @@ Imports SBCBL.Tickets
 Imports SBCBL.Managers
 Imports System.Collections
 Imports System.Data
+Imports System.Linq.Expressions
+
 Partial Class SBS_Agents_Inc_Game_SelectGame
     Inherits SBCBL.UI.CSBCUserControl
     Private _sGameType As String = SBCBL.std.GetSiteType & " GameType"
@@ -279,11 +281,30 @@ Partial Class SBS_Agents_Inc_Game_SelectGame
 
             bindGameTypes()
 
-
+            SetActiveMenu()
 
 
         End If
 
+    End Sub
+
+    Private Sub SetActiveMenu()
+        Select Case UCase(BetType)
+            Case "TEASER"
+                Me.Page.CurrentPageName = "Sport_Teaser"
+            Case "PARLAY"
+                Me.Page.CurrentPageName = "Sport_Parlay"
+            Case "REVERSE"
+                Me.Page.CurrentPageName = "Sport_IfBet"
+            Case "PROP"
+                Me.Page.CurrentPageName = "Sport_Prop"
+            Case "IF WIN OR PUSH"
+                Me.Page.CurrentPageName = "Sport_IfBet"
+            Case "IF WIN"
+                Me.Page.CurrentPageName = "Sport_IfBet"
+            Case "BETIFALL"
+                Me.Page.CurrentPageName = "Sport_Straight"
+        End Select
     End Sub
 
     'Public Sub DisplayInfo()
@@ -330,7 +351,7 @@ Partial Class SBS_Agents_Inc_Game_SelectGame
         dvSubAgents.Visible = ddlSubAgents.Items.Count > 1
     End Sub
 
-    <System.Web.Services.WebMethod()> _
+    <System.Web.Services.WebMethod()>
     Private Sub BindPlayers()
 
         Dim oMng As New SBCBL.Managers.CPlayerManager()
@@ -458,7 +479,7 @@ Partial Class SBS_Agents_Inc_Game_SelectGame
 
         Return "Pinnacle2"
     End Function
-    Private Shared Function SortGameType( _
+    Private Shared Function SortGameType(
         ByVal x As String, ByVal y As String) As Boolean
 
         Return String.Compare(x, y)

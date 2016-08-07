@@ -21,6 +21,7 @@ Namespace SBSPlayer
         Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
             PageTitle = "History"
             MenuTabName = "HISTORY"
+            CurrentPageName = "Account_DailyFigure"
         End Sub
 
         Protected Sub Page_Load1(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load

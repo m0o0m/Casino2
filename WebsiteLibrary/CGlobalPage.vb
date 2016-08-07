@@ -108,6 +108,16 @@ Public Class CGlobalPage
         End Set
     End Property
 
+    Private _CurrentPageName As String = ""
+    Public Property CurrentPageName() As String
+        Get
+            Return _CurrentPageName
+        End Get
+        Set(ByVal value As String)
+            _CurrentPageName = value
+        End Set
+    End Property
+
     Public ReadOnly Property PopupCallBackData() As String
         Get
             Return Server.UrlDecode(SafeString(Request("__EVENTARGUMENT")))
