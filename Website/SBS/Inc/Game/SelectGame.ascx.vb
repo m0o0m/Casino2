@@ -304,6 +304,8 @@ Partial Class SBS_Agents_Inc_Game_SelectGame
                 Me.Page.CurrentPageName = "Sport_IfBet"
             Case "BETIFALL"
                 Me.Page.CurrentPageName = "Sport_Straight"
+            Case "IFBETREVERSE"
+                Me.Page.CurrentPageName = "Sport_IfBet"
         End Select
     End Sub
 

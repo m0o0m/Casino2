@@ -22,6 +22,8 @@ Partial Class SBS_Inc_Game_BetActions
     Private _SuperBookmakerValue As String = SBCBL.std.GetSiteType & " BookmakerType"
     Private _sParlay As String = "Parlay"
     Private __BetIfAll As String = "BetIfAll"
+    Private __IfWin As String = "If Win"
+    Private __IfWinOrPush As String = "If Win or Push"
     Private _sReverse As String = "Reverse"
     Private _sStraight As String = "Straight"
     Private _sBetTheBoard As String = "BetTheBoard"
@@ -419,6 +421,8 @@ Partial Class SBS_Inc_Game_BetActions
                 Me.Page.CurrentPageName = "Sport_IfBet"
             Case "BETIFALL"
                 Me.Page.CurrentPageName = "Sport_Straight"
+            Case "IFBETREVERSE"
+                Me.Page.CurrentPageName = "Sport_IfBet"
         End Select
     End Sub
 
@@ -2826,7 +2830,9 @@ PropGame:
         '    Return False
         'End If
 
-        If BetTypeActive.Equals(__BetIfAll, StringComparison.CurrentCultureIgnoreCase) Then
+        If BetTypeActive.Equals(__BetIfAll, StringComparison.CurrentCultureIgnoreCase) OrElse _
+         BetTypeActive.Equals(__IfWin, StringComparison.CurrentCultureIgnoreCase) OrElse _
+         BetTypeActive.Equals(__IfWinOrPush, StringComparison.CurrentCultureIgnoreCase) Then
             Return True
         Else
             Return False
