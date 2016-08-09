@@ -760,6 +760,36 @@ Partial Class SBS_Agents_Inc_Game_SelectGame
 
     End Sub
 
+    Protected Sub btnContinueIfBetOrReverse_Command(sender As Object, e As CommandEventArgs) 
+        If UserSession.UserType = SBCBL.EUserType.Agent Then
+            SelectedPlayerID = ddlPlayers.SelectedValue
+        End If
+        UserSession.SelectedBetType(Me.SelectedPlayerID) = "SINGLE"
+        Session("BetTypeActive") = e.CommandName
+        If Not String.IsNullOrEmpty(BetActionLink) AndAlso Not String.IsNullOrEmpty(Me.SelectedPlayerID) Then
+            ''clear all game
+            UserSession.SelectedGameTypes(Me.SelectedPlayerID).Clear()
+            ''get game checked
+            _log.Error("goi")
+            SelectBetType()
+
+            Dim olt As List(Of String) = UserSession.SelectedGameTypes(Me.SelectedPlayerID)
+            '_log.Debug("xxx" + olt.Count.ToString())
+            Dim olstGameType As List(Of String) = UserSession.SelectedGameTypes(Me.SelectedPlayerID)
+            '_log.Debug("sasdasdsa" + olstGameType.Count)
+
+            If olstGameType Is Nothing OrElse olstGameType.Count = 0 Then
+                'ClientAlert("Please Select Game2")
+                lbMessage.Text = "Please select at least one option to continue"
+            Else
+                Response.Redirect(BetActionLink & String.Format("?PlayerID={0}", Me.SelectedPlayerID))
+            End If
+
+        Else
+            'ClientAlert("Please Select A Player")
+            lbMessage.Text = "Please Select A Player"
+        End If
+    End Sub
 
 
     Protected Sub lbtPropType_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -929,6 +959,7 @@ Partial Class SBS_Agents_Inc_Game_SelectGame
 #End Region
 
 
+    
 End Class
 
 

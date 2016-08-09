@@ -193,15 +193,19 @@
         <div class="clear pdLR13 mgT40">
             <div class="ly-w-1:2 left pdLR13 text-center">
                 <div class="mgB5">
-                    <button  type="button" class="button-style-3 w220px" onclick='$("#<%=btnContinue.ClientID%>").click()'>If Bet (If Win Only)</button></div>
+                    <asp:Button ID="btnContinueIfWin" CssClass="button-style-3 w220px" CommandName="If Win" runat="server" Text="If Bet (If Win Only)" OnCommand="btnContinueIfBetOrReverse_Command" />
+                </div>
                 <div>
-                    <a href="Default.aspx?bettype=Default.aspx?bettype=If Win or Push" class="button-style-3 w220px">If Bet (If Win, Push or Cancel)</a></div>
+                    <asp:Button ID="btnContinueIfWinOrPush" CssClass="button-style-3 w220px" CommandName="If Win or Push" runat="server" Text="If Bet (If Win, Push or Cancel)" OnCommand="btnContinueIfBetOrReverse_Command" />
+                </div>
             </div>
             <div class="ly-w-1:2 left pdLR13 text-center">
                 <div class="mgB5">
-                    <a href="#" class="button-style-3 w220px">Win Reverse</a></div>
+                    <asp:Button ID="btnWinReverse" CssClass="button-style-3 w220px" CommandName="Win Reverse" Enabled="False" runat="server" Text="Win Reverse" />
+                </div>
                 <div>
-                    <a href="Default.aspx?bettype=Reverse" class="button-style-3 w220px">Action Reverse</a></div>
+                    <asp:Button ID="btnContinueReverse" CssClass="button-style-3 w220px" CommandName="Reverse" runat="server" Text="Action Reverse" OnCommand="btnContinueIfBetOrReverse_Command" />
+                </div>
             </div>
         </div>
         <% End If%>
