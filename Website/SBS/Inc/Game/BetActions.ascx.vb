@@ -1800,7 +1800,7 @@ Partial Class SBS_Inc_Game_BetActions
 
         End If
 
-            LogInfo(_log, "rptGameLines_ItemDataBound")
+        LogInfo(_log, "rptGameLines_ItemDataBound")
     End Sub
 
     Protected Sub BetGame(ByVal bSetWinAmount As Boolean, ByVal sender As Object, ByVal pbFavorite As Boolean, ByVal poData As DataRow, ByVal ddlBuyPoint As CDropDownList, ByVal pbIsCheckPitcher As Boolean, Optional ByVal pbPropGame As Boolean = False)
@@ -3059,9 +3059,9 @@ PropGame:
     Protected Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
         Dim selectedBetTypeActive As String = UCase(BetTypeActive)
 
-        If( (selectedBetTypeActive = "REVERSE" ) OR (selectedBetTypeActive = "IF WIN" ) OR (selectedBetTypeActive = "IF WIN OR PUSH" )) Then
+        If ((selectedBetTypeActive = "REVERSE") Or (selectedBetTypeActive = "IF WIN") Or (selectedBetTypeActive = "IF WIN OR PUSH")) Then
             Response.Redirect("Default.aspx?bettype=IfBetReverse")
-        Else 
+        Else
             Response.Redirect(String.Format("Default.aspx?bettype={0}", BetTypeActive))
         End If
     End Sub

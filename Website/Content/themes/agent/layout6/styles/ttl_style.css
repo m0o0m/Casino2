@@ -8,7 +8,7 @@
      Heading - Title Style ///////////////////////////////////////////// */
 
 .ft-primary {
-    font-family: Arial ;
+    font-family: Arial;
 }
 
 .ft-secondary {
@@ -441,6 +441,37 @@ ul.menu-style-3 {
 
 
 
+
+.table-style-6 {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+    .table-style-6 tr.caption {
+        background: #000;
+    }
+
+        .table-style-6 tr.caption > td {
+            height: 40px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #FFF;
+        }
+
+    .table-style-6 tr.content:nth-of-type(2n+1) {
+        background: #EFEFEF;
+    }
+
+
+    .table-style-6 tr.content > td {
+        padding-top: 3px;
+        padding-bottom: 3px;
+        font-size: 14px;
+        color: #000;
+    }
+
+
+
 /* ========================================
      Box Style /////////////////////////////////////////////////////////// */
 
@@ -725,8 +756,11 @@ ul.menu-style-3 {
 }
 
     .button-style-2:hover {
-        background: #008a32 none repeat scroll 0 0;
         font-weight: bold;
+    }
+
+    .button-style-2.red {
+        background: red none repeat scroll 0 0;
     }
 
 .button-style-3 {
@@ -857,8 +891,12 @@ ul.menu-style-3 {
 /* ========================================
      Hyperlink Style //////////////////////////////////////////////////// */
 
-.link-1; {
+.link-1 {
     color: blue;
+}
+
+.link-2 {
+    text-decoration: none;
 }
 
 a.nonunderline {
@@ -926,6 +964,15 @@ a.nonunderline {
 .clr-black {
     color: #000;
 }
+
+.clr-red {
+    color: red;
+}
+
+.clr-brown {
+    color: #7b3c02;
+}
+
 
 /* ========================================
      Separator Style /////////////////////////////////////////////////// */

@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="right pdR20">
-                <asp:Button ID="btnMainMenu" class="button-style-3 w110px h24px" runat="server" Text="Main Menu"></asp:Button>
+
                 <asp:Button ID="btnUpdateLines" class="update button-style-3 w110px h24px" runat="server" Text="Refresh"></asp:Button>
             </div>
         </div>
@@ -134,7 +134,7 @@
                                                                         <asp:Label ID="lblGameTypeHeader" runat="server" Text="" class="lh25"></asp:Label>
                                                                     </div>
                                                                     <div class="w200px clear pdR10 pdT2 v-top-i ">
-                                                                        <button class="button-style-2 w110px h24px right">Continue</button>
+                                                                        <button type="button" class="button-style-2 w110px h24px right" onclick='continueBet(this);'>Continue</button>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -142,15 +142,15 @@
 
                                                         <tr context='<%# Container.DataItem("Context")%>' class='<%# "GameHeader2 " + If(Container.ItemIndex Mod 2 = 0, "", "success") & If(SBCBL.std.SafeDate(Container.DataItem("GameDate")).DayOfWeek = DayOfWeek.Monday, " mondaygame", "")%>'>
                                                             <th colspan="3">
-                                                                    <span id="tdDate" runat="server">
-                                                                        <!--Date-->
-                                                                    </span>
-                                                                    <span id="tdNum" runat="server">
-                                                                        <!--#-->
-                                                                    </span>
-                                                                    <span id="tdTeam" runat="server">
-                                                                        <asp:Label ID="lblGameContext" runat="server" Text=""></asp:Label>
-                                                                    </span>
+                                                                <span id="tdDate" runat="server">
+                                                                    <!--Date-->
+                                                                </span>
+                                                                <span id="tdNum" runat="server">
+                                                                    <!--#-->
+                                                                </span>
+                                                                <span id="tdTeam" runat="server">
+                                                                    <asp:Label ID="lblGameContext" runat="server" Text=""></asp:Label>
+                                                                </span>
                                                             </th>
                                                             <th id="tdSpread" runat="server" align="left">
                                                                 <%#GetSpreadTitle(CType(Container.Parent.Parent.Parent.Parent, RepeaterItem).DataItem, "Spread")%>
@@ -319,7 +319,7 @@
                                                                 <asp:Label ID="lblDrawMoney" runat="server" Width="60" class="labelodd" />
                                                             </td>
                                                             <td id="tdDrawLast" runat="server"></td>
-                                                            
+
 
                                                         </tr>
 

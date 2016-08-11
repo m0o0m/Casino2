@@ -13,8 +13,7 @@
                 <asp:Button ID="btnBackGame" runat="server" Text="Back To Game" class="btn btn-default pull-right" Style="margin: 5px" OnClick="btnClearWagers_Click" />
             </div>
             <div class="clearfix"></div>
-            <h2 id="trTicketType" runat="server">Wager type : <%=BetTypeActive.Replace("BetTheBoard", "Straight Bet(s)").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board")%>
-            </h2>
+            <h2 id="trTicketType" runat="server">Wager type : <%=BetTypeActive.Replace("BetTheBoard", "Straight Bet(s)").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board")%></h2>
             <table class="table table-condensed">
                 <asp:Repeater ID="rptTickets" runat="server">
                     <ItemTemplate>
@@ -154,30 +153,61 @@
                         <%#IIf((SBCBL.std.SafeString(Session("BetTypeActive")).Equals("Straight") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Equals("BetTheBoard") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Contains("If")), "</table> </td></tr></table>", "")%>
                     </FooterTemplate>
                 </asp:Repeater>
+            </table>
 
-                <tr>
+
+            <table class="table-style-6 full">
+                <tr class="caption">
+                    <td class="pdT10 pdL25" colspan="2">StraightsBet    8/10/2016 11:25:13 AM - PT</td>
+                    <td>Risk</td>
+                    <td colspan="2">Win</td>
+                </tr>
+                <tr class="content">
+                    <td class="pdL25-i"><span class="fz12">Selection 1:</span></td>
                     <td>
-                        <div id="tblBetTheboard" runat="server" visible="True" style="text-align: right;" class="row">
-                            <span id="pnSameAmount" visible="false" runat="server" style="text-align: right; display: inline-block;">
-                                <asp:CheckBox ID="chkCheckAmount" onclick="if(this.checked){$('.amount').hide()}else{$('.amount').show();$('.amount').val('');}" runat="server" />Use same amount for All Bets 
-                                        <asp:TextBox ID="txtSameAmount" onkeypress="javascript:return inputNumber(this,event, false);" Width="100" runat="server" CssClass="form-control" Style="display: inline-block;"></asp:TextBox>
-                                <asp:Button ID="btnPreviewGame" runat="server" CssClass="btn btn-dark" Text="Preview Bet(s)" Style="margin-left: 10px;" />
-                            </span>
-                           
-                            <asp:Label ID="lblMessage" Style="font-size: 14px; text-align: left; display: inline-block"
-                                ForeColor="black" runat="server" Text="Please Enter Your Password To Confirm !"></asp:Label>
-                            <asp:TextBox ID="txtPassword" runat="server" Visible="true" TextMode="Password"
-                                Width="100" MaxLength="50" CssClass="form-control" Style="display: inline-block;"></asp:TextBox>
-                            <asp:Button ID="btnSubmit" runat="server" Visible="true" Text="Confirm Bet(s)" Style="margin-left: 10px;"
-                                ToolTip="Confirm Bet(s)" CssClass="btn btn-dark" />
-                            <asp:Button ID="btnCancel" runat="server" Text="Cancel Your Wager" Style="margin-left: 10px; margin-right: 25px;" CssClass="btn btn-red"
-                                ToolTip="Cancel Your Wager" />
-                            <div class="clearfix"></div>
+                        <div>
+                            <div class="fz11 clr-brown baseline">Basketball - Olympics - Men</div>
+                            <div class="baseline">
+                                <span class="fz12 bold clr-black">[31821] USA</span>
+                                <span class="fz11 clr-brown">08/10/2016</span>
+                                <span class="fz11 clr-black">(03:00 PM)</span>
+                            </div>
+                            <div class="baseline">
+                                <span class="fz12 bold clr-black">-27½ Points -110</span>
+                                <span class="fz11 clr-black">for the Game</span>
+                                <span class="fz12 clr-red">(Line Change)</span>
+                            </div>
                         </div>
-                        <div class="clearfix"></div>
+                    </td>
+                    <td style="width: 81px">100.00</td>
+                    <td style="width: 81px">100.00</td>
+                    <td style="width: 81px">
+                        <a class="link-2 clr-red" href="#">Remove</a>
                     </td>
                 </tr>
             </table>
+
+
+            <div class="pdTB10 pdLR25">
+                <span class="fz12 bold clr-black">Please Review Wagers Carefully! Enter Password and click 'Confirm Bet(s)' to confirm and receive Ticket Numbers.</span>
+            </div>
+
+            <div id="tblBetTheboard" runat="server" visible="True" class="row pdTB10 pdL25 pdR50 text-center">
+                <span id="pnSameAmount" visible="false" runat="server" style="text-align: right; display: inline-block;">
+                    <asp:CheckBox ID="chkCheckAmount" onclick="if(this.checked){$('.amount').hide()}else{$('.amount').show();$('.amount').val('');}" runat="server" />Use same amount for All Bets 
+                                        <asp:TextBox ID="txtSameAmount" onkeypress="javascript:return inputNumber(this,event, false);" Width="100" runat="server" CssClass="form-control" Style="display: inline-block;"></asp:TextBox>
+                    <asp:Button ID="btnPreviewGame" runat="server" CssClass="btn btn-dark" Text="Preview Bet(s)" Style="margin-left: 10px;" />
+                </span>
+                <asp:Label ID="lblMessage" CssClass="fz14 bold mgR10"
+                    ForeColor="black" runat="server" Text="Password:"></asp:Label>
+                <asp:TextBox ID="txtPassword" runat="server" Visible="true" TextMode="Password"
+                    Width="180" MaxLength="50" CssClass="form-control input-field-2 h30px" Style="display: inline-block;"></asp:TextBox>
+                <asp:Button ID="btnSubmit" runat="server" Visible="true" Text="Confirm Bet(s)" Style="margin-left: 20px;"
+                    ToolTip="Confirm Bet(s)" CssClass="btn btn-dark button-style-2 w140px h24px" />
+                <asp:Button ID="btnCancel" runat="server" Text="Cancel Your Wager" Style="margin-left: 10px; margin-right: 25px;" CssClass="btn btn-red button-style-2 red w175px h24px"
+                    ToolTip="Cancel Your Wager" />
+                <div class="clearfix"></div>
+            </div>
         </div>
 
         <div>
@@ -201,7 +231,7 @@
 </div>
 <div id="noticeCancel" runat="server" style="text-align: center" visible="false">
 
-    <font color="red" face="" size="4" style="BACKGROUND-COLOR: #ffffff">Current wager cancelled....</font>
+    <font color="red" face="" size="4" style="background-color: #ffffff">Current wager cancelled....</font>
     <br />
     <span style="color: black; font-size: 12pt">You may begin entering another wager by selecting a wager type above.</span>
 
