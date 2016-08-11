@@ -134,7 +134,7 @@
                                                                         <asp:Label ID="lblGameTypeHeader" runat="server" Text="" class="lh25"></asp:Label>
                                                                     </div>
                                                                     <div class="w200px clear pdR10 pdT2 v-top-i ">
-                                                                        <button class="button-style-2 w110px h24px right">Continue</button>
+                                                                        <button type="button" class="button-style-2 w110px h24px right" onclick='continueBet(this);'>Continue</button>
                                                                     </div>
                                                                 </div>
                                                             </td>

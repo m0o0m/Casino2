@@ -16,6 +16,13 @@
             <h2 id="trTicketType" runat="server">Wager type : <%=BetTypeActive.Replace("BetTheBoard", "Straight Bet(s)").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board")%>
             </h2>
             <table class="table table-condensed">
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Risk</th>
+                    <th>Win</th>
+                    <th></th>
+                </tr>
                 <asp:Repeater ID="rptTickets" runat="server">
                     <ItemTemplate>
                         <tr>
@@ -49,8 +56,8 @@
                                             <tr id="trTicketBet" runat="server">
                                                 <td>
                                                     <b>
-                                                        <asp:Literal ID="lblTeam" runat="server" Text='<%# SBCBL.std.SafeString(Container.DataItem.Team)%>  '></asp:Literal><span
-                                                            style="margin-left: 10px"><%# Container.DataItem.GameDate%>
+                                                        <asp:Literal ID="lblTeam" runat="server" Text='<%# SBCBL.std.SafeString(Container.DataItem.Team)%>  '></asp:Literal>
+                                                        <span style="margin-left: 10px"><%# Container.DataItem.GameDate%>
                                                             - (EST)</span></b>
                                                     <asp:Literal ID="lblContext" runat="server" Text='<%# SBCBL.std.SafeString(iif(LCase(SBCBL.std.SafeString(Container.DataItem.Context)) = "current","for Game",Container.DataItem.Context ))%>'></asp:Literal>
                                                 </td>
@@ -163,7 +170,7 @@
                                         <asp:TextBox ID="txtSameAmount" onkeypress="javascript:return inputNumber(this,event, false);" Width="100" runat="server" CssClass="form-control" Style="display: inline-block;"></asp:TextBox>
                                 <asp:Button ID="btnPreviewGame" runat="server" CssClass="btn btn-dark" Text="Preview Bet(s)" Style="margin-left: 10px;" />
                             </span>
-                           
+
                             <asp:Label ID="lblMessage" Style="font-size: 14px; text-align: left; display: inline-block"
                                 ForeColor="black" runat="server" Text="Please Enter Your Password To Confirm !"></asp:Label>
                             <asp:TextBox ID="txtPassword" runat="server" Visible="true" TextMode="Password"
@@ -201,7 +208,7 @@
 </div>
 <div id="noticeCancel" runat="server" style="text-align: center" visible="false">
 
-    <font color="red" face="" size="4" style="BACKGROUND-COLOR: #ffffff">Current wager cancelled....</font>
+    <font color="red" face="" size="4" style="background-color: #ffffff">Current wager cancelled....</font>
     <br />
     <span style="color: black; font-size: 12pt">You may begin entering another wager by selecting a wager type above.</span>
 

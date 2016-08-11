@@ -8,7 +8,7 @@ Imports SBCBL.UI.CSBCSession
 Imports System.Web
 
 Namespace Tickets
-    <Serializable()> _
+    <Serializable()>
     Public Class CTicketBet
         Implements IComparable(Of CTicketBet)
         Private Shared _log As log4net.ILog = log4net.LogManager.GetLogger(GetType(CTicketBet))
@@ -240,9 +240,9 @@ Namespace Tickets
         Public ReadOnly Property HTML(Optional ByVal pbCheckBuyPoint As Boolean = False) As String
             Get
                 ' HTML result
-                Dim sHTML As String = "<tr><td>{2}</td><td nowrap='nowrap'><b>{3}</b></td><td nowrap='nowrap'>{4}</td><td nowrap='nowrap'>{5}</td>" & _
-                "<td><input type='submit' id='btnDel{1}' name='btnDel{1}' value='Del' " & _
-                "onclick='javascript:return RemoveBet(\""{0}\"",\""{1}\"");' " & _
+                Dim sHTML As String = "<tr><td>{2}</td><td nowrap='nowrap'><b>{3}</b></td><td nowrap='nowrap'>{4}</td><td nowrap='nowrap'>{5}</td>" &
+                "<td><input type='submit' id='btnDel{1}' name='btnDel{1}' value='Del' " &
+                "onclick='javascript:return RemoveBet(\""{0}\"",\""{1}\"");' " &
                 "title='Delete TicketBet' /></td></tr>"
                 Dim sLine As String = ""
 
@@ -252,7 +252,7 @@ Namespace Tickets
 
                     If olstBuyPoint.Count > 0 Then ' Can Buy Point
                         ' Display dropdownlist buy points
-                        sLine = String.Format("<select name='ddl{0}' id='ddlBuyPoint{0}' class='textInput' " & _
+                        sLine = String.Format("<select name='ddl{0}' id='ddlBuyPoint{0}' class='textInput' " &
                                               "onblur='javascript: return BuyPoints(this, \""{1}\"", \""{0}\"");' >", Me.TicketBetID, Me.TicketID)
 
                         Dim sValue As String = ""
@@ -346,12 +346,12 @@ Namespace Tickets
                     sDisplay = ""
                 End If
 
-                sLine &= String.Format("<span id='span{0}' name='span{0}' Wager='{1}' GameType='{2}' " & _
-                                      "Point='{3}' Status='{4}' Money='{5}' Rate='{6}'>{7}</span>", _
+                sLine &= String.Format("<span id='span{0}' name='span{0}' Wager='{1}' GameType='{2}' " &
+                                      "Point='{3}' Status='{4}' Money='{5}' Rate='{6}'>{7}</span>",
                                       Me.TicketBetID, Me.TicketID, Me.GameType, sPoint, sStatus, sMoney, sRate, sDisplay)
 
 
-                sHTML = String.Format(sHTML, Me.TicketID, Me.TicketBetID, Me.TeamNumber, Me.Team, _
+                sHTML = String.Format(sHTML, Me.TicketID, Me.TicketBetID, Me.TeamNumber, Me.Team,
                                       SafeString(IIf(LCase(SafeString(Me.Context)) = "current", "", Me.Context)), sLine)
 
                 Return sHTML
@@ -361,7 +361,7 @@ Namespace Tickets
         Public ReadOnly Property PreviewHTML(ByVal pnIndex As Integer) As String
             Get
                 ' HTML result
-                Dim sHTML As String = String.Format("<tr><td>Select #{0}: </td><td>{1}</td></tr><tr><td></td><td {2}>", _
+                Dim sHTML As String = String.Format("<tr><td>Select #{0}: </td><td>{1}</td></tr><tr><td></td><td {2}>",
                                                     SafeString(pnIndex), Me.GameType, SafeString(IIf(Me.IsUpdate, "style=\""color: red;\""", "")))
 
                 Select Case UCase(Me.BetType)
@@ -426,16 +426,16 @@ Namespace Tickets
 
             Dim sTotalPointsMoney As String = FormatNumber(nMoney + Me.AddPointMoney, GetRoundMidPoint, TriState.UseDefault, TriState.False)
 
-            Return String.Format("<b>{0}</b>&nbsp;{1} <b>-</b> {2} &nbsp;<u><b>{3} {4} ({5})</b></u>", _
-                                 IIf(LCase(SafeString(Me.Context)) = "current", "", "&nbsp;" & Me.Context), Me.HomeTeam, _
+            Return String.Format("<b>{0}</b>&nbsp;{1} <b>-</b> {2} &nbsp;<u><b>{3} {4} ({5})</b></u>",
+                                 IIf(LCase(SafeString(Me.Context)) = "current", "", "&nbsp;" & Me.Context), Me.HomeTeam,
                                  Me.AwayTeam, sMsg, FormatPoint(Me.TotalPoints + Me.AddPoint, Me.GameType).Replace("+"c, ""), IIf(sTotalPointsMoney.Contains("-"), sTotalPointsMoney, "+" & sTotalPointsMoney))
         End Function
 
         Public Function GetDetailByDraw() As String
             Dim sDrawLine As String = FormatNumber(Me.DrawMoneyLine + Me.AddPointMoney, GetRoundMidPoint, TriState.UseDefault, TriState.False)
 
-            Return String.Format("<b>{0}</b>&nbsp;{1} <b>-</b> {2} &nbsp;<u><b>Draw ({3})</b></u>", _
-                                 IIf(Me.Context = "Current", "", "&nbsp;" & Me.Context), _
+            Return String.Format("<b>{0}</b>&nbsp;{1} <b>-</b> {2} &nbsp;<u><b>Draw ({3})</b></u>",
+                                 IIf(Me.Context = "Current", "", "&nbsp;" & Me.Context),
             Me.HomeTeam, Me.AwayTeam, IIf(sDrawLine.Contains("-"), sDrawLine, "+" & sDrawLine))
         End Function
 
@@ -574,7 +574,7 @@ Namespace Tickets
                                 oWhere.AppendANDCondition(" GameDate < " & SQLString(std.GetEasternDate()))
                                 If pnSecondHalfTimeOff <> 0 Then
 
-                                    oWhere.AppendANDCondition(" DATEDIFF( minute,SecondHalfTime," & _
+                                    oWhere.AppendANDCondition(" DATEDIFF( minute,SecondHalfTime," &
                                          SQLString(Now.ToUniversalTime()) & ") <= " & SafeString(pnSecondHalfTimeOff))
                                 End If
                                 ' If context is Quarter
@@ -593,8 +593,8 @@ Namespace Tickets
                                 'SQLString(oToday) & " , GameDate),0) > " & SafeInteger(oSys.Value).ToString())
                                 'End If
                                 If oSys IsNot Nothing AndAlso SafeInteger(oSys.SubCategory) <> 0 Then
-                                    oWhere.AppendANDCondition(" isnull(DATEDIFF(minute," & _
-                                 SQLString(oToday) & " , GameDate),0) < " & _
+                                    oWhere.AppendANDCondition(" isnull(DATEDIFF(minute," &
+                                 SQLString(oToday) & " , GameDate),0) < " &
                                  (SafeInteger(oSys.SubCategory) * 60).ToString())
                                 End If
 
@@ -604,8 +604,8 @@ Namespace Tickets
                     End If
                 End If
 
-                Dim sSQL As String = _
-                String.Format("SELECT TOP 1 gl.*, g.HomePitcher, g.AwayPitcher " & _
+                Dim sSQL As String =
+                String.Format("SELECT TOP 1 gl.*, g.HomePitcher, g.AwayPitcher " &
                       "FROM GameLines gl INNER JOIN Games g ON gl.GameID = g.GameID {0} ORDER BY gl.LastUpdated DESC", oWhere.SQL)
 
                 _log.Debug("Check TicketBet. SQL: " & sSQL)
@@ -806,7 +806,7 @@ Namespace Tickets
             '' Only Football and Basketball can buy points
             '' Allow buy point when juice is between -110 and -100
             '' First character of TeamNumber = 1: 1st Half | 3: 2nd Half
-            Dim bBuyPoint As Boolean = UCase(Me.BetType) <> "MONEYLINE" AndAlso _
+            Dim bBuyPoint As Boolean = UCase(Me.BetType) <> "MONEYLINE" AndAlso
             UCase(Context) = "CURRENT" AndAlso BetPoint >= -110 AndAlso BetPoint <= -100 _
             AndAlso (IsFootball(Me.GameType) OrElse IsBasketball(Me.GameType))
 
@@ -844,7 +844,7 @@ Namespace Tickets
                             nAddpoint = -nPoint
                         End If
 
-                        oDicItem = New DictionaryEntry(sPrefix & SafeString(Juice() + nAddpoint) & " (" & SafeString(BetPoint + (-nPoint * 20)) & ")", _
+                        oDicItem = New DictionaryEntry(sPrefix & SafeString(Juice() + nAddpoint) & " (" & SafeString(BetPoint + (-nPoint * 20)) & ")",
                                                        SafeString(nAddpoint) & "|" & SafeString(-nPoint * 20))
                         olstDic.Add(oDicItem)
                     Next
@@ -870,9 +870,94 @@ Namespace Tickets
                     Return 0
             End Select
         End Function
+
+#Region "Description Html"
+        Public ReadOnly Property DescriptionHtml(ByVal pnIndex As Integer) As String
+            Get
+                Dim regulationOnly As String = SafeString(IIf(IsSoccer(Me.GameType), " <b>Regualation Only</b>", "")) 
+                Dim sDescription As String = "<div class='gm-sportname-team baseline'>" & GetSportType(Me.GameType) & " - " & Me.GameType &"</div> <>" &
+                    "<div class='baseline'>" & 
+                        "<b class='gm-number'>{0}[2315]</b>&nbsp;<b class='gm-team'>{1}</b> <span class='gm-date'>"& Me.GameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & Me.GameDate.ToString("HH:mm tt") & ")</span>"&
+                    "</div> {2}" 
+                Dim gameBet As String = "<div class='baseline'>{0}<b>{1}</b> for the " & ContextFormat(Me.Context) & regulationOnly & "<i>M. Estrada(must start) K. Gausman(must start)</i></div>"
+
+
+                If Me.IsForProp Then
+                    Dim propGameBet As String = String.Format("<div class='baseline'><b>{0}</b> for the {1}</div>", Me.PropMoneyLine, ContextFormat(Me.Context))
+                    sDescription = String.Format(sDescription,"", Me.PropParticipantName, propGameBet)
+                Else
+
+                    Select Case UCase(Me.BetType)
+                        Case "SPREAD"
+                            Dim sRotationNumber As String = SafeString(IIf(Me.HomeSpreadMoney <> 0, SafeDouble(Me.HomeTeamNumber), SafeDouble(Me.AwayTeamNumber)))
+                            Dim sChoiceTeam As String = SafeString(IIf(Me.HomeSpreadMoney <> 0, Me.HomeTeam, Me.AwayTeam))
+                            Dim nSpread As Double = SafeDouble(IIf(Me.HomeSpreadMoney <> 0, Me.HomeSpread, Me.AwaySpread)) + Me.AddPoint
+                            Dim sSpread = SafeString(IIf(nSpread = 0, "PK", safeVegass(nSpread)))
+                            Dim nSpreadMoney As Double = SafeRound(IIf(Me.HomeSpreadMoney <> 0, Me.HomeSpreadMoney, Me.AwaySpreadMoney)) + Me.AddPointMoney
+                            Dim sSpreadMoney As String = SafeString(IIf(nSpreadMoney > 0, IIf(nSpreadMoney = 100, "Even", "+" & nSpreadMoney), nSpreadMoney))
+                            sDescription = String.Format(sDescription,"["& sRotationNumber &"]", sChoiceTeam, String.Format(gameBet),"", sSpread & " " & sSpreadMoney)
+                        Case "TOTALPOINTS"
+                            'If SafeString(oTicketBet("HomePitcher_TicketBets")) <> "" AndAlso SafeString(oTicketBet("AwayPitcher_TicketBets")) <> "" Then
+                            '    sHomeTeam = SafeString(oTicketBet("AwayTeam")) & "/" & sHomeTeam
+                            '    sDescription = GetDetailByTotalPoints(sHomeTeam, "", oTicketBet)
+                            'Else
+                            '    sHomeTeam = sAwayTeam & "/" & sHomeTeam
+                            '    sDescription = GetDetailByTotalPoints(sHomeTeam, "", oTicketBet)
+                            'End If
+                        Case "TEAMTOTALPOINTS"
+                            'sDescription = getDetailByTeamTotalPoints(IIf(SafeString(oTicketBet("TeamTotalName")).Equals("away"), sAwayTeam, sHomeTeam), "", oTicketBet)
+                        Case "MONEYLINE"
+                            Dim sRotationNumber As String = SafeString(IIf(Me.HomeMoneyLine <> 0, SafeDouble(Me.HomeTeamNumber), SafeDouble(Me.AwayTeamNumber)))
+                            Dim sChoiceTeam As String = SafeString(IIf(Me.HomeMoneyLine <> 0, Me.HomeTeam, Me.AwayTeam))
+                            Dim nMoneyLine As Double = SafeDouble(IIf(Me.HomeMoneyLine <> 0, Me.HomeMoneyLine, Me.AwayMoneyLine))
+                            Dim sMoneyLine As String = SafeString(IIf(nMoneyLine > 0, "+" & nMoneyLine, nMoneyLine))
+                            sDescription = String.Format(sDescription,"["& sRotationNumber &"]", sChoiceTeam, String.Format(gameBet),"Money Line ", sMoneyLine)
+                        Case "DRAW"
+                            Dim sChoiceTeam = String.Format("Draw({0} vs {1})", Me.HomeTeam, Me.AwayTeam)
+                            Dim nDrawLine As Double = Me.DrawMoneyLine + Me.AddPointMoney
+                            sDescription = String.Format(sDescription,"", sChoiceTeam, String.Format(gameBet),"Money Line ", nDrawLine)
+                    End Select
+
+                End If
+
+                Return sDescription
+            End Get
+        End Property
+
+        Private Function ContextFormat(ByVal sContext As String) As String
+            Select Case LCase(sContext)
+                        Case "current"
+                            return "Game"
+
+                        Case "1h"
+                            return "1st Half"
+
+                        Case "2h"
+                            return "2nd Half"
+
+                        Case "1q"
+                            return "1st Quarter"
+
+                        Case "2q"
+                            return "2nd Quarter"
+
+                        Case "3q"
+                            return "3rd Quarter"
+
+                        Case "4q"
+                            return "4th Quarter"
+
+                        Case Else
+                            return ""
+                    End Select
+        End Function
+
+
+#End Region
+
     End Class
 
-    <Serializable()> _
+    <Serializable()>
     Public Class CTicketBetList
         Inherits List(Of CTicketBet)
 
