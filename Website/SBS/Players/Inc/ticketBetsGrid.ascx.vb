@@ -222,6 +222,7 @@ Namespace SBSPlayer
             oTotalItem.Cells(3).Visible = False
             oTotalItem.Cells(4).Visible = False
             oTotalItem.Cells(5).HorizontalAlign = HorizontalAlign.Center
+            oTotalItem.Cells(7).Visible = False
         End Sub
 
         Private TicketBetsCount As Int32 = 0

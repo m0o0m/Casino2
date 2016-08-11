@@ -15,6 +15,13 @@
             <div class="clearfix"></div>
             <h2 id="trTicketType" runat="server">Wager type : <%=BetTypeActive.Replace("BetTheBoard", "Straight Bet(s)").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board")%></h2>
             <table class="table table-condensed">
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Risk</th>
+                    <th>Win</th>
+                    <th></th>
+                </tr>
                 <asp:Repeater ID="rptTickets" runat="server">
                     <ItemTemplate>
                         <tr>
@@ -48,8 +55,8 @@
                                             <tr id="trTicketBet" runat="server">
                                                 <td>
                                                     <b>
-                                                        <asp:Literal ID="lblTeam" runat="server" Text='<%# SBCBL.std.SafeString(Container.DataItem.Team)%>  '></asp:Literal><span
-                                                            style="margin-left: 10px"><%# Container.DataItem.GameDate%>
+                                                        <asp:Literal ID="lblTeam" runat="server" Text='<%# SBCBL.std.SafeString(Container.DataItem.Team)%>  '></asp:Literal>
+                                                        <span style="margin-left: 10px"><%# Container.DataItem.GameDate%>
                                                             - (EST)</span></b>
                                                     <asp:Literal ID="lblContext" runat="server" Text='<%# SBCBL.std.SafeString(iif(LCase(SBCBL.std.SafeString(Container.DataItem.Context)) = "current","for Game",Container.DataItem.Context ))%>'></asp:Literal>
                                                 </td>
@@ -193,21 +200,21 @@
             </div>
 
             <div id="tblBetTheboard" runat="server" visible="True" class="row pdTB10 pdL25 pdR50 text-center">
-                <span id="pnSameAmount" visible="false" runat="server" style="text-align: right; display: inline-block;">
-                    <asp:CheckBox ID="chkCheckAmount" onclick="if(this.checked){$('.amount').hide()}else{$('.amount').show();$('.amount').val('');}" runat="server" />Use same amount for All Bets 
+                            <span id="pnSameAmount" visible="false" runat="server" style="text-align: right; display: inline-block;">
+                                <asp:CheckBox ID="chkCheckAmount" onclick="if(this.checked){$('.amount').hide()}else{$('.amount').show();$('.amount').val('');}" runat="server" />Use same amount for All Bets 
                                         <asp:TextBox ID="txtSameAmount" onkeypress="javascript:return inputNumber(this,event, false);" Width="100" runat="server" CssClass="form-control" Style="display: inline-block;"></asp:TextBox>
-                    <asp:Button ID="btnPreviewGame" runat="server" CssClass="btn btn-dark" Text="Preview Bet(s)" Style="margin-left: 10px;" />
-                </span>
+                                <asp:Button ID="btnPreviewGame" runat="server" CssClass="btn btn-dark" Text="Preview Bet(s)" Style="margin-left: 10px;" />
+                            </span>
                 <asp:Label ID="lblMessage" CssClass="fz14 bold mgR10"
                     ForeColor="black" runat="server" Text="Password:"></asp:Label>
-                <asp:TextBox ID="txtPassword" runat="server" Visible="true" TextMode="Password"
+                            <asp:TextBox ID="txtPassword" runat="server" Visible="true" TextMode="Password"
                     Width="180" MaxLength="50" CssClass="form-control input-field-2 h30px" Style="display: inline-block;"></asp:TextBox>
                 <asp:Button ID="btnSubmit" runat="server" Visible="true" Text="Confirm Bet(s)" Style="margin-left: 20px;"
                     ToolTip="Confirm Bet(s)" CssClass="btn btn-dark button-style-2 w140px h24px" />
                 <asp:Button ID="btnCancel" runat="server" Text="Cancel Your Wager" Style="margin-left: 10px; margin-right: 25px;" CssClass="btn btn-red button-style-2 red w175px h24px"
-                    ToolTip="Cancel Your Wager" />
-                <div class="clearfix"></div>
-            </div>
+                                ToolTip="Cancel Your Wager" />
+                            <div class="clearfix"></div>
+                        </div>
         </div>
 
         <div>
