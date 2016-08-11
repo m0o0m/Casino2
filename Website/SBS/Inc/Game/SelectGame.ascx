@@ -188,45 +188,45 @@
                 </div>
             </ItemTemplate>
         </asp:Repeater>
-        <div class="clearfix"></div>
-        <% If (BetType.Equals("IfBetReverse", StringComparison.OrdinalIgnoreCase)) Then%>
-        <div class="clear pdLR13 mgT40">
-            <div class="ly-w-1:2 left pdLR13 text-center">
-                <div class="mgB5">
-                    <asp:Button ID="btnContinueIfWin" CssClass="button-style-3 w220px" CommandName="If Win" runat="server" Text="If Bet (If Win Only)" OnCommand="btnContinueIfBetOrReverse_Command" />
-                </div>
-                <div>
-                    <asp:Button ID="btnContinueIfWinOrPush" CssClass="button-style-3 w220px" CommandName="If Win or Push" runat="server" Text="If Bet (If Win, Push or Cancel)" OnCommand="btnContinueIfBetOrReverse_Command" />
-                </div>
-            </div>
-            <div class="ly-w-1:2 left pdLR13 text-center">
-                <div class="mgB5">
-                    <asp:Button ID="btnWinReverse" CssClass="button-style-3 w220px" CommandName="Win Reverse" Enabled="False" runat="server" Text="Win Reverse" />
-                </div>
-                <div>
-                    <asp:Button ID="btnContinueReverse" CssClass="button-style-3 w220px" CommandName="Reverse" runat="server" Text="Action Reverse" OnCommand="btnContinueIfBetOrReverse_Command" />
-                </div>
-            </div>
-        </div>
-        <% End If%>
-        <% If (Not BetType.Equals("Teaser", StringComparison.OrdinalIgnoreCase) And (Not BetType.Equals("IfBetReverse", StringComparison.OrdinalIgnoreCase))) Then%>
-        <div class="col-md-4 pull-right pdT15">
-            <button type="button" class="btn btn-dark pull-right button-style-2 w110px h24px right" style="margin-left: 10px;" onclick='$("#<%=btnContinue.ClientID%>").click()'>
-                Continue
-                    <i class="fa fa-forward"></i>
-            </button>
-        </div>
-        <% End If%>
+
     </div>
+    <% If (BetType.Equals("IfBetReverse", StringComparison.OrdinalIgnoreCase)) Then%>
+    <div class="clear pdLR13 mgT60">
+        <div class="ly-w-1:2 left pdLR13">
+            <div class="button-style-6 w220px center">
+                <asp:Button ID="btnContinueIfWin" CssClass="" CommandName="If Win" runat="server" Text="If Bet (If Win Only)" OnCommand="btnContinueIfBetOrReverse_Command" />
+            </div>
+            <div class="button-style-6 w220px center mgT5">
+                <asp:Button ID="btnContinueIfWinOrPush" CssClass="" CommandName="If Win or Push" runat="server" Text="If Bet (If Win, Push or Cancel)" OnCommand="btnContinueIfBetOrReverse_Command" />
+            </div>
+        </div>
+        <div class="ly-w-1:2 left pdLR13 text-center">
+            <div class="button-style-6 w220px center">
+                <asp:Button ID="btnWinReverse" CssClass="" CommandName="Win Reverse" Enabled="False" runat="server" Text="Win Reverse" />
+            </div>
+            <div class="button-style-6 w220px center mgT5">
+                <asp:Button ID="btnContinueReverse" CssClass="" CommandName="Reverse" runat="server" Text="Action Reverse" OnCommand="btnContinueIfBetOrReverse_Command" />
+            </div>
+        </div>
+    </div>
+    <% End If%>
+    <% If (Not BetType.Equals("Teaser", StringComparison.OrdinalIgnoreCase) And (Not BetType.Equals("IfBetReverse", StringComparison.OrdinalIgnoreCase))) Then%>
+    <div class="col-md-4 pull-right pdT15">
+        <button type="button" class="btn btn-dark pull-right button-style-2 w110px h24px right" style="margin-left: 10px;" onclick='$("#<%=btnContinue.ClientID%>").click()'>
+            Continue
+                    <i class="fa fa-forward"></i>
+        </button>
+    </div>
+    <% End If%>
 </div>
 
 <div id="divTeaserType" runat="server" class="panel panel-grey">
-    <div class="panel-heading">Select Option</div>
-    <div class="panel-body">
+    <div class="panel-heading none">Select Option</div>
+    <div class="panel-body none">
         <table id="TeaserType" runat="server" class="table table-hover table-bordered">
             <tr id="tr46" runat="server" class="offering_pair_odd">
                 <td>
-                    <asp:LinkButton ID="lbt" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="4/6"> 4/6-Point Teaser</asp:LinkButton>
+                    <asp:LinkButton ID="lbts" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="4/6"> 4/6-Point Teaser</asp:LinkButton>
                 </td>
 
                 <td>2 - 6 Team 4 pt Basketball & 6 pt Football - Ties & PUSH is No Action - Ties & Lose is a LOSE
@@ -234,43 +234,96 @@
             </tr>
             <tr id="tr4565" runat="server" class="offering_pair_even">
                 <td>
-                    <asp:LinkButton ID="LinkButton2" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="4.5/6.5"> 4½/6½Point Teaser </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton2s" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="4.5/6.5"> 4½/6½Point Teaser </asp:LinkButton>
                 </td>
                 <td>2 - 6 Team 4½ pt Basketball 6½pt Football - Ties & PUSH is No Action - Ties & Lose is a LOSE
                 </td>
             </tr>
             <tr id="tr57" runat="server" class="offering_pair_odd">
                 <td>
-                    <asp:LinkButton ID="LinkButton3" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="5/7"> 5/7-Point Teaser </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton3s" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="5/7"> 5/7-Point Teaser </asp:LinkButton>
                 </td>
                 <td>2 - 6 Team 5 pt Basketball 7 pt Football - Ties & PUSH is No Action - Ties & Lose is a LOSE
                 </td>
             </tr>
             <tr id="tr5575" runat="server" class="offering_pair_even">
                 <td>
-                    <asp:LinkButton ID="LinkButton4" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="5.5/7.5"> 5½/7½-Point Teaser</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton4s" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="5.5/7.5"> 5½/7½-Point Teaser</asp:LinkButton>
                 </td>
                 <td>2 - 6 Team 5½ pt Basketball 7½ pt Football - Ties & PUSH is No Action - Ties & Lose is a LOSE
                 </td>
             </tr>
             <tr id="tr38" runat="server" class="offering_pair_odd">
                 <td>
-                    <asp:LinkButton ID="LinkButton5" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="8/10">3T 8-10 SP-Point Tease</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton5s" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="8/10">3T 8-10 SP-Point Tease</asp:LinkButton>
                 </td>
                 <td>3 Team 8 point Basketball 10 point Football Special Teaser - Ties Lose
                 </td>
             </tr>
             <tr id="tr413" runat="server" class="offering_pair_even">
                 <td>
-                    <asp:LinkButton ID="LinkButton6" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="10/13"> 4T 13 Point SP Teaser</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton6s" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="10/13"> 4T 13 Point SP Teaser</asp:LinkButton>
                 </td>
                 <td>4 Team 13 Point NFL side only Special Teaser - Ties Lose
                 </td>
             </tr>
         </table>
     </div>
-</div>
 
+    <div class="content teasers">
+    <table class="table-style-5 full mgTB40">
+        <tr class="caption">
+            <td>Teasers offered</td>
+            <td colspan="2" class="text-left-i pdL50-i">Team & Description</td>
+        </tr>
+        <tr class="content">
+            <td style="width: 25%">
+                <asp:LinkButton ID="lbt" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="4/6">4/6-Point Teaser</asp:LinkButton>
+            </td>
+            <td style="width: 30%">2 - 6 Team 4 pt Basketball & 6 pt Football
+            </td>
+            <td>Ties & PUSH is No Action - Ties & Lose is a LOSE
+            </td>
+        </tr>
+        <tr class="content">
+            <td>
+                <asp:LinkButton ID="LinkButton2" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="4.5/6.5">4½/6½Point Teaser </asp:LinkButton>
+            </td>
+            <td>2 - 6 Team 4½ pt Basketball 6½pt Football
+            </td>
+            <td>Ties & PUSH is No Action - Ties & Lose is a LOSE
+            </td>
+        </tr>
+        <tr class="content">
+            <td>
+                <asp:LinkButton ID="LinkButton3" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="5/7">5/7-Point Teaser </asp:LinkButton>
+            </td>
+            <td>2 - 6 Team 5 pt Basketball 7 pt Football
+            </td>
+            <td>Ties & PUSH is No Action - Ties & Lose is a LOSE 
+            </td>
+        </tr>
+        <tr class="content">
+            <td>
+                <asp:LinkButton ID="LinkButton4" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="5.5/7.5">5½/7½-Point Teaser </asp:LinkButton>
+            </td>
+            <td>2 - 6 Team 5½ pt Basketball 7½ pt Football
+            </td>
+            <td>Ties & PUSH is No Action - Ties & Lose is a LOSE 
+            </td>
+        </tr>
+        <tr class="content">
+            <td>
+                <asp:LinkButton ID="LinkButton5" runat="server" OnClick="Teaser_Click" Font-Underline="true" CommandArgument="8/10">3T 8-10 SP-Point Teaser </asp:LinkButton>
+            </td>
+            <td>3 Team 8 point Basketball 10 point Football Special Teaser 
+            </td>
+            <td>Ties Lose
+            </td>
+        </tr>
+    </table>
+</div><!--teasers-->
+</div><!--divTeaserType-->
 
 <div id="wager" runat="server">
     <div id="betpanel" style="margin-left: 0px; vertical-align: top; padding: 0;">

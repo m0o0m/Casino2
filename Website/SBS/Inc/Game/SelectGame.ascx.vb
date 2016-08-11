@@ -760,7 +760,7 @@ Partial Class SBS_Agents_Inc_Game_SelectGame
 
     End Sub
 
-    Protected Sub btnContinueIfBetOrReverse_Command(sender As Object, e As CommandEventArgs) 
+    Protected Sub btnContinueIfBetOrReverse_Command(sender As Object, e As CommandEventArgs)
         If UserSession.UserType = SBCBL.EUserType.Agent Then
             SelectedPlayerID = ddlPlayers.SelectedValue
         End If
@@ -959,7 +959,7 @@ Partial Class SBS_Agents_Inc_Game_SelectGame
 #End Region
 
 
-    
+
 End Class
 
 

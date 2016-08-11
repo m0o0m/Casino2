@@ -3,6 +3,8 @@
 
 <%@ Register Assembly="WebsiteLibrary" Namespace="WebsiteLibrary" TagPrefix="cc1" %>
 <%@ Register Src="Inc/ticketBetsGrid.ascx" TagName="ticketBetsGrid" TagPrefix="uc1" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="cphBody" runat="Server">
 
     <asp:Panel ID="pnGoBackTop" runat="server" Visible="False" CssClass="go-back-panel text-center">
@@ -11,10 +13,11 @@
         <br/><br/><br/>
     </asp:Panel>
 
-    <div class="clear mgB5">
-        <button class="button-style-2 w110px">Print</button>
+    <div class="btn-pending-print clear mgB5">
+        <button class="button-style-2 w110px h24px">Print</button>
     </div>
-    <div class="table-filter-style-1 pdTB10 pdLR10">
+
+    <div class="table-filter-style-1 pdTB10 pdLR10 mgT20">
         <div class="ly-fixed">
             <div class="text-left">
                 <span class="fz12 bold clr-white mgR80">Filter:</span>
@@ -70,4 +73,5 @@
         <input type="button" class="button-style-2 w110px" onclick="javascript:history.back();" value="Back"/>
     </asp:Panel>
 
+    <link href="../../Content/themes/agent/layout6/styles/print-pending.css" rel="stylesheet" />
 </asp:Content>
