@@ -872,14 +872,14 @@ Namespace Tickets
         End Function
 
 #Region "Description Html"
-        Public ReadOnly Property DescriptionHtml(ByVal pnIndex As Integer) As String
+        Public ReadOnly Property DescriptionHtml() As String
             Get
-                Dim regulationOnly As String = SafeString(IIf(IsSoccer(Me.GameType), " <b>Regualation Only</b>", "")) 
-                Dim sDescription As String = "<div class='gm-sportname-team baseline'>" & GetSportType(Me.GameType) & " - " & Me.GameType &"</div> <>" &
+                Dim regulationOnly As String = SafeString(IIf(IsSoccer(Me.GameType), "&nbsp;<b>Regualation Only</b>", "")) 
+                Dim sDescription As String = "<div class='gm-sportname-team baseline'>" & GetSportType(Me.GameType) & " - " & Me.GameType &"</div>" &
                     "<div class='baseline'>" & 
-                        "<b class='gm-number'>{0}[2315]</b>&nbsp;<b class='gm-team'>{1}</b> <span class='gm-date'>"& Me.GameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & Me.GameDate.ToString("HH:mm tt") & ")</span>"&
+                        "<b class='gm-number'>{0}</b>&nbsp;<b class='gm-team'>{1}</b> <span class='gm-date'>"& Me.GameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & Me.GameDate.ToString("HH:mm tt") & ")</span>"&
                     "</div> {2}" 
-                Dim gameBet As String = "<div class='baseline'>{0}<b>{1}</b> for the " & ContextFormat(Me.Context) & regulationOnly & "<i>M. Estrada(must start) K. Gausman(must start)</i></div>"
+                Dim gameBet As String = "<div class='baseline'>{0}<b>{1}</b> for the " & ContextFormat(Me.Context) & regulationOnly & GetMustStart() & "</div>"
 
 
                 If Me.IsForProp Then
@@ -895,27 +895,44 @@ Namespace Tickets
                             Dim sSpread = SafeString(IIf(nSpread = 0, "PK", safeVegass(nSpread)))
                             Dim nSpreadMoney As Double = SafeRound(IIf(Me.HomeSpreadMoney <> 0, Me.HomeSpreadMoney, Me.AwaySpreadMoney)) + Me.AddPointMoney
                             Dim sSpreadMoney As String = SafeString(IIf(nSpreadMoney > 0, IIf(nSpreadMoney = 100, "Even", "+" & nSpreadMoney), nSpreadMoney))
-                            sDescription = String.Format(sDescription,"["& sRotationNumber &"]", sChoiceTeam, String.Format(gameBet),"", sSpread & " " & sSpreadMoney)
+                            sDescription = String.Format(sDescription,"["& sRotationNumber &"]", sChoiceTeam, String.Format(gameBet,"", sSpread & " " & sSpreadMoney))
                         Case "TOTALPOINTS"
-                            'If SafeString(oTicketBet("HomePitcher_TicketBets")) <> "" AndAlso SafeString(oTicketBet("AwayPitcher_TicketBets")) <> "" Then
-                            '    sHomeTeam = SafeString(oTicketBet("AwayTeam")) & "/" & sHomeTeam
-                            '    sDescription = GetDetailByTotalPoints(sHomeTeam, "", oTicketBet)
-                            'Else
-                            '    sHomeTeam = sAwayTeam & "/" & sHomeTeam
-                            '    sDescription = GetDetailByTotalPoints(sHomeTeam, "", oTicketBet)
-                            'End If
+                            Dim sChoiceTeam = String.Format("{0} {1}", Me.HomeTeam, IIf(String.IsNullOrEmpty(Me.AwayTeam), "", " - " & Me.AwayTeam))
+                            If IsTennis(Me.GameType) OrElse IsGolf(Me.GameType) Then
+                                sChoiceTeam = Me.AwayTeam & " - " & Me.HomeTeam
+                            End If
+                            Dim sMsg As String = SafeString(IIf(Me.TotalPointsOverMoney <> 0, "Over", "Under"))
+                            Dim sTotalPoint As String = safeVegass(Me.TotalPoints)
+                            If IsSoccer(Me.GameType) Then
+                                sTotalPoint = AHFormat(Me.TotalPoints).Replace("+"c, "")
+                            End If
+                            Dim nMoney As Double = SafeRound(IIf(Me.TotalPointsOverMoney <> 0, Me.TotalPointsOverMoney, Me.TotalPointsUnderMoney)) + Me.AddPointMoney
+                            Dim sMoney As String = SafeString(IIf(nMoney > 0, IIf(nMoney = 100, "Even", "+" & nMoney), nMoney))
+
+                            sDescription = String.Format(sDescription,"", sChoiceTeam, String.Format(gameBet, sMsg & " ", sTotalPoint & " " & sMoney ))
                         Case "TEAMTOTALPOINTS"
-                            'sDescription = getDetailByTeamTotalPoints(IIf(SafeString(oTicketBet("TeamTotalName")).Equals("away"), sAwayTeam, sHomeTeam), "", oTicketBet)
+                            Dim sChoiceTeam = String.Format("{0} {1}", Me.HomeTeam, IIf(String.IsNullOrEmpty(Me.AwayTeam), "", " - " & Me.AwayTeam))
+                            If IsTennis(Me.GameType) OrElse IsGolf(Me.GameType) Then
+                                sChoiceTeam = Me.AwayTeam & " - " & Me.HomeTeam
+                            End If
+                            Dim sMsg As String = SafeString(IIf(Me.TotalPointsOverMoney <> 0, "Over", "Under"))
+                            Dim sTotalPoint As String = safeVegass(Me.TotalPoints)
+                            If IsSoccer(Me.GameType) Then
+                                sTotalPoint = AHFormat(Me.TotalPoints).Replace("+"c, "")
+                            End If
+                            Dim nMoney As Double = SafeRound(IIf(Me.TotalPointsOverMoney <> 0, Me.TotalPointsOverMoney, Me.TotalPointsUnderMoney)) + Me.AddPointMoney
+
+                            sDescription = String.Format(sDescription,"", sChoiceTeam, String.Format(gameBet, sMsg & " ", sTotalPoint & " " & nMoney))
                         Case "MONEYLINE"
                             Dim sRotationNumber As String = SafeString(IIf(Me.HomeMoneyLine <> 0, SafeDouble(Me.HomeTeamNumber), SafeDouble(Me.AwayTeamNumber)))
                             Dim sChoiceTeam As String = SafeString(IIf(Me.HomeMoneyLine <> 0, Me.HomeTeam, Me.AwayTeam))
                             Dim nMoneyLine As Double = SafeDouble(IIf(Me.HomeMoneyLine <> 0, Me.HomeMoneyLine, Me.AwayMoneyLine))
                             Dim sMoneyLine As String = SafeString(IIf(nMoneyLine > 0, "+" & nMoneyLine, nMoneyLine))
-                            sDescription = String.Format(sDescription,"["& sRotationNumber &"]", sChoiceTeam, String.Format(gameBet),"Money Line ", sMoneyLine)
+                            sDescription = String.Format(sDescription,"["& sRotationNumber &"]", sChoiceTeam, String.Format(gameBet,"Money Line ", sMoneyLine))
                         Case "DRAW"
                             Dim sChoiceTeam = String.Format("Draw({0} vs {1})", Me.HomeTeam, Me.AwayTeam)
                             Dim nDrawLine As Double = Me.DrawMoneyLine + Me.AddPointMoney
-                            sDescription = String.Format(sDescription,"", sChoiceTeam, String.Format(gameBet),"Money Line ", nDrawLine)
+                            sDescription = String.Format(sDescription,"", sChoiceTeam, String.Format(gameBet,"Money Line ", nDrawLine))
                     End Select
 
                 End If
@@ -923,6 +940,21 @@ Namespace Tickets
                 Return sDescription
             End Get
         End Property
+
+        Private Function GetMustStart() As String
+            If Not IsBaseball(Me.GameType) Then
+                Return ""
+            End If
+
+            Dim mustStarPitcher = ""
+
+            If SafeString(Me.HomePitcher) <> "" AndAlso SafeString(Me.AwayPitcher) <> "" Then
+                Dim sHomePitcher = SafeString(Me.HomePitcher)
+                Dim sAwayPitcher = SafeString(Me.AwayPitcher)
+                mustStarPitcher = String.Format("<i>{0}(must start) {1}(must start)</i>", sHomePitcher, sAwayPitcher)
+            End If
+            Return mustStarPitcher
+        End Function
 
         Private Function ContextFormat(ByVal sContext As String) As String
             Select Case LCase(sContext)
