@@ -105,7 +105,7 @@
                                     <tr align="right" style="display: none">
                                         <asp:Literal ID="lblRiskWin" runat="server" Visible="false" />
                                     </tr>
-                                    <tr style="text-align: left">
+                                    <tr style="text-align: left; display:none">
                                         <td colspan="3">
                                             <asp:Label ID="lblBetLimits" runat="server" Font-Bold="True" CssClass="label label-danger" />
                                         </td>
