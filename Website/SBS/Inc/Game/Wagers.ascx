@@ -7,7 +7,7 @@
 
             <table class="table table-condensed table-style-6 full">
                 <tr class="caption">
-                    <td class="pdT10 pdL25" colspan="2"><%=BetTypeActive.Replace("BetTheBoard", "Straight Bet(s)").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board")%>
+                    <td class="pdT10 pdL25" colspan="2"><%=BetTypeActive.Replace("BetTheBoard", "Straight Bet(s)").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board").Replace("If Win", "If Bet (If Win Only)").Replace("If Win or Push", "If Bet (If Win, Push or Cancel)")%>
                         <asp:Literal ID="ltrDateBet" runat="server"></asp:Literal>
                         - ET</td>
                     <td><asp:Literal ID="ltrHeadRisk" runat="server">Risk</asp:Literal></td>
