@@ -2860,9 +2860,7 @@ PropGame:
         '    Return False
         'End If
 
-        If BetTypeActive.Equals(__BetIfAll, StringComparison.CurrentCultureIgnoreCase) OrElse _
-         BetTypeActive.Equals(__IfWin, StringComparison.CurrentCultureIgnoreCase) OrElse _
-         BetTypeActive.Equals(__IfWinOrPush, StringComparison.CurrentCultureIgnoreCase) Then
+        If BetTypeActive.Equals(__BetIfAll, StringComparison.CurrentCultureIgnoreCase) Then
             Return True
         Else
             Return False

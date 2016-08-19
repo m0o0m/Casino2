@@ -19,7 +19,7 @@
             <div class="clearfix"></div>
         </div>-->
         <div class="clear">
-            <div class="left pdL30">
+            <div class="left pdL30" id="pnMenu" runat="server">
                 <div class="ly-fixed w-auto-i baseline">
                     <div class="w130px clr-black">
                         <b>Wager Amount:</b>
@@ -82,7 +82,7 @@
                     <asp:Label ID="lblMessage" runat="server" Style="color: Red; margin-left: 20px; position: relative; top: 15px"></asp:Label>
                     <asp:Panel ID="pnBetTheBoard" runat="server" Style="margin-top: 5px" Visible="false" class="none">
                         <asp:Panel ID="pnCheckSameMount" runat="server">
-                            <input type="checkbox" id="chkShowCheckBox" onclick="showCheckBox(this)" />Use same amount for all bets:<input type="text" id="txtMultiBet" style="width: 60px" onkeypress="javascript:return inputNumber(this,event, false);" /><h2 style="display: inline; margin-left: 10px">NEW!!!</h2>
+                            <input type="checkbox" id="chkShowCheckBox" onclick="showCheckBox(this)" />Use same amount for all bets:<input type="text" id="txtMultiBet" style="width: 60px"  /><h2 style="display: inline; margin-left: 10px">NEW!!!</h2>
                         </asp:Panel>
                         <br />
                         <asp:CheckBox runat="server" ID="chkTeamTotal" AutoPostBack="true" OnCheckedChanged="chkTeamTotal_click" /><span style="color: blue"> Team Total Bettings</span>
@@ -185,9 +185,9 @@
                                                                 <asp:Literal ID="lblAwayPitcherRightHand" runat="server"></asp:Literal>
                                                             </td>
                                                             <td id="tdSpread2" runat="server" width="190">
-                                                                <asp:TextBox ID="txtMoneyAwaySpread" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);"
+                                                                <asp:TextBox ID="txtMoneyAwaySpread" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
-                                                                <asp:RadioButton ID="rdSelectAwaySpread" runat="server" CssClass="chkBetActionSelect none" />
+                                                                <asp:RadioButton ID="rdSelectAwaySpread" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkSelectAwaySpread" runat="server" CssClass="chkBetActionSelect" Style="margin-top: 2px" />
                                                                 <wlb:CDropDownList ID="ddlBuyPointAwaySpread" CssClass="select-field-1 w110px h21px" runat="server" hasOptionalItem="False" Visible="False" />
                                                                 <asp:Label ID="lblAwaySpread" runat="server" class="labelodd" />
@@ -195,15 +195,15 @@
 
                                                             <td id="tdMLine2" runat="server">
                                                                 <nobr>
-                                                                <asp:TextBox ID="txtMoneyAwayMLine" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5"  onkeypress="javascript:return inputNumber(this,event, false);"
+                                                                <asp:TextBox ID="txtMoneyAwayMLine" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5"  
                                                                 AutoPostBack="false" />
-                                                                <asp:RadioButton ID="rdSelectAwayMLine" runat="server" CssClass="chkBetActionSelect none" />
+                                                                <asp:RadioButton ID="rdSelectAwayMLine" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkSelectAwayMLine" CssClass="chkBetActionSelect" runat="server" Style="margin-top: 2px"  />
                                                                 <asp:Label ID="lblAwayMoneyLine" runat="server"  class="labelodd" />
                                                                 <%#IIf(SBCBL.std.IsBaseball(Container.DataItem("GameType")), "<span class='mlaction'>Action</span>", "")%>
                                                                 <br/>
                                                                 <asp:RadioButton ID="rdSelectAwayMLine2" runat="server" CssClass="chkBetActionSelect" />
-                                                                <asp:TextBox ID="txtMoneyAwayMLine2" runat="server" size="3"  MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);"
+                                                                <asp:TextBox ID="txtMoneyAwayMLine2" runat="server" size="3"  MaxLength="5" 
                                                                 AutoPostBack="false" />
                                                                 <asp:CheckBox ID="chkSelectAwayMLine2" CssClass="chkBetActionSelect" runat="server" />
                                                                 <asp:Label ID="lblAwayMoneyLine2" runat="server"  class="labelodd" />
@@ -211,7 +211,7 @@
                                                                 </nobr>
                                                             </td>
                                                             <td id="tdTotal2" runat="server" width="190">
-                                                                <asp:TextBox ID="txtMoneyAwayTotal" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);"
+                                                                <asp:TextBox ID="txtMoneyAwayTotal" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
                                                                 <asp:RadioButton ID="rdSelectAwayTotal" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkSelectAwayTotal" CssClass="chkBetActionSelect" runat="server" />
@@ -220,14 +220,14 @@
                                                             </td>
 
                                                             <td id="tdTeam_Total_AwayOver" runat="server" width="190">
-                                                                <asp:TextBox ID="txtMoneyAwayTeamTotalOver" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);" AutoPostBack="false" />
+                                                                <asp:TextBox ID="txtMoneyAwayTeamTotalOver" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5"  AutoPostBack="false" />
                                                                 <asp:RadioButton ID="rdAwayTeamTotalOver" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkAwayTeamTotalOver" CssClass="chkBetActionSelect" runat="server" />
                                                                 <span class="TeamTotal"><%#SBCBL.std.safeVegass(SBCBL.std.SafeString(Container.DataItem("AwayTeamTotalPoints")))%></span>
                                                                 <asp:Literal ID="lblAwayTeamTotalPointsOverMoney" runat="server"></asp:Literal>
                                                             </td>
                                                             <td id="tdTeam_Total_AwayUnder" runat="server" width="190">
-                                                                <asp:TextBox ID="txtMoneyAwayTeamTotalUnder" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);" AutoPostBack="false" />
+                                                                <asp:TextBox ID="txtMoneyAwayTeamTotalUnder" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5"  AutoPostBack="false" />
                                                                 <asp:RadioButton ID="rdAwayTeamTotalUnder" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkAwayTeamTotalUnder" CssClass="chkBetActionSelect" runat="server" />
                                                                 <span class="TeamTotal"><%#SBCBL.std.safeVegass(SBCBL.std.SafeString(Container.DataItem("AwayTeamTotalPoints")))%></span>
@@ -251,24 +251,24 @@
                                                                 <asp:Literal ID="lblHomePitcherRightHand" runat="server"></asp:Literal>
                                                             </td>
                                                             <td id="tdSpread3" runat="server" width="165">
-                                                                <asp:TextBox ID="txtMoneyHomeSpread" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);"
+                                                                <asp:TextBox ID="txtMoneyHomeSpread" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
-                                                                <asp:RadioButton ID="rdSelectHomeSpread" runat="server" CssClass="chkBetActionSelect none" />
+                                                                <asp:RadioButton ID="rdSelectHomeSpread" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkSelectHomeSpread" CssClass="chkBetActionSelect" runat="server" Style="margin-top: 2px" />
                                                                 <wlb:CDropDownList ID="ddlBuyPointHomeSpread" class="select-field-1 w110px h21px" runat="server" hasOptionalItem="false" Visible="false" />
                                                                 <asp:Label ID="lblHomeSpread" runat="server" class="labelodd" />
                                                             </td>
 
                                                             <td id="tdMLine3" runat="server">
-                                                                <asp:TextBox ID="txtMoneyHomeMLine" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);"
+                                                                <asp:TextBox ID="txtMoneyHomeMLine" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
-                                                                <asp:RadioButton ID="rdSelectHomeMLine" runat="server" CssClass="chkBetActionSelect none" />
+                                                                <asp:RadioButton ID="rdSelectHomeMLine" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkSelectHomeMLine" CssClass="chkBetActionSelect" runat="server" />
                                                                 <asp:Label ID="lblHomeMoney" runat="server" class="labelodd" />
                                                                 <%#IIf(SBCBL.std.IsBaseball(Container.DataItem("GameType")), "<span class='mlaction'>Action</span>", "")%>
                                                                 <br />
                                                                 <asp:RadioButton ID="rdSelectHomeMLine2" runat="server" CssClass="chkBetActionSelect" />
-                                                                <asp:TextBox ID="txtMoneyHomeMLine2" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);"
+                                                                <asp:TextBox ID="txtMoneyHomeMLine2" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
                                                                 <asp:CheckBox ID="chkSelectHomeMLine2" CssClass="chkBetActionSelect" runat="server" />
                                                                 <asp:Label ID="lblHomeMoney2" runat="server" class="labelodd" />
@@ -276,7 +276,7 @@
 
                                                             </td>
                                                             <td id="tdTotal3" runat="server">
-                                                                <asp:TextBox ID="txtMoneyHomeTotal" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);"
+                                                                <asp:TextBox ID="txtMoneyHomeTotal" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
                                                                 <asp:RadioButton ID="rdSelectHomeTotal" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkSelectHomeTotal" CssClass="chkBetActionSelect" runat="server" />
@@ -286,7 +286,7 @@
                                                             </td>
 
                                                             <td id="tdTeam_Total_HomeOver" runat="server">
-                                                                <asp:TextBox ID="txtMoneyHomeTeamTotalOver" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);"
+                                                                <asp:TextBox ID="txtMoneyHomeTeamTotalOver" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
                                                                 <asp:RadioButton ID="rdHomeTeamTotalOver" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkHomeTeamTotalOver" CssClass="chkBetActionSelect" runat="server" />
@@ -294,7 +294,7 @@
                                                                 <asp:Literal ID="lblHomeTeamTotalPointsOverMoney" runat="server"></asp:Literal>
                                                             </td>
                                                             <td id="tdTeam_Total_HomeUnder" runat="server">
-                                                                <asp:TextBox ID="txtMoneyHomeTeamTotalUnder" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);" AutoPostBack="false" />
+                                                                <asp:TextBox ID="txtMoneyHomeTeamTotalUnder" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5"  AutoPostBack="false" />
                                                                 <span class="TeamTotal">
                                                                     <asp:RadioButton ID="rdHomeTeamTotalUnder" runat="server" CssClass="chkBetActionSelect" />
                                                                     <asp:CheckBox ID="chkHomeTeamTotalUnder" CssClass="chkBetActionSelect" runat="server" />
@@ -312,9 +312,9 @@
                                                             </td>
                                                             <td></td>
                                                             <td>
-                                                                <asp:TextBox ID="txtMoneyDraw" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);"
+                                                                <asp:TextBox ID="txtMoneyDraw" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
-                                                                <asp:RadioButton ID="rdSelectDraw" runat="server" CssClass="chkBetActionSelect none" />
+                                                                <asp:RadioButton ID="rdSelectDraw" runat="server" CssClass="chkBetActionSelect" />
                                                                 <asp:CheckBox ID="chkSelectDraw" CssClass="chkBetActionSelect" runat="server" />
                                                                 <asp:Label ID="lblDrawMoney" runat="server" Width="60" class="labelodd" />
                                                             </td>
@@ -385,7 +385,7 @@
                                                                 <asp:Literal ID="lbnPropParticipantName" runat="server" Text='<%#Container.DataItem("PropParticipantName")%>'></asp:Literal>
                                                         </td>
                                                         <td id="tdMLine2" runat="server" width="30%">
-                                                            <asp:TextBox ID="txtMoneyPropMoneyLine" runat="server" size="3" MaxLength="5" onkeypress="javascript:return inputNumber(this,event, false);"
+                                                            <asp:TextBox ID="txtMoneyPropMoneyLine" runat="server" size="3" MaxLength="5" 
                                                                 AutoPostBack="false" />
 
                                                             <asp:Label ID="lblPropMoneyLine" runat="server" CssClass="PropMoneyLine" />

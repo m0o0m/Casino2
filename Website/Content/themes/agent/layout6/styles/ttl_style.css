@@ -472,6 +472,40 @@ ul.menu-style-3 {
 
 
 
+
+
+
+.table-style-10 {
+    border: 1px solid #000;
+    border-collapse: collapse;
+}
+
+    .table-style-10 tr.row-caption {
+        background: #0E2431;
+    }
+
+        .table-style-10 tr.row-caption > td {
+            padding: 0px 5px;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1;
+            color: #FFF;
+            text-align: center;
+        }
+
+    .table-style-10 tr.row-content {
+    }
+
+    .table-style-10 tr.row-detail {
+        background: transparent !important;
+    }
+
+        .table-style-10 tr.row-detail .row-detail-caption {
+            background: #666666;
+            border-left: 2px solid transparent;
+        }
+
+
 /* ========================================
      Box Style /////////////////////////////////////////////////////////// */
 
