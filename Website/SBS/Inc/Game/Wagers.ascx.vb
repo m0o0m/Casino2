@@ -1,4 +1,5 @@
-﻿Imports SBCBL.CacheUtils
+﻿Imports System.Drawing
+Imports SBCBL.CacheUtils
 Imports SBCBL.std
 Imports SBCBL.Tickets
 
@@ -15,6 +16,8 @@ Namespace SBSWebsite
         Private _sReverse As String = "Reverse"
         Private _sStraight As String = "Straight"
         Private _sBetTheBoard As String = "BetTheBoard"
+
+
         Public Enum EHandler
             ClearWager
         End Enum
@@ -75,7 +78,7 @@ Namespace SBSWebsite
 
         Private ReadOnly Property CanBetting() As Boolean
             Get
-                Return UserSession.SysSettings("BettingSetup", "BettingEnable").GetBooleanValue("BettingEnable") OrElse _
+                Return UserSession.SysSettings("BettingSetup", "BettingEnable").GetBooleanValue("BettingEnable") OrElse
                     UserSession.SysSettings("BettingSetup", "OverrideBettingEnable").GetBooleanValue("OverrideBettingEnable")
             End Get
         End Property
@@ -138,7 +141,8 @@ Namespace SBSWebsite
             btnCancel.Visible = True
             txtSameAmount.Text = ""
             If UserSession.SelectedTicket(SelectedPlayerID).Tickets.Count >= 1 Then
-
+                ltrDateBet.Text = DateTime.Now.ToString()
+                formatDisplayWithColor()
                 ' ClientAlert(BetTypeA, True)
                 'ClientAlert(UserSession.SelectedTicket(SelectedPlayerID).Tickets(0).IsForProp, True)
                 If Not UserSession.SelectedTicket(SelectedPlayerID).Preview AndAlso Not BetTypeA.Equals("BetIfAll", StringComparison.CurrentCultureIgnoreCase) AndAlso BetTypeActive.Equals(_sBetTheBoard) AndAlso Not UserSession.SelectedTicket(SelectedPlayerID).Tickets(0).IsForProp Then
@@ -154,11 +158,158 @@ Namespace SBSWebsite
             End If
         End Sub
 
+        Private Sub formatDisplayWithColor()
+            If rptTickets.Items.Count <= 0 Then
+                Return
+            End If
+
+          
+
+            Dim nIndex As Integer = 0
+            Dim nTotalRisk As Double = 0
+            Dim nTotalWin As Double = 0
+            Dim sBackColor As String = "#ffffff"
+            Dim alternateCount As Integer = 0
+            Dim betTypeForAlternate As String = ""
+            Dim contextForAlternate As String = ""
+            Dim ticketIdforAlternate As String = ""
+
+            While nIndex < rptTickets.Items.Count
+                Dim oItem As RepeaterItem = rptTickets.Items(nIndex)
+                Dim oTicket As CTicket = CType(rptTickets.DataSource(nIndex), CTicket)
+
+                Dim itemTicketContent As HtmlControl = CType(oItem.FindControl("trTicketContent"), HtmlControl)
+
+                Dim sBetType As String = oTicket.TicketType
+                Dim sTicketID As String = oTicket.TicketID
+                Dim sContext As String = ""
+                If Not oTicket.TicketBets.FirstOrDefault() Is Nothing Then
+                    sContext = oTicket.TicketBets.FirstOrDefault().Context
+                End If
+
+                ' Row alternate
+                If Not betTypeForAlternate.Equals(sBetType) Then
+                    alternateCount = 1
+                ElseIf Not ticketIdforAlternate.Equals(sTicketID) And (betTypeForAlternate.Equals(sBetType) Or (sBetType.Contains("If Win") And betTypeForAlternate.Contains("Reverse")) Or (sBetType.Contains("Reverse") And betTypeForAlternate.Contains("If Win")))
+                    If sBetType.Contains("Straight") Then
+                        If Not (contextForAlternate.Equals(sContext) Or (sContext.Contains(contextForAlternate))) Then
+                            alternateCount = 1
+                        Else
+                            alternateCount += 1
+                        End If
+                    Else
+                        alternateCount += 1
+                    End If
+
+                End If
+
+                betTypeForAlternate = SafeString(IIf(sBetType.Contains("Reverse"), "If Win", sBetType))
+                ticketIdforAlternate = sTicketID
+                contextForAlternate = SafeString(IIf(sContext.Contains("q"), "q", sContext))
+
+                ' Row color
+                Select Case True
+                    Case sBetType.Contains("Straight")
+                        Select Case LCase(sContext)
+                            Case "current"
+                                If (alternateCount Mod 2) = 0 Then
+                                    sBackColor = "#ffffff"
+                                Else
+                                    sBackColor = "#efefef"
+                                End If
+                            Case "1h"
+                                If (alternateCount Mod 2) = 0 Then
+                                    sBackColor = "#cde4fd"
+                                Else
+                                    sBackColor = "#b5d8ff"
+                                End If
+
+                            Case "2h"
+                                If (alternateCount Mod 2) = 0 Then
+                                    sBackColor = "#b2f8b7"
+                                Else
+                                    sBackColor = "#6cf475"
+                                End If
+
+                            Case "1q"
+                                If (alternateCount Mod 2) = 0 Then
+                                    sBackColor = "#faa833"
+                                Else
+                                    sBackColor = "#fab450"
+                                End If
+
+                            Case "2q"
+                                If (alternateCount Mod 2) = 0 Then
+                                    sBackColor = "#faa833"
+                                Else
+                                    sBackColor = "#fab450"
+                                End If
+
+                            Case "3q"
+                                If (alternateCount Mod 2) = 0 Then
+                                    sBackColor = "#faa833"
+                                Else
+                                    sBackColor = "#fab450"
+                                End If
+
+                            Case "4q"
+                                If (alternateCount Mod 2) = 0 Then
+                                    sBackColor = "#faa833"
+                                Else
+                                    sBackColor = "#fab450"
+                                End If
+                            Case Else
+                                sBackColor = "#efefef"
+                        End Select
+                    Case sBetType.Contains("Parlay")
+                        Dim tdRisk As HtmlControl = CType(oItem.FindControl("tdRisk"), HtmlControl)
+                        Dim tdWin As HtmlControl = CType(oItem.FindControl("tdWin"), HtmlControl)
+                        tdRisk.Visible = False
+                        tdWin.Visible = False
+
+                        If (alternateCount Mod 2) = 0 Then
+                            sBackColor = "#ede56f"
+                        Else
+                            sBackColor = "#f1e64e"
+                        End If
+                    Case sBetType.Contains("Teaser")
+                        If (alternateCount Mod 2) = 0 Then
+                            sBackColor = "#f08080"
+                        Else
+                            sBackColor = "#f59596"
+                        End If
+                    Case sBetType.Contains("If Win") Or sBetType.Contains("Reverse")
+                        If (alternateCount Mod 2) = 0 Then
+                            sBackColor = "#efefef"
+                        Else
+                            sBackColor = "#ffffff"
+                        End If
+                    Case Else
+                        sBackColor = "#ffffff"
+                End Select
+
+                itemTicketContent.Style.Add("background", sBackColor)
+                ' Risk, Win
+                nTotalRisk += oTicket.RiskAmount
+                nTotalWin += oTicket.WinAmount
+                nIndex += 1
+            End While
+
+            lblTicketSummary.Text = String.Format("{0} Selections Risking <b>{1}</b> To Win <b>{2} US</b>", rptTickets.Items.Count, FormatNumber(nTotalRisk, 2), FormatNumber(nTotalWin, 2))
+
+              'Hide Rish/Win for Parlay
+            If Me.BetTypeActive.Contains("Parlay") Then
+                ltrHeadRisk.Visible = False
+                ltrHeadWin.Visible = False
+                lblTicketSummary.Visible = False
+            End If
+            
+        End Sub
+
         Protected Sub rptTickets_ItemCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.RepeaterCommandEventArgs) Handles rptTickets.ItemCommand
             Select Case UCase(SafeString(e.CommandName))
                 Case "DEL_TICKET"
                     UserSession.SelectedTicket(SelectedPlayerID).RemoveTickets(SafeString(e.CommandArgument))
-
                 Case Else
                     '' Error
             End Select
@@ -352,7 +503,7 @@ Namespace SBSWebsite
                         Case "PARLAY"
                             btnNextWager.Visible = False
                             sClickAction &= "CalcParlay(document.getElementById('{0}'), {1}, document.getElementById('{2}'), document.getElementById('{3}'));"
-                            sClickAction = String.Format(sClickAction, txtBet.ClientID, SQLString(oTicket.TicketID), ddlType.ClientID, _
+                            sClickAction = String.Format(sClickAction, txtBet.ClientID, SQLString(oTicket.TicketID), ddlType.ClientID,
                                                           lblResult.ClientID)
                             ddlType.Attributes.Add("onchange", sClickAction)
 
@@ -385,11 +536,11 @@ Namespace SBSWebsite
                             Dim rdRiskAmount As RadioButton = CType(e.Item.FindControl("rdRiskAmount"), RadioButton)
                             '   Dim rdWinAmount As RadioButton = CType(e.Item.FindControl("rdWinAmount"), RadioButton)
                             rdRiskAmount.Attributes.Add("Onclick", String.Format("showRisk('{0}','{1}',true)", txtBet.ClientID, txtWin.ClientID))
-                            '  rdWinAmount.Attributes.Add("Onclick", String.Format("showRisk('{0}','{1}',false)", txtBet.ClientID, txtWin.ClientID))
+                        '  rdWinAmount.Attributes.Add("Onclick", String.Format("showRisk('{0}','{1}',false)", txtBet.ClientID, txtWin.ClientID))
 
-                            'Case "STRAIGHT", "BETTHEBOARD"
-                            '    CType(e.Item.FindControl("rdRiskAmount"), RadioButton).Visible = False
-                            '    CType(e.Item.FindControl("lblRiskAmmount"), Literal).Text = "<input type='checkbox' checked='checked'/>Use same amount for All Bets"
+                        'Case "STRAIGHT", "BETTHEBOARD"
+                        '    CType(e.Item.FindControl("rdRiskAmount"), RadioButton).Visible = False
+                        '    CType(e.Item.FindControl("lblRiskAmmount"), Literal).Text = "<input type='checkbox' checked='checked'/>Use same amount for All Bets"
                         Case "STRAIGHT", "IF BET"
                             lblResult.Visible = False
                             If UCase(oTicket.TicketType) = "STRAIGHT" Then
@@ -423,26 +574,26 @@ Namespace SBSWebsite
                             Dim rdRiskAmount As RadioButton = CType(e.Item.FindControl("rdRiskAmount"), RadioButton)
                             ' Dim rdWinAmount As RadioButton = CType(e.Item.FindControl("rdWinAmount"), RadioButton)
                             rdRiskAmount.Attributes.Add("Onclick", String.Format("showRisk('{0}','{1}',true)", txtBet.ClientID, txtWin.ClientID))
-                            ' rdWinAmount.Attributes.Add("Onclick", String.Format("showRisk('{0}','{1}',false)", txtBet.ClientID, txtWin.ClientID))
+                        ' rdWinAmount.Attributes.Add("Onclick", String.Format("showRisk('{0}','{1}',false)", txtBet.ClientID, txtWin.ClientID))
 
                         Case "TEASER"
                             lblResult.Visible = False
                             btnNextWager.Visible = False
                             sClickAction &= "CalcTeaser(this, {0}, {1}, {2});"
-                            sClickAction = String.Format(sClickAction, SQLString(oTicket.TicketID), _
-                                                         "document.getElementById('" & txtBet.ClientID & "')", _
+                            sClickAction = String.Format(sClickAction, SQLString(oTicket.TicketID),
+                                                         "document.getElementById('" & txtBet.ClientID & "')",
                                                          "document.getElementById('" & txtWin.ClientID & "')")
                             ddlType.Attributes.Add("onchange", sClickAction)
 
                             sClickAction = "javascript: "
                             sClickAction &= "CalcRiskTeaser(this, {0}, document.getElementById('{1}'), document.getElementById('{2}'));"
-                            sClickAction = String.Format(sClickAction, SQLString(oTicket.TicketID), ddlType.ClientID, _
+                            sClickAction = String.Format(sClickAction, SQLString(oTicket.TicketID), ddlType.ClientID,
                                                           txtBet.ClientID)
                             txtWin.Attributes.Add("onblur", sClickAction)
 
                             sClickAction = "javascript: "
                             sClickAction &= "CalcWinTeaser(this, {0}, document.getElementById('{1}'), document.getElementById('{2}'));"
-                            sClickAction = String.Format(sClickAction, SQLString(oTicket.TicketID), ddlType.ClientID, _
+                            sClickAction = String.Format(sClickAction, SQLString(oTicket.TicketID), ddlType.ClientID,
                                                            txtWin.ClientID)
 
                             lblRiskDsp.Text = "Risk: "
@@ -639,14 +790,14 @@ Namespace SBSWebsite
                     Else
 
                     End If
-                    'Try
-                    '    If UserSession.SelectedTicket(SelectedPlayerID).Tickets.Count = 0 Then
-                    '        e.Item.FindControl("trTicketBet").Visible = False
-                    '    End If
-                    'Catch ex As Exception
-                    '    e.Item.FindControl("trTicketBet").Visible = False
+                'Try
+                '    If UserSession.SelectedTicket(SelectedPlayerID).Tickets.Count = 0 Then
+                '        e.Item.FindControl("trTicketBet").Visible = False
+                '    End If
+                'Catch ex As Exception
+                '    e.Item.FindControl("trTicketBet").Visible = False
 
-                    'End Try
+                'End Try
 
                 Case Else
                     '' Error
@@ -1053,7 +1204,7 @@ Namespace SBSWebsite
                         lblMessage.Text = "<span style=' font-weight:bold;'>Attention:</span> lines have changed. Please review and reconfirm your bet."
                         ' bindPreviewWagers()
                     Else
-                        If UserSession.SelectedTicket(SelectedPlayerID).SaveTickets(SelectedPlayer.BalanceAmount, _
+                        If UserSession.SelectedTicket(SelectedPlayerID).SaveTickets(SelectedPlayer.BalanceAmount,
                                                                   SelectedPlayer.AgentID, SelectedPlayer.UserID, UserSession.UserID) Then
                             lblMessage.Text = "Wager(s) has been saved successfully"
                             ' lblMessage.Attributes.Item("style") = "font-size: 14px;"
@@ -1273,8 +1424,8 @@ Namespace SBSWebsite
                 nIndex += 1
             Next
 
-            sResult &= Join(oDetails.ToArray) & String.Format("Amount : Risking <b>{0}</b> To Win <b>{1}</b>", _
-                                                                                 FormatCurrency(SafeRound(poTicket.RiskAmount), GetRoundMidPoint).Replace("$", ""), _
+            sResult &= Join(oDetails.ToArray) & String.Format("Amount : Risking <b>{0}</b> To Win <b>{1}</b>",
+                                                                                 FormatCurrency(SafeRound(poTicket.RiskAmount), GetRoundMidPoint).Replace("$", ""),
                                                                                  FormatCurrency(SafeRound(poTicket.WinAmount), GetRoundMidPoint)).Replace("$", "")
 
             Return sResult
@@ -1322,7 +1473,7 @@ Namespace SBSWebsite
 
             Dim sTotalPointsMoney As String = FormatNumber(nMoney + poTicketbet.AddPointMoney, GetRoundMidPoint, TriState.UseDefault, TriState.False)
 
-            Return String.Format("<b>{0}</b>&nbsp;{1} <b>-</b> {2} &nbsp;<u><b>{3} {4} ({5})</b></u>", IIf(LCase(SafeString(poTicketbet.Context)) = "current", "", "&nbsp;" & poTicketbet.Context), poTicketbet.HomeTeam, _
+            Return String.Format("<b>{0}</b>&nbsp;{1} <b>-</b> {2} &nbsp;<u><b>{3} {4} ({5})</b></u>", IIf(LCase(SafeString(poTicketbet.Context)) = "current", "", "&nbsp;" & poTicketbet.Context), poTicketbet.HomeTeam,
                                  poTicketbet.AwayTeam, sMsg, FormatPoint(poTicketbet.TotalPoints + poTicketbet.AddPoint, poTicketbet.GameType).Replace("+"c, ""), IIf(sTotalPointsMoney.Contains("-"), sTotalPointsMoney, "+" & sTotalPointsMoney))
         End Function
 
@@ -1340,14 +1491,14 @@ Namespace SBSWebsite
 
             Dim sTotalPointsMoney As String = FormatNumber(nMoney + poTicketbet.AddPointMoney, GetRoundMidPoint, TriState.UseDefault, TriState.False)
 
-            Return String.Format("<b>{0}</b>&nbsp;{1} &nbsp;<u><b>{2} {3} ({4})</b></u>", IIf(LCase(SafeString(poTicketbet.Context)) = "current", "", "&nbsp;" & poTicketbet.Context), IIf(poTicketbet.TeamTotalName.Equals("away", StringComparison.CurrentCultureIgnoreCase), poTicketbet.AwayTeam, poTicketbet.HomeTeam), _
+            Return String.Format("<b>{0}</b>&nbsp;{1} &nbsp;<u><b>{2} {3} ({4})</b></u>", IIf(LCase(SafeString(poTicketbet.Context)) = "current", "", "&nbsp;" & poTicketbet.Context), IIf(poTicketbet.TeamTotalName.Equals("away", StringComparison.CurrentCultureIgnoreCase), poTicketbet.AwayTeam, poTicketbet.HomeTeam),
                                   sMsg, FormatPoint(poTicketbet.TotalPoints + poTicketbet.AddPoint, poTicketbet.GameType).Replace("+"c, ""), IIf(sTotalPointsMoney.Contains("-"), sTotalPointsMoney, "+" & sTotalPointsMoney))
         End Function
 
         Private Function getDetailByDraw(ByVal poTicketbet As CTicketBet) As String
             Dim sDrawLine As String = FormatNumber(poTicketbet.DrawMoneyLine + poTicketbet.AddPointMoney, GetRoundMidPoint, TriState.UseDefault, TriState.False)
 
-            Return String.Format("<b>{0}</b>&nbsp;{1} <b>-</b> {2} &nbsp;<u><b>Draw ({3})</b></u>", IIf(poTicketbet.Context = "Current", "", "&nbsp;" & poTicketbet.Context), _
+            Return String.Format("<b>{0}</b>&nbsp;{1} <b>-</b> {2} &nbsp;<u><b>Draw ({3})</b></u>", IIf(poTicketbet.Context = "Current", "", "&nbsp;" & poTicketbet.Context),
             poTicketbet.HomeTeam, poTicketbet.AwayTeam, IIf(sDrawLine.Contains("-"), sDrawLine, "+" & sDrawLine))
         End Function
 

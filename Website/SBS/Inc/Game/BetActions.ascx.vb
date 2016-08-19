@@ -9,6 +9,8 @@ Imports WebsiteLibrary
 Imports System.IO
 Imports System.Security
 Imports System.Security.AccessControl
+Imports SBCBL.UI
+
 Partial Class SBS_Inc_Game_BetActions
     Inherits SBCBL.UI.CSBCUserControl
 
@@ -38,6 +40,12 @@ Partial Class SBS_Inc_Game_BetActions
     Public _context1H As Integer = 1
 
 #Region "Properties"
+    Private Function UserType() As EUserType
+        If HttpContext.Current.Session("USER_TYPE") Is Nothing Then
+            HttpContext.Current.Session("USER_TYPE") = EUserType.Player
+        End If
+        Return CType(HttpContext.Current.Session("USER_TYPE"), EUserType)
+    End Function
     Public ReadOnly Property IfBetOrdinal() As String
         Get
             If LCase(BetTypeActive).Contains("if ") Then
@@ -88,9 +96,9 @@ Partial Class SBS_Inc_Game_BetActions
                     sSubTeams &= "{ ""TeamMember"": """ & oTeaserTeam.Key & """, ""Value"": """ & oTeaserTeam.Value & """ }, "
                 Next
 
-                sResult &= "{ ""RuleID"": """ & SafeString(oTeaserRule.TeaserRuleID) & """, ""BasketballPoint"": """ & _
-                SafeString(oTeaserRule.BasketballPoint) & """, ""FootballPoint"": """ & oTeaserRule.FootbalPoint & """, ""MinTeam"": """ & _
-                oTeaserRule.MinTeam & """, ""MaxTeam"": """ & oTeaserRule.MaxTeam & """, ""Teams"": [" & _
+                sResult &= "{ ""RuleID"": """ & SafeString(oTeaserRule.TeaserRuleID) & """, ""BasketballPoint"": """ &
+                SafeString(oTeaserRule.BasketballPoint) & """, ""FootballPoint"": """ & oTeaserRule.FootbalPoint & """, ""MinTeam"": """ &
+                oTeaserRule.MinTeam & """, ""MaxTeam"": """ & oTeaserRule.MaxTeam & """, ""Teams"": [" &
                 sSubTeams & "{ ""TeamMember"": """", ""Value"": """" }] }, "
             Next
 
@@ -171,12 +179,12 @@ Partial Class SBS_Inc_Game_BetActions
     Private ReadOnly Property CanBetting() As Boolean
         Get
             If SelectedPlayerID <> "" Then
-                Return (UserSession.SysSettings("BettingSetup", "BettingEnable").GetBooleanValue("BettingEnable") OrElse _
-                UserSession.SysSettings("BettingSetup", "OverrideBettingEnable").GetBooleanValue("OverrideBettingEnable")) AndAlso _
-                Not UserSession.Cache.GetPlayerInfo(SelectedPlayerID).IsBettingLocked AndAlso _
+                Return (UserSession.SysSettings("BettingSetup", "BettingEnable").GetBooleanValue("BettingEnable") OrElse
+                UserSession.SysSettings("BettingSetup", "OverrideBettingEnable").GetBooleanValue("OverrideBettingEnable")) AndAlso
+                Not UserSession.Cache.GetPlayerInfo(SelectedPlayerID).IsBettingLocked AndAlso
                 UserSession.Cache.GetPlayerInfo(SelectedPlayerID).OriginalAmount > 0
             Else
-                Return (UserSession.SysSettings("BettingSetup", "BettingEnable").GetBooleanValue("BettingEnable") OrElse _
+                Return (UserSession.SysSettings("BettingSetup", "BettingEnable").GetBooleanValue("BettingEnable") OrElse
                 UserSession.SysSettings("BettingSetup", "OverrideBettingEnable").GetBooleanValue("OverrideBettingEnable"))
             End If
 
@@ -1006,7 +1014,7 @@ Partial Class SBS_Inc_Game_BetActions
     Private Function validGameType(ByVal psAction As String, ByVal psGameType As String) As String
         Select Case UCase(psAction)
             Case "TEASER"
-                If Not (IsBasketball(psGameType) OrElse _
+                If Not (IsBasketball(psGameType) OrElse
                         IsFootball(psGameType)) Then
                     Return String.Format("{0} Doesn't Have Teaser Type.", psGameType)
                 End If
@@ -1418,7 +1426,7 @@ Partial Class SBS_Inc_Game_BetActions
             Dim nTotalPointsOver = addPointTeaser(nTotalPoint, sGameType, False)
             Dim nTotalPointsUnder = addPointTeaser(nTotalPoint, sGameType, True)
             '' Away Spread 
-            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "Spread", _
+            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "Spread",
                                                       SafeDouble(oData("AwaySpreadMoney")), SafeBoolean(bAwaySpreadJuice), IncreaseSpread)
 
 
@@ -1433,14 +1441,14 @@ Partial Class SBS_Inc_Game_BetActions
             chkSelectAwaySpread.Visible = nMoneyLine <> 0
             CType(e.Item.FindControl("txtMoneyAwaySpread"), TextBox).Visible = nMoneyLine <> 0
             ParseBuyPointOptions(nAwaySpread, nMoneyLine, "Spread", sContext, sGameType, ddlBuyPointAwaySpread, lblAwaySpread)
-            Dim sClick As String = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," & _
-            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");", _
-            oData("GameID"), oData("GameLineID"), oData("GameType"), _
-            oData("BookMaker"), oData("Context"), oData("GameDate"), _
-            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"), _
-            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"), _
-            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "Spread", "AWAY", _
-            SafeDouble(oData("AwaySpread")), GetMoneyGameIncreaseSpreadML(SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "Spread", SafeDouble(oData("AwaySpreadMoney")), SafeString(oData("GameLineID")), SafeDouble(oData("AwaySpread")), SafeDouble(oData("HomeSpread"))), _
+            Dim sClick As String = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," &
+            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");",
+            oData("GameID"), oData("GameLineID"), oData("GameType"),
+            oData("BookMaker"), oData("Context"), oData("GameDate"),
+            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"),
+            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"),
+            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "Spread", "AWAY",
+            SafeDouble(oData("AwaySpread")), GetMoneyGameIncreaseSpreadML(SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "Spread", SafeDouble(oData("AwaySpreadMoney")), SafeString(oData("GameLineID")), SafeDouble(oData("AwaySpread")), SafeDouble(oData("HomeSpread"))),
             oData("IsCircle"), getFavout(SafeDouble(oData("AwaySpread")), SafeDouble(oData("HomeSpread")), "Away"), ValidDescription(SBCBL.std.SafeString(oData("Description"))), SafeString(ddlBuyPointAwaySpread.ClientID), "")
             chkSelectAwaySpread.Attributes("OnClick") = sClick
             rdSelectAwaySpread.Attributes("OnClick") = sClick
@@ -1448,61 +1456,61 @@ Partial Class SBS_Inc_Game_BetActions
 
             ' HightGameLight(sGameID, sContext, lblAwaySpread)
             ''total-Team over
-            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "TeamTotalPoints", _
+            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "TeamTotalPoints",
                                                       SafeDouble(oData("AwayTeamTotalPointsOverMoney")), True, "away")
 
             lblAwayTeamTotalPointsOverMoney.Text = String.Format("Over{0}", IIf(nMoneyLine > 0, "&nbsp;+" & nMoneyLine, "&nbsp;" & nMoneyLine))
-            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," & _
-            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");", _
-            oData("GameID"), oData("GameLineID"), oData("GameType"), _
-            oData("BookMaker"), oData("Context"), oData("GameDate"), _
-            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"), _
-            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"), _
-            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "TeamTotalPoints", "AWAY", _
-            SBCBL.std.SafeDouble(oData("AwayTeamTotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "TotalPoints", SBCBL.std.SafeDouble(oData("AwayTeamTotalPointsOverMoney")), SBCBL.std.SafeString(oData("GameLineID")), "True"), _
+            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," &
+            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");",
+            oData("GameID"), oData("GameLineID"), oData("GameType"),
+            oData("BookMaker"), oData("Context"), oData("GameDate"),
+            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"),
+            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"),
+            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "TeamTotalPoints", "AWAY",
+            SBCBL.std.SafeDouble(oData("AwayTeamTotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "TotalPoints", SBCBL.std.SafeDouble(oData("AwayTeamTotalPointsOverMoney")), SBCBL.std.SafeString(oData("GameLineID")), "True"),
             oData("IsCircle"), "True", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "")
             rdAwayTeamTotalOver.Attributes("OnClick") = sClick
 
 
-            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Home", sContext, "TeamTotalPoints", _
+            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Home", sContext, "TeamTotalPoints",
                                                       SafeDouble(oData("AwayTeamTotalPointsUnderMoney")), False, "away")
             lblAwayTeamTotalPointsUnderMoney.Text = String.Format("Under{0}", IIf(nMoneyLine > 0, "&nbsp;+" & nMoneyLine, "&nbsp;" & nMoneyLine))
-            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," & _
-                       """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"");", _
-                       oData("GameID"), oData("GameLineID"), oData("GameType"), _
-                       oData("BookMaker"), oData("Context"), oData("GameDate"), _
-                       oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"), _
-                       oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"), _
-                       oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "TeamTotalPoints", "AWAY", _
-                       SBCBL.std.SafeDouble(oData("AwayTeamTotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "TotalPoints", SBCBL.std.SafeDouble(oData("AwayTeamTotalPointsUnderMoney")), SBCBL.std.SafeString(oData("GameLineID")), "True"), _
+            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," &
+                       """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"");",
+                       oData("GameID"), oData("GameLineID"), oData("GameType"),
+                       oData("BookMaker"), oData("Context"), oData("GameDate"),
+                       oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"),
+                       oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"),
+                       oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "TeamTotalPoints", "AWAY",
+                       SBCBL.std.SafeDouble(oData("AwayTeamTotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "TotalPoints", SBCBL.std.SafeDouble(oData("AwayTeamTotalPointsUnderMoney")), SBCBL.std.SafeString(oData("GameLineID")), "True"),
                        oData("IsCircle"), "False", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "")
             rdAwayTeamTotalUnder.Attributes("OnClick") = sClick
             ''total-Team under
-            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "TeamTotalPoints", _
+            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "TeamTotalPoints",
                                                       SafeDouble(oData("HomeTeamTotalPointsOverMoney")), True, "home")
             lblHomeTeamTotalPointsOverMoney.Text = String.Format("Over{0}", IIf(nMoneyLine > 0, "&nbsp;+" & nMoneyLine, "&nbsp;" & nMoneyLine))
 
-            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," & _
-            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");", _
-            oData("GameID"), oData("GameLineID"), oData("GameType"), _
-            oData("BookMaker"), oData("Context"), oData("GameDate"), _
-            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"), _
-            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"), _
-            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "TeamTotalPoints", "HOME", _
-            SBCBL.std.SafeDouble(oData("HomeTeamTotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "HOME", oData("Context"), "TeamTotalPoints", SBCBL.std.SafeDouble(oData("HomeTeamTotalPointsUnderMoney")), SBCBL.std.SafeString(oData("GameLineID")), "False"), _
+            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," &
+            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");",
+            oData("GameID"), oData("GameLineID"), oData("GameType"),
+            oData("BookMaker"), oData("Context"), oData("GameDate"),
+            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"),
+            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"),
+            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "TeamTotalPoints", "HOME",
+            SBCBL.std.SafeDouble(oData("HomeTeamTotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "HOME", oData("Context"), "TeamTotalPoints", SBCBL.std.SafeDouble(oData("HomeTeamTotalPointsUnderMoney")), SBCBL.std.SafeString(oData("GameLineID")), "False"),
             oData("IsCircle"), "True", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "")
             rdHomeTeamTotalOver.Attributes("OnClick") = sClick
-            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Home", sContext, "TeamTotalPoints", _
+            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Home", sContext, "TeamTotalPoints",
                                                      SafeDouble(oData("HomeTeamTotalPointsUnderMoney")), False, "home")
             lblHomeTeamTotalPointsUnderMoney.Text = String.Format("Under{0}", IIf(nMoneyLine > 0, "&nbsp;+" & nMoneyLine, "&nbsp;" & nMoneyLine))
-            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," & _
-            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");", _
-            oData("GameID"), oData("GameLineID"), oData("GameType"), _
-            oData("BookMaker"), oData("Context"), oData("GameDate"), _
-            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"), _
-            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"), _
-            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "TeamTotalPoints", "HOME", _
-            SBCBL.std.SafeDouble(oData("HomeTeamTotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "HOME", oData("Context"), "TeamTotalPoints", SBCBL.std.SafeDouble(oData("HomeTeamTotalPointsOverMoney")), SBCBL.std.SafeString(oData("GameLineID")), "False"), _
+            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," &
+            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");",
+            oData("GameID"), oData("GameLineID"), oData("GameType"),
+            oData("BookMaker"), oData("Context"), oData("GameDate"),
+            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"),
+            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"),
+            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "TeamTotalPoints", "HOME",
+            SBCBL.std.SafeDouble(oData("HomeTeamTotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "HOME", oData("Context"), "TeamTotalPoints", SBCBL.std.SafeDouble(oData("HomeTeamTotalPointsOverMoney")), SBCBL.std.SafeString(oData("GameLineID")), "False"),
             oData("IsCircle"), "False", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "")
             rdHomeTeamTotalUnder.Attributes("OnClick") = sClick
             '' check if total point is locked
@@ -1512,7 +1520,7 @@ Partial Class SBS_Inc_Game_BetActions
                 nTotalPoints = 0
             End If
             '' Away TotalPoints
-            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "TotalPoints", _
+            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "TotalPoints",
                                                        SafeDouble(oData("TotalPointsOverMoney")), True)
             lblAwayTotal.Text = "Over&nbsp;" & safeVegass(nTotalPoints) & SafeString(IIf(nMoneyLine > 0, "&nbsp;+" & nMoneyLine, "&nbsp;" & nMoneyLine))
             CType(e.Item.FindControl("txtMoneyAwayTotal"), TextBox).Visible = nTotalPoints <> 0 AndAlso nMoneyLine <> 0
@@ -1525,14 +1533,14 @@ Partial Class SBS_Inc_Game_BetActions
             If lblAwayTotal.Visible Then
                 ParseBuyPointOptions(nTotalPoints, nMoneyLine, "TotalPoints", sContext, sGameType, ddlBuyPointAwayTotal, lblAwayTotal, True)
             End If
-            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," & _
-            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");", _
-            oData("GameID"), oData("GameLineID"), oData("GameType"), _
-            oData("BookMaker"), oData("Context"), oData("GameDate"), _
-            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"), _
-            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"), _
-            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "TotalPoints", "AWAY", _
-            SBCBL.std.SafeDouble(oData("TotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "away", oData("Context"), "TotalPoints", SBCBL.std.SafeDouble(oData("TotalPointsOverMoney")), SBCBL.std.SafeString(oData("GameLineID")), "False"), _
+            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," &
+            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");",
+            oData("GameID"), oData("GameLineID"), oData("GameType"),
+            oData("BookMaker"), oData("Context"), oData("GameDate"),
+            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"),
+            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"),
+            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "TotalPoints", "AWAY",
+            SBCBL.std.SafeDouble(oData("TotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "away", oData("Context"), "TotalPoints", SBCBL.std.SafeDouble(oData("TotalPointsOverMoney")), SBCBL.std.SafeString(oData("GameLineID")), "False"),
             oData("IsCircle"), "False", ValidDescription(SBCBL.std.SafeString(oData("Description"))), SafeString(ddlBuyPointAwayTotal.ClientID), "")
             chkSelectAwayTotal.Attributes("Onclick") = sClick
             rdSelectAwayTotal.Attributes("Onclick") = sClick
@@ -1540,7 +1548,7 @@ Partial Class SBS_Inc_Game_BetActions
             If GetMLLock(oData) Then
                 nMoneyLine = 0
             Else
-                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "MoneyLine", _
+                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "MoneyLine",
                                                        SafeDouble(oData("AwayMoneyLine")), bAwayMoneyLineJuice)
             End If
             lblAwayMoneyLine.Text = SafeString(IIf(nMoneyLine > 0, "&nbsp;+" & nMoneyLine, "&nbsp;" & nMoneyLine))
@@ -1551,14 +1559,14 @@ Partial Class SBS_Inc_Game_BetActions
             CType(e.Item.FindControl("chkSelectHomeMLine"), CheckBox).Visible = nMoneyLine <> 0
             lblHomeMoney.Visible = nMoneyLine <> 0
             lblAwayMoneyLine.Visible = nMoneyLine <> 0
-            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," & _
-            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");", _
-            oData("GameID"), oData("GameLineID"), oData("GameType"), _
-            oData("BookMaker"), oData("Context"), oData("GameDate"), _
-            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"), _
-            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"), _
-            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "MoneyLine", "AWAY", _
-            0, GetMoneyGameIncreaseSpreadML(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "MoneyLine", SBCBL.std.SafeDouble(oData("AwayMoneyLine")), SBCBL.std.SafeString(oData("GameLineID")), SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread"))), _
+            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," &
+            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");",
+            oData("GameID"), oData("GameLineID"), oData("GameType"),
+            oData("BookMaker"), oData("Context"), oData("GameDate"),
+            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"),
+            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"),
+            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "MoneyLine", "AWAY",
+            0, GetMoneyGameIncreaseSpreadML(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "MoneyLine", SBCBL.std.SafeDouble(oData("AwayMoneyLine")), SBCBL.std.SafeString(oData("GameLineID")), SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread"))),
             oData("IsCircle"), getFavout(SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread")), "Away"), ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "[IsCheckPitcher]")
             rdSelectAwayMLine.Attributes("Onclick") = sClick.Replace("[IsCheckPitcher]", "False")
             rdSelectAwayMLine2.Attributes("Onclick") = sClick.Replace("[IsCheckPitcher]", "True")
@@ -1567,7 +1575,7 @@ Partial Class SBS_Inc_Game_BetActions
 
 
             '' Home Spread
-            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Home", sContext, "Spread", _
+            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Home", sContext, "Spread",
                                                       SafeDouble(oData("HomeSpreadMoney")), bHomeSpreadJuice, IncreaseSpread)
 
             lblHomeSpread.Text = SafeString(IIf(nHomeSpread > 0, "&nbsp;+" & safeVegass(nHomeSpread), "&nbsp;" & safeVegass(nHomeSpread))) & "&nbsp;" & SafeString(IIf(nMoneyLine > 0, "&nbsp;+" & nMoneyLine, "&nbsp;" & nMoneyLine))
@@ -1581,54 +1589,54 @@ Partial Class SBS_Inc_Game_BetActions
             CType(e.Item.FindControl("txtMoneyHomeSpread"), TextBox).Visible = nMoneyLine <> 0
             chkSelectHomeSpread.Visible = nMoneyLine <> 0
             ParseBuyPointOptions(nHomeSpread, nMoneyLine, "Spread", sContext, sGameType, ddlBuyPointHomeSpread, lblHomeSpread)
-            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," & _
-            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");", _
-            oData("GameID"), oData("GameLineID"), oData("GameType"), _
-            oData("BookMaker"), oData("Context"), oData("GameDate"), _
-            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"), _
-            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"), _
-            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "Spread", "HOME", _
-            SBCBL.std.SafeDouble(oData("HomeSpread")), GetMoneyGameIncreaseSpreadML(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Home", oData("Context"), "Spread", SBCBL.std.SafeDouble(oData("HomeSpreadMoney")), SBCBL.std.SafeString(oData("GameLineID")), SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread"))), _
+            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," &
+            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");",
+            oData("GameID"), oData("GameLineID"), oData("GameType"),
+            oData("BookMaker"), oData("Context"), oData("GameDate"),
+            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"),
+            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"),
+            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "Spread", "HOME",
+            SBCBL.std.SafeDouble(oData("HomeSpread")), GetMoneyGameIncreaseSpreadML(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Home", oData("Context"), "Spread", SBCBL.std.SafeDouble(oData("HomeSpreadMoney")), SBCBL.std.SafeString(oData("GameLineID")), SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread"))),
             oData("IsCircle"), getFavout(SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread")), "Home"), ValidDescription(SBCBL.std.SafeString(oData("Description"))), ddlBuyPointHomeSpread.ClientID, "")
             chkSelectHomeSpread.Attributes("Onclick") = sClick
             rdSelectHomeSpread.Attributes("Onclick") = sClick
 
             '' Home TotalPoints
             nTotalPoints = nTotalPointsUnder
-            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Home", sContext, "TotalPoints", _
+            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Home", sContext, "TotalPoints",
                                                        SafeDouble(oData("TotalPointsUnderMoney")), False)
             lblHomeTotal.Text = "Under&nbsp;" & safeVegass(nTotalPoints) & SafeString(IIf(nMoneyLine > 0, "&nbsp;+" & nMoneyLine, "&nbsp;" & nMoneyLine))
             lblHomeTotal.Enabled = SafeDouble(nTotalPoints) <> 0 AndAlso nMoneyLine <> 0
             If lblHomeTotal.Visible Then
                 ParseBuyPointOptions(nTotalPoints, nMoneyLine, "TotalPoints", sContext, sGameType, ddlBuyPointHomeTotal, lblHomeTotal)
             End If
-            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," & _
-             """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");", _
-             oData("GameID"), oData("GameLineID"), oData("GameType"), _
-             oData("BookMaker"), oData("Context"), oData("GameDate"), _
-             oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"), _
-             oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"), _
-             oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "TotalPoints", "HOME", _
-             SBCBL.std.SafeDouble(oData("TotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Home", oData("Context"), "TotalPoints", SBCBL.std.SafeDouble(oData("TotalPointsUnderMoney")), SBCBL.std.SafeString(oData("GameLineID")), "False"), _
+            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," &
+             """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");",
+             oData("GameID"), oData("GameLineID"), oData("GameType"),
+             oData("BookMaker"), oData("Context"), oData("GameDate"),
+             oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"),
+             oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"),
+             oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "TotalPoints", "HOME",
+             SBCBL.std.SafeDouble(oData("TotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Home", oData("Context"), "TotalPoints", SBCBL.std.SafeDouble(oData("TotalPointsUnderMoney")), SBCBL.std.SafeString(oData("GameLineID")), "False"),
              oData("IsCircle"), "False", ValidDescription(SBCBL.std.SafeString(oData("Description"))), ddlBuyPointHomeTotal.ClientID, "")
             chkSelectHomeTotal.Attributes("Onclick") = sClick
             rdSelectHomeTotal.Attributes("Onclick") = sClick
             If GetMLLock(oData) Then
                 nMoneyLine = 0
             Else
-                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Home", sContext, "MoneyLine", _
+                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Home", sContext, "MoneyLine",
                                                            SafeDouble(oData("HomeMoneyLine")), bHomeMoneyLineJuice)
             End If
             lblHomeMoney.Text = SafeString(IIf(nMoneyLine > 0, "+&nbsp;" & nMoneyLine, "&nbsp;" & nMoneyLine))
 
-            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," & _
-            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");", _
-            oData("GameID"), oData("GameLineID"), oData("GameType"), _
-            oData("BookMaker"), oData("Context"), oData("GameDate"), _
-            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"), _
-            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"), _
-            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "MoneyLine", "HOME", _
-            0, GetMoneyGameIncreaseSpreadML(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Home", oData("Context"), "MoneyLine", SBCBL.std.SafeDouble(oData("HomeMoneyLine")), SBCBL.std.SafeString(oData("GameLineID")), SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread"))), _
+            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," &
+            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");",
+            oData("GameID"), oData("GameLineID"), oData("GameType"),
+            oData("BookMaker"), oData("Context"), oData("GameDate"),
+            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"),
+            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"),
+            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "MoneyLine", "HOME",
+            0, GetMoneyGameIncreaseSpreadML(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Home", oData("Context"), "MoneyLine", SBCBL.std.SafeDouble(oData("HomeMoneyLine")), SBCBL.std.SafeString(oData("GameLineID")), SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread"))),
             oData("IsCircle"), getFavout(SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread")), "Home"), ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "[IsCheckPitcher]")
             rdSelectHomeMLine.Attributes("Onclick") = sClick.Replace("[IsCheckPitcher]", "false")
             rdSelectHomeMLine2.Attributes("Onclick") = sClick.Replace("[IsCheckPitcher]", "true")
@@ -1637,24 +1645,24 @@ Partial Class SBS_Inc_Game_BetActions
 
 
             ' Draw MoneyLine
-            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "Draw", _
+            nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "Draw",
                                                        SafeDouble(oData("DrawMoneyLine")), False)
             lblDrawMoney.Text = SafeString(IIf(nMoneyLine > 0, "&nbsp;+" & nMoneyLine, "&nbsp;" & nMoneyLine))
             CType(e.Item.FindControl("txtMoneyDraw"), TextBox).Visible = nMoneyLine <> 0
             chkSelectDraw.Visible = nMoneyLine <> 0
-            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," & _
-            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");", _
-            oData("GameID"), oData("GameLineID"), oData("GameType"), _
-            oData("BookMaker"), oData("Context"), oData("GameDate"), _
-            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"), _
-            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"), _
-            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "Draw", "", _
-            0, GetMoneyGameIncrease(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "Draw", SBCBL.std.SafeDouble(oData("DrawMoneyLine")), ""), _
+            sClick = String.Format("javascript: return Betting(this,""{0}"",""{1}"",""{2}"",""{3}"",""{4}"",""{5}"",""{6}"",""{7}""," &
+            """{8}"",""{9}"",""{10}"",""{11}"",""{12}"",""{13}"",""{14}"",""{15}"",{16},{17},""{18}"",""{19}"",""{20}"",""{21}"",""{22}"");",
+            oData("GameID"), oData("GameLineID"), oData("GameType"),
+            oData("BookMaker"), oData("Context"), oData("GameDate"),
+            oData("AwayTeam"), oData("HomeTeam"), oData("AwayRotationNumber"),
+            oData("HomeRotationNumber"), oData("AwayPitcher"), oData("HomePitcher"),
+            oData("AwayPitcherRightHand"), oData("HomePitcherRightHand"), "Draw", "",
+            0, GetMoneyGameIncrease(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "Draw", SBCBL.std.SafeDouble(oData("DrawMoneyLine")), ""),
             oData("IsCircle"), "", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "")
             chkSelectDraw.Attributes("Onclick") = sClick
             rdSelectDraw.Attributes("Onclick") = sClick
             If IsSoccer(SafeString(oData("GameType"))) Then
-                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "Spread", _
+                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "Spread",
                                                              SafeDouble(oData("AwaySpreadMoney")), bAwaySpreadJuice)
 
                 lblAwaySpread.Text = safeVegass(AHFormat(nAwaySpread)) & SafeString(IIf(nMoneyLine > 0, "&nbsp;+" & nMoneyLine, "&nbsp;" & nMoneyLine))
@@ -1665,10 +1673,10 @@ Partial Class SBS_Inc_Game_BetActions
                     lblAwaySpread.Text = ""
                 End If
 
-                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "TotalPoints", _
+                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "TotalPoints",
                                                            SafeDouble(oData("TotalPointsOverMoney")), True)
                 lblAwayTotal.Text = "Over&nbsp;" & safeVegass(AHFormat(nTotalPointsOver)).Replace("+"c, "") & SafeString(IIf(nMoneyLine > 0, "&nbsp;+" & nMoneyLine, "&nbsp;&nbsp;" & nMoneyLine))
-                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Home", sContext, "Spread", _
+                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Home", sContext, "Spread",
                                                         SafeDouble(oData("HomeSpreadMoney")), bHomeSpreadJuice)
                 lblHomeSpread.Text = safeVegass(AHFormat(nHomeSpread)) & SafeString(IIf(nMoneyLine > 0, "&nbsp;+" & nMoneyLine, "&nbsp;" & nMoneyLine))
 
@@ -1680,7 +1688,7 @@ Partial Class SBS_Inc_Game_BetActions
                     lblHomeSpread.Text = ""
                 End If
 
-                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Home", sContext, "TotalPoints", _
+                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Home", sContext, "TotalPoints",
                                                            SafeDouble(oData("TotalPointsUnderMoney")), False)
                 lblHomeTotal.Text = "Under&nbsp;" & safeVegass(AHFormat(nTotalPointsUnder)).Replace("+"c, "") & " " & SafeString(IIf(nMoneyLine > 0, "&nbsp;+" & nMoneyLine, "&nbsp;" & nMoneyLine))
             End If
@@ -1852,14 +1860,14 @@ Partial Class SBS_Inc_Game_BetActions
                     'Dim chkSelectAwayTeamTotalUnder As CheckBox = CType(item.FindControl("chkSelectAwayTeamTotalUnder"), CheckBox)
                     ''check lick check box in away
                     If txtItem.ID.Contains("txtMoneyAwayTeamTotalOver") Then
-                        nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "TeamTotalPoints", _
+                        nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "TeamTotalPoints",
                                                       SafeDouble(poData("AwayTeamTotalPointsOverMoney")), True, "away")
                         sHABetA = SafeDouble(poData("AwayTeamTotalPoints")) & "|" & nMoneyLine 'CType(item.FindControl("hfaSelectAwayTeamTotalOver"), HiddenField).Value
                         sHABet = "OVER_POINT_TEAM_TOTAL"
                         pbFavorite = True
                     ElseIf txtItem.ID.Contains("txtMoneyAwayTeamTotalUnder") Then
 
-                        nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Home", poData("Context"), "TeamTotalPoints", _
+                        nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Home", poData("Context"), "TeamTotalPoints",
                                                      SafeDouble(poData("AwayTeamTotalPointsUnderMoney")), False, "away")
 
                         sHABetA = SafeDouble(poData("AwayTeamTotalPoints")) & "|" & nMoneyLine ' CType(item.FindControl("hfaSelectAwayTeamTotalUnder"), HiddenField).Value
@@ -1877,13 +1885,13 @@ Partial Class SBS_Inc_Game_BetActions
                     ''check lick check box in home
                     If txtItem.ID.Contains("txtMoneyHomeTeamTotalOver") Then
 
-                        nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "TeamTotalPoints", _
+                        nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "TeamTotalPoints",
                                                       SafeDouble(poData("HomeTeamTotalPointsOverMoney")), True, "home")
                         sHABetA = SafeDouble(poData("HomeTeamTotalPoints")) & "|" & nMoneyLine 'CType(item.FindControl("hfaSelectHomeTeamTotalOver"), HiddenField).Value
                         sHABet = "OVER_POINT_TEAM_TOTAL"
                         pbFavorite = True
                     ElseIf txtItem.ID.Contains("txtMoneyHomeTeamTotalUnder") Then
-                        nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Home", poData("Context"), "TeamTotalPoints", _
+                        nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Home", poData("Context"), "TeamTotalPoints",
                                                      SafeDouble(poData("HomeTeamTotalPointsUnderMoney")), False, "home")
                         sHABetA = SafeDouble(poData("HomeTeamTotalPoints")) & "|" & nMoneyLine 'CType(item.FindControl("hfaSelectHomeTeamTotalUnder"), HiddenField).Value
                         sHABet = "UNDER_POINT_TEAM_TOTAL"
@@ -1905,12 +1913,12 @@ PropGame:
                 sChoice = "AWAY"
                 If ddlBuyPoint IsNot Nothing AndAlso ddlBuyPoint.Visible AndAlso ddlBuyPoint.SelectedIndex > 0 Then
                     arrBuyPoin = ddlBuyPoint.SelectedValue.Split("|")
-                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "Spread", _
+                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "Spread",
                                              SafeDouble(poData("AwaySpreadMoney")) + SafeDouble(arrBuyPoin(1)), pbFavorite, IncreaseSpread)
 
                     oTicketBet = getSpeadBet(SafeDouble(SafeString(arrBuyPoin(0))) + SafeDouble(SafeString(poData("AwaySpread"))), nMoneyLine, sChoice)
                 Else
-                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "Spread", _
+                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "Spread",
                                              SafeDouble(poData("AwaySpreadMoney")), pbFavorite, IncreaseSpread)
 
                     oTicketBet = getSpeadBet(SafeDouble(SafeString(poData("AwaySpread"))), nMoneyLine, sChoice)
@@ -1920,12 +1928,12 @@ PropGame:
                 sChoice = "HOME"
                 If ddlBuyPoint IsNot Nothing AndAlso ddlBuyPoint.Visible AndAlso ddlBuyPoint.SelectedIndex > 0 Then
                     arrBuyPoin = ddlBuyPoint.SelectedValue.Split("|")
-                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Home", poData("Context"), "Spread", _
+                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Home", poData("Context"), "Spread",
                                             SafeDouble(poData("HomeSpreadMoney")) + SafeDouble(arrBuyPoin(1)), pbFavorite, IncreaseSpread)
 
                     oTicketBet = getSpeadBet(SafeDouble(SafeString(poData("HomeSpread"))) + SafeDouble(arrBuyPoin(0)), nMoneyLine, sChoice)
                 Else
-                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Home", poData("Context"), "Spread", _
+                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Home", poData("Context"), "Spread",
                                             SafeDouble(poData("HomeSpreadMoney")), pbFavorite, IncreaseSpread)
 
                     oTicketBet = getSpeadBet(SafeDouble(SafeString(poData("HomeSpread"))), nMoneyLine, sChoice)
@@ -1934,7 +1942,7 @@ PropGame:
             Case txtItem.ID.Contains("AwayTotal") '"OVER_POINT", "UNDER_POINT"
                 If ddlBuyPoint IsNot Nothing AndAlso ddlBuyPoint.Visible AndAlso ddlBuyPoint.SelectedIndex > 0 Then
                     arrBuyPoin = ddlBuyPoint.SelectedValue.Split("|")
-                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "TotalPoints", _
+                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "TotalPoints",
                                                       SafeDouble(poData("TotalPointsOverMoney")) + SafeDouble(arrBuyPoin(1)), True)
                     sChoice = "OVER"
                     oTicketBet = getTotalPointsBet(SafeDouble(poData("TotalPoints")) + SafeDouble(arrBuyPoin(0)) _
@@ -1943,7 +1951,7 @@ PropGame:
                     oTicketBet.TeamTotalName = sTeamTotalName
                 Else
 
-                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "TotalPoints", _
+                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "TotalPoints",
                                                  SafeDouble(poData("TotalPointsOverMoney")), True)
                     sChoice = "OVER"
                     oTicketBet = getTotalPointsBet(SafeDouble(poData("TotalPoints")) _
@@ -1956,7 +1964,7 @@ PropGame:
             Case txtItem.ID.Contains("HomeTotal") '"OVER_POINT", "UNDER_POINT"
                 If ddlBuyPoint IsNot Nothing AndAlso ddlBuyPoint.Visible AndAlso ddlBuyPoint.SelectedIndex > 0 Then
                     arrBuyPoin = ddlBuyPoint.SelectedValue.Split("|")
-                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Home", poData("Context"), "TotalPoints", _
+                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Home", poData("Context"), "TotalPoints",
                                                                SafeDouble(poData("TotalPointsUnderMoney")) + SafeDouble(arrBuyPoin(1)), False)
                     sChoice = "UNDER"
                     oTicketBet = getTotalPointsBet(SafeDouble(poData("TotalPoints")) + SafeDouble(arrBuyPoin(0)) _
@@ -1965,7 +1973,7 @@ PropGame:
                     oTicketBet.TeamTotalName = sTeamTotalName
                 Else
                     arrBuyPoin = ddlBuyPoint.SelectedValue.Split("|")
-                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Home", poData("Context"), "TotalPoints", _
+                    nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Home", poData("Context"), "TotalPoints",
                                                                SafeDouble(poData("TotalPointsUnderMoney")), False)
                     sChoice = "UNDER"
                     oTicketBet = getTotalPointsBet(SafeDouble(poData("TotalPoints")) _
@@ -1986,18 +1994,18 @@ PropGame:
 
             Case txtItem.ID.Contains("MoneyAwayMLine") '"AWAY_LINE"
                 sChoice = "AWAY"
-                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "MoneyLine", _
+                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "MoneyLine",
                                                        SafeDouble(poData("AwayMoneyLine")), pbFavorite)
                 oTicketBet = getMoneyLineBet(nMoneyLine, sChoice)
             Case txtItem.ID.Contains("MoneyHomeMLine")
                 sChoice = "HOME"
-                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Home", poData("Context"), "MoneyLine", _
+                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Home", poData("Context"), "MoneyLine",
                                                           SafeDouble(poData("HomeMoneyLine")), pbFavorite)
                 oTicketBet = getMoneyLineBet(nMoneyLine, sChoice)
             Case txtItem.ID.Contains("MoneyDraw") '"DRAW_LINE"
                 oTicketBet = New CTicketBet()
                 oTicketBet.BetType = "Draw"
-                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "Draw", _
+                nMoneyLine = _oOddsRuleEngine.GetMoneyLine(SafeString(poData("GameID")), poData("GameType"), "Away", poData("Context"), "Draw",
                                                      SafeDouble(poData("DrawMoneyLine")), False)
                 oTicketBet.DrawMoneyLine = nMoneyLine
                 If Not BetTypeActive.Replace(__BetIfAll, _sStraight).Replace(_sBetTheBoard, _sStraight).Equals(_sStraight, StringComparison.CurrentCultureIgnoreCase) Then
@@ -2045,6 +2053,7 @@ PropGame:
                 If ddlBuyPoint IsNot Nothing AndAlso ddlBuyPoint.Visible AndAlso Not String.IsNullOrEmpty(ddlBuyPoint.SelectedValue) Then
                     oTicketBet.AddPointValid = ddlBuyPoint.SelectedValue.Split("|")(0)
                     oTicketBet.AddPointMoneyValid = ddlBuyPoint.SelectedValue.Split("|")(1)
+
                 End If
                 oTicketBet.SetWinAmount = bSetWinAmount
                 Dim sError As String = ""
@@ -2057,7 +2066,7 @@ PropGame:
                 Dim oOddsRules As New COddRulesEngine(olstGameID, SelectedPlayer.SuperAdminID, False, SelectedPlayer.Template, SelectedPlayer.SuperAgentID)
 
                 If UCase(sActionType) <> "STRAIGHT" Then
-                    If UserSession.SelectedTicket(SelectedPlayerID).LastTicket IsNot Nothing AndAlso _
+                    If UserSession.SelectedTicket(SelectedPlayerID).LastTicket IsNot Nothing AndAlso
                             UCase(UserSession.SelectedTicket(SelectedPlayerID).LastTicket.TicketType) = UCase(sActionType) Then
                         Try
                             sError = UserSession.SelectedTicket(SelectedPlayerID).LastTicket.AddTicketBet(oTicketBet)
@@ -2076,7 +2085,7 @@ PropGame:
                 End If
                 'ClientAlert(txtItem.Text + sActionType, True)
                 If Not bAlreadyAdd Then
-                    If UserSession.SelectedTicket(SelectedPlayerID).LastTicket IsNot Nothing AndAlso _
+                    If UserSession.SelectedTicket(SelectedPlayerID).LastTicket IsNot Nothing AndAlso
                             UserSession.SelectedTicket(SelectedPlayerID).LastTicket.NumOfTicketBets = 0 Then
                         UserSession.SelectedTicket(SelectedPlayerID).RemoveTickets(UserSession.SelectedTicket(SelectedPlayerID).LastTicket.TicketID)
                     End If
@@ -2160,7 +2169,8 @@ PropGame:
         End If
 
         If BetTypeActive.Contains("If ") Then
-            Return True
+            Dim olstGameType As List(Of String) = UserSession.SelectedGameTypes(Me.SelectedPlayerID)
+            _oOddsRuleEngine = New COddRulesEngine(olstGameType, SelectedPlayer.SuperAdminID, True, SelectedPlayer.Template, SelectedPlayer.SuperAgentID)
         End If
 
         UserSession.SelectedTicket(SelectedPlayerID) = Nothing
@@ -2263,46 +2273,110 @@ PropGame:
 
                     Dim hfInfo As HiddenField = CType(rptGameLines.Items(k).FindControl("hfInfo"), HiddenField)
                     Dim sGameLineID As String = hfInfo.Value
+
+
+
                     If chkAwayTeamTotalOver.Checked OrElse txtMoneyAwayTeamTotalOver.Text <> "" Then
                         Dim oData = oGameLineManager.GetGameLinesByID(sGameLineID)
-                        BetGame(lblMoneyAwayTeamTotalOver.Text.Substring(2).Contains("+"), txtMoneyAwayTeamTotalOver, False, oData, Nothing, False)
-                        If StraightError Then
-                            Return False
+                        If BetTypeActive.Contains("If ") Then
+                            Dim bettingError As String = SBSBetting(lblMoneyAwayTeamTotalOver.Text.Substring(2).Contains("+"), txtMoneyAwayTeamTotalOver,SelectedPlayerID, SafeString(oData("GameID")), sGameLineID, BetTypeActive, SafeString(oData("GameType")), SafeString(oData("BookMaker")),
+                                  SafeString(oData("Context")), SafeString(oData("GameDate")), SafeString(oData("AwayTeam")), SafeString(oData("HomeTeam")), SafeString(oData("AwayRotationNumber")),
+                                  SafeString(oData("HomeRotationNumber")), SafeString(oData("AwayPitcher")), SafeString(oData("HomePitcher")), SafeString(oData("AwayPitcherRightHand")),
+                                  SafeString(oData("HomePitcherRightHand")), "TeamTotalPoints", "AWAY", SafeDouble(oData("AwayTeamTotalPoints")), GetMoneyGameIncreaseTotal(SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "TotalPoints", SafeDouble(oData("AwayTeamTotalPointsOverMoney")), SafeString(oData("GameLineID")), "True"),
+                                  SafeString(oData("IsCircle")), "True", "", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "")
+                            If bettingError.Length > 0 Then
+                                Return False
+                            End If
+                        Else
+                            BetGame(lblMoneyAwayTeamTotalOver.Text.Substring(2).Contains("+"), txtMoneyAwayTeamTotalOver, False, oData, Nothing, False)
+                            If StraightError Then
+                                Return False
+                            End If
                         End If
+
 
                     End If
                     If chkAwayTeamTotalUnder.Checked OrElse txtMoneyAwayTeamTotalUnder.Text <> "" Then
                         Dim oData = oGameLineManager.GetGameLinesByID(sGameLineID)
-                        BetGame(lblMoneyAwayTeamTotalUnder.Text.Substring(2).Contains("+"), txtMoneyAwayTeamTotalUnder, False, oData, Nothing, False)
-                        If StraightError Then
-                            Return False
+
+                        If BetTypeActive.Contains("If ") Then
+                            Dim bettingError As String = SBSBetting(lblMoneyAwayTeamTotalUnder.Text.Substring(2).Contains("+"), txtMoneyAwayTeamTotalUnder,SelectedPlayerID, SafeString(oData("GameID")), sGameLineID, BetTypeActive, SafeString(oData("GameType")), SafeString(oData("BookMaker")),
+                                  SafeString(oData("Context")), SafeString(oData("GameDate")), SafeString(oData("AwayTeam")), SafeString(oData("HomeTeam")), SafeString(oData("AwayRotationNumber")),
+                                  SafeString(oData("HomeRotationNumber")), SafeString(oData("AwayPitcher")), SafeString(oData("HomePitcher")), SafeString(oData("AwayPitcherRightHand")),
+                                  SafeString(oData("HomePitcherRightHand")), "TeamTotalPoints", "AWAY", SafeDouble(oData("AwayTeamTotalPoints")), GetMoneyGameIncreaseTotal(SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "TotalPoints", SafeDouble(oData("AwayTeamTotalPointsOverMoney")), SafeString(oData("GameLineID")), "True"),
+                                  SafeString(oData("IsCircle")), "False", "", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "")
+                            If bettingError.Length > 0 Then
+                                Return False
+                            End If
+                        Else
+                            BetGame(lblMoneyAwayTeamTotalUnder.Text.Substring(2).Contains("+"), txtMoneyAwayTeamTotalUnder, False, oData, Nothing, False)
+                            If StraightError Then
+                                Return False
+                            End If
                         End If
+
                     End If
                     If chkHomeTeamTotalOver.Checked OrElse txtMoneyHomeTeamTotalOver.Text <> "" Then
                         Dim oData = oGameLineManager.GetGameLinesByID(sGameLineID)
-                        BetGame(lblMoneyHomeTeamTotalOver.Text.Substring(2).Contains("+"), txtMoneyHomeTeamTotalOver, False, oData, Nothing, False)
-                        If StraightError Then
-                            Return False
+                        If BetTypeActive.Contains("If ") Then
+                            Dim bettingError As String = SBSBetting(lblMoneyHomeTeamTotalOver.Text.Substring(2).Contains("+"), txtMoneyHomeTeamTotalOver,SelectedPlayerID, SafeString(oData("GameID")), sGameLineID, BetTypeActive, SafeString(oData("GameType")), SafeString(oData("BookMaker")),
+                                  SafeString(oData("Context")), SafeString(oData("GameDate")), SafeString(oData("AwayTeam")), SafeString(oData("HomeTeam")), SafeString(oData("AwayRotationNumber")),
+                                  SafeString(oData("HomeRotationNumber")), SafeString(oData("AwayPitcher")), SafeString(oData("HomePitcher")), SafeString(oData("AwayPitcherRightHand")),
+                                  SafeString(oData("HomePitcherRightHand")), "TeamTotalPoints", "HOME", SafeDouble(oData("HomeTeamTotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "HOME", oData("Context"), "TeamTotalPoints", SBCBL.std.SafeDouble(oData("HomeTeamTotalPointsUnderMoney")), SBCBL.std.SafeString(oData("GameLineID")), "False"),
+                                  SafeString(oData("IsCircle")), "True", "", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "")
+                            If bettingError.Length > 0 Then
+                                Return False
+                            End If
+                        Else
+                            BetGame(lblMoneyHomeTeamTotalOver.Text.Substring(2).Contains("+"), txtMoneyHomeTeamTotalOver, False, oData, Nothing, False)
+                            If StraightError Then
+                                Return False
+                            End If
                         End If
+
                     End If
 
                     If chkHomeTeamTotalUnder.Checked OrElse txtMoneyHomeTeamTotalUnder.Text <> "" Then
                         Dim oData = oGameLineManager.GetGameLinesByID(sGameLineID)
-                        BetGame(lblMoneyHomeTeamTotalUnder.Text.Substring(2).Contains("+"), txtMoneyHomeTeamTotalUnder, False, oData, Nothing, False)
-                        If StraightError Then
-                            Return False
+                        If BetTypeActive.Contains("If ") Then
+                            Dim bettingError As String = SBSBetting(lblMoneyHomeTeamTotalUnder.Text.Substring(2).Contains("+"), txtMoneyHomeTeamTotalUnder,SelectedPlayerID, SafeString(oData("GameID")), sGameLineID, BetTypeActive, SafeString(oData("GameType")), SafeString(oData("BookMaker")),
+                                  SafeString(oData("Context")), SafeString(oData("GameDate")), SafeString(oData("AwayTeam")), SafeString(oData("HomeTeam")), SafeString(oData("AwayRotationNumber")),
+                                  SafeString(oData("HomeRotationNumber")), SafeString(oData("AwayPitcher")), SafeString(oData("HomePitcher")), SafeString(oData("AwayPitcherRightHand")),
+                                  SafeString(oData("HomePitcherRightHand")), "TeamTotalPoints", "HOME", SafeDouble(oData("HomeTeamTotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "HOME", oData("Context"), "TeamTotalPoints", SBCBL.std.SafeDouble(oData("HomeTeamTotalPointsOverMoney")), SBCBL.std.SafeString(oData("GameLineID")), "False"),
+                                  SafeString(oData("IsCircle")), "False", "", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "")
+                            If bettingError.Length > 0 Then
+                                Return False
+                            End If
+                        Else
+                            BetGame(lblMoneyHomeTeamTotalUnder.Text.Substring(2).Contains("+"), txtMoneyHomeTeamTotalUnder, False, oData, Nothing, False)
+                            If StraightError Then
+                                Return False
+                            End If
                         End If
+
                     End If
 
                     If chkSelectAwaySpread.Checked OrElse txtMoneyAwaySpread.Text <> "" Then
                         Dim oData = oGameLineManager.GetGameLinesByID(sGameLineID)
-                        Dim nAwaySpread As Single = SafeSingle(oData("AwaySpread"))
-                        Dim nHomeSpread As Single = SafeSingle(oData("HomeSpread"))
-                        getTeamJuice(nAwaySpread, nHomeSpread, bAwaySpreadJuice, bHomeSpreadJuice, bAwayMoneyLineJuice, bHomeMoneyLineJuice)
-                        BetGame(lblMoneyAwaySpread.Text.Substring(8).Contains("+"), txtMoneyAwaySpread, bAwaySpreadJuice, oData, ddlBuyPointAwaySpread, False)
-                        If StraightError Then
-                            Return False
+                        If BetTypeActive.Contains("If ") Then
+                            Dim bettingError As String = SBSBetting(lblMoneyAwaySpread.Text.Substring(8).Contains("+"), txtMoneyAwaySpread,SelectedPlayerID, SafeString(oData("GameID")), sGameLineID, BetTypeActive, SafeString(oData("GameType")), SafeString(oData("BookMaker")),
+                                  SafeString(oData("Context")), SafeString(oData("GameDate")), SafeString(oData("AwayTeam")), SafeString(oData("HomeTeam")), SafeString(oData("AwayRotationNumber")),
+                                  SafeString(oData("HomeRotationNumber")), SafeString(oData("AwayPitcher")), SafeString(oData("HomePitcher")), SafeString(oData("AwayPitcherRightHand")),
+                                  SafeString(oData("HomePitcherRightHand")), "Spread", "AWAY", SafeDouble(oData("AwaySpread")), GetMoneyGameIncreaseSpreadML(SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "Spread", SafeDouble(oData("AwaySpreadMoney")), SafeString(oData("GameLineID")), SafeDouble(oData("AwaySpread")), SafeDouble(oData("HomeSpread"))),
+                                  SafeString(oData("IsCircle")), getFavout(SafeDouble(oData("AwaySpread")), SafeDouble(oData("HomeSpread")), "Away"), "", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "")
+                            If bettingError.Length > 0 Then
+                                Return False
+                            End If
+                        Else
+                            Dim nAwaySpread As Single = SafeSingle(oData("AwaySpread"))
+                            Dim nHomeSpread As Single = SafeSingle(oData("HomeSpread"))
+                            getTeamJuice(nAwaySpread, nHomeSpread, bAwaySpreadJuice, bHomeSpreadJuice, bAwayMoneyLineJuice, bHomeMoneyLineJuice)
+                            BetGame(lblMoneyAwaySpread.Text.Substring(8).Contains("+"), txtMoneyAwaySpread, bAwaySpreadJuice, oData, ddlBuyPointAwaySpread, False)
+                            If StraightError Then
+                                Return False
+                            End If
                         End If
+
                     End If
                     'If chkSelectHomeSpread.Checked Then
                     '    Dim oData = oGameLineManager.GetGameLinesByID(sGameLineID)
@@ -2333,63 +2407,442 @@ PropGame:
                     'End If
                     If chkSelectHomeSpread.Checked OrElse txtMoneyHomeSpread.Text <> "" Then
                         Dim oData = oGameLineManager.GetGameLinesByID(sGameLineID)
-                        Dim nAwaySpread As Single = SafeSingle(oData("AwaySpread"))
-                        Dim nHomeSpread As Single = SafeSingle(oData("HomeSpread"))
-                        getTeamJuice(nAwaySpread, nHomeSpread, bAwaySpreadJuice, bHomeSpreadJuice, bAwayMoneyLineJuice, bHomeMoneyLineJuice)
-                        BetGame(lblMoneyHomeSpread.Text.Substring(8).Contains("+"), txtMoneyHomeSpread, bHomeSpreadJuice, oData, ddlBuyPointHomeSpread, False)
-                        If StraightError Then
-                            Return False
+                        If BetTypeActive.Contains("If ") Then
+                            Dim bettingError As String = SBSBetting(lblMoneyHomeSpread.Text.Substring(8).Contains("+"), txtMoneyHomeSpread,SelectedPlayerID, SafeString(oData("GameID")), sGameLineID, BetTypeActive, SafeString(oData("GameType")), SafeString(oData("BookMaker")),
+                                  SafeString(oData("Context")), SafeString(oData("GameDate")), SafeString(oData("AwayTeam")), SafeString(oData("HomeTeam")), SafeString(oData("AwayRotationNumber")),
+                                  SafeString(oData("HomeRotationNumber")), SafeString(oData("AwayPitcher")), SafeString(oData("HomePitcher")), SafeString(oData("AwayPitcherRightHand")),
+                                  SafeString(oData("HomePitcherRightHand")), "Spread", "AWAY", SafeDouble(oData("HomeSpread")), GetMoneyGameIncreaseSpreadML(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Home", oData("Context"), "Spread", SBCBL.std.SafeDouble(oData("HomeSpreadMoney")), SBCBL.std.SafeString(oData("GameLineID")), SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread"))),
+                                  SafeString(oData("IsCircle")), getFavout(SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread")), "Home"), "", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "")
+                            If bettingError.Length > 0 Then
+                                Return False
+                            End If
+                        Else
+                            Dim nAwaySpread As Single = SafeSingle(oData("AwaySpread"))
+                            Dim nHomeSpread As Single = SafeSingle(oData("HomeSpread"))
+                            getTeamJuice(nAwaySpread, nHomeSpread, bAwaySpreadJuice, bHomeSpreadJuice, bAwayMoneyLineJuice, bHomeMoneyLineJuice)
+                            BetGame(lblMoneyHomeSpread.Text.Substring(8).Contains("+"), txtMoneyHomeSpread, bHomeSpreadJuice, oData, ddlBuyPointHomeSpread, False)
+                            If StraightError Then
+                                Return False
+                            End If
                         End If
+
                     End If
                     If chkSelectHomeMLine.Checked OrElse txtMoneyHomeMLine.Text <> "" Then
                         Dim oData = oGameLineManager.GetGameLinesByID(sGameLineID)
-                        Dim nAwaySpread As Single = SafeSingle(oData("AwaySpread"))
-                        Dim nHomeSpread As Single = SafeSingle(oData("HomeSpread"))
-                        getTeamJuice(nAwaySpread, nHomeSpread, bAwaySpreadJuice, bHomeSpreadJuice, bAwayMoneyLineJuice, bHomeMoneyLineJuice)
-                        BetGame(lblMoneyHomeMLine.Text.Substring(2).Contains("+"), txtMoneyHomeMLine, bHomeMoneyLineJuice, oData, Nothing, False)
-                        If StraightError Then
-                            Return False
+                        If BetTypeActive.Contains("If ") Then
+                            Dim bettingError As String = SBSBetting(lblMoneyHomeMLine.Text.Substring(2).Contains("+"), txtMoneyHomeMLine,SelectedPlayerID, SafeString(oData("GameID")), sGameLineID, BetTypeActive, SafeString(oData("GameType")), SafeString(oData("BookMaker")),
+                                  SafeString(oData("Context")), SafeString(oData("GameDate")), SafeString(oData("AwayTeam")), SafeString(oData("HomeTeam")), SafeString(oData("AwayRotationNumber")),
+                                  SafeString(oData("HomeRotationNumber")), SafeString(oData("AwayPitcher")), SafeString(oData("HomePitcher")), SafeString(oData("AwayPitcherRightHand")),
+                                  SafeString(oData("HomePitcherRightHand")), "MoneyLine", "HOME", 0, GetMoneyGameIncreaseSpreadML(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Home", oData("Context"), "MoneyLine", SBCBL.std.SafeDouble(oData("HomeMoneyLine")), SBCBL.std.SafeString(oData("GameLineID")), SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread"))),
+                                  SafeString(oData("IsCircle")), getFavout(SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread")), "Home"), "", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "False")
+                            If bettingError.Length > 0 Then
+                                Return False
+                            End If
+                        Else
+                            Dim nAwaySpread As Single = SafeSingle(oData("AwaySpread"))
+                            Dim nHomeSpread As Single = SafeSingle(oData("HomeSpread"))
+                            getTeamJuice(nAwaySpread, nHomeSpread, bAwaySpreadJuice, bHomeSpreadJuice, bAwayMoneyLineJuice, bHomeMoneyLineJuice)
+                            BetGame(lblMoneyHomeMLine.Text.Substring(2).Contains("+"), txtMoneyHomeMLine, bHomeMoneyLineJuice, oData, Nothing, False)
+                            If StraightError Then
+                                Return False
+                            End If
                         End If
+
                     End If
                     If chkSelectAwayMLine.Checked OrElse txtMoneyAwayMLine.Text <> "" Then 'AndAlso Not String.IsNullOrEmpty(txtMoneyAwayMLine.Text) Then
                         Dim oData = oGameLineManager.GetGameLinesByID(sGameLineID)
-                        Dim nAwaySpread As Single = SafeSingle(oData("AwaySpread"))
-                        Dim nHomeSpread As Single = SafeSingle(oData("HomeSpread"))
-                        getTeamJuice(nAwaySpread, nHomeSpread, bAwaySpreadJuice, bHomeSpreadJuice, bAwayMoneyLineJuice, bHomeMoneyLineJuice)
-                        BetGame(lblMoneyAwayMLine.Text.Substring(2).Contains("+"), txtMoneyAwayMLine, bHomeMoneyLineJuice, oData, Nothing, True)
-                        If StraightError Then
-                            Return False
+                        If BetTypeActive.Contains("If ") Then
+                            Dim bettingError As String = SBSBetting(lblMoneyAwayMLine.Text.Substring(2).Contains("+"), txtMoneyAwayMLine,SelectedPlayerID, SafeString(oData("GameID")), sGameLineID, BetTypeActive, SafeString(oData("GameType")), SafeString(oData("BookMaker")),
+                                  SafeString(oData("Context")), SafeString(oData("GameDate")), SafeString(oData("AwayTeam")), SafeString(oData("HomeTeam")), SafeString(oData("AwayRotationNumber")),
+                                  SafeString(oData("HomeRotationNumber")), SafeString(oData("AwayPitcher")), SafeString(oData("HomePitcher")), SafeString(oData("AwayPitcherRightHand")),
+                                  SafeString(oData("HomePitcherRightHand")), "MoneyLine", "AWAY", 0, GetMoneyGameIncreaseSpreadML(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "MoneyLine", SBCBL.std.SafeDouble(oData("AwayMoneyLine")), SBCBL.std.SafeString(oData("GameLineID")), SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread"))),
+                                  SafeString(oData("IsCircle")), getFavout(SBCBL.std.SafeDouble(oData("AwaySpread")), SBCBL.std.SafeDouble(oData("HomeSpread")), "Away"), "", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "False")
+                            If bettingError.Length > 0 Then
+                                Return False
+                            End If
+                        Else
+                            Dim nAwaySpread As Single = SafeSingle(oData("AwaySpread"))
+                            Dim nHomeSpread As Single = SafeSingle(oData("HomeSpread"))
+                            getTeamJuice(nAwaySpread, nHomeSpread, bAwaySpreadJuice, bHomeSpreadJuice, bAwayMoneyLineJuice, bHomeMoneyLineJuice)
+                            BetGame(lblMoneyAwayMLine.Text.Substring(2).Contains("+"), txtMoneyAwayMLine, bHomeMoneyLineJuice, oData, Nothing, True)
+                            If StraightError Then
+                                Return False
+                            End If
                         End If
+
                     End If
                     If chkSelectAwayTotal.Checked OrElse txtMoneyAwayTotal.Text <> "" Then
                         Dim oData = oGameLineManager.GetGameLinesByID(sGameLineID)
-                        BetGame(lblMoneyAwayTotal.Text.Substring(8).Contains("+"), txtMoneyAwayTotal, False, oData, ddlBuyPointAwayTotal, False)
-                        If StraightError Then
-                            Return False
+                        If BetTypeActive.Contains("If ") Then
+                            Dim bettingError As String = SBSBetting(lblMoneyAwayTotal.Text.Substring(8).Contains("+"), txtMoneyAwayTotal,SelectedPlayerID, SafeString(oData("GameID")), sGameLineID, BetTypeActive, SafeString(oData("GameType")), SafeString(oData("BookMaker")),
+                                  SafeString(oData("Context")), SafeString(oData("GameDate")), SafeString(oData("AwayTeam")), SafeString(oData("HomeTeam")), SafeString(oData("AwayRotationNumber")),
+                                  SafeString(oData("HomeRotationNumber")), SafeString(oData("AwayPitcher")), SafeString(oData("HomePitcher")), SafeString(oData("AwayPitcherRightHand")),
+                                  SafeString(oData("HomePitcherRightHand")), "TotalPoints", "AWAY", SafeDouble(oData("TotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "away", oData("Context"), "TotalPoints", SBCBL.std.SafeDouble(oData("TotalPointsOverMoney")), SBCBL.std.SafeString(oData("GameLineID")), "False"),
+                                  SafeString(oData("IsCircle")), "False", "", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "False")
+                            If bettingError.Length > 0 Then
+                                Return False
+                            End If
+                        Else
+                            BetGame(lblMoneyAwayTotal.Text.Substring(8).Contains("+"), txtMoneyAwayTotal, False, oData, ddlBuyPointAwayTotal, False)
+                            If StraightError Then
+                                Return False
+                            End If
                         End If
+
                     End If
 
                     If chkSelectHomeTotal.Checked OrElse txtMoneyHomeTotal.Text <> "" Then
                         Dim oData = oGameLineManager.GetGameLinesByID(sGameLineID)
-                        BetGame(lblMoneyHomeTotal.Text.Substring(8).Contains("+"), txtMoneyHomeTotal, False, oData, ddlBuyPointHomeTotal, False)
-                        If StraightError Then
-                            Return False
+                        If BetTypeActive.Contains("If ") Then
+                            Dim bettingError As String = SBSBetting(lblMoneyHomeTotal.Text.Substring(8).Contains("+"), txtMoneyHomeTotal,SelectedPlayerID, SafeString(oData("GameID")), sGameLineID, BetTypeActive, SafeString(oData("GameType")), SafeString(oData("BookMaker")),
+                                  SafeString(oData("Context")), SafeString(oData("GameDate")), SafeString(oData("AwayTeam")), SafeString(oData("HomeTeam")), SafeString(oData("AwayRotationNumber")),
+                                  SafeString(oData("HomeRotationNumber")), SafeString(oData("AwayPitcher")), SafeString(oData("HomePitcher")), SafeString(oData("AwayPitcherRightHand")),
+                                  SafeString(oData("HomePitcherRightHand")), "TotalPoints", "HOME", SafeDouble(oData("TotalPoints")), GetMoneyGameIncreaseTotal(SBCBL.std.SafeString(oData("GameID")), oData("GameType"), "Home", oData("Context"), "TotalPoints", SBCBL.std.SafeDouble(oData("TotalPointsUnderMoney")), SBCBL.std.SafeString(oData("GameLineID")), "False"),
+                                  SafeString(oData("IsCircle")), "False", "", ValidDescription(SBCBL.std.SafeString(oData("Description"))), "", "False")
+                            If bettingError.Length > 0 Then
+                                Return False
+                            End If
+                        Else
+                            BetGame(lblMoneyHomeTotal.Text.Substring(8).Contains("+"), txtMoneyHomeTotal, False, oData, ddlBuyPointHomeTotal, False)
+                            If StraightError Then
+                                Return False
+                            End If
                         End If
+
                     End If
 
 
                     If chkSelectDraw.Checked OrElse txtMoneyDraw.Text <> "" Then
                         Dim oData = oGameLineManager.GetGameLinesByID(sGameLineID)
-                        BetGame(lblMoneyDraw.Text.Substring(2).Contains("+"), txtMoneyDraw, Nothing, oData, Nothing, False)
-                        If StraightError Then
-                            Return False
+                        If BetTypeActive.Contains("If ") Then
+                            Dim bettingError As String = SBSBetting(lblMoneyDraw.Text.Substring(2).Contains("+"), txtMoneyDraw,SelectedPlayerID, SafeString(oData("GameID")), sGameLineID, BetTypeActive, SafeString(oData("GameType")), SafeString(oData("BookMaker")),
+                                  SafeString(oData("Context")), SafeString(oData("GameDate")), SafeString(oData("AwayTeam")), SafeString(oData("HomeTeam")), SafeString(oData("AwayRotationNumber")),
+                                  SafeString(oData("HomeRotationNumber")), SafeString(oData("AwayPitcher")), SafeString(oData("HomePitcher")), SafeString(oData("AwayPitcherRightHand")),
+                                  SafeString(oData("HomePitcherRightHand")), "Draw", "", 0, GetMoneyGameIncrease(SafeString(oData("GameID")), oData("GameType"), "Away", oData("Context"), "Draw", SafeDouble(oData("DrawMoneyLine")), ""),
+                                  SafeString(oData("IsCircle")), "", "", ValidDescription(SafeString(oData("Description"))), "", "")
+                            If bettingError.Length > 0 Then
+                                Return False
+                            End If
+                        Else
+                            BetGame(lblMoneyDraw.Text.Substring(2).Contains("+"), txtMoneyDraw, Nothing, oData, Nothing, False)
+                            If StraightError Then
+                                Return False
+                            End If
                         End If
+
                     End If
+
+
                 Next
             Next
         Next
         Return True
     End Function
+
+#Region "Betting Of Ifbet/Reverse"
+    Private Function SBSBetting(ByVal bSetWinAmount As Boolean, ByVal txtItem As Textbox,ByVal psSelectedPlayerID As String, ByVal psGameID As String, ByVal psGameLineID As String, ByVal psActionType As String,
+                                   ByVal psGameType As String, ByVal psBookmaker As String, ByVal psContext As String, ByVal psGameDate As String,
+                                   ByVal psAwayTeam As String, ByVal psHomeTeam As String, ByVal psAwayTeamNumber As String,
+                                   ByVal psHomeTeamNumber As String, ByVal psAwayPitcher As String, ByVal psHomePitcher As String,
+                                   ByVal psAwayPitcherRH As String, ByVal psHomePitcherRH As String, ByVal psBetType As String,
+                                   ByVal psTeam As String, ByVal pnSpread As Double, ByVal pnMoney As Double, ByVal psCircled As String, ByVal psFav As String, ByVal pschkID As String, ByVal psDescription As String, ByVal psBuyPointValue As String, ByVal pbIsCheckPitcher As String) As String
+        Dim sError As String = ""
+
+        psAwayTeam = Replace(psAwayTeam, "&quot;", "'")
+        psHomeTeam = Replace(psHomeTeam, "&quot;", "'")
+        psDescription = Replace(psDescription, "&quot;", "'")
+        Try
+            '''''check parlay for odd>15
+            Dim oCacheManager As CCacheManager = New CCacheManager()
+            Dim lstCategory = oCacheManager.GetSysSettings("MAX_PARLAY_IN_GAME_MVP")
+            Dim nMaxParlayInGame As Single
+            If lstCategory IsNot Nothing Then
+                nMaxParlayInGame = SafeSingle(lstCategory.GetValue(GetSportType(psGameType)))
+            End If
+            '  sError = psBetType & Math.Abs(pnSpread) & SelectedTicket(psSelectedPlayerID).BetAmount
+            'sError = psActionType & "nMaxParlayInGame " & nMaxParlayInGame
+            If SelectedTicket(psSelectedPlayerID).LastTicket IsNot Nothing Then
+                For Each oBet As CTicketBet In SelectedTicket(psSelectedPlayerID).LastTicket.TicketBets
+                    If psBetType.Equals("Spread", StringComparison.CurrentCultureIgnoreCase) AndAlso oBet.BetType.Equals("Spread", StringComparison.CurrentCultureIgnoreCase) AndAlso psActionType.Equals("Parlay", StringComparison.CurrentCultureIgnoreCase) AndAlso IsSoccer(psGameType) AndAlso (oBet.HomeTeam.Equals(psHomeTeam) OrElse oBet.AwayTeam.Equals(psAwayTeam)) Then
+                        sError = "Parlay is invalid"
+                    End If
+                    If psBetType.Equals("TOTALPOINTS", StringComparison.CurrentCultureIgnoreCase) AndAlso oBet.BetType.Equals("TOTALPOINTS", StringComparison.CurrentCultureIgnoreCase) AndAlso psActionType.Equals("Parlay", StringComparison.CurrentCultureIgnoreCase) AndAlso IsSoccer(psGameType) AndAlso (oBet.HomeTeam.Equals(psHomeTeam) OrElse oBet.AwayTeam.Equals(psAwayTeam)) Then
+                        sError = "Parlay is invalid"
+                    End If
+
+                    ' Don't check allownace when they are same key
+                    'If Not oBet.GameLineID.Equals(psGameLineID, StringComparison.CurrentCultureIgnoreCase) Then
+                    '    Exit For
+                    'End If
+                    ' sError = oBet.BetType
+                    '  sError = oBet.Team & psBetType & nMaxParlayInGame & ":" & Math.Abs(oBet.HomeSpread) & psActionType & ":" & oBet.GameLineID & ":" & psGameLineID
+                    Dim nSpread = pnSpread
+                    Dim oGameLineManager = New Managers.CGameLineManager()
+                    If psActionType.Equals("Parlay", StringComparison.CurrentCultureIgnoreCase) AndAlso Not psContext.Equals("Current", StringComparison.CurrentCultureIgnoreCase) Then
+
+                        If psTeam.Equals("HOME") Then
+                            nSpread = oGameLineManager.GetGameLine(psGameID).HomeSpread
+                            ' sError = psTeam & nSpread
+                        Else
+                            nSpread = oGameLineManager.GetGameLine(psGameID).AwaySpread
+                            'sError = psTeam & nSpread
+                        End If
+                    End If
+                    If psBetType.Equals("Spread", StringComparison.CurrentCultureIgnoreCase) Then
+
+                        If nMaxParlayInGame > 0 AndAlso oBet.GameLineID.Equals(psGameLineID, StringComparison.CurrentCultureIgnoreCase) AndAlso (IsFootball(psGameType) OrElse IsBasketball(psGameType)) Then
+                            If (psActionType.Equals("Parlay", StringComparison.CurrentCultureIgnoreCase) OrElse psActionType.Equals("Reverse", StringComparison.CurrentCultureIgnoreCase)) AndAlso Math.Abs(nSpread) >= nMaxParlayInGame Then
+                                ' sError = Math.Abs(pnSpread) & ">=" & nMaxParlayInGame
+                                sError = String.Format("{0} for this game : {1} - {2} is not allowed", psActionType, psAwayTeam, psHomeTeam)
+                            End If
+                        End If
+                    Else
+
+                        If oBet.HomeSpread <> 0 Then
+                            ' sError = oBet.Team & nMaxParlayInGame & ":" & Math.Abs(oBet.HomeSpread) & psActionType & ":" & oBet.GameLineID & ":" & psGameLineID
+                            If nMaxParlayInGame > 0 AndAlso oBet.GameLineID.Equals(psGameLineID, StringComparison.CurrentCultureIgnoreCase) AndAlso (IsFootball(psGameType) OrElse IsBasketball(psGameType)) Then
+                                ' sError = Math.Abs(oBet.HomeSpread) & psActionType & ":" & oBet.GameLineID & ":" & psGameLineID
+                                nSpread = oGameLineManager.GetGameLine(oBet.GameID).HomeSpread
+                                If (psActionType.Equals("Parlay", StringComparison.CurrentCultureIgnoreCase) OrElse psActionType.Equals("Reverse", StringComparison.CurrentCultureIgnoreCase)) AndAlso Math.Abs(nSpread) >= nMaxParlayInGame Then
+                                    ' sError = Math.Abs(pnSpread) & ">=" & nMaxParlayInGame
+                                    sError = String.Format("{0} for this game : {1} - {2} is not allowed", psActionType, psAwayTeam, psHomeTeam)
+                                End If
+                            End If
+                        Else
+                            ' sError = oBet.HomeSpread & ":" & nMaxParlayInGame & ":" & Math.Abs(oBet.HomeSpread) & psActionType & ":" & oBet.GameLineID & ":" & psGameLineID
+                            If nMaxParlayInGame > 0 AndAlso oBet.GameLineID.Equals(psGameLineID, StringComparison.CurrentCultureIgnoreCase) AndAlso (IsFootball(psGameType) OrElse IsBasketball(psGameType)) Then
+                                nSpread = oGameLineManager.GetGameLine(oBet.GameID).AwaySpread
+                                If (psActionType.Equals("Parlay", StringComparison.CurrentCultureIgnoreCase) OrElse psActionType.Equals("Reverse", StringComparison.CurrentCultureIgnoreCase)) AndAlso Math.Abs(nSpread) >= nMaxParlayInGame Then
+                                    ' sError = Math.Abs(pnSpread) & ">=" & nMaxParlayInGame
+                                    sError = String.Format("{0} for this game : {1} - {2} is not allowed", psActionType, psAwayTeam, psHomeTeam)
+                                End If
+                            End If
+                        End If
+
+
+
+                    End If
+
+
+
+
+                Next
+            End If
+
+            If SelectedTicket(psSelectedPlayerID).Preview Then ' Don't allow betting while preview wagers
+                sError = "Please press Cancel or Back button before you can make any wager adjustment."
+            End If
+
+            If sError = "" Then ' Check valid gametype
+                sError = ValidGameType(psActionType, psGameType, psContext)
+            End If
+
+            If sError = "" Then
+                Dim oTicketBet As CTicketBet = GetTicketBet(psBetType, psTeam, pnSpread, pnMoney, psDescription, SafeBoolean(psFav))
+
+                If oTicketBet IsNot Nothing Then
+                    oTicketBet.GameID = psGameID
+                    oTicketBet.GameLineID = psGameLineID
+                    oTicketBet.GameType = psGameType
+                    oTicketBet.Bookmaker = psBookmaker
+                    oTicketBet.Context = psContext
+                    oTicketBet.BuyPointValue = psBuyPointValue
+                    oTicketBet.GameDate = SafeDate(psGameDate)
+                    oTicketBet.IsFavorite = SafeBoolean(psFav)
+                    oTicketBet.SetWinAmount = bSetWinAmount
+                    If Not oTicketBet.IsForProp Then
+                        If IsBaseball(psGameType) Then
+                            oTicketBet.IsCheckPitcher = SafeBoolean(pbIsCheckPitcher)
+                        End If
+                        oTicketBet.AwayTeam = psAwayTeam
+                        oTicketBet.HomeTeam = psHomeTeam
+                        oTicketBet.AwayTeamNumber = psAwayTeamNumber
+                        oTicketBet.HomeTeamNumber = psHomeTeamNumber
+                        oTicketBet.HomePitcher = psHomePitcher
+                        oTicketBet.AwayPitcher = psAwayPitcher
+                        oTicketBet.HomePitcherRH = SafeBoolean(psHomePitcherRH)
+                        oTicketBet.AwayPitcherRH = SafeBoolean(psAwayPitcherRH)
+                    Else
+                        oTicketBet.PropParticipantName = psAwayTeam
+                        oTicketBet.PropRotationNumber = psAwayTeamNumber
+                    End If
+
+                    Dim bAlreadyAdd As Boolean = False
+                    If UCase(psActionType) <> "STRAIGHT" AndAlso UCase(psActionType) <> "IF BET" Then
+                        If SelectedTicket(psSelectedPlayerID).LastTicket IsNot Nothing AndAlso
+                                UCase(SelectedTicket(psSelectedPlayerID).LastTicket.TicketType) = UCase(psActionType) Then
+
+                            sError = SelectedTicket(psSelectedPlayerID).LastTicket.AddTicketBet(oTicketBet)
+                            bAlreadyAdd = True
+                        End If
+                    End If
+
+                    If Not bAlreadyAdd Then
+                        If SelectedTicket(psSelectedPlayerID).LastTicket IsNot Nothing AndAlso
+                                SelectedTicket(psSelectedPlayerID).LastTicket.NumOfTicketBets = 0 Then
+                            SelectedTicket(psSelectedPlayerID).RemoveTickets(SelectedTicket(psSelectedPlayerID).LastTicket.TicketID)
+                        End If
+                        Dim UserSession As New CSBCSession()
+                        Dim oTicket As CTicket = New CTicket(psActionType, UserSession.Cache.GetPlayerInfo(psSelectedPlayerID).SuperAgentID, psSelectedPlayerID)
+                        sError = oTicket.AddTicketBet(oTicketBet)
+
+                        If sError = "" Then
+                            If Not String.IsNullOrEmpty(txtItem.Text) Then
+                                oTicket.BetAmount = SafeDouble(txtItem.Text)
+                            End If
+                            sError = SelectedTicket(psSelectedPlayerID).AddTicket(oTicket)
+                        End If
+
+                    End If
+
+                    If Not oTicketBet.IsForProp Then
+                        oTicketBet.IsCircled = SafeBoolean(psCircled)
+                    End If
+
+                    If oTicketBet.IsCircled AndAlso (UCase(psActionType) = "STRAIGHT" OrElse UCase(psActionType) = "IF BET") Then
+                        '' Create OddsRulesEngine
+                        Dim olstGameID As New List(Of String)
+                        olstGameID.Add(oTicketBet.GameID)
+
+                        Dim oCache As New CacheUtils.CCacheManager()
+                        Dim oOddsRules As New COddRulesEngine(olstGameID,
+                                                              oCache.GetPlayerInfo(psSelectedPlayerID).SuperAdminID, False, oCache.GetPlayerInfo(psSelectedPlayerID).Template, oCache.GetPlayerInfo(psSelectedPlayerID).SuperAgentID)
+
+                        If Not oTicketBet.ValidateStraightCircled(oOddsRules, psTeam) Then
+                            SelectedTicket(psSelectedPlayerID).LastTicket.RemoveTicketBets(oTicketBet.TicketBetID)
+                            sError = "You are exceeding the maximum allowed for this Circled game."
+                        End If
+                    End If
+
+                Else
+                    sError = "Can not betting right now. Please try again later."
+                End If
+
+            End If
+        Catch ex As Exception
+            sError = "Can not betting right now. Please try again later."
+            _log.Error("Betting Error :" & ex.Message, ex)
+        End Try
+
+        Dim sResult As String = "{{""ErrorMessage"":""{0}"",""chkID"":""{1}""}}"
+
+        Return sError
+    End Function
+
+    Private Function SelectedTicket(ByVal psPlayerID As String) As Tickets.CSelectedTickets
+        Dim sKey As String = String.Format("{0}_SELECTED_TICKETS", psPlayerID)
+        If HttpContext.Current.Session(sKey) Is Nothing Then
+            If UserType() = EUserType.CallCenterAgent Then
+                HttpContext.Current.Session(sKey) = New Tickets.CSelectedTickets(CEnums.ETypeOfBet.Phone)
+            Else
+                HttpContext.Current.Session(sKey) = New Tickets.CSelectedTickets(CEnums.ETypeOfBet.Internet)
+            End If
+        End If
+
+        Return CType(HttpContext.Current.Session(sKey), Tickets.CSelectedTickets)
+    End Function
+
+    Private Function ValidGameType(ByVal psAction As String, ByVal psGameType As String, ByVal psContext As String) As String
+        Select Case UCase(psAction)
+            Case "TEASER"
+                If Not (IsBasketball(psGameType) OrElse
+                        IsFootball(psGameType)) Then
+                    Return String.Format("{0} doesn't have Teaser type.", psGameType)
+                End If
+            Case "IF BET"
+                If Not (IsFootball(psGameType) OrElse IsBasketball(psGameType) _
+                        OrElse IsBaseball(psGameType) OrElse IsHockey(psGameType)) Then
+                    Return String.Format("{0} doesn't have If Bet type.", psGameType)
+                End If
+
+                If UCase(psContext) <> "CURRENT" Then
+                    Return String.Format("{0} doesn't have If Bet type.", psContext)
+                End If
+        End Select
+
+        Return ""
+    End Function
+
+    Private Function GetTicketBet(ByVal psBetType As String, ByVal psTeam As String, ByVal pnSpread As Double, ByVal pnMoney As Double, ByVal psDescription As String, ByVal pbTeamTotalOver As Boolean) As CTicketBet
+        Dim oTicketBet As CTicketBet = Nothing
+
+        Select Case psBetType
+            Case "Spread"
+                oTicketBet = New CTicketBet()
+                oTicketBet.BetType = psBetType
+                oTicketBet.Description = psDescription
+                If psTeam = "HOME" Then
+                    oTicketBet.HomeSpread = pnSpread
+                    oTicketBet.HomeSpreadMoney = pnMoney
+                Else
+                    oTicketBet.AwaySpread = pnSpread
+                    oTicketBet.AwaySpreadMoney = pnMoney
+                End If
+
+            Case "TotalPoints"
+                oTicketBet = New CTicketBet()
+                oTicketBet.BetType = psBetType
+                oTicketBet.TotalPoints = pnSpread
+                oTicketBet.Description = psDescription
+                If psTeam = "HOME" Then
+                    oTicketBet.TotalPointsUnderMoney = pnMoney
+                Else
+                    oTicketBet.TotalPointsOverMoney = pnMoney
+                End If
+            Case "TeamTotalPoints"
+                oTicketBet = New CTicketBet()
+                oTicketBet.BetType = psBetType
+                oTicketBet.TotalPoints = pnSpread
+                oTicketBet.Description = psDescription
+
+                If psTeam = "HOME" Then
+                    If pbTeamTotalOver Then
+                        oTicketBet.TotalPointsOverMoney = pnMoney
+                        oTicketBet.TeamTotalName = "home"
+                    Else
+                        oTicketBet.TotalPointsUnderMoney = pnMoney
+                        oTicketBet.TeamTotalName = "home"
+                    End If
+
+                Else
+                    If pbTeamTotalOver Then
+                        oTicketBet.TotalPointsOverMoney = pnMoney
+                        oTicketBet.TeamTotalName = "away"
+                    Else
+                        oTicketBet.TotalPointsUnderMoney = pnMoney
+                        oTicketBet.TeamTotalName = "away"
+                    End If
+
+                End If
+
+            Case "MoneyLine"
+                oTicketBet = New CTicketBet()
+                oTicketBet.BetType = psBetType
+                oTicketBet.Description = psDescription
+                If psTeam = "HOME" Then
+                    oTicketBet.HomeMoneyLine = pnMoney
+                Else
+                    oTicketBet.AwayMoneyLine = pnMoney
+                End If
+
+            Case "Draw"
+                oTicketBet = New CTicketBet()
+                oTicketBet.BetType = psBetType
+                oTicketBet.DrawMoneyLine = pnMoney
+                oTicketBet.Description = psDescription
+            Case "Prop"
+                oTicketBet = New CTicketBet()
+                oTicketBet.BetType = "MoneyLine"
+                oTicketBet.IsForProp = True
+                oTicketBet.PropMoneyLine = pnMoney
+
+            Case Else
+                '' Error
+        End Select
+
+        Return oTicketBet
+    End Function
+#End Region
 
     'Protected Sub SelectBetType(ByVal sender As Object, ByVal e As System.EventArgs)
     '    ViewState("Title") = Nothing
@@ -2589,7 +3042,7 @@ PropGame:
         If Not String.IsNullOrEmpty(Me.SelectedPlayerID) Then
             'BindBettingData()
             'GetSelectGame(BetTypeActive)
-            If Not LCase(BetTypeActive).Contains("if ") OrElse (UserSession.SelectedTicket(SelectedPlayerID).LastTicket IsNot Nothing AndAlso _
+            If Not LCase(BetTypeActive).Contains("if ") OrElse (UserSession.SelectedTicket(SelectedPlayerID).LastTicket IsNot Nothing AndAlso
                                                                 UCase(UserSession.SelectedTicket(SelectedPlayerID).LastTicket.TicketType) <> "IF BET") Then
                 UserSession.SelectedTicket(SelectedPlayerID) = Nothing
             End If
@@ -2733,11 +3186,11 @@ PropGame:
 
 
     '' get money increase for page method
-    Public Function GetMoneyGameIncrease(ByVal psGameID As String, ByVal psGameType As String, _
-                                     ByVal psTeam As String, ByVal psContext As String, _
+    Public Function GetMoneyGameIncrease(ByVal psGameID As String, ByVal psGameType As String,
+                                     ByVal psTeam As String, ByVal psContext As String,
                                      ByVal psBetType As String, ByVal pnOdds As Double, ByVal psGameLineID As String) As Double
         Dim nMoneyLine As Double
-        nMoneyLine = _oOddsRuleEngine.GetMoneyLine(psGameID, psGameType, psTeam, psContext, psBetType, _
+        nMoneyLine = _oOddsRuleEngine.GetMoneyLine(psGameID, psGameType, psTeam, psContext, psBetType,
                                                                      pnOdds, 0, IncreaseSpread)
         '_oOddsRuleEngine.GetMoneyLine(sGameID, sGameType, "Away", sContext, "TotalPoints", _
         '                                               SafeDouble(oData("TotalPointsOverMoney")))
@@ -2745,8 +3198,8 @@ PropGame:
         Return nMoneyLine
     End Function
 
-    Public Function GetMoneyGameIncreaseSpreadML(ByVal psGameID As String, ByVal psGameType As String, _
-                                     ByVal psTeam As String, ByVal psContext As String, _
+    Public Function GetMoneyGameIncreaseSpreadML(ByVal psGameID As String, ByVal psGameType As String,
+                                     ByVal psTeam As String, ByVal psContext As String,
                                      ByVal psBetType As String, ByVal pnOdds As Double, ByVal psGameLineID As String, ByVal pnAwaySpread As Double, ByVal pnHomeSpread As Double) As Double
 
         Dim bFavorite As Boolean
@@ -2773,15 +3226,15 @@ PropGame:
                 bFavorite = False
             End If
         End If
-        Return _oOddsRuleEngine.GetMoneyLine(psGameID, psGameType, psTeam, psContext, psBetType, _
+        Return _oOddsRuleEngine.GetMoneyLine(psGameID, psGameType, psTeam, psContext, psBetType,
                                                                       pnOdds, bFavorite, IncreaseSpread)
     End Function
 
-    Public Function GetMoneyGameIncreaseTotal(ByVal psGameID As String, ByVal psGameType As String, _
-                                 ByVal psTeam As String, ByVal psContext As String, _
+    Public Function GetMoneyGameIncreaseTotal(ByVal psGameID As String, ByVal psGameType As String,
+                                 ByVal psTeam As String, ByVal psContext As String,
                                  ByVal psBetType As String, ByVal pnOdds As Double, ByVal psGameLineID As String, ByVal pbFavorite As String) As Double
 
-        Return _oOddsRuleEngine.GetMoneyLine(psGameID, psGameType, psTeam, psContext, psBetType, _
+        Return _oOddsRuleEngine.GetMoneyLine(psGameID, psGameType, psTeam, psContext, psBetType,
                                                                       pnOdds, SafeBoolean(pbFavorite), IncreaseSpread)
     End Function
 
@@ -2860,7 +3313,9 @@ PropGame:
         '    Return False
         'End If
 
-        If BetTypeActive.Equals(__BetIfAll, StringComparison.CurrentCultureIgnoreCase) Then
+        If BetTypeActive.Equals(__BetIfAll, StringComparison.CurrentCultureIgnoreCase) OrElse
+         BetTypeActive.Equals(__IfWin, StringComparison.CurrentCultureIgnoreCase) OrElse
+         BetTypeActive.Equals(__IfWinOrPush, StringComparison.CurrentCultureIgnoreCase) Then
             Return True
         Else
             Return False
@@ -2869,8 +3324,8 @@ PropGame:
     End Function
 
     Public Function ShowCheckBox() As Boolean
-        If BetTypeActive.Equals("Straight", StringComparison.CurrentCultureIgnoreCase) OrElse _
-         LCase(BetTypeActive).Contains("if ") OrElse _
+        If BetTypeActive.Equals("Straight", StringComparison.CurrentCultureIgnoreCase) OrElse
+         LCase(BetTypeActive).Contains("if ") OrElse
          BetTypeActive.Equals(__BetIfAll, StringComparison.CurrentCultureIgnoreCase) Then
             Return False
         Else
@@ -2951,7 +3406,7 @@ PropGame:
                                                 OrElse BetTypeActive.Equals(_sReverse, StringComparison.CurrentCultureIgnoreCase)) Then
                 '' Only Football and Basketball can buy points
                 '' Allow buy point when juice is between -110 and -100
-                Dim bBuyPoint As Boolean = UCase(psBetType) <> "MONEYLINE" AndAlso _
+                Dim bBuyPoint As Boolean = UCase(psBetType) <> "MONEYLINE" AndAlso
                 UCase(psContext) = "CURRENT" AndAlso pnBetPoint >= -110 AndAlso pnBetPoint <= -100 _
                 AndAlso (IsFootball(psGameType) OrElse IsBasketball(psGameType))
 
@@ -2978,7 +3433,7 @@ PropGame:
                             If UCase(psBetType) = "TOTALPOINTS" AndAlso bTotalOver Then
                                 nAddpoint = -nPoint
                             End If
-                            oDicItem = New DictionaryEntry(SafeString(pnJuice + nAddpoint) & "   " & SafeString(pnBetPoint + (-nPoint * 20)), _
+                            oDicItem = New DictionaryEntry(SafeString(pnJuice + nAddpoint) & "   " & SafeString(pnBetPoint + (-nPoint * 20)),
                                                            SafeString(nAddpoint) & "|" & SafeString(-nPoint * 20))
                             olstDic.Add(oDicItem)
                         Next
