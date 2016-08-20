@@ -163,7 +163,7 @@ Namespace SBSWebsite
                 Return
             End If
 
-          
+
 
             Dim nIndex As Integer = 0
             Dim nTotalRisk As Double = 0
@@ -278,7 +278,7 @@ Namespace SBSWebsite
                         Else
                             sBackColor = "#f59596"
                         End If
-                    Case sBetType.Contains("If Win") Or sBetType.Contains("Reverse")
+                    Case sBetType.Contains("If") Or sBetType.Contains("Reverse")
                         If (alternateCount Mod 2) = 0 Then
                             sBackColor = "#efefef"
                         Else
@@ -297,13 +297,21 @@ Namespace SBSWebsite
 
             lblTicketSummary.Text = String.Format("{0} Selections Risking <b>{1}</b> To Win <b>{2} US</b>", rptTickets.Items.Count, FormatNumber(nTotalRisk, 2), FormatNumber(nTotalWin, 2))
 
-              'Hide Rish/Win for Parlay
+            'Hide Rish/Win for Parlay
             If Me.BetTypeActive.Contains("Parlay") Then
                 ltrHeadRisk.Visible = False
                 ltrHeadWin.Visible = False
                 lblTicketSummary.Visible = False
+
             End If
-            
+            If Me.BetTypeActive.Contains("If") Then
+                btnSubmit.Visible = True
+                txtPassword.Visible = True
+                lblMessage.Visible = True
+                tblBetTheboard.Visible = True
+
+            End If
+
         End Sub
 
         Protected Sub rptTickets_ItemCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.RepeaterCommandEventArgs) Handles rptTickets.ItemCommand
