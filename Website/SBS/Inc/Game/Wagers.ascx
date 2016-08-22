@@ -11,7 +11,8 @@
                         <asp:Literal ID="ltrDateBet" runat="server"></asp:Literal>
                         - ET</td>
                     <td><asp:Literal ID="ltrHeadRisk" runat="server">Risk</asp:Literal></td>
-                    <td colspan="2"><asp:Literal ID="ltrHeadWin" runat="server">Win</asp:Literal></td>
+                    <td><asp:Literal ID="ltrHeadWin" runat="server">Win</asp:Literal></td>
+                    <td><asp:Literal ID="ltrHeadTicketNumber" runat="server">Ticket #</asp:Literal></td>
                 </tr>
                 <asp:Repeater ID="rptTickets" runat="server">
                     <ItemTemplate>
@@ -114,7 +115,8 @@
                             </td>
                             <td style="width: 81px" id="tdRisk" runat="server"><%# FormatNumber(Container.DataItem.RiskAmount, 2)%></td>
                             <td style="width: 81px" id="tdWin" runat="server"><%# FormatNumber(Container.DataItem.WinAmount, 2)%></td>
-                            <td style="width: 81px">
+                            <td style="width: 81px" id="tdActions" runat="server">
+                                <asp:Label ID="lblTicketNumber" Text="<%# Container.DataItem.TicketNumber%>" CssClass="ticket-number" Visible="False" runat="server"></asp:Label>
                                 <asp:LinkButton ID="lbtDeleteTicket" runat="server" Text="Remove" CssClass="link-2 clr-red" CommandName="DEL_TICKET" CommandArgument='<%# Container.DataItem.TicketID%>'></asp:LinkButton>
                                 <asp:HiddenField ID="hfTicketID" Value="<%# Container.DataItem.TicketID%>" runat="server" />
                             </td>

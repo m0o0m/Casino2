@@ -23,6 +23,8 @@ Namespace Tickets
         Private _sSuperAgentID As String
         Private _sPlayerID As String
         Public RelatedTicketID As String
+        Public TicketNumber As Integer
+        Public SubTicketNumber As Integer
 
         '' Dont save to DB
         Public LastIndex As Integer

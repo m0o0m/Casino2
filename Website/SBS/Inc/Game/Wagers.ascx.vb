@@ -166,6 +166,7 @@ Namespace SBSWebsite
 
 
             Dim nIndex As Integer = 0
+            Dim bIsSubmited As Boolean = False
             Dim nTotalRisk As Double = 0
             Dim nTotalWin As Double = 0
             Dim sBackColor As String = "#ffffff"
@@ -293,6 +294,19 @@ Namespace SBSWebsite
                 nTotalRisk += oTicket.RiskAmount
                 nTotalWin += oTicket.WinAmount
                 nIndex += 1
+
+                '
+                If oTicket.TicketNumber > 0 Then
+                    Dim tdActions As HtmlControl = CType(oItem.FindControl("tdActions"), HtmlControl)
+                    Dim lblTicketNumber As Label = CType(oItem.FindControl("lblTicketNumber"), Label)
+                    Dim lbtDeleteTicket As LinkButton = CType(oItem.FindControl("lbtDeleteTicket"), LinkButton)
+
+                    lblTicketNumber.Visible = True
+                    lbtDeleteTicket.Visible = False
+                    tdActions.Style.Add("width", "150px")
+                    
+                    bIsSubmited = True
+                End If
             End While
 
             lblTicketSummary.Text = String.Format("{0} Selections Risking <b>{1}</b> To Win <b>{2} US</b>", rptTickets.Items.Count, FormatNumber(nTotalRisk, 2), FormatNumber(nTotalWin, 2))
@@ -311,6 +325,12 @@ Namespace SBSWebsite
                 tblBetTheboard.Visible = True
 
             End If
+            ' show ticket number
+            If bIsSubmited Then
+                ltrHeadTicketNumber.Visible = True
+                lblTicketSummary.Visible = True
+            End If
+            
 
         End Sub
 
@@ -1212,8 +1232,18 @@ Namespace SBSWebsite
                         lblMessage.Text = "<span style=' font-weight:bold;'>Attention:</span> lines have changed. Please review and reconfirm your bet."
                         ' bindPreviewWagers()
                     Else
+                        Dim oListCTicket = New List(Of CTicket)
                         If UserSession.SelectedTicket(SelectedPlayerID).SaveTickets(SelectedPlayer.BalanceAmount,
-                                                                  SelectedPlayer.AgentID, SelectedPlayer.UserID, UserSession.UserID) Then
+                                                                  SelectedPlayer.AgentID, SelectedPlayer.UserID, UserSession.UserID, oListCTicket) Then
+                            For Each oCTicket As CTicket In oListCTicket
+                               Dim oTicket = UserSession.SelectedTicket(SelectedPlayerID).GetTicket(oCTicket.TicketID)
+                                If oTicket IsNot Nothing Then
+                                    oTicket.TicketNumber = oCTicket.TicketNumber
+                                    oTicket.SubTicketNumber = oCTicket.SubTicketNumber
+                                End If
+                            Next
+
+
                             lblMessage.Text = "Wager(s) has been saved successfully"
                             ' lblMessage.Attributes.Item("style") = "font-size: 14px;"
                             'UserSession.SelectedTicket(SelectedPlayerID) = Nothing
@@ -1286,7 +1316,7 @@ Namespace SBSWebsite
                 End If
 
 
-                ' BindWagers()
+                BindWagers()
                 ShowWager(True)
                 UserSession.SelectedTicket(SelectedPlayerID) = Nothing
                 'If SiteType = SBCBL.CEnums.ESiteType.SBS Then
