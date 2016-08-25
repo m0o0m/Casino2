@@ -877,7 +877,7 @@ Namespace Tickets
                 Dim regulationOnly As String = SafeString(IIf(IsSoccer(Me.GameType), "&nbsp;<b>Regualation Only</b>", "")) 
                 Dim sDescription As String = "<div class='gm-sportname-team baseline'>" & GetSportType(Me.GameType) & " - " & Me.GameType &"</div>" &
                     "<div class='baseline'>" & 
-                        "<b class='gm-number'>{0}</b>&nbsp;<b class='gm-team'>{1}</b> <span class='gm-date'>"& Me.GameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & Me.GameDate.ToString("HH:mm tt") & ")</span>"&
+                        "<b class='gm-number'>{0}</b><b class='gm-team'>{1}</b> <span class='gm-date'>"& Me.GameDate.ToString("MM/dd/yyyy") & "</span>&nbsp;<span class='gm-time'>(" & Me.GameDate.ToString("HH:mm tt") & ")</span>"&
                     "</div> {2}" 
                 Dim gameBet As String = "<div class='baseline'>{0}<b>{1}</b> for the " & ContextFormat(Me.Context) & regulationOnly & GetMustStart() & "</div>"
 
@@ -895,7 +895,7 @@ Namespace Tickets
                             Dim sSpread = SafeString(IIf(nSpread = 0, "PK", safeVegass(nSpread)))
                             Dim nSpreadMoney As Double = SafeRound(IIf(Me.HomeSpreadMoney <> 0, Me.HomeSpreadMoney, Me.AwaySpreadMoney)) + Me.AddPointMoney
                             Dim sSpreadMoney As String = SafeString(IIf(nSpreadMoney > 0, IIf(nSpreadMoney = 100, "Even", "+" & nSpreadMoney), nSpreadMoney))
-                            sDescription = String.Format(sDescription,"["& sRotationNumber &"]", sChoiceTeam, String.Format(gameBet,"", sSpread & " " & sSpreadMoney))
+                            sDescription = String.Format(sDescription,"["& sRotationNumber &"] ", sChoiceTeam, String.Format(gameBet,"", sSpread & " " & sSpreadMoney))
                         Case "TOTALPOINTS"
                             Dim sChoiceTeam = String.Format("{0} {1}", Me.HomeTeam, IIf(String.IsNullOrEmpty(Me.AwayTeam), "", " - " & Me.AwayTeam))
                             If IsTennis(Me.GameType) OrElse IsGolf(Me.GameType) Then
@@ -928,7 +928,7 @@ Namespace Tickets
                             Dim sChoiceTeam As String = SafeString(IIf(Me.HomeMoneyLine <> 0, Me.HomeTeam, Me.AwayTeam))
                             Dim nMoneyLine As Double = SafeDouble(IIf(Me.HomeMoneyLine <> 0, Me.HomeMoneyLine, Me.AwayMoneyLine))
                             Dim sMoneyLine As String = SafeString(IIf(nMoneyLine > 0, "+" & nMoneyLine, nMoneyLine))
-                            sDescription = String.Format(sDescription,"["& sRotationNumber &"]", sChoiceTeam, String.Format(gameBet,"Money Line ", sMoneyLine))
+                            sDescription = String.Format(sDescription,"["& sRotationNumber &"] ", sChoiceTeam, String.Format(gameBet,"Money Line ", sMoneyLine))
                         Case "DRAW"
                             Dim sChoiceTeam = String.Format("Draw({0} vs {1})", Me.HomeTeam, Me.AwayTeam)
                             Dim nDrawLine As Double = Me.DrawMoneyLine + Me.AddPointMoney
