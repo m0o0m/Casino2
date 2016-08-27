@@ -67,6 +67,33 @@
     color: #000;
 }
 
+
+.title-8 {
+    background: #18455c none repeat scroll 0 0;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.title-8-outline {
+    background: transparent none repeat scroll 0 0;
+    padding: 12px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #66cccc;
+    text-transform: uppercase;
+    border-top: 1px solid #18455c;
+    border-bottom: 1px solid #18455c;
+}
+
+.paragragh-8 {
+    font-size: 11px;
+    color: #ccc;
+}
+
+
 /* ========================================
      List Style /////////////////////////////////////////////////////////// */
 
@@ -485,7 +512,7 @@ ul.menu-style-3 {
     }
 
         .table-style-10 tr.row-caption > td {
-            padding: 0px 5px;
+            padding: 1px 5px;
             font-size: 14px;
             font-weight: bold;
             line-height: 1;
@@ -493,17 +520,113 @@ ul.menu-style-3 {
             text-align: center;
         }
 
-    .table-style-10 tr.row-content {
+
+    .table-style-10 .row-content {
+        background: #FFF;
     }
+
+        .table-style-10 .row-content.row-straight {
+            background: #FFF;
+        }
+
+        .table-style-10 .row-content.row-parlay {
+            background: #F1E64E;
+        }
+
+        .table-style-10 .row-content.row-ifbet.odd {
+            background: #FFF;
+        }
+
+        .table-style-10 .row-content.row-ifbet.even {
+            background: #EFEFEF;
+        }
+
+        .table-style-10 .row-content.row-teaser {
+            background: #F59596;
+        }
+
+        .table-style-10 .row-content > td {
+            color: #000;
+            font-size: 13px;
+            padding: 5px 5px;
+            vertical-align: middle;
+        }
+
+            .table-style-10 .row-content > td .gm-type {
+                font-size: 12px;
+                font-weight: bold;
+                color: blue;
+                margin-bottom: 2px;
+            }
+
+            .table-style-10 .row-content > td .gm-sportname-team {
+                font-size: 11px;
+                color: darkred;
+            }
+
+            .table-style-10 .row-content > td .gm-date {
+                font-size: 11px;
+                color: darkred;
+            }
+
+            .table-style-10 .row-content > td .gm-time {
+                font-size: 11px;
+                color: darkgreen;
+            }
+
+            .table-style-10 .row-content > td .gm-status {
+                font-size: 11px;
+                color: darkred;
+            }
+
+    .table-style-10 .row-total {
+        background: #FFF;
+    }
+
+        .table-style-10 .row-total > td {
+            font-size: 13px;
+            color: #000;
+        }
 
     .table-style-10 tr.row-detail {
         background: transparent !important;
     }
 
-        .table-style-10 tr.row-detail .row-detail-caption {
-            background: #666666;
-            border-left: 2px solid transparent;
+        .table-style-10 tr.row-detail > td {
+            padding: 1px;
+            border: none !important;
         }
+
+            .table-style-10 tr.row-detail > td > .row-detail-caption {
+                background: #666666;
+                margin-left: 1px;
+                margin-right: 1px;
+            }
+
+                .table-style-10 tr.row-detail > td > .row-detail-caption + table {
+                    border-spacing: 1px;
+                }
+
+                    .table-style-10 tr.row-detail > td > .row-detail-caption + table tr td {
+                        background: #A0E1FF;
+                        border: none !important;
+                    }
+
+
+
+
+.table-t-style-1 {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 1px solid #18455C;
+    border-bottom: 1px solid #18455C;
+}
+
+    .table-t-style-1 tr td {
+        padding: 5px 0;
+        font-size: 11px;
+        color: #ccc;
+    }
 
 
 /* ========================================
@@ -857,6 +980,7 @@ ul.menu-style-3 {
         height: 70%;
         width: 100%;
         background: inherit;
+        cursor: pointer;
     }
 
 

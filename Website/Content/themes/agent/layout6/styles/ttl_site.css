@@ -12,58 +12,60 @@ i {
     background: #fff;
     padding: 20px 13px 150px;
 }
+
 .table-style-2 tr td span.week-balance-peding {
     cursor: pointer;
-    text-decoration: underline ;
-    -moz-text-decoration-color: #b30000 ; /* Code for Firefox */
-    text-decoration-color: #b30000 ;
-}
-.table-style-2 tr td span.week-balance-peding:hover {
-    -moz-text-decoration-color: black ; /* Code for Firefox */
-    text-decoration-color: black ;
+    text-decoration: underline;
+    -moz-text-decoration-color: #b30000; /* Code for Firefox */
+    text-decoration-color: #b30000;
 }
 
-
-    .divrptGameTypeShort > .panel-body {
-        -moz-column-count: 2;
-        -webkit-column-count: 2;
-        column-count: 2;
-        -moz-column-gap: 13px;
-        -webkit-column-gap: 13px;
-        column-gap: 13px;
+    .table-style-2 tr td span.week-balance-peding:hover {
+        -moz-text-decoration-color: black; /* Code for Firefox */
+        text-decoration-color: black;
     }
 
-    .divrptGameTypeShort .list-group-item > span {
-        display: none;
-    }
 
-    .divrptGameTypeShort .list-group-item > label {
-        border: 1px solid;
-        color: #000;
-        cursor: pointer;
-        padding: 6px 0 6px 30px;
-        display: block;
-        background: none;
-    }
+.divrptGameTypeShort > .panel-body {
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+    -moz-column-gap: 13px;
+    -webkit-column-gap: 13px;
+    column-gap: 13px;
+}
 
-    .divrptGameTypeShort .BetIfAll .list-group-item > label {
-        padding: 6px 0 6px 55px;
-        background: url("../images/box.png") no-repeat 10px center;
-    }
+.divrptGameTypeShort .list-group-item > span {
+    display: none;
+}
 
-    .divrptGameTypeShort .list-group-item > label:hover {
-        color: blue;
-    }
+.divrptGameTypeShort .list-group-item > label {
+    border: 1px solid;
+    color: #000;
+    cursor: pointer;
+    padding: 6px 0 6px 30px;
+    display: block;
+    background: none;
+}
 
-    .divrptGameTypeShort .BetIfAll .list-group-item > label.highlight {
-        background: yellow url("../images/tick.png") no-repeat 35px center;
-        font-weight: bold;
-    }
+.divrptGameTypeShort .BetIfAll .list-group-item > label {
+    padding: 6px 0 6px 55px;
+    background: url("../images/box.png") no-repeat 10px center;
+}
 
-    .divrptGameTypeShort .list-group-item > label.highlight {
-        background: yellow url("../images/tick.png") no-repeat 10px center;
-        font-weight: bold;
-    }
+.divrptGameTypeShort .list-group-item > label:hover {
+    color: blue;
+}
+
+.divrptGameTypeShort .BetIfAll .list-group-item > label.highlight {
+    background: yellow url("../images/tick.png") no-repeat 35px center;
+    font-weight: bold;
+}
+
+.divrptGameTypeShort .list-group-item > label.highlight {
+    background: yellow url("../images/tick.png") no-repeat 10px center;
+    font-weight: bold;
+}
 
 .game-type {
     width: 100%;
@@ -110,6 +112,7 @@ i {
 .table-style-1 {
     border: 1px solid #000;
 }
+
     .table-style-1 .row-caption {
         background: #0E2431;
     }
