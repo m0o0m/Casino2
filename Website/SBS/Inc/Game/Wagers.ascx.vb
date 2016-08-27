@@ -163,11 +163,13 @@ Namespace SBSWebsite
                 Return
             End If
 
-          
+
 
             Dim nIndex As Integer = 0
+            Dim bIsSubmited As Boolean = False
             Dim nTotalRisk As Double = 0
             Dim nTotalWin As Double = 0
+            Dim nCountSelection As Integer = 0
             Dim sBackColor As String = "#ffffff"
             Dim alternateCount As Integer = 0
             Dim betTypeForAlternate As String = ""
@@ -177,133 +179,206 @@ Namespace SBSWebsite
             While nIndex < rptTickets.Items.Count
                 Dim oItem As RepeaterItem = rptTickets.Items(nIndex)
                 Dim oTicket As CTicket = CType(rptTickets.DataSource(nIndex), CTicket)
+                Dim rptTicketBets As Repeater = CType(oItem.FindControl("rptTicketBets"), Repeater)
 
-                Dim itemTicketContent As HtmlControl = CType(oItem.FindControl("trTicketContent"), HtmlControl)
-
-                Dim sBetType As String = oTicket.TicketType
-                Dim sTicketID As String = oTicket.TicketID
-                Dim sContext As String = ""
-                If Not oTicket.TicketBets.FirstOrDefault() Is Nothing Then
-                    sContext = oTicket.TicketBets.FirstOrDefault().Context
+                If rptTicketBets.Items.Count <= 0 Then
+                    Return
                 End If
 
-                ' Row alternate
-                If Not betTypeForAlternate.Equals(sBetType) Then
-                    alternateCount = 1
-                ElseIf Not ticketIdforAlternate.Equals(sTicketID) And (betTypeForAlternate.Equals(sBetType) Or (sBetType.Contains("If Win") And betTypeForAlternate.Contains("Reverse")) Or (sBetType.Contains("Reverse") And betTypeForAlternate.Contains("If Win")))
-                    If sBetType.Contains("Straight") Then
-                        If Not (contextForAlternate.Equals(sContext) Or (sContext.Contains(contextForAlternate))) Then
-                            alternateCount = 1
+                Dim nTiketBetIndex As Integer = 0
+
+                While nTiketBetIndex < rptTicketBets.Items.Count
+                    Dim oItemTicketBet As RepeaterItem = rptTicketBets.Items(nTiketBetIndex)
+                    Dim oTicketBet As CTicketBet = CType(rptTicketBets.DataSource(nTiketBetIndex), CTicketBet)
+
+                    Dim itemTicketContent As HtmlControl = CType(oItemTicketBet.FindControl("trTicketContent"), HtmlControl)
+
+                    Dim sBetType As String = oTicket.TicketType
+                    Dim sTicketID As String = oTicketBet.TicketID
+                    Dim sContext As String = oTicketBet.Context
+
+                    '' hide risk, win if has the same ticketID
+                    If ticketIdforAlternate.Equals(sTicketID) Then
+                        Dim tdRisk As HtmlTableCell = CType(oItemTicketBet.FindControl("tdRisk"), HtmlTableCell)
+                        Dim tdWin As HtmlTableCell = CType(oItemTicketBet.FindControl("tdWin"), HtmlTableCell)
+                        Dim lblTicketNumber As Label = CType(oItemTicketBet.FindControl("lblTicketNumber"), Label)
+                        lblTicketNumber.Text = ""
+                        tdRisk.InnerText = ""
+                        tdWin.InnerText = ""
+                    End If
+
+                    ' Row alternate
+                    If Not betTypeForAlternate.Equals(sBetType) Then
+                        alternateCount = 1
+                    ElseIf Not ticketIdforAlternate.Equals(sTicketID) And (betTypeForAlternate.Equals(sBetType) Or (sBetType.Contains("If Win") And betTypeForAlternate.Contains("Reverse")) Or (sBetType.Contains("Reverse") And betTypeForAlternate.Contains("If Win")))
+                        If sBetType.Contains("Straight") Then
+                            If Not (contextForAlternate.Equals(sContext) Or (sContext.Contains(contextForAlternate))) Then
+                                alternateCount = 1
+                            Else
+                                alternateCount += 1
+                            End If
                         Else
                             alternateCount += 1
                         End If
-                    Else
-                        alternateCount += 1
+
                     End If
 
-                End If
+                    betTypeForAlternate = SafeString(IIf(sBetType.Contains("Reverse"), "If Win", sBetType))
+                    ticketIdforAlternate = sTicketID
+                    contextForAlternate = SafeString(IIf(sContext.Contains("q"), "q", sContext))
 
-                betTypeForAlternate = SafeString(IIf(sBetType.Contains("Reverse"), "If Win", sBetType))
-                ticketIdforAlternate = sTicketID
-                contextForAlternate = SafeString(IIf(sContext.Contains("q"), "q", sContext))
+                    ' Row color
+                    Select Case True
+                        Case sBetType.Contains("Straight")
+                            Select Case LCase(sContext)
+                                Case "current"
+                                    If (alternateCount Mod 2) = 0 Then
+                                        sBackColor = "#ffffff"
+                                    Else
+                                        sBackColor = "#efefef"
+                                    End If
+                                Case "1h"
+                                    If (alternateCount Mod 2) = 0 Then
+                                        sBackColor = "#cde4fd"
+                                    Else
+                                        sBackColor = "#b5d8ff"
+                                    End If
 
-                ' Row color
-                Select Case True
-                    Case sBetType.Contains("Straight")
-                        Select Case LCase(sContext)
-                            Case "current"
-                                If (alternateCount Mod 2) = 0 Then
-                                    sBackColor = "#ffffff"
-                                Else
+                                Case "2h"
+                                    If (alternateCount Mod 2) = 0 Then
+                                        sBackColor = "#b2f8b7"
+                                    Else
+                                        sBackColor = "#6cf475"
+                                    End If
+
+                                Case "1q"
+                                    If (alternateCount Mod 2) = 0 Then
+                                        sBackColor = "#faa833"
+                                    Else
+                                        sBackColor = "#fab450"
+                                    End If
+
+                                Case "2q"
+                                    If (alternateCount Mod 2) = 0 Then
+                                        sBackColor = "#faa833"
+                                    Else
+                                        sBackColor = "#fab450"
+                                    End If
+
+                                Case "3q"
+                                    If (alternateCount Mod 2) = 0 Then
+                                        sBackColor = "#faa833"
+                                    Else
+                                        sBackColor = "#fab450"
+                                    End If
+
+                                Case "4q"
+                                    If (alternateCount Mod 2) = 0 Then
+                                        sBackColor = "#faa833"
+                                    Else
+                                        sBackColor = "#fab450"
+                                    End If
+                                Case Else
                                     sBackColor = "#efefef"
-                                End If
-                            Case "1h"
-                                If (alternateCount Mod 2) = 0 Then
-                                    sBackColor = "#cde4fd"
-                                Else
-                                    sBackColor = "#b5d8ff"
-                                End If
+                            End Select
+                        Case sBetType.Contains("Parlay")
+                            If (alternateCount Mod 2) = 0 Then
+                                sBackColor = "#ede56f"
+                            Else
+                                sBackColor = "#f1e64e"
+                            End If
 
-                            Case "2h"
-                                If (alternateCount Mod 2) = 0 Then
-                                    sBackColor = "#b2f8b7"
-                                Else
-                                    sBackColor = "#6cf475"
-                                End If
+                            'Dim tdActions As HtmlTableCell = CType(oItemTicketBet.FindControl("tdActions"), HtmlTableCell)
+                            Dim lbtDeleteTicket As LinkButton = CType(oItemTicketBet.FindControl("lbtDeleteTicket"), LinkButton)
 
-                            Case "1q"
-                                If (alternateCount Mod 2) = 0 Then
-                                    sBackColor = "#faa833"
-                                Else
-                                    sBackColor = "#fab450"
-                                End If
-
-                            Case "2q"
-                                If (alternateCount Mod 2) = 0 Then
-                                    sBackColor = "#faa833"
-                                Else
-                                    sBackColor = "#fab450"
-                                End If
-
-                            Case "3q"
-                                If (alternateCount Mod 2) = 0 Then
-                                    sBackColor = "#faa833"
-                                Else
-                                    sBackColor = "#fab450"
-                                End If
-
-                            Case "4q"
-                                If (alternateCount Mod 2) = 0 Then
-                                    sBackColor = "#faa833"
-                                Else
-                                    sBackColor = "#fab450"
-                                End If
-                            Case Else
+                            lbtDeleteTicket.Visible = False
+                            'tdActions.ColSpan = 2
+                            If oTicket.RiskAmount <= 0 Then
+                                Dim tdRisk As HtmlTableCell = CType(oItemTicketBet.FindControl("tdRisk"), HtmlTableCell)
+                                Dim tdWin As HtmlTableCell = CType(oItemTicketBet.FindControl("tdWin"), HtmlTableCell)
+                                tdRisk.InnerText = ""
+                                tdWin.InnerText = ""
+                            End If
+                        Case sBetType.Contains("Teaser")
+                            If (alternateCount Mod 2) = 0 Then
+                                sBackColor = "#f08080"
+                            Else
+                                sBackColor = "#f59596"
+                            End If
+                        Case sBetType.Contains("If") Or sBetType.Contains("Reverse")
+                            If (alternateCount Mod 2) = 0 Then
                                 sBackColor = "#efefef"
-                        End Select
-                    Case sBetType.Contains("Parlay")
-                        Dim tdRisk As HtmlControl = CType(oItem.FindControl("tdRisk"), HtmlControl)
-                        Dim tdWin As HtmlControl = CType(oItem.FindControl("tdWin"), HtmlControl)
-                        tdRisk.Visible = False
-                        tdWin.Visible = False
-
-                        If (alternateCount Mod 2) = 0 Then
-                            sBackColor = "#ede56f"
-                        Else
-                            sBackColor = "#f1e64e"
-                        End If
-                    Case sBetType.Contains("Teaser")
-                        If (alternateCount Mod 2) = 0 Then
-                            sBackColor = "#f08080"
-                        Else
-                            sBackColor = "#f59596"
-                        End If
-                    Case sBetType.Contains("If Win") Or sBetType.Contains("Reverse")
-                        If (alternateCount Mod 2) = 0 Then
-                            sBackColor = "#efefef"
-                        Else
+                            Else
+                                sBackColor = "#ffffff"
+                            End If
+                        Case Else
                             sBackColor = "#ffffff"
-                        End If
-                    Case Else
-                        sBackColor = "#ffffff"
-                End Select
+                    End Select
 
-                itemTicketContent.Style.Add("background", sBackColor)
+                    itemTicketContent.Style.Add("background", sBackColor)
+
+                    '' show ticket number
+                    If oTicket.TicketNumber > 0 Then
+                        Dim tdActions As HtmlControl = CType(oItemTicketBet.FindControl("tdActions"), HtmlControl)
+                        Dim lblTicketNumber As Label = CType(oItemTicketBet.FindControl("lblTicketNumber"), Label)
+                        Dim lbtDeleteTicket As LinkButton = CType(oItemTicketBet.FindControl("lbtDeleteTicket"), LinkButton)
+
+                        lblTicketNumber.Visible = True
+                        lbtDeleteTicket.Visible = False
+                        tdActions.Style.Add("width", "150px")
+
+                        bIsSubmited = True
+                    End If
+
+                    nTiketBetIndex += 1
+                    nCountSelection += 1
+                End While
+
                 ' Risk, Win
                 nTotalRisk += oTicket.RiskAmount
                 nTotalWin += oTicket.WinAmount
                 nIndex += 1
+
             End While
 
-            lblTicketSummary.Text = String.Format("{0} Selections Risking <b>{1}</b> To Win <b>{2} US</b>", rptTickets.Items.Count, FormatNumber(nTotalRisk, 2), FormatNumber(nTotalWin, 2))
+            lblTicketSummary.Text = String.Format("{0} Selections Risking <b>{1}</b> To Win <b>{2} US</b>", nCountSelection, FormatNumber(nTotalRisk, 2), FormatNumber(nTotalWin, 2))
 
-              'Hide Rish/Win for Parlay
-            If Me.BetTypeActive.Contains("Parlay") Then
-                ltrHeadRisk.Visible = False
-                ltrHeadWin.Visible = False
-                lblTicketSummary.Visible = False
+            'Hide Rish/Win 
+            Dim hasBetted = SafeBoolean(IIf(nTotalRisk > 0, True, False))
+            ltrHeadRisk.Visible = hasBetted
+            ltrHeadWin.Visible = hasBetted
+            lblTicketSummary.Visible = hasBetted
+            pnWarningMessage.Visible = hasBetted
+
+            If Me.BetTypeActive.Contains("If") Then
+                btnSubmit.Visible = True
+                txtPassword.Visible = True
+                lblMessage.Visible = True
+                tblBetTheboard.Visible = True
+
             End If
-            
+
+            ' show ticket number, confirmed wagers
+            If bIsSubmited Then
+                ltrHeadTicketNumber.Visible = True
+                lblTicketSummary.Visible = True
+
+                pnWarningMessage.Visible = False
+                lblMessage.Visible = False
+                pnWagerConfirmed.Visible = True
+                lblCountWagerConfirmed.Text = String.Format("YES - {0} {1} Confirmed", nIndex + 1, SafeString(IIf((nIndex + 1) > 1, "Wagers", "Wager")) ) 
+            End If
+
+        End Sub
+
+        Protected Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
+            Dim selectedBetTypeActive As String = UCase(BetTypeActive)
+
+            If ((selectedBetTypeActive = "REVERSE") Or (selectedBetTypeActive = "IF WIN") Or (selectedBetTypeActive = "IF WIN OR PUSH")) Then
+                Response.Redirect("Default.aspx?bettype=IfBetReverse")
+            Else
+                Response.Redirect(String.Format("Default.aspx?bettype={0}", BetTypeActive))
+            End If
         End Sub
 
         Protected Sub rptTickets_ItemCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.RepeaterCommandEventArgs) Handles rptTickets.ItemCommand
@@ -1204,8 +1279,18 @@ Namespace SBSWebsite
                         lblMessage.Text = "<span style=' font-weight:bold;'>Attention:</span> lines have changed. Please review and reconfirm your bet."
                         ' bindPreviewWagers()
                     Else
+                        Dim oListCTicket = New List(Of CTicket)
                         If UserSession.SelectedTicket(SelectedPlayerID).SaveTickets(SelectedPlayer.BalanceAmount,
-                                                                  SelectedPlayer.AgentID, SelectedPlayer.UserID, UserSession.UserID) Then
+                                                                  SelectedPlayer.AgentID, SelectedPlayer.UserID, UserSession.UserID, oListCTicket) Then
+                            For Each oCTicket As CTicket In oListCTicket
+                                Dim oTicket = UserSession.SelectedTicket(SelectedPlayerID).GetTicket(oCTicket.TicketID)
+                                If oTicket IsNot Nothing Then
+                                    oTicket.TicketNumber = oCTicket.TicketNumber
+                                    oTicket.SubTicketNumber = oCTicket.SubTicketNumber
+                                End If
+                            Next
+
+
                             lblMessage.Text = "Wager(s) has been saved successfully"
                             ' lblMessage.Attributes.Item("style") = "font-size: 14px;"
                             'UserSession.SelectedTicket(SelectedPlayerID) = Nothing
@@ -1278,7 +1363,7 @@ Namespace SBSWebsite
                 End If
 
 
-                ' BindWagers()
+                BindWagers()
                 ShowWager(True)
                 UserSession.SelectedTicket(SelectedPlayerID) = Nothing
                 'If SiteType = SBCBL.CEnums.ESiteType.SBS Then

@@ -1,4 +1,5 @@
-﻿Imports SBCBL.std
+﻿Imports System.Runtime.InteropServices
+Imports SBCBL.std
 Imports SBCBL.CEnums
 Imports SBCBL.CacheUtils
 Imports WebsiteLibrary.DBUtils
@@ -323,7 +324,7 @@ Namespace Tickets
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Function SaveTickets(ByVal pnRemainAmount As Double, ByVal psAgentID As String, _
-                                    ByVal psPlayerID As String, ByVal psOrderBy As String) As Boolean
+                                    ByVal psPlayerID As String, ByVal psOrderBy As String,Optional ByRef  poListCTicket As List(Of CTicket) = Nothing) As Boolean
 
             _log.Debug("BEGIN SaveTickets")
             Dim bResult As Boolean = False
@@ -336,6 +337,7 @@ Namespace Tickets
                 Dim nCurrTicketNumber As Integer
                 Dim oPrevTicket As CTicket = Nothing
                 Dim nIndex As Integer = 1
+                poListCTicket = new List(Of CTicket)
 
                 For Each oTicket As CTicket In _olstTickets
                     '' UnCheck empty ticket
@@ -352,7 +354,7 @@ Namespace Tickets
                     Else
                         nIndex += 1
                     End If
-
+                    
                     If UCase(oTicket.TicketType) = "PARLAY" AndAlso UCase(oTicket.TicketOption) <> "PARLAY" Then
                         _log.Debug("Generate Round Robin Parlay Tickets")
                         Dim olstGenTickets As CTicketList = oTicket.GenerateParlay()
@@ -362,10 +364,19 @@ Namespace Tickets
                         nIndex = 1
                         For Each oGenTicket As CTicket In olstGenTickets
                             SaveTicket(oDB, oGenTicket, psAgentID, psPlayerID, psOrderBy, nCurrTicketNumber, nIndex)
+                            oTicket.TicketNumber = nCurrTicketNumber
+                            oTicket.SubTicketNumber = nIndex
+                            poListCTicket.Add(oTicket)
+
                             nIndex += 1
+                            
                         Next
                     Else
                         SaveTicket(oDB, oTicket, psAgentID, psPlayerID, psOrderBy, nCurrTicketNumber, nIndex)
+                        oTicket.TicketNumber = nCurrTicketNumber
+                        oTicket.SubTicketNumber = nIndex
+                        poListCTicket.Add(oTicket)
+
                     End If
 
                     oPrevTicket = oTicket

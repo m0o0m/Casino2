@@ -11,114 +11,97 @@
                         <asp:Literal ID="ltrDateBet" runat="server"></asp:Literal>
                         - ET</td>
                     <td><asp:Literal ID="ltrHeadRisk" runat="server">Risk</asp:Literal></td>
-                    <td colspan="2"><asp:Literal ID="ltrHeadWin" runat="server">Win</asp:Literal></td>
+                    <td><asp:Literal ID="ltrHeadWin" runat="server">Win</asp:Literal></td>
+                    <td><asp:Literal ID="ltrHeadTicketNumber" Visible="False" runat="server">Ticket #</asp:Literal></td>
                 </tr>
                 <asp:Repeater ID="rptTickets" runat="server">
                     <ItemTemplate>
-                        <tr id="trTicketContent" runat="server" class="content">
-                            <td class="pdL25-i"><span class="fz12">Selection <%#Container.ItemIndex + 1%>:</span></td>
-                            <td>
-                                <%--<div>
-                                    <div class="fz11 clr-brown baseline">Basketball - Olympics - Men</div>
-                                    <div class="baseline">
-                                        <span class="fz12 bold clr-black">[31821] USA</span>
-                                        <span class="fz11 clr-brown">08/10/2016</span>
-                                        <span class="fz11 clr-black">(03:00 PM)</span>
-                                    </div>
-                                    <div class="baseline">
-                                        <span class="fz12 bold clr-black">-27½ Points -110</span>
-                                        <span class="fz11 clr-black">for the Game</span>
-                                        <span class="fz12 clr-red">(Line Change)</span>
-                                    </div>
-                                </div>--%>
-
-                                <table class="table table-condensed">
-                                    <%--  <tr id="trTicket" runat="server">
-                            <td colspan="2" align="left">
-                                <asp:Label ID="lblTicketType" runat="server" CssClass="org_txt" Text='<%# Container.DataItem.TicketType%>'></asp:Label>
-                                <asp:Label ID="lblIndex" runat="server" CssClass="blue_txt" Text='<%# " (Wager #" & SBCBL.std.SafeString(Container.ItemIndex + 1) & ")"%>'></asp:Label>
-                            </td>
-                        </tr>--%>
-
-                                    <asp:Repeater ID="rptTicketBets" runat="server" OnItemDataBound="rptTicketBets_ItemDataBound"
-                                        OnItemCommand="rptTicketBets_ItemCommand">
-                                        <HeaderTemplate>
-                                        </HeaderTemplate>
-                                        <ItemTemplate>
-                                            <tr>
-                                                <td>
-                                                    <%# Container.DataItem.DescriptionHtml%>
-                                                    <asp:HiddenField ID="hdfTicketBetId" Value="<%# Container.DataItem.TicketBetID%>" runat="server" />
-                                                    <asp:HiddenField ID="hdfContext" Value="<%# Container.DataItem.Context%>" runat="server" />
-                                                </td>
-                                            </tr>
-                                            <tr style="background: #f9f9f9; display: none">
-                                                <td colspan="2" align="center">
-                                                    <h5>
-                                                        <span style='<%# IIf((SBCBL.std.SafeString(Session("BetTypeActive")).Equals("Straight") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Equals("BetTheBoard") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Contains("If")),"display:none","") %>'>Select #<%#Container.ItemIndex + 1%> </span>
-                                                        <%--<span style='<%# IIf((SBCBL.std.SafeString(Session("BetTypeActive")).Equals("Straight") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Equals("BetTheBoard") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Contains("If")),"","display:none") %>'>Select #<%#CType(Container.Parent.Parent, RepeaterItem).ItemIndex + 1%> </span>--%>
+                        <asp:Repeater ID="rptTicketBets" runat="server" OnItemDataBound="rptTicketBets_ItemDataBound"
+                                OnItemCommand="rptTicketBets_ItemCommand">
+                                <ItemTemplate>
+                                    <tr id="trTicketContent" runat="server" class="content">
+                                        <td class="pdL25-i">
+                                            <span class="fz12" style='<%# IIf((SBCBL.std.SafeString(Session("BetTypeActive")).Equals("Straight") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Equals("BetTheBoard") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Contains("If")),"display:none","") %>'>Selection <%#Container.ItemIndex + 1%>: </span>
+                                            <span style='<%# IIf((SBCBL.std.SafeString(Session("BetTypeActive")).Equals("Straight") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Equals("BetTheBoard") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Contains("If")),"","display:none") %>'>Selection <%#CType(Container.Parent.Parent, RepeaterItem).ItemIndex + 1%>: </span>
+                                        </td>
+                                        <td>
+                                            <%# Container.DataItem.DescriptionHtml %>
+                                            <asp:HiddenField ID="hdfTicketBetId" Value="<%# Container.DataItem.TicketBetID%>" runat="server" />
+                                            <asp:HiddenField ID="hdfContext" Value="<%# Container.DataItem.Context%>" runat="server" />
+                                        </td>
+                                        <td style="width: 81px" id="tdRisk" runat="server"><%# FormatNumber(CType(Container.Parent.Parent, RepeaterItem).DataItem.RiskAmount, 2)%></td>
+                                        <td style="width: 81px" id="tdWin" runat="server"><%# FormatNumber(CType(Container.Parent.Parent, RepeaterItem).DataItem.WinAmount, 2)%></td>
+                                        <td style="width: 81px" id="tdActions" runat="server">
+                                            <asp:Label ID="lblTicketNumber" Text="<%# CType(Container.Parent.Parent, RepeaterItem).DataItem.TicketNumber%>" CssClass="ticket-number" Visible="False" runat="server"></asp:Label>
+                                            <asp:LinkButton ID="lbtDeleteTicket" runat="server" Text="Remove" CssClass="link-2 clr-red" CommandName="DEL_TICKETBET" CommandArgument='<%# Container.DataItem.TicketID & "|" & Container.DataItem.TicketBetID%>'></asp:LinkButton>
+                                            <asp:HiddenField ID="hfTicketID" Value="<%# Container.DataItem.TicketID%>" runat="server" />
+                                        </td>
+                                    </tr>
+                                    <tr style="background: #f9f9f9; display: none">
+                                        <td colspan="2" align="center">
+                                            <h5>
+                                                <span style='<%# IIf((SBCBL.std.SafeString(Session("BetTypeActive")).Equals("Straight") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Equals("BetTheBoard") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Contains("If")),"display:none","") %>'>Select #<%#Container.ItemIndex + 1%> </span>
+                                                <%--<span style='<%# IIf((SBCBL.std.SafeString(Session("BetTypeActive")).Equals("Straight") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Equals("BetTheBoard") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Contains("If")),"","display:none") %>'>Select #<%#CType(Container.Parent.Parent, RepeaterItem).ItemIndex + 1%> </span>--%>
                                                         :
                                                    
                                                     <%#Container.DataItem.GameType.Replace("NCAA Football", "College Football").Replace("CFL Football", "Canadian Football").Replace("AFL Football", "Arena Football")%>
                                                     </h5>
-                                                </td>
-                                                <td id="tdAmount" visible="false" class="amount" runat="server">
-                                                    <h5>Amount</h5>
-                                                </td>
-                                            </tr>
-                                            <tr id="trTicketBet" runat="server" style="display: none">
-                                                <td>
-                                                    <b>
-                                                        <asp:Literal ID="lblTeam" runat="server" Text='<%# SBCBL.std.SafeString(Container.DataItem.Team)%>  '></asp:Literal>
-                                                        <span style="margin-left: 10px"><%# Container.DataItem.GameDate%>
+                                        </td>
+                                        <td id="tdAmount" visible="false" class="amount" runat="server">
+                                            <h5>Amount</h5>
+                                        </td>
+                                    </tr>
+                                    <tr id="trTicketBet" runat="server" style="display: none">
+                                        <td>
+                                            <b>
+                                                <asp:Literal ID="lblTeam" runat="server" Text='<%# SBCBL.std.SafeString(Container.DataItem.Team)%>  '></asp:Literal>
+                                                <span style="margin-left: 10px"><%# Container.DataItem.GameDate%>
                                                             - (EST)</span></b>
-                                                    <asp:Literal ID="lblContext" runat="server" Text='<%# SBCBL.std.SafeString(iif(LCase(SBCBL.std.SafeString(Container.DataItem.Context)) = "current","for Game",Container.DataItem.Context ))%>'></asp:Literal>
-                                                </td>
-                                                <td nowrap="nowrap" align="center">
-                                                    <asp:Label ID="lblLine" runat="server"></asp:Label>
-                                                    <asp:Literal ID="lblBuyPoint" runat="server"></asp:Literal>
-                                                </td>
-                                                <td id="tdAmount2" visible="false" style="text-align: right" runat="server" class="amount">
-                                                    <nobr><asp:TextBox ID="txtAmount" Visible ="false"   CssClass="amount textInput" Width="70px" onkeypress="javascript:return inputNumber(this,event, false);"  runat="server"></asp:TextBox>
+                                            <asp:Literal ID="lblContext" runat="server" Text='<%# SBCBL.std.SafeString(iif(LCase(SBCBL.std.SafeString(Container.DataItem.Context)) = "current","for Game",Container.DataItem.Context ))%>'></asp:Literal>
+                                        </td>
+                                        <td nowrap="nowrap" align="center">
+                                            <asp:Label ID="lblLine" runat="server"></asp:Label>
+                                            <asp:Literal ID="lblBuyPoint" runat="server"></asp:Literal>
+                                        </td>
+                                        <td id="tdAmount2" visible="false" style="text-align: right" runat="server" class="amount">
+                                            <nobr><asp:TextBox ID="txtAmount" Visible ="false"   CssClass="amount textInput" Width="70px" onkeypress="javascript:return inputNumber(this,event, false);"  runat="server"></asp:TextBox>
                                                     <asp:Button ID="btnDelTicketBet" runat="server" Text="Del" 
                                                         CommandArgument='<%# Container.DataItem.TicketID & "|" & Container.DataItem.TicketBetID%>'
                                                         CommandName="DEL_TICKETBET" />
                                                     </nobr>
-                                                </td>
-                                            </tr>
-                                            <tr style="display: none">
-                                                <td></td>
-                                                <td nowrap="nowrap" style="text-align: right">
-
-
-                                                    <%--<asp:Literal ID="lblBuyPoint" runat="server"></asp:Literal>--%>
-                                                    <wlb:CDropDownList ID="ddlBuyPoint" runat="server" hasOptionalItem="false" />
-                                                    <asp:TextBox ID="txtRisk" runat="server" Wager='<%# Container.DataItem.TicketID%>'
-                                                        Rate='<%# Container.DataItem.BetPoint%>' CssClass="textInput" MaxLength="10"
-                                                        Style="text-align: right; padding-left: 2px; display: none;" Width="50" />
-                                                </td>
-                                                <td></td>
-                                            </tr>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-
-                                    <tr align="right" style="display: none">
-                                        <asp:Literal ID="lblRiskWin" runat="server" Visible="false" />
-                                    </tr>
-                                    <tr style="text-align: left; display:none">
-                                        <td colspan="3">
-                                            <asp:Label ID="lblBetLimits" runat="server" Font-Bold="True" CssClass="label label-danger" />
                                         </td>
                                     </tr>
-                                </table>
-                            </td>
-                            <td style="width: 81px" id="tdRisk" runat="server"><%# FormatNumber(Container.DataItem.RiskAmount, 2)%></td>
-                            <td style="width: 81px" id="tdWin" runat="server"><%# FormatNumber(Container.DataItem.WinAmount, 2)%></td>
-                            <td style="width: 81px">
-                                <asp:LinkButton ID="lbtDeleteTicket" runat="server" Text="Remove" CssClass="link-2 clr-red" CommandName="DEL_TICKET" CommandArgument='<%# Container.DataItem.TicketID%>'></asp:LinkButton>
-                                <asp:HiddenField ID="hfTicketID" Value="<%# Container.DataItem.TicketID%>" runat="server" />
-                            </td>
-                        </tr>
+                                    <tr style="display: none">
+                                        <td></td>
+                                        <td nowrap="nowrap" style="text-align: right">
+
+
+                                            <%--<asp:Literal ID="lblBuyPoint" runat="server"></asp:Literal>--%>
+                                            <wlb:CDropDownList ID="ddlBuyPoint" runat="server" hasOptionalItem="false" />
+                                            <asp:TextBox ID="txtRisk" runat="server" Wager='<%# Container.DataItem.TicketID%>'
+                                                Rate='<%# Container.DataItem.BetPoint%>' CssClass="textInput" MaxLength="10"
+                                                Style="text-align: right; padding-left: 2px; display: none;" Width="50" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                       
+
+                        <table class="table table-condensed" runat="server" Visible="False">
+
+                            <tr align="right" style="display: none">
+                                <td>
+                                <asp:Literal ID="lblRiskWin" runat="Server" Visible="False" />
+                                    </td>
+                            </tr>
+                            <tr style="text-align: left; display: none">
+                                <td colspan="3">
+                                    <asp:Label ID="lblBetLimits" runat="server" Font-Bold="True" CssClass="label label-danger" />
+                                </td>
+                            </tr>
+                        </table>
+
 
                         <tr>
                             <td>
@@ -174,18 +157,31 @@
                                 </asp:Panel>
                             </td>
                         </tr>
-                        <asp:Literal ID="tableEnd" runat="server"></asp:Literal>
-
+                        <asp:Panel runat="server" Visible="False">
+                            <asp:Literal ID="tableEnd" runat="server"></asp:Literal>
+                        </asp:Panel>
                     </ItemTemplate>
-                    <FooterTemplate>
+                   <%-- <FooterTemplate>
                         <%#IIf((SBCBL.std.SafeString(Session("BetTypeActive")).Equals("Straight") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Equals("BetTheBoard") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Contains("If")), "</table> </td></tr></table>", "")%>
-                    </FooterTemplate>
+                    </FooterTemplate>--%>
                 </asp:Repeater>
             </table>
 
             <asp:Label ID="lblTicketSummary" CssClass="ticket-summary" runat="server"></asp:Label>
 
-            <div class="pdTB10 pdLR25">
+            <asp:Panel ID="pnWagerConfirmed" runat="server" Visible="False">
+                <div class="confirmed-message">
+                    <img src="/Content/themes/agent/layout6/images/icons/confirmed-wager.png"/>
+                    <asp:Label ID="lblCountWagerConfirmed" runat="server"></asp:Label>
+                </div>
+                <div class="confirmed-actions">
+                    <asp:Button ID="btnMainMenu" class="button-style-3 w110px h24px" runat="server" Text="Main Menu"></asp:Button>
+                    <a href="/SBS/Players/OpenBet.aspx">Pending Bets</a>
+                    <button class="button-style-3 w110px h24px">Print</button>
+                </div>
+            </asp:Panel>
+
+            <div id="pnWarningMessage" runat="server" class="pdTB10 pdLR25">
                 <span class="fz12 bold clr-black">Please Review Wagers Carefully! Enter Password and click 'Confirm Bet(s)' to confirm and receive Ticket Numbers.</span>
             </div>
 
