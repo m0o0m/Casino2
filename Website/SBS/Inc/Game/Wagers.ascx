@@ -169,7 +169,19 @@
 
             <asp:Label ID="lblTicketSummary" CssClass="ticket-summary" runat="server"></asp:Label>
 
-            <div class="pdTB10 pdLR25">
+            <asp:Panel ID="pnWagerConfirmed" runat="server" Visible="False">
+                <div class="confirmed-message">
+                    <img src="/Content/themes/agent/layout6/images/icons/confirmed-wager.png"/>
+                    <asp:Label ID="lblCountWagerConfirmed" runat="server"></asp:Label>
+                </div>
+                <div class="confirmed-actions">
+                    <asp:Button ID="btnMainMenu" class="button-style-3 w110px h24px" runat="server" Text="Main Menu"></asp:Button>
+                    <a href="/SBS/Players/OpenBet.aspx">Pending Bets</a>
+                    <button class="button-style-3 w110px h24px">Print</button>
+                </div>
+            </asp:Panel>
+
+            <div id="pnWarningMessage" runat="server" class="pdTB10 pdLR25">
                 <span class="fz12 bold clr-black">Please Review Wagers Carefully! Enter Password and click 'Confirm Bet(s)' to confirm and receive Ticket Numbers.</span>
             </div>
 

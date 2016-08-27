@@ -348,7 +348,7 @@ Namespace SBSWebsite
             ltrHeadRisk.Visible = hasBetted
             ltrHeadWin.Visible = hasBetted
             lblTicketSummary.Visible = hasBetted
-
+            pnWarningMessage.Visible = hasBetted
 
             If Me.BetTypeActive.Contains("If") Then
                 btnSubmit.Visible = True
@@ -357,13 +357,28 @@ Namespace SBSWebsite
                 tblBetTheboard.Visible = True
 
             End If
-            ' show ticket number
+
+            ' show ticket number, confirmed wagers
             If bIsSubmited Then
                 ltrHeadTicketNumber.Visible = True
                 lblTicketSummary.Visible = True
+
+                pnWarningMessage.Visible = False
+                lblMessage.Visible = False
+                pnWagerConfirmed.Visible = True
+                lblCountWagerConfirmed.Text = String.Format("YES - {0} {1} Confirmed", nIndex + 1, SafeString(IIf((nIndex + 1) > 1, "Wagers", "Wager")) ) 
             End If
 
+        End Sub
 
+        Protected Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
+            Dim selectedBetTypeActive As String = UCase(BetTypeActive)
+
+            If ((selectedBetTypeActive = "REVERSE") Or (selectedBetTypeActive = "IF WIN") Or (selectedBetTypeActive = "IF WIN OR PUSH")) Then
+                Response.Redirect("Default.aspx?bettype=IfBetReverse")
+            Else
+                Response.Redirect(String.Format("Default.aspx?bettype={0}", BetTypeActive))
+            End If
         End Sub
 
         Protected Sub rptTickets_ItemCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.RepeaterCommandEventArgs) Handles rptTickets.ItemCommand
