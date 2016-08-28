@@ -288,16 +288,18 @@ Namespace SBSWebsite
                                 sBackColor = "#f1e64e"
                             End If
 
-                            'Dim tdActions As HtmlTableCell = CType(oItemTicketBet.FindControl("tdActions"), HtmlTableCell)
+                            
                             Dim lbtDeleteTicket As LinkButton = CType(oItemTicketBet.FindControl("lbtDeleteTicket"), LinkButton)
-
-                            lbtDeleteTicket.Visible = False
-                            'tdActions.ColSpan = 2
+                            lbtDeleteTicket.Visible = SafeBoolean(IIf(oTicket.TicketBets.Count() > 2, True, False))
+                            
                             If oTicket.RiskAmount <= 0 Then
                                 Dim tdRisk As HtmlTableCell = CType(oItemTicketBet.FindControl("tdRisk"), HtmlTableCell)
                                 Dim tdWin As HtmlTableCell = CType(oItemTicketBet.FindControl("tdWin"), HtmlTableCell)
                                 tdRisk.InnerText = ""
                                 tdWin.InnerText = ""
+                            Else
+                                Dim tdActions As HtmlTableCell = CType(oItemTicketBet.FindControl("tdActions"), HtmlTableCell)
+                                tdActions.Visible = False
                             End If
                         Case sBetType.Contains("Teaser")
                             If (alternateCount Mod 2) = 0 Then
@@ -317,7 +319,7 @@ Namespace SBSWebsite
 
                     itemTicketContent.Style.Add("background", sBackColor)
 
-                    '' show ticket number
+                    '' show ticket number   
                     If oTicket.TicketNumber > 0 Then
                         Dim tdActions As HtmlControl = CType(oItemTicketBet.FindControl("tdActions"), HtmlControl)
                         Dim lblTicketNumber As Label = CType(oItemTicketBet.FindControl("lblTicketNumber"), Label)
@@ -366,7 +368,7 @@ Namespace SBSWebsite
                 pnWarningMessage.Visible = False
                 lblMessage.Visible = False
                 pnWagerConfirmed.Visible = True
-                lblCountWagerConfirmed.Text = String.Format("YES - {0} {1} Confirmed", nIndex + 1, SafeString(IIf((nIndex + 1) > 1, "Wagers", "Wager")) ) 
+                lblCountWagerConfirmed.Text = String.Format("YES - {0} {1} Confirmed", nIndex, SafeString(IIf(nIndex > 1, "Wagers", "Wager")) ) 
             End If
 
         End Sub
