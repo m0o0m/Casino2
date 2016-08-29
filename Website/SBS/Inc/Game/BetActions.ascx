@@ -188,7 +188,7 @@
                                                             <td id="tdSpread2" runat="server" width="190">
                                                                 <asp:TextBox ID="txtMoneyAwaySpread" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
-                                                                <asp:RadioButton ID="rdSelectAwaySpread" runat="server" CssClass="chkBetActionSelect" />
+                                                                <asp:RadioButton ID="rdSelectAwaySpread" runat="server" CssClass="chkBetActionSelect none" />
                                                                 <asp:CheckBox ID="chkSelectAwaySpread" runat="server" CssClass="chkBetActionSelect" Style="margin-top: 2px" />
                                                                 <wlb:CDropDownList ID="ddlBuyPointAwaySpread" CssClass="select-field-1 w110px h21px" runat="server" hasOptionalItem="False" Visible="False" />
                                                                 <asp:Label ID="lblAwaySpread" runat="server" class="labelodd" />
@@ -198,12 +198,12 @@
                                                                 <nobr>
                                                                 <asp:TextBox ID="txtMoneyAwayMLine" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5"  
                                                                 AutoPostBack="false" />
-                                                                <asp:RadioButton ID="rdSelectAwayMLine" runat="server" CssClass="chkBetActionSelect" />
+                                                                <asp:RadioButton ID="rdSelectAwayMLine" runat="server" CssClass="chkBetActionSelect none" />
                                                                 <asp:CheckBox ID="chkSelectAwayMLine" CssClass="chkBetActionSelect" runat="server" Style="margin-top: 2px"  />
                                                                 <asp:Label ID="lblAwayMoneyLine" runat="server"  class="labelodd" />
                                                                 <%#IIf(SBCBL.std.IsBaseball(Container.DataItem("GameType")), "<span class='mlaction'>Action</span>", "")%>
                                                                 <br/>
-                                                                <asp:RadioButton ID="rdSelectAwayMLine2" runat="server" CssClass="chkBetActionSelect" />
+                                                                <asp:RadioButton ID="rdSelectAwayMLine2" runat="server" CssClass="chkBetActionSelect none" />
                                                                 <asp:TextBox ID="txtMoneyAwayMLine2" runat="server" size="3"  MaxLength="5" 
                                                                 AutoPostBack="false" />
                                                                 <asp:CheckBox ID="chkSelectAwayMLine2" CssClass="chkBetActionSelect" runat="server" />
@@ -214,7 +214,7 @@
                                                             <td id="tdTotal2" runat="server" width="190">
                                                                 <asp:TextBox ID="txtMoneyAwayTotal" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
-                                                                <asp:RadioButton ID="rdSelectAwayTotal" runat="server" CssClass="chkBetActionSelect" />
+                                                                <asp:RadioButton ID="rdSelectAwayTotal" runat="server" CssClass="chkBetActionSelect none" />
                                                                 <asp:CheckBox ID="chkSelectAwayTotal" CssClass="chkBetActionSelect" runat="server" />
                                                                 <wlb:CDropDownList CssClass="select-field-1 w110px h21px" ID="ddlBuyPointAwayTotal" runat="server" hasOptionalItem="false" Visible="false" />
                                                                 <asp:Label ID="lblAwayTotal" runat="server" class="labelodd" />
@@ -254,7 +254,7 @@
                                                             <td id="tdSpread3" runat="server" width="165">
                                                                 <asp:TextBox ID="txtMoneyHomeSpread" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
-                                                                <asp:RadioButton ID="rdSelectHomeSpread" runat="server" CssClass="chkBetActionSelect" />
+                                                                <asp:RadioButton ID="rdSelectHomeSpread" runat="server" CssClass="chkBetActionSelect none" />
                                                                 <asp:CheckBox ID="chkSelectHomeSpread" CssClass="chkBetActionSelect" runat="server" Style="margin-top: 2px" />
                                                                 <wlb:CDropDownList ID="ddlBuyPointHomeSpread" class="select-field-1 w110px h21px" runat="server" hasOptionalItem="false" Visible="false" />
                                                                 <asp:Label ID="lblHomeSpread" runat="server" class="labelodd" />
@@ -263,12 +263,12 @@
                                                             <td id="tdMLine3" runat="server">
                                                                 <asp:TextBox ID="txtMoneyHomeMLine" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
-                                                                <asp:RadioButton ID="rdSelectHomeMLine" runat="server" CssClass="chkBetActionSelect" />
+                                                                <asp:RadioButton ID="rdSelectHomeMLine" runat="server" CssClass="chkBetActionSelect none" />
                                                                 <asp:CheckBox ID="chkSelectHomeMLine" CssClass="chkBetActionSelect" runat="server" />
                                                                 <asp:Label ID="lblHomeMoney" runat="server" class="labelodd" />
                                                                 <%#IIf(SBCBL.std.IsBaseball(Container.DataItem("GameType")), "<span class='mlaction'>Action</span>", "")%>
                                                                 <br />
-                                                                <asp:RadioButton ID="rdSelectHomeMLine2" runat="server" CssClass="chkBetActionSelect" />
+                                                                <asp:RadioButton ID="rdSelectHomeMLine2" runat="server" CssClass="chkBetActionSelect none" />
                                                                 <asp:TextBox ID="txtMoneyHomeMLine2" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
                                                                 <asp:CheckBox ID="chkSelectHomeMLine2" CssClass="chkBetActionSelect" runat="server" />
@@ -279,7 +279,7 @@
                                                             <td id="tdTotal3" runat="server">
                                                                 <asp:TextBox ID="txtMoneyHomeTotal" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
-                                                                <asp:RadioButton ID="rdSelectHomeTotal" runat="server" CssClass="chkBetActionSelect" />
+                                                                <asp:RadioButton ID="rdSelectHomeTotal" runat="server" CssClass="chkBetActionSelect none" />
                                                                 <asp:CheckBox ID="chkSelectHomeTotal" CssClass="chkBetActionSelect" runat="server" />
                                                                 <asp:Label ID="Label1" runat="server" class="labelodd" />
                                                                 <wlb:CDropDownList ID="ddlBuyPointHomeTotal" class="select-field-1 w110px h21px" runat="server" hasOptionalItem="false" Visible="false" />
@@ -315,7 +315,7 @@
                                                             <td>
                                                                 <asp:TextBox ID="txtMoneyDraw" class="input-field-1 w43px h21px" runat="server" size="3" MaxLength="5" 
                                                                     AutoPostBack="false" />
-                                                                <asp:RadioButton ID="rdSelectDraw" runat="server" CssClass="chkBetActionSelect" />
+                                                                <asp:RadioButton ID="rdSelectDraw" runat="server" CssClass="chkBetActionSelect none" />
                                                                 <asp:CheckBox ID="chkSelectDraw" CssClass="chkBetActionSelect" runat="server" />
                                                                 <asp:Label ID="lblDrawMoney" runat="server" Width="60" class="labelodd" />
                                                             </td>
