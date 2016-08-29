@@ -10,7 +10,7 @@ Partial Class SBS_Players_Default
             Response.Redirect("AccountStatus.aspx?RequireChangePass=Y")
         End If
         'MenuTabName = "BET_ACTION"
-        'PageTitle = "Wager"
+        PageTitle = "Wager"
         'DisplaySubTitlle(Me.Master, "Select Game")
         'TopMenu = CType(Page.Master.FindControl("menuWager"), HtmlAnchor)
         'BottomMenu = CType(Page.Master.FindControl("footMenuWager"), HtmlAnchor)

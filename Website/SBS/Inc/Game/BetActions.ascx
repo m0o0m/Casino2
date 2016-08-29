@@ -4,53 +4,54 @@
 
 <link href="../../../Content/themes/agent/layout6/styles/_bet-action.css" rel="stylesheet" />
 
-<div class="row">
-    <div class="col-lg-12">
-        <!--
-        <div class="page-title-breadcrumb">
-            <div class="col-md-1 pull-left">
-                <span class="page-title">WagerType</span>
-            </div>
-            <div class="col-md-1 pull-left">
-                <span class="label label-dark pull-left mtm" style="margin-top: -1px !important; font-size: larger;">
-                    <%=IIf(UserSession.SelectedBetType(Me.SelectedPlayerID) <> "PROP", BetTypeActive.Replace("BetTheBoard", "Straight").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board"), "Proposition/Future")%>
-                </span>
-            </div>
-            <div class="clearfix"></div>
-        </div>-->
-        <div class="clear">
-            <div class="left pdL30" id="pnMenu" runat="server">
-                <div class="ly-fixed w-auto-i baseline">
-                    <div class="w130px clr-black">
-                        <b>Wager Amount:</b>
-                    </div>
-                    <div class="w75px clr-black">
-                        <input type="radio" name="rdC" value="" />
-                        Rish
-                    </div>
-                    <div class="w75px clr-black">
-                        <input type="radio" name="rdC" value="" />
-                        Win
-                    </div>
-                    <div class="clr-black">
-                        <input type="radio" name="rdC" value="" checked />
-                        Base Amount
-                    </div>
-                </div>
-            </div>
-            <div class="right pdR20">
-                <asp:Button ID="btnMainMenu" class="button-style-3 w110px h24px" runat="server" Text="Main Menu"></asp:Button>
-                <asp:Button ID="btnUpdateLines" class="update button-style-3 w110px h24px" runat="server" Text="Refresh"></asp:Button>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="mbl"></div>
 <div class="panel gamebetdetail">
     <div class="panel-body">
 
         <asp:UpdatePanel ID="UpdatePanel13" runat="server" UpdateMode="Always">
             <ContentTemplate>
+                <div class="row" id="pnBetActionHeader" runat="server">
+                    <div class="col-lg-12">
+                        <!--
+                        <div class="page-title-breadcrumb">
+                            <div class="col-md-1 pull-left">
+                                <span class="page-title">WagerType</span>
+                            </div>
+                            <div class="col-md-1 pull-left">
+                                <span class="label label-dark pull-left mtm" style="margin-top: -1px !important; font-size: larger;">
+                                    <%=IIf(UserSession.SelectedBetType(Me.SelectedPlayerID) <> "PROP", BetTypeActive.Replace("BetTheBoard", "Straight").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board"), "Proposition/Future")%>
+                                </span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>-->
+                        <div class="clear">
+                            <div class="left pdL30" id="pnMenu" runat="server">
+                                <div class="ly-fixed w-auto-i baseline">
+                                    <div class="w130px clr-black">
+                                        <b>Wager Amount:</b>
+                                    </div>
+                                    <div class="w75px clr-black">
+                                        <input type="radio" name="rdC" value="" />
+                                        Rish
+                                    </div>
+                                    <div class="w75px clr-black">
+                                        <input type="radio" name="rdC" value="" />
+                                        Win
+                                    </div>
+                                    <div class="clr-black">
+                                        <input type="radio" name="rdC" value="" checked />
+                                        Base Amount
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right pdR20">
+                                <asp:Button ID="btnMainMenu" class="button-style-3 w110px h24px" runat="server" Text="Main Menu"></asp:Button>
+                                <asp:Button ID="btnUpdateLines" class="update button-style-3 w110px h24px" runat="server" Text="Refresh"></asp:Button>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.row-->
                 <asp:HiddenField ID="hfIsWagers" runat="server" Value="false" />
                 <asp:Panel ID="pnBetAction" runat="server" onkeypress="if(event.keyCode==13){$('#'+btnContinue).click();}">
                     <asp:HiddenField ID="hfBetTypeActive" runat="server" Value="Straight" />
@@ -444,7 +445,7 @@
 
 
     function continueBet(sender) {
-        sender.style.display  = "none";
+       // sender.style.display  = "none";
         
         var btnCont = document.getElementById(btnContinue);
         btnCont.click();

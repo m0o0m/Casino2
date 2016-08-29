@@ -349,7 +349,7 @@ Namespace SBSWebsite
             Dim hasBetted = SafeBoolean(IIf(nTotalRisk > 0, True, False))
             ltrHeadRisk.Visible = hasBetted
             ltrHeadWin.Visible = hasBetted
-            lblTicketSummary.Visible = hasBetted
+            lblTicketSummary.Visible = ( hasBetted AndAlso (nCountSelection > 1))
             pnWarningMessage.Visible = hasBetted
 
             If Me.BetTypeActive.Contains("If") Then

@@ -391,6 +391,8 @@ Partial Class SBS_Inc_Game_BetActions
             ucWagers.Visible = Not pnBetAction.Visible
             hfIsWagers.Value = Not pnBetAction.Visible
 
+            pnBetActionHeader.Visible = Not ucWagers.Visible
+            
             dvHeaderIfBet.Visible = LCase(BetTypeActive).Contains("if ")
             dvBottomIfBet.Visible = dvHeaderIfBet.Visible
             If dvHeaderIfBet.Visible Then
@@ -511,6 +513,8 @@ Partial Class SBS_Inc_Game_BetActions
             hfIsWagers.Value = False
             rptProps.Visible = False
             lblMessage.Visible = True
+
+            pnBetActionHeader.Visible = Not ucWagers.Visible
         Else
             lblMessage.Visible = False
         End If
@@ -3036,6 +3040,8 @@ PropGame:
         'UserSession.SelectedGameTypes(Me.SelectedPlayerID).Clear()
         ucWagers.SelectedPlayerID = SelectedPlayerID
         ucWagers.BindWagers()
+
+        pnBetActionHeader.Visible = Not ucWagers.Visible
     End Sub
 
     Public Sub ClearWager()
@@ -3182,6 +3188,8 @@ PropGame:
         ' BetTypeActive = _sStraight
         ClearWager()
         '  ActiveMenu()
+
+        pnBetActionHeader.Visible = Not ucWagers.Visible
     End Sub
 
 
