@@ -4,8 +4,8 @@
     <div id="picks" class="col-lg-12" onkeypress="if(event.keyCode==13){debugger;document.getElementById('cphBody_ucBetActions_ucWagers_btnSubmit').click();return false;}">
         <div id="wagers">
             <%--<h2 id="trTicketType" runat="server">Wager type : <%=BetTypeActive.Replace("BetTheBoard", "Straight Bet(s)").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board")%></h2>--%>
-
-            <table class="table table-condensed table-style-6 full">
+            <div id="wager-print">
+            <table class="table table-condensed table-style-6 full wager-print">
                 <tr class="caption">
                     <td class="pdT10 pdL25" colspan="2"><%=BetTypeActive.Replace("BetTheBoard", "Straight Bet(s)").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board").Replace("If Win", "If Bet (If Win Only)").Replace("If Win or Push", "If Bet (If Win, Push or Cancel)")%>
                         <asp:Literal ID="ltrDateBet" runat="server"></asp:Literal>
@@ -166,7 +166,7 @@
                     </FooterTemplate>--%>
                 </asp:Repeater>
             </table>
-
+            </div><!-- /#wager-print-->
             <asp:Label ID="lblTicketSummary" CssClass="ticket-summary" runat="server"></asp:Label>
 
             <asp:Panel ID="pnWagerConfirmed" runat="server" Visible="False">
@@ -177,7 +177,7 @@
                 <div class="confirmed-actions">
                     <asp:Button ID="btnMainMenu" class="button-style-3 w110px h24px" runat="server" Text="Main Menu"></asp:Button>
                     <a href="/SBS/Players/OpenBet.aspx">Pending Bets</a>
-                    <button class="button-style-3 w110px h24px">Print</button>
+                    <button class="button-style-3 w110px h24px" onclick="printContent('wager-print');">Print</button>
                 </div>
             </asp:Panel>
 

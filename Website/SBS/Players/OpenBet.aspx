@@ -14,7 +14,7 @@
     </asp:Panel>
 
     <div class="btn-pending-print clear mgB5">
-        <button class="button-style-2 w110px h24px">Print</button>
+        <button class="button-style-2 w110px h24px" onclick="printContent('open-bet-print');">Print</button>
     </div>
 
     <div class="table-filter-style-1 pdTB10 pdLR10 mgT20">
@@ -73,5 +73,4 @@
         <input type="button" class="button-style-2 w110px" onclick="javascript:history.back();" value="Back"/>
     </asp:Panel>
 
-    <link href="../../Content/themes/agent/layout6/styles/print-pending.css" rel="stylesheet" />
 </asp:Content>

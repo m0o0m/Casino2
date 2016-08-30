@@ -216,8 +216,9 @@ Namespace SBSPlayer
 
             ''total row
             Dim oTotalItem As DataGridItem = dgTicketBets.Items(dgTicketBets.Items.Count - 1)
-            oTotalItem.Cells(0).Visible = False
-            oTotalItem.Cells(1).ColumnSpan = 5
+            oTotalItem.Cells(0).Visible = True
+            oTotalItem.Cells(0).Text = ""
+            oTotalItem.Cells(1).ColumnSpan = 4
             oTotalItem.Cells(2).Visible = False
             oTotalItem.Cells(3).Visible = False
             oTotalItem.Cells(4).Visible = False
@@ -459,7 +460,7 @@ Namespace SBSPlayer
             Dim nHomeSpreadMoney As Double = SafeDouble(poTicketBet("HomeSpreadMoney"))
             Dim nAwaySpreadMoney As Double = SafeDouble(poTicketBet("AwaySpreadMoney"))
             Dim nSpread As Double = SafeDouble(IIf(nHomeSpreadMoney <> 0, nHomeSpread, nAwaySpread)) + SafeDouble(poTicketBet("AddPoint"))
-            Dim sSpread As String = SafeString(nSpread)
+            Dim sSpread As String = SafeString(IIf(nSpread > 0, "+" & nSpread, nSpread))
             If IsSoccer(sGameType) Then
                 sSpread = safeVegass(AHFormat(nSpread))
             End If
@@ -514,7 +515,7 @@ Namespace SBSPlayer
             Dim mustStarPitcher = GetMustStart(poTicketBet, sGameType)
 
             Dim regulationOnly = IIf(IsSoccer(SafeString(poTicketBet("GameType"))), "<b>Regualation Only</b>", "")
-            Dim gameBet = String.Format("<div class='baseline'>{0} <b>{1} {2}</b> for the {5} {3} {4}</div>", sMsg, sTotalPoint, sMoney, regulationOnly, mustStarPitcher, ContextFormat(sContext))
+            Dim gameBet = String.Format("<div class='baseline'>{0} <b>{1} {2}</b> for the {5} {3} {4}</div>", sMsg, safeVegass(sTotalPoint), sMoney, regulationOnly, mustStarPitcher, ContextFormat(sContext))
 
             Dim sChoiceTeam = String.Format("{0} {1}", psHomeTeam, IIf(String.IsNullOrEmpty(psAwayTeam), "", " - " & psAwayTeam))
 
@@ -552,7 +553,7 @@ Namespace SBSPlayer
             Dim sMoney As String = SafeString(nMoney)
             Dim regulationOnly = IIf(IsSoccer(SafeString(poTicketBet("GameType"))), "<b>Regualation Only</b>", "")
 
-            Dim gameBet = String.Format("<div class='baseline'>{0} <b>{1} {2}</b> for the {4} {3}</div>", sMsg, sTotalPoint, sMoney, regulationOnly, ContextFormat(sContext))
+            Dim gameBet = String.Format("<div class='baseline'>{0} <b>{1} {2}</b> for the {4} {3}</div>", sMsg, safeVegass(sTotalPoint), sMoney, regulationOnly, ContextFormat(sContext))
 
             Dim sChoiceTeam = String.Format("{0} {1}", psHomeTeam, IIf(String.IsNullOrEmpty(psAwayTeam), "", " - " & psAwayTeam))
 

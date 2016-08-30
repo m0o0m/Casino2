@@ -8,5 +8,6 @@
 
 <%--<link type="text/css" rel="stylesheet" href="<%=GetPath()%>styles/bootstrap.min.css">--%>
 <link type="text/css" rel="stylesheet" href="<%=GetPath()%>styles/wowslider/wowslider-1.css">
-<link type="text/css" rel="stylesheet" href="<%=GetPath()%>styles/ttl_style-document.css">
+<link type="text/css" rel="stylesheet" href="<%=GetPath()%>styles/ttl_style-document.css" media="all">
+<link type="text/css" rel="stylesheet" href="<%=GetPath()%>styles/print.css" media="print">
 
