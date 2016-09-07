@@ -5,18 +5,22 @@
         <div id="wagers">
             <%--<h2 id="trTicketType" runat="server">Wager type : <%=BetTypeActive.Replace("BetTheBoard", "Straight Bet(s)").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board")%></h2>--%>
             <div id="wager-print">
-            <table class="table table-condensed table-style-6 full wager-print">
-                <tr class="caption">
-                    <td class="pdT10 pdL25" colspan="2"><%=BetTypeActive.Replace("BetTheBoard", "Straight Bet(s)").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board").Replace("If Win", "If Bet (If Win Only)").Replace("If Win or Push", "If Bet (If Win, Push or Cancel)")%>
-                        <asp:Literal ID="ltrDateBet" runat="server"></asp:Literal>
-                        - ET</td>
-                    <td><asp:Literal ID="ltrHeadRisk" runat="server">Risk</asp:Literal></td>
-                    <td><asp:Literal ID="ltrHeadWin" runat="server">Win</asp:Literal></td>
-                    <td><asp:Literal ID="ltrHeadTicketNumber" Visible="False" runat="server">Ticket #</asp:Literal></td>
-                </tr>
-                <asp:Repeater ID="rptTickets" runat="server">
-                    <ItemTemplate>
-                        <asp:Repeater ID="rptTicketBets" runat="server" OnItemDataBound="rptTicketBets_ItemDataBound"
+                <table class="table table-condensed table-style-6 full wager-print">
+                    <tr class="caption">
+                        <td class="pdT10 pdL25" colspan="2">
+                            <asp:Literal ID="ltrBetType" runat="server"></asp:Literal>
+                            <asp:Literal ID="ltrDateBet" runat="server"></asp:Literal>
+                            - ET</td>
+                        <td>
+                            <asp:Literal ID="ltrHeadRisk" runat="server">Risk</asp:Literal></td>
+                        <td>
+                            <asp:Literal ID="ltrHeadWin" runat="server">Win</asp:Literal></td>
+                        <td>
+                            <asp:Literal ID="ltrHeadTicketNumber" Visible="False" runat="server">Ticket #</asp:Literal></td>
+                    </tr>
+                    <asp:Repeater ID="rptTickets" runat="server">
+                        <ItemTemplate>
+                            <asp:Repeater ID="rptTicketBets" runat="server" OnItemDataBound="rptTicketBets_ItemDataBound"
                                 OnItemCommand="rptTicketBets_ItemCommand">
                                 <ItemTemplate>
                                     <tr id="trTicketContent" runat="server" class="content">
@@ -45,7 +49,7 @@
                                                         :
                                                    
                                                     <%#Container.DataItem.GameType.Replace("NCAA Football", "College Football").Replace("CFL Football", "Canadian Football").Replace("AFL Football", "Arena Football")%>
-                                                    </h5>
+                                            </h5>
                                         </td>
                                         <td id="tdAmount" visible="false" class="amount" runat="server">
                                             <h5>Amount</h5>
@@ -86,92 +90,113 @@
                                     </tr>
                                 </ItemTemplate>
                             </asp:Repeater>
-                       
 
-                        <table class="table table-condensed" runat="server" Visible="False">
 
-                            <tr align="right" style="display: none">
-                                <td>
-                                <asp:Literal ID="lblRiskWin" runat="Server" Visible="False" />
+                            <table class="table table-condensed" runat="server" visible="False">
+
+                                <tr align="right" style="display: none">
+                                    <td>
+                                        <asp:Literal ID="lblRiskWin" runat="Server" Visible="False" />
                                     </td>
-                            </tr>
-                            <tr style="text-align: left; display: none">
-                                <td colspan="3">
-                                    <asp:Label ID="lblBetLimits" runat="server" Font-Bold="True" CssClass="label label-danger" />
-                                </td>
-                            </tr>
-                        </table>
+                                </tr>
+                                <tr style="text-align: left; display: none">
+                                    <td colspan="3">
+                                        <asp:Label ID="lblBetLimits" runat="server" Font-Bold="True" CssClass="label label-danger" />
+                                    </td>
+                                </tr>
+                            </table>
 
 
-                        <tr>
-                            <td>
-                                <asp:Literal ID="lblSperateStraight" runat="server"></asp:Literal>
-                                <asp:Panel ID="pnOptionWager" runat="server" CssClass="row" Style="color: black;">
-                                    <asp:Panel ID="noticeParlay" runat="server" Visible="false" CssClass="col-lg-4">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <wlb:CDropDownList ID="ddlType" runat="server" CssClass="form-control" hasOptionalItem="false" />
+                            <tr class="footer-options">
+                                <td colspan="5">
+                                    <asp:Literal ID="lblSperateStraight" runat="server"></asp:Literal>
+                                    <asp:Panel ID="pnOptionWager" runat="server" CssClass="row" Style="color: black;">
+                                        <asp:Panel ID="noticeParlay" runat="server" Visible="false" CssClass="col-lg-4">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <wlb:CDropDownList ID="ddlType" runat="server" CssClass="form-control" hasOptionalItem="false" />
+                                                </div>
+                                                <div class="col-md-6">
+                                                </div>
                                             </div>
-                                            <div class="col-md-6">
+                                        </asp:Panel>
+
+                                        <asp:Panel ID="noticeStraight" runat="server" Visible="false" CssClass="col-lg-4">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <asp:RadioButton ID="rdRiskAmount" runat="server" GroupName="wager" Checked="true" onclick='showRisk(true)' />
+                                                    <asp:Label ID="lblRiskAmmount" runat="server" Text="Risk Amount"></asp:Label>
+                                                    <%--<asp:RadioButton ID="rdWinAmount" runat="server" GroupName="wager" onclick='showRisk(false)' /> To Win Amount --%>
+                                                    <asp:TextBox ID="txtBet" runat="server" Text='<%# IIf(SBCBL.std.SafeRound(Container.DataItem.RiskAmount)=0,"",SBCBL.std.SafeRound(Container.DataItem.RiskAmount))%>'
+                                                        CssClass="form-control" Style="display: inline-block;" MaxLength="10" Width="90" onkeypress="javascript:return inputNumber(this,event, false);" />
+                                                    <asp:TextBox ID="txtWin" runat="server" Text='<%# IIf(SBCBL.std.SafeRound(Container.DataItem.WinAmount)=0,"",SBCBL.std.SafeRound(Container.DataItem.WinAmount))%>'
+                                                        CssClass="form-control" Style="display: none;" MaxLength="10" Width="90" onkeypress="javascript:return inputNumber(this,event, false);" />
+                                                    <asp:Button ID="btnContinue" runat="server" Text="" CssClass="btn btn-dark" Style="margin-left: 10px;"
+                                                        OnClick="btnPreview_Click" />
+                                                    <asp:Button ID="btnCancel" Visible="false" OnClick="btnClearWagers_Click" runat="server" Text="" Style="margin-left: 10px;" CssClass="btn btn-red"
+                                                        ToolTip="Cancel Your Wager" />
+                                                </div>
+                                            </div>
+                                        </asp:Panel>
+
+                                        <div class="col-md-4">
+                                            <table class="tbl-round-robin" id="tblRoundRobin" visible="False" clientidmode="Static" runat="server">
+                                                <tr class="round-robin-head">
+                                                    <td colspan="2">Wager Type</td>
+                                                </tr>
+                                                <tr class="round-robin-options">
+                                                    <td>
+                                                        <asp:RadioButton ID="rdbParlay" Checked="True" ClientIDMode="Static" GroupName="RoundRobin" Text="Parlay" runat="server" />
+                                                    </td>
+                                                    <td>
+                                                        <asp:RadioButton ID="rdbRoundRobin" ClientIDMode="Static" GroupName="RoundRobin" Text="Round Robin" runat="server" />
+                                                    </td>
+                                                </tr>
+                                                <tr class="round-robin-content">
+                                                    <td>&nbsp;</td>
+                                                    <td>
+                                                        <asp:CheckBoxList ID="cblRoundRobinOptions" ClientIDMode="Static" runat="server">
+                                                        </asp:CheckBoxList>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <div class="form-group">
+                                                <asp:Label ID="lblRiskDsp" runat="server" Text="Bet: " Visible="false"></asp:Label>
+                                                <%--<asp:TextBox ID="txtBet" runat="server" Text='<%# SBCBL.std.SafeRound(Container.DataItem.RiskAmount)%>'
+                                        CssClass="textInput" MaxLength="10" Style="text-align: right; padding-left: 2px;"
+                                        Width="50" onkeypress="javascript:return inputNumber(this,event, false);" />--%>
+                                                <asp:Label ID="lblWinDsp" runat="server" Text="Win: " Visible="false"></asp:Label>
+                                                <%-- <asp:TextBox ID="txtWin" runat="server" Text='<%# SBCBL.std.SafeRound(Container.DataItem.WinAmount)%>'
+                                        CssClass="textInput" MaxLength="10" Style="text-align: right; padding-left: 2px;"
+                                        Width="50" onkeypress="javascript:return inputNumber(this,event, false);" />--%>
                                                 <asp:TextBox ID="txtBetParlay" runat="server" Text='<%# IIf(SBCBL.std.SafeRound(Container.DataItem.RiskAmount)=0 , "",SBCBL.std.SafeRound(Container.DataItem.RiskAmount))%>'
                                                     CssClass="form-control" MaxLength="10" onkeypress="javascript:return inputNumber(this,event, false);" />
-                                            </div>
-                                        </div>
-                                    </asp:Panel>
-
-                                    <asp:Panel ID="noticeStraight" runat="server" Visible="false" CssClass="col-lg-4">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <asp:RadioButton ID="rdRiskAmount" runat="server" GroupName="wager" Checked="true" onclick='showRisk(true)' />
-                                                <asp:Label ID="lblRiskAmmount" runat="server" Text="Risk Amount"></asp:Label>
-                                                <%--<asp:RadioButton ID="rdWinAmount" runat="server" GroupName="wager" onclick='showRisk(false)' /> To Win Amount --%>
-                                                <asp:TextBox ID="txtBet" runat="server" Text='<%# IIf(SBCBL.std.SafeRound(Container.DataItem.RiskAmount)=0,"",SBCBL.std.SafeRound(Container.DataItem.RiskAmount))%>'
-                                                    CssClass="form-control" Style="display: inline-block;" MaxLength="10" Width="90" onkeypress="javascript:return inputNumber(this,event, false);" />
-                                                <asp:TextBox ID="txtWin" runat="server" Text='<%# IIf(SBCBL.std.SafeRound(Container.DataItem.WinAmount)=0,"",SBCBL.std.SafeRound(Container.DataItem.WinAmount))%>'
-                                                    CssClass="form-control" Style="display: none;" MaxLength="10" Width="90" onkeypress="javascript:return inputNumber(this,event, false);" />
-                                                <asp:Button ID="btnContinue" runat="server" Text="" CssClass="btn btn-dark" Style="margin-left: 10px;"
+                                                <asp:Label ID="lblResult" Style="display: none" runat="server" Text='<%# "Risk/Win: " & SBCBL.std.SafeRound(Container.DataItem.RiskAmount) & "/" & SBCBL.std.SafeRound(Container.DataItem.WinAmount) %>'></asp:Label>
+                                                <asp:Button ID="btnNextWager" runat="server" Text="Continue" class="btn btn-dark" Style="margin-left: 10px;" OnClick="btnNextWager_Click" />
+                                                <asp:Button ID="btnPreview" runat="server" Text="Continue" class="btn btn-dark" Style="margin-left: 10px;"
                                                     OnClick="btnPreview_Click" />
-                                                <asp:Button ID="btnCancel" Visible="false" OnClick="btnClearWagers_Click" runat="server" Text="" Style="margin-left: 10px;" CssClass="btn btn-red"
-                                                    ToolTip="Cancel Your Wager" />
+                                                <asp:Button ID="btnCancel2" OnClick="btnClearWagers_Click" runat="server" Text="Cancel Wager" Style="margin-left: 10px;" CssClass="btn btn-red" ToolTip="Cancel Your Wager" />
                                             </div>
                                         </div>
                                     </asp:Panel>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <asp:Label ID="lblRiskDsp" runat="server" Text="Bet: " Visible="false"></asp:Label>
-                                            <%--<asp:TextBox ID="txtBet" runat="server" Text='<%# SBCBL.std.SafeRound(Container.DataItem.RiskAmount)%>'
-                                        CssClass="textInput" MaxLength="10" Style="text-align: right; padding-left: 2px;"
-                                        Width="50" onkeypress="javascript:return inputNumber(this,event, false);" />--%>
-                                            <asp:Label ID="lblWinDsp" runat="server" Text="Win: " Visible="false"></asp:Label>
-                                            <%-- <asp:TextBox ID="txtWin" runat="server" Text='<%# SBCBL.std.SafeRound(Container.DataItem.WinAmount)%>'
-                                        CssClass="textInput" MaxLength="10" Style="text-align: right; padding-left: 2px;"
-                                        Width="50" onkeypress="javascript:return inputNumber(this,event, false);" />--%>
-                                            <asp:Label ID="lblResult" Style="display: none" runat="server" Text='<%# "Risk/Win: " & SBCBL.std.SafeRound(Container.DataItem.RiskAmount) & "/" & SBCBL.std.SafeRound(Container.DataItem.WinAmount) %>'></asp:Label>
-                                            <asp:Button ID="btnNextWager" runat="server" Text="Continue" class="btn btn-dark" Style="margin-left: 10px;" OnClick="btnNextWager_Click" />
-                                            <asp:Button ID="btnPreview" runat="server" Text="Continue" class="btn btn-dark" Style="margin-left: 10px;"
-                                                OnClick="btnPreview_Click" />
-                                            <asp:Button ID="btnCancel2" OnClick="btnClearWagers_Click" runat="server" Text="Cancel Wager" Style="margin-left: 10px;" CssClass="btn btn-red" ToolTip="Cancel Your Wager" />
-                                        </div>
-                                    </div>
-                                </asp:Panel>
-                            </td>
-                        </tr>
-                        <asp:Panel runat="server" Visible="False">
-                            <asp:Literal ID="tableEnd" runat="server"></asp:Literal>
-                        </asp:Panel>
-                    </ItemTemplate>
-                   <%-- <FooterTemplate>
+                                </td>
+                            </tr>
+                            <asp:Panel runat="server" Visible="False">
+                                <asp:Literal ID="tableEnd" runat="server"></asp:Literal>
+                            </asp:Panel>
+                        </ItemTemplate>
+                        <%-- <FooterTemplate>
                         <%#IIf((SBCBL.std.SafeString(Session("BetTypeActive")).Equals("Straight") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Equals("BetTheBoard") OrElse SBCBL.std.SafeString(Session("BetTypeActive")).Contains("If")), "</table> </td></tr></table>", "")%>
                     </FooterTemplate>--%>
-                </asp:Repeater>
-            </table>
-            </div><!-- /#wager-print-->
+                    </asp:Repeater>
+                </table>
+            </div>
+            <!-- /#wager-print-->
             <asp:Label ID="lblTicketSummary" CssClass="ticket-summary" runat="server"></asp:Label>
 
             <asp:Panel ID="pnWagerConfirmed" runat="server" Visible="False">
                 <div class="confirmed-message">
-                    <img src="/Content/themes/agent/layout6/images/icons/confirmed-wager.png"/>
+                    <img src="/Content/themes/agent/layout6/images/icons/confirmed-wager.png" />
                     <asp:Label ID="lblCountWagerConfirmed" runat="server"></asp:Label>
                 </div>
                 <div class="confirmed-actions">

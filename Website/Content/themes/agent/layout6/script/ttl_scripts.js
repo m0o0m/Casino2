@@ -12,7 +12,14 @@ $(document).ready(function() {
         $(this).toggleClass('open');
         $(this).closest('.game-description').siblings('.game-detail').slideToggle('100');
     });
+
+    
 });
+
+(function($) {
+    // round robin selection
+    roundRobinSelection();
+})(jQuery);
 
 // Print
 function printContent(el) {
@@ -22,4 +29,14 @@ function printContent(el) {
 
     window.print();
     document.body.innerHTML = restorepage;
+}
+
+// Select Round Robin
+function roundRobinSelection() {
+    $("body").delegate("#cblRoundRobinOptions input:checkbox", "click", function (event) {
+        var isRoundRobin = $("#rdbRoundRobin").is(":checked");
+        
+        if (!isRoundRobin)
+            return false;
+    });
 }

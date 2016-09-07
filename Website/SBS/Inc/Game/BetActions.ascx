@@ -1,4 +1,5 @@
-﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="BetActions.ascx.vb" Inherits="SBS_Inc_Game_BetActions" %>
+﻿
+<%@ Control Language="VB" AutoEventWireup="false" CodeFile="BetActions.ascx.vb" Inherits="SBS_Inc_Game_BetActions" %>
 <%@ Register Assembly="WebsiteLibrary" Namespace="WebsiteLibrary" TagPrefix="wlb" %>
 <%@ Register Src="~/SBS/Inc/Game/Wagers.ascx" TagName="Wagers" TagPrefix="uc" %>
 
@@ -33,7 +34,7 @@
                                     </div>
                                     <div class="w75px clr-black">
                                         <input type="radio" name="rdC" value="" />
-                                        Rish
+                                        Risk
                                     </div>
                                     <div class="w75px clr-black">
                                         <input type="radio" name="rdC" value="" />

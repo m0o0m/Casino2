@@ -20,6 +20,7 @@ Namespace Tickets
         Private _sInvalidBets As String
         Private _nBetAmount As Double
         Private _sTicketOption As String
+        Private _olstsTicketRoundRobinOption As List(Of Integer)
         Private _sSuperAgentID As String
         Private _sPlayerID As String
         Public RelatedTicketID As String
@@ -156,6 +157,15 @@ Namespace Tickets
                     _sTicketOption = value
                     ReCalcAmount()
                 End If
+            End Set
+        End Property
+
+        Public Property TicketRoundRobinOption() As List(Of Integer)
+            Get
+                Return _olstsTicketRoundRobinOption
+            End Get
+            Set(ByVal value As List(Of Integer))
+                _olstsTicketRoundRobinOption = value
             End Set
         End Property
 
@@ -1143,6 +1153,19 @@ Namespace Tickets
             Return olstDic
         End Function
 
+        Public Function RoundRobinOptions() As List(Of DictionaryEntry)
+            Dim olstDic As List(Of DictionaryEntry)
+
+            Select Case UCase(TicketType)
+                Case "PARLAY"
+                    olstDic = ParseParlayOptionsCheckbox()
+                Case Else
+                    olstDic = New List(Of DictionaryEntry)
+            End Select
+
+            Return olstDic
+        End Function
+
         Public Sub ReCalcAmount()
             _nRiskAmount = 0
             _nWinAmount = 0
@@ -1342,16 +1365,16 @@ Namespace Tickets
                 _nWinAmount = Math.Round(_nWinAmount, 2)
             Else
                 '' Round robin
-                Dim nItems As Integer
-                If Right(_sTicketOption, 1) = "s" Then
-                    nItems = SafeInteger(Left(_sTicketOption, Len(_sTicketOption) - 1))
-                    LogDebug(_log, String.Format("Calc At Most {0} Parlays Amount", nItems))
-                Else
-                    nItems = SafeInteger(_sTicketOption)
-                    LogDebug(_log, String.Format("Calc Exactly {0} Parlays Amount", nItems))
-                End If
+                'Dim nItems As Integer
+                'If Right(_sTicketOption, 1) = "s" Then
+                '    nItems = SafeInteger(Left(_sTicketOption, Len(_sTicketOption) - 1))
+                '    LogDebug(_log, String.Format("Calc At Most {0} Parlays Amount", nItems))
+                'Else
+                '    nItems = SafeInteger(_sTicketOption)
+                '    LogDebug(_log, String.Format("Calc Exactly {0} Parlays Amount", nItems))
+                'End If
 
-                For i As Integer = nItems To 2 Step -1
+                 For Each i In _olstsTicketRoundRobinOption
                     _nRiskAmount += _nBetAmount * Combinatorial(_olstTicketBets.Count, i)
 
                     '' Get all possiable combinaations
@@ -1368,11 +1391,35 @@ Namespace Tickets
                         _nWinAmount += Math.Round(CustomParlayAmount(nMaxParlayItem, (nMaxParlayLine - 1) * _nBetAmount), 2)
                     Next
 
-                    If Right(_sTicketOption, 1) <> "s" Then
-                        '' Exactly round robin
-                        Exit For
-                    End If
+                    'If Right(_sTicketOption, 1) <> "s" Then
+                    '    '' Exactly round robin
+                    '    Exit For
+                    'End If
                 Next
+
+
+                'For i As Integer = nItems To 2 Step -1
+                '    _nRiskAmount += _nBetAmount * Combinatorial(_olstTicketBets.Count, i)
+
+                '    '' Get all possiable combinaations
+                '    Dim olstEnumCombinatons As New List(Of String)
+                '    EnumCombinations(i, olstEnumCombinatons)
+
+                '    For Each sCombination As String In olstEnumCombinatons
+                '        Dim nMaxParlayLine As Double = 1
+                '        Dim nMaxParlayItem As Integer = 0
+                '        For Each sItem As String In sCombination.Split("|"c)
+                '            nMaxParlayLine *= CalcRate(_olstTicketBets.ElementAt(SafeInteger(sItem)).BetPoint + _olstTicketBets.ElementAt(SafeInteger(sItem)).AddPointMoney)
+                '            nMaxParlayItem += 1
+                '        Next
+                '        _nWinAmount += Math.Round(CustomParlayAmount(nMaxParlayItem, (nMaxParlayLine - 1) * _nBetAmount), 2)
+                '    Next
+
+                '    If Right(_sTicketOption, 1) <> "s" Then
+                '        '' Exactly round robin
+                '        Exit For
+                '    End If
+                'Next
 
                 _nWinAmount = Math.Round(_nWinAmount, 2)
                 _nRiskAmount = Math.Round(_nRiskAmount, 2)
@@ -1430,6 +1477,20 @@ Namespace Tickets
                     Next
 
                     oDicItem = New DictionaryEntry(SafeString(nIndex) & "s", "Round Robin: " & sValue)
+                    olstDic.Add(oDicItem)
+                Next
+            End If
+
+            Return olstDic
+        End Function
+
+        Private Function ParseParlayOptionsCheckbox() As List(Of DictionaryEntry)
+            Dim olstDic As New List(Of DictionaryEntry)
+
+            '' Robin Round
+            If _olstTicketBets.Count() > 2 Then
+                For i As Integer = 2 To _olstTicketBets.Count()
+                    Dim oDicItem As New DictionaryEntry(i, string.Format("{0}'s x {1}", i, Combinatorial(_olstTicketBets.Count, i)))
                     olstDic.Add(oDicItem)
                 Next
             End If

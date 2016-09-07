@@ -141,7 +141,9 @@ Namespace SBSWebsite
             btnCancel.Visible = True
             txtSameAmount.Text = ""
             If UserSession.SelectedTicket(SelectedPlayerID).Tickets.Count >= 1 Then
+                ltrBetType.Text = BetTypeActive.Replace("BetTheBoard", "Straight Bet(s)").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board").Replace("If Win", "If Bet (If Win Only)").Replace("If Win or Push", "If Bet (If Win, Push or Cancel)")
                 ltrDateBet.Text = DateTime.Now.ToString()
+
                 formatDisplayWithColor()
                 ' ClientAlert(BetTypeA, True)
                 'ClientAlert(UserSession.SelectedTicket(SelectedPlayerID).Tickets(0).IsForProp, True)
@@ -167,6 +169,7 @@ Namespace SBSWebsite
 
             Dim nIndex As Integer = 0
             Dim bIsSubmited As Boolean = False
+            Dim sRoundRobin As String = ""
             Dim nTotalRisk As Double = 0
             Dim nTotalWin As Double = 0
             Dim nCountSelection As Integer = 0
@@ -288,10 +291,14 @@ Namespace SBSWebsite
                                 sBackColor = "#f1e64e"
                             End If
 
-                            
+                            If oTicket.TicketBets.Count() > 2 Then
+                                sRoundRobin = string.Format("<span class='round-robin'>{0}</span>", oTicket.TicketOptionText) 
+                                ltrBetType.Text = "Parlay/Round Robin"
+                            End If
+
                             Dim lbtDeleteTicket As LinkButton = CType(oItemTicketBet.FindControl("lbtDeleteTicket"), LinkButton)
                             lbtDeleteTicket.Visible = SafeBoolean(IIf(oTicket.TicketBets.Count() > 2, True, False))
-                            
+
                             If oTicket.RiskAmount <= 0 Then
                                 Dim tdRisk As HtmlTableCell = CType(oItemTicketBet.FindControl("tdRisk"), HtmlTableCell)
                                 Dim tdWin As HtmlTableCell = CType(oItemTicketBet.FindControl("tdWin"), HtmlTableCell)
@@ -341,15 +348,17 @@ Namespace SBSWebsite
                 nTotalWin += oTicket.WinAmount
                 nIndex += 1
 
+                
+
             End While
 
-            lblTicketSummary.Text = String.Format("{0} Selections Risking <b>{1}</b> To Win <b>{2} US</b>", nCountSelection, FormatNumber(nTotalRisk, 2), FormatNumber(nTotalWin, 2))
+            lblTicketSummary.Text = String.Format("{0} Selections Risking <b>{1}</b> To Win <b>{2} US</b> {3}", nCountSelection, FormatNumber(nTotalRisk, 2), FormatNumber(nTotalWin, 2), sRoundRobin )
 
             'Hide Rish/Win 
             Dim hasBetted = SafeBoolean(IIf(nTotalRisk > 0, True, False))
             ltrHeadRisk.Visible = hasBetted
             ltrHeadWin.Visible = hasBetted
-            lblTicketSummary.Visible = ( hasBetted AndAlso (nCountSelection > 1))
+            lblTicketSummary.Visible = (hasBetted AndAlso (nCountSelection > 1))
             pnWarningMessage.Visible = hasBetted
 
             If Me.BetTypeActive.Contains("If") Then
@@ -368,7 +377,7 @@ Namespace SBSWebsite
                 pnWarningMessage.Visible = False
                 lblMessage.Visible = False
                 pnWagerConfirmed.Visible = True
-                lblCountWagerConfirmed.Text = String.Format("YES - {0} {1} Confirmed", nIndex, SafeString(IIf(nIndex > 1, "Wagers", "Wager")) ) 
+                lblCountWagerConfirmed.Text = String.Format("YES - {0} {1} Confirmed", nIndex, SafeString(IIf(nIndex > 1, "Wagers", "Wager")))
             End If
 
         End Sub
@@ -409,9 +418,29 @@ Namespace SBSWebsite
                     If oTicket IsNot Nothing Then
                         Select Case UCase(oTicket.TicketType)
                             Case "PARLAY"
-                                Dim ddlType As CDropDownList = CType(rptItem.FindControl("ddlType"), CDropDownList)
-                                oTicket.TicketOption = ddlType.Value
-                                oTicket.TicketOptionText = ddlType.SelectedItem.Text
+                                'Dim ddlType As CDropDownList = CType(rptItem.FindControl("ddlType"), CDropDownList)
+                                Dim rdbRoundRobin As RadioButton = CType(rptItem.FindControl("rdbRoundRobin"), RadioButton)
+                                Dim cblRoundRobinOptions As CheckBoxList = CType(rptItem.FindControl("cblRoundRobinOptions"), CheckBoxList)
+
+                                Dim olstSelectedRoundRobin As List(Of Integer) = New List(Of Integer)
+                                For Each oItem As ListItem In From oItem1 As ListItem In cblRoundRobinOptions.Items Where oItem1.Selected
+                                    Dim nSelection As Integer
+                                    If Integer.TryParse(oItem.Value, nSelection) Then
+                                        olstSelectedRoundRobin.Add(nSelection)
+                                        oTicket.TicketOptionText += oItem.Text + ", "
+                                    End If
+                                Next
+
+                                oTicket.TicketRoundRobinOption = olstSelectedRoundRobin
+
+                                If rdbRoundRobin.Checked AndAlso oTicket.TicketOptionText IsNot Nothing Then
+                                    oTicket.TicketOptionText = String.Format("Round Robin Parlay <b>({0})</b>", oTicket.TicketOptionText.Trim().TrimEnd(","c))
+                                Else
+                                    oTicket.TicketOptionText = "Single Parlay"
+                                End If
+
+                                oTicket.TicketOption = SafeString(IIf(rdbRoundRobin.Checked, "Round Robin", "Parlay"))
+
 
                                 '' Save BuyPoints
                                 Dim rptTicketBets As Repeater = CType(rptItem.FindControl("rptTicketBets"), Repeater)
@@ -543,6 +572,8 @@ Namespace SBSWebsite
 
                 '' Bind Type
                 Dim ddlType As CDropDownList = CType(e.Item.FindControl("ddlType"), CDropDownList)
+                Dim cblRoundRobinOptions As CheckBoxList = CType(e.Item.FindControl("cblRoundRobinOptions"), CheckBoxList)
+                Dim tblRoundRobin As HtmlTable = CType(e.Item.FindControl("tblRoundRobin"), HtmlTable)
                 If UCase(oTicket.TicketType) <> "STRAIGHT" AndAlso UCase(oTicket.TicketType) <> "IF BET" Then
                     Dim lblWagerName As Literal = CType(e.Item.FindControl("lblWagerName"), Literal)
                     ' lblWagerName.Text = oTicket.NumOfTicketBets & " Team(s) " & lblWagerName.Text
@@ -552,6 +583,13 @@ Namespace SBSWebsite
                     ddlType.DataTextField = "Value"
                     ddlType.DataValueField = "Key"
                     ddlType.DataBind()
+
+                    tblRoundRobin.Visible = oTicket.TicketBets.Count() > 2
+                    cblRoundRobinOptions.DataSource = oTicket.RoundRobinOptions
+                    cblRoundRobinOptions.DataTextField = "Value"
+                    cblRoundRobinOptions.DataValueField = "Key"
+                    cblRoundRobinOptions.DataBind()
+
                     If oTicket.TicketOption <> "" Then
                         ddlType.Value = oTicket.TicketOption
                     Else
@@ -592,10 +630,12 @@ Namespace SBSWebsite
                                 End If
                             Next
 
-                            'lblRiskDsp.Text = "Bet: "
-                            lblRiskDsp.Visible = False
+                            lblRiskDsp.Text = "Please enter an amount, then press Submit."
+
+                            lblRiskDsp.Visible = True
                             lblWinDsp.Visible = False
                             txtWin.Visible = False
+                            ddlType.Visible = False
 
                         Case "REVERSE"
                             lblResult.Visible = False
@@ -1224,9 +1264,14 @@ Namespace SBSWebsite
                             Continue For
                         End If
 
+                        If UCase(oTicket.TicketOption) <> "PARLAY" AndAlso ( (oTicket.TicketRoundRobinOption Is Nothing) OrElse (Not oTicket.TicketRoundRobinOption.Any()) )   Then
+                            Throw New CTicketException("You must select at least one option of the round robin.")
+                        End If
+
                         If oTicket.RiskAmount = 0 Then
                             Throw New CTicketException("The Bet Amount has to be different than 0")
                         End If
+
                         nIndex += 1
                     Next
                     lblMessage.Text = "Please Enter Your Password To Confirm !"
