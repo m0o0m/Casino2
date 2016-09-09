@@ -22,14 +22,14 @@
             <div class="text-left">
                 <span class="fz12 bold clr-white mgR80">Filter:</span>
                 <label class="col-md-2 control-label">Type Of Bet</label>
-                <cc1:CDropDownList ID="ddlTypeOfBet" runat="server" CssClass="select-field-3" hasOptionalItem="true"
+                <cc1:CDropDownList ID="ddlTypeOfBet" runat="server" CssClass="select-field-3 mgR20" hasOptionalItem="true"
                     OptionalText="All" OptionalValue="All" AutoPostBack="true">
                     <asp:ListItem Text="All" Value="All"></asp:ListItem>
                     <asp:ListItem Text="Internet" Value="Internet"></asp:ListItem>
                     <asp:ListItem Text="Phone" Value="Phone"></asp:ListItem>
                 </cc1:CDropDownList>
                 <label class="col-md-1 control-label">Context</label>
-                <cc1:CDropDownList ID="ddlContext" runat="server" CssClass="select-field-3" AutoPostBack="true">
+                <cc1:CDropDownList ID="ddlContext" runat="server" CssClass="select-field-3 mgR20" AutoPostBack="true">
                     <asp:ListItem Text="All" Value=""></asp:ListItem>
                     <asp:ListItem Text="Current" Value="Current"></asp:ListItem>
                     <asp:ListItem Text="1H" Value="1H"></asp:ListItem>
@@ -38,11 +38,11 @@
                     <asp:ListItem Text="Proposition" Value="Proposition"></asp:ListItem>
                 </cc1:CDropDownList>
                 <label class="col-md-1 control-label">Horses</label>
-                <cc1:CDropDownList ID="ddlHorse" runat="server" CssClass="select-field-3" AutoPostBack="true" Enabled="False">
+                <cc1:CDropDownList ID="ddlHorse" runat="server" CssClass="select-field-3 mgR20" AutoPostBack="true" Enabled="False">
                     <asp:ListItem Text="All" Value=""></asp:ListItem>
                 </cc1:CDropDownList>
                 <label class="col-md-1 control-label">Games</label>
-                <cc1:CDropDownList ID="ddlGameType" runat="server" CssClass="select-field-3" AutoPostBack="true">
+                <cc1:CDropDownList ID="ddlGameType" runat="server" CssClass="select-field-3 mgR20" AutoPostBack="true">
                     <asp:ListItem Text="All" Value=""></asp:ListItem>
                     <asp:ListItem Text="Football" Value="Football"></asp:ListItem>
                     <asp:ListItem Text="Baseball" Value="Baseball"></asp:ListItem>

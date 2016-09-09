@@ -2,7 +2,7 @@
     Inherits="SBSPlayer.ticketBetsGrid" %>
 <div id="open-bet-print">
     <asp:DataGrid ID="dgTicketBets" runat="server" Width="100%" AutoGenerateColumns="false"
-        CssClass="table table-hover table-bordered table-style-1 open-bet-print" align="center">
+        CssClass="table table-hover table-bordered table-style-10 open-bet-print" align="center">
         <HeaderStyle CssClass="tableheading row-caption" HorizontalAlign="Center" />
         <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" CssClass="row-content" />
         <AlternatingItemStyle HorizontalAlign="Center" />
@@ -31,7 +31,7 @@
                 </ItemTemplate>
             </asp:TemplateColumn>
             <asp:TemplateColumn HeaderText="Ticket #" ItemStyle-HorizontalAlign="Center">
-                <ItemStyle Width="9%"></ItemStyle>
+                <ItemStyle Width="8%"></ItemStyle>
                 <ItemTemplate>
                     <b>
                         <asp:Label ID="lblTicketNumber" runat="server" /></b>

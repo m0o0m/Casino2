@@ -286,6 +286,13 @@ ul.menu-style-3 {
 /* ========================================
      Table Style ////////////////////////////////////////////////////////// */
 
+
+.table-filter-style-1 {
+    background: #000000;
+    font-size: 12px;
+    color: #FFF;
+}
+
 .table-style-1 {
     border-spacing: 0;
     border: 1px solid #000;
@@ -437,6 +444,8 @@ ul.menu-style-3 {
         background: #CDE4FD;
     }*/
 
+
+
 .table-style-5 {
     border: 1px solid #000;
     border-collapse: collapse;
@@ -467,8 +476,6 @@ ul.menu-style-3 {
 
 
 
-
-
 .table-style-6 {
     border-collapse: collapse;
     border-spacing: 0;
@@ -496,8 +503,6 @@ ul.menu-style-3 {
         font-size: 14px;
         color: #000;
     }
-
-
 
 
 
@@ -613,6 +618,92 @@ ul.menu-style-3 {
                     }
 
 
+
+
+
+
+
+.table-style-16 {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.table.table-condensed.table-style-16 tr > td {
+    border: none;
+}
+
+.table-style-16 tr.caption {
+    background: #000;
+}
+
+    .table-style-16 tr.caption > td {
+        height: 40px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #FFF;
+    }
+
+.table-style-16 tr.content > td {
+    color: #000;
+    font-size: 13px;
+    padding: 5px 5px;
+    vertical-align: middle;
+}
+
+
+
+    .table-style-16 tr.content > td .gm-type {
+        font-size: 12px;
+        font-weight: bold;
+        color: blue;
+        margin-bottom: 2px;
+    }
+
+    .table-style-16 tr.content > td .gm-sportname-team {
+        font-size: 11px;
+        color: darkred;
+    }
+
+    .table-style-16 tr.content > td .gm-date {
+        font-size: 11px;
+        color: darkred;
+    }
+
+    .table-style-16 tr.content > td .gm-time {
+        font-size: 11px;
+        color: darkgreen;
+    }
+
+    .table-style-16 tr.content > td .gm-status {
+        font-size: 11px;
+        color: darkred;
+    }
+
+
+
+.tbl-round-robin {
+    border: 1px solid #000;
+    border-collapse: collapse;
+}
+
+    .tbl-round-robin .round-robin-head td {
+        background: transparent url("../images/icons/bg_title_table.gif") repeat scroll 0 0;
+        border-bottom: 1px solid #a6a5a2;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 25px;
+        padding: 10px;
+    }
+
+    .tbl-round-robin .round-robin-content td td {
+        font-size: 12px;
+        font-weight: bold;
+        padding: 8px 10px;
+    }
+
+        .tbl-round-robin .round-robin-content td td input {
+            margin-right: 5px;
+        }
 
 
 .table-t-style-1 {

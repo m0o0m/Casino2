@@ -5,7 +5,7 @@
         <div id="wagers">
             <%--<h2 id="trTicketType" runat="server">Wager type : <%=BetTypeActive.Replace("BetTheBoard", "Straight Bet(s)").Replace("Reverse", "Action Reverse").Replace("BetIfAll", "Bet The Board")%></h2>--%>
             <div id="wager-print">
-                <table class="table table-condensed table-style-6 full wager-print">
+                <table class="table table-condensed table-style-16 full wager-print">
                     <tr class="caption">
                         <td class="pdT10 pdL25" colspan="2">
                             <asp:Literal ID="ltrBetType" runat="server"></asp:Literal>
@@ -37,7 +37,7 @@
                                         <td style="width: 81px" id="tdWin" runat="server"><%# FormatNumber(CType(Container.Parent.Parent, RepeaterItem).DataItem.WinAmount, 2)%></td>
                                         <td style="width: 81px" id="tdActions" runat="server">
                                             <asp:Label ID="lblTicketNumber" Text="<%# CType(Container.Parent.Parent, RepeaterItem).DataItem.TicketNumber%>" CssClass="ticket-number" Visible="False" runat="server"></asp:Label>
-                                            <asp:LinkButton ID="lbtDeleteTicket" runat="server" Text="Remove" CssClass="link-2 clr-red" CommandName="DEL_TICKETBET" CommandArgument='<%# Container.DataItem.TicketID & "|" & Container.DataItem.TicketBetID%>'></asp:LinkButton>
+                                            <asp:LinkButton ID="lbtDeleteTicket" runat="server" Text="Remove" CssClass="link-2 clr-red fz14" CommandName="DEL_TICKETBET" CommandArgument='<%# Container.DataItem.TicketID & "|" & Container.DataItem.TicketBetID%>'></asp:LinkButton>
                                             <asp:HiddenField ID="hfTicketID" Value="<%# Container.DataItem.TicketID%>" runat="server" />
                                         </td>
                                     </tr>
@@ -139,43 +139,48 @@
                                             </div>
                                         </asp:Panel>
 
-                                        <div class="col-md-4">
-                                            <table class="tbl-round-robin" id="tblRoundRobin" visible="False" clientidmode="Static" runat="server">
+                                        <div class="mgT10">
+                                            <table class="tbl-round-robin w180px" id="tblRoundRobin" visible="False" clientidmode="Static" runat="server">
                                                 <tr class="round-robin-head">
                                                     <td colspan="2">Wager Type</td>
                                                 </tr>
                                                 <tr class="round-robin-options">
-                                                    <td>
+                                                    <td class="pd10 fz12 bold">
                                                         <asp:RadioButton ID="rdbParlay" Checked="True" ClientIDMode="Static" GroupName="RoundRobin" Text="Parlay" runat="server" />
                                                     </td>
-                                                    <td>
+                                                    <td class="pd10 fz12">
                                                         <asp:RadioButton ID="rdbRoundRobin" ClientIDMode="Static" GroupName="RoundRobin" Text="Round Robin" runat="server" />
                                                     </td>
                                                 </tr>
                                                 <tr class="round-robin-content">
                                                     <td>&nbsp;</td>
-                                                    <td>
+                                                    <td class="pdL20 pdTB10">
                                                         <asp:CheckBoxList ID="cblRoundRobinOptions" ClientIDMode="Static" runat="server">
                                                         </asp:CheckBoxList>
                                                     </td>
                                                 </tr>
                                             </table>
                                             <div class="form-group">
-                                                <asp:Label ID="lblRiskDsp" runat="server" Text="Bet: " Visible="false"></asp:Label>
+                                                <asp:Label class="fz12 bold pdT10 pdL25" ID="lblRiskDsp" runat="server" Text="Bet: " Visible="false"></asp:Label>
                                                 <%--<asp:TextBox ID="txtBet" runat="server" Text='<%# SBCBL.std.SafeRound(Container.DataItem.RiskAmount)%>'
                                         CssClass="textInput" MaxLength="10" Style="text-align: right; padding-left: 2px;"
                                         Width="50" onkeypress="javascript:return inputNumber(this,event, false);" />--%>
-                                                <asp:Label ID="lblWinDsp" runat="server" Text="Win: " Visible="false"></asp:Label>
+                                                <asp:Label class="fz12 bold pdT10 pdL25" ID="lblWinDsp" runat="server" Text="Win: " Visible="false"></asp:Label>
                                                 <%-- <asp:TextBox ID="txtWin" runat="server" Text='<%# SBCBL.std.SafeRound(Container.DataItem.WinAmount)%>'
                                         CssClass="textInput" MaxLength="10" Style="text-align: right; padding-left: 2px;"
                                         Width="50" onkeypress="javascript:return inputNumber(this,event, false);" />--%>
-                                                <asp:TextBox ID="txtBetParlay" runat="server" Text='<%# IIf(SBCBL.std.SafeRound(Container.DataItem.RiskAmount)=0 , "",SBCBL.std.SafeRound(Container.DataItem.RiskAmount))%>'
-                                                    CssClass="form-control" MaxLength="10" onkeypress="javascript:return inputNumber(this,event, false);" />
+                                                <div class="text-center">
+                                                    <span class="fz14 bold clr-red">Amount::</span>
+                                                    <asp:TextBox ID="txtBetParlay" runat="server" Text='<%# IIf(SBCBL.std.SafeRound(Container.DataItem.RiskAmount) = 0, "", SBCBL.std.SafeRound(Container.DataItem.RiskAmount))%>'
+                                                    CssClass="form-control input-field-2 w180px h30px" MaxLength="10" onkeypress="javascript:return inputNumber(this,event, false);" />
+                                                
                                                 <asp:Label ID="lblResult" Style="display: none" runat="server" Text='<%# "Risk/Win: " & SBCBL.std.SafeRound(Container.DataItem.RiskAmount) & "/" & SBCBL.std.SafeRound(Container.DataItem.WinAmount) %>'></asp:Label>
-                                                <asp:Button ID="btnNextWager" runat="server" Text="Continue" class="btn btn-dark" Style="margin-left: 10px;" OnClick="btnNextWager_Click" />
-                                                <asp:Button ID="btnPreview" runat="server" Text="Continue" class="btn btn-dark" Style="margin-left: 10px;"
+                                                <asp:Button ID="btnNextWager" runat="server" Text="Continue" class="btn btn-dark button-style-2 w110px h24px" Style="margin-left: 20px;" OnClick="btnNextWager_Click" />
+                                                <asp:Button ID="btnPreview" runat="server" Text="Submit" class="btn btn-dark button-style-2 w110px h24px" Style="margin-left: 20px;"
                                                     OnClick="btnPreview_Click" />
-                                                <asp:Button ID="btnCancel2" OnClick="btnClearWagers_Click" runat="server" Text="Cancel Wager" Style="margin-left: 10px;" CssClass="btn btn-red" ToolTip="Cancel Your Wager" />
+                                                <asp:Button ID="btnCancel2" OnClick="btnClearWagers_Click" runat="server" Text="Cancel Wager" Style="margin-left: 10px;display: none" CssClass="btn btn-red" ToolTip="Cancel Your Wager" />
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </asp:Panel>

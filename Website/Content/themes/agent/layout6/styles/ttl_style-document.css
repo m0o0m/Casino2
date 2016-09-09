@@ -381,34 +381,34 @@ strong,
 
 
 /*Bet Detail*/
-.gamebetdetail .table {
+.gamebetdetail .table.lst-game-bet {
     border: 1px solid #000;
     border-spacing: 0;
 }
 
-    .gamebetdetail .table tr > th,
-    .gamebetdetail .table tr > td {
+    .gamebetdetail .table.lst-game-bet tr > th,
+    .gamebetdetail .table.lst-game-bet tr > td {
         border-right: 1px solid gray;
         vertical-align: middle;
     }
 
-        .gamebetdetail .table tr > th.nobdr,
-        .gamebetdetail .table tr > td.nobdr,
-        .gamebetdetail .table tr > th:last-child,
-        .gamebetdetail .table tr > td:last-child {
+        .gamebetdetail .table.lst-game-bet tr > th.nobdr,
+        .gamebetdetail .table.lst-game-bet tr > td.nobdr,
+        .gamebetdetail .table.lst-game-bet tr > th:last-child,
+        .gamebetdetail .table.lst-game-bet tr > td:last-child {
             border-right-color: transparent;
         }
 
 
-    .gamebetdetail .table > tbody > tr.gameheader {
+    .gamebetdetail .table.lst-game-bet > tbody > tr.gameheader {
         background: #0E2431;
     }
 
-        .gamebetdetail .table > tbody > tr.gameheader > td {
+        .gamebetdetail .table.lst-game-bet > tbody > tr.gameheader > td {
             background: transparent;
         }
 
-            .gamebetdetail .table > tbody > tr.gameheader > td span {
+            .gamebetdetail .table.lst-game-bet > tbody > tr.gameheader > td span {
                 background: transparent;
                 font-size: 14px;
                 font-weight: normal;
@@ -417,11 +417,11 @@ strong,
             }
 
 
-    .gamebetdetail .table > tbody > tr.GameHeader2 {
+    .gamebetdetail .table.lst-game-bet > tbody > tr.GameHeader2 {
         background: #666666;
     }
 
-        .gamebetdetail .table > tbody > tr.GameHeader2 > th {
+        .gamebetdetail .table.lst-game-bet > tbody > tr.GameHeader2 > th {
             background: transparent;
             padding: 5px 10px;
             text-align: center;
@@ -432,7 +432,7 @@ strong,
 
 
 
-    .gamebetdetail .table > tbody > tr.gamecontent > td {
+    .gamebetdetail .table.lst-game-bet > tbody > tr.gamecontent > td {
         background: transparent;
         padding: 4px 10px;
         font-size: 12px;
@@ -440,38 +440,38 @@ strong,
         color: #000;
     }
 
-        .gamebetdetail .table > tbody > tr.gamecontent > td.game-number {
+        .gamebetdetail .table.lst-game-bet > tbody > tr.gamecontent > td.game-number {
             padding-right: 0;
             font-weight: bold;
         }
 
-            .gamebetdetail .table > tbody > tr.gamecontent > td.game-date,
-            .gamebetdetail .table > tbody > tr.gamecontent > td.game-number,
-            .gamebetdetail .table > tbody > tr.gamecontent > td.game-team,
-            .gamebetdetail .table > tbody > tr.gamecontent > td.game-date *,
-            .gamebetdetail .table > tbody > tr.gamecontent > td.game-number *,
-            .gamebetdetail .table > tbody > tr.gamecontent > td.game-team * {
+            .gamebetdetail .table.lst-game-bet > tbody > tr.gamecontent > td.game-date,
+            .gamebetdetail .table.lst-game-bet > tbody > tr.gamecontent > td.game-number,
+            .gamebetdetail .table.lst-game-bet > tbody > tr.gamecontent > td.game-team,
+            .gamebetdetail .table.lst-game-bet > tbody > tr.gamecontent > td.game-date *,
+            .gamebetdetail .table.lst-game-bet > tbody > tr.gamecontent > td.game-number *,
+            .gamebetdetail .table.lst-game-bet > tbody > tr.gamecontent > td.game-team * {
                 vertical-align: baseline;
             }
 
 
-    .gamebetdetail .table tr > td.woutbdr {
+    .gamebetdetail .table.lst-game-bet tr > td.woutbdr {
         border: none;
     }
 
-    .gamebetdetail .table tr[context="Current"] {
+    .gamebetdetail .table.lst-game-bet tr[context="Current"] {
         background: #FFFFFF;
     }
 
-        .gamebetdetail .table tr[context="Current"].offering_pair_odd {
+        .gamebetdetail .table.lst-game-bet tr[context="Current"].offering_pair_odd {
             background: #EFEFEF;
         }
 
-    .gamebetdetail .table tr[context="1H"] {
+    .gamebetdetail .table.lst-game-bet tr[context="1H"] {
         background: #B5D8FF;
     }
 
-        .gamebetdetail .table tr[context="1H"].offering_pair_odd {
+        .gamebetdetail .table.lst-game-bet tr[context="1H"].offering_pair_odd {
             background: #CDE4FD;
         }
 
