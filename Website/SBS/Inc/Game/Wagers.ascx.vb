@@ -334,6 +334,7 @@ Namespace SBSWebsite
 
                         lblTicketNumber.Visible = True
                         lbtDeleteTicket.Visible = False
+                        tdActions.Visible = True
                         tdActions.Style.Add("width", "150px")
 
                         bIsSubmited = True
