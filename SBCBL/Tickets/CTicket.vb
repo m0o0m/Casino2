@@ -357,7 +357,7 @@ Namespace Tickets
             Dim nMaxperGame As Double = 500
             Dim strSportType24H As String = ""
             _log.Debug("BEGIN check valid TicketID: " & _sTicketID)
-            
+
             '' Check enough amount to place bet
             If pnRemainAmount < Me.RiskAmount Then
                 sError = "You have exceeded your credit limit" & vbCrLf
@@ -404,7 +404,7 @@ Namespace Tickets
                 strSportType24H = GetSportType(oTicketBet.GameType)
                 If oCacheMng.GetSysSettings("MAXPERGAME_24H_TIMER" & SuperAgentID) IsNot Nothing And oCacheMng.GetSysSettings("MAXPERGAME_24H_TIMER" & SuperAgentID).GetDoubleValue(strSportType24H) > 0 Then
                     If oTicketBet.GameDate.Subtract(GetEasternDate).TotalMinutes > (oCacheMng.GetSysSettings("MAXPERGAME_24H_TIMER" & SuperAgentID).GetDoubleValue(strSportType24H) * 60) Then
-                       ' LogDebug(_log, GetEasternDate() & "-" & oTicketBet.GameDate & "thuong 24h:" & oTicketBet.GameDate.Subtract(GetEasternDate).TotalMinutes)
+                        ' LogDebug(_log, GetEasternDate() & "-" & oTicketBet.GameDate & "thuong 24h:" & oTicketBet.GameDate.Subtract(GetEasternDate).TotalMinutes)
                         bGame24H = True
                         'Dim oSysManager As New CSysSettingManager()
                         'Dim odr As DataRow = oSysManager.GetValue("MAXPERGAME_24H" & SuperAgentID, "", strSportType24H)
@@ -542,7 +542,7 @@ Namespace Tickets
                             _log.Debug("You are exceeding the maximum allowed for this game." & getMaxBetAmount(oLstGameContext, oLstGameType, poPlayerTemplate))
                         End If
                     End If
-                    
+
                 Else
                     If bGame24H Then
                         LogDebug(_log, "nMaxperGame" & nMaxperGame)
@@ -556,7 +556,7 @@ Namespace Tickets
                             _log.Debug("You are exceeding the maximum allowed for this game." & getMaxBetAmount(oLstGameContext, oLstGameType, poPlayerTemplate))
                         End If
                     End If
-                   
+
                 End If
             Else
 
@@ -1205,7 +1205,7 @@ Namespace Tickets
             Dim olstParlayType As CSysSettingList = Nothing
             Dim olstParlayRules As CSysSettingList = Nothing
             Dim olstBWParlayRules As CSysSettingList = Nothing
-            
+
             '' if exists config parplay  not get default 
             If oCache.GetSysSettings(SuperAgentID & " ParlayType", "Football").Count > 0 Then
                 _sParlayType = SuperAgentID & " ParlayType"
@@ -1374,7 +1374,7 @@ Namespace Tickets
                 '    LogDebug(_log, String.Format("Calc Exactly {0} Parlays Amount", nItems))
                 'End If
 
-                 For Each i In _olstsTicketRoundRobinOption
+                For Each i In _olstsTicketRoundRobinOption
                     _nRiskAmount += _nBetAmount * Combinatorial(_olstTicketBets.Count, i)
 
                     '' Get all possiable combinaations
@@ -1490,7 +1490,7 @@ Namespace Tickets
             '' Robin Round
             If _olstTicketBets.Count() > 2 Then
                 For i As Integer = 2 To _olstTicketBets.Count()
-                    Dim oDicItem As New DictionaryEntry(i, string.Format("{0}'s x {1}", i, Combinatorial(_olstTicketBets.Count, i)))
+                    Dim oDicItem As New DictionaryEntry(i, String.Format("{0}'s x {1}", i, Combinatorial(_olstTicketBets.Count, i)))
                     olstDic.Add(oDicItem)
                 Next
             End If

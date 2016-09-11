@@ -191,10 +191,11 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        var borderColor = $tr.css("background-color");
+                        var backgroundColor = $tr.css("background-color");
                         $tr.after('<tr id="game-detail-' + ticketId + '" class="row-detail"><td colspan="8"></td></tr>');
-                        $("#game-detail-" + ticketId + " > td").html(response.d).css("border-color", borderColor);
-                        $("#game-detail-" + ticketId + " > td td, #game-detail-" + ticketId + " > td table").css("border-color", borderColor);
+                        $("#game-detail-" + ticketId + " > td").css("background-color", backgroundColor);
+                        $("#game-detail-" + ticketId + " > td").html(response.d);
+                        $("#game-detail-" + ticketId + " > td td, #game-detail-" + ticketId + " > td table");
                         $this.addClass("open");
                         ticketIds.removeTicketId(ticketId, false);
                     }
