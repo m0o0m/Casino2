@@ -15,9 +15,9 @@
 
 }
     </script>
-    <div class="panel panel-grey">
-        <div class="panel-heading">ALL GAMES</div>
-        <div class="panel-body">
+    <div class="panel panel-grey " style="">
+        <div class="panel-heading" style="display: none">ALL GAMES</div>
+        <div class="panel-body bg-black clr-white" style="margin: -20px -13px -150px">
             <asp:Button ID="lbnCasino" runat="server" Style="display: none" Text="btn btn-primary" />
 
             <table class="casinoTab" width="100%">
@@ -28,7 +28,7 @@
                                 <center>
                             <div class="tabdesc">
                             </div>
-                            <table class="casinogames">
+                            <table class="casinogames-">
                                 <tbody>
                                     <tr>
                                         <td class="casinogames">
@@ -41,9 +41,8 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBrown">
-                                                            Multihand Blackjack<br>
-                                                            6 deck<br>
+                                                        <td class="title gametextBrown">
+                                                            Multihand Blackjack/6 deck<br />
                                                             Min. Bet: $1, Max. Bet: $50
                                                         </td>
                                                     </tr>
@@ -60,10 +59,9 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBrown">
-                                                            Blackjack<br>
-                                                            6 deck<br>
-                                                            Min. Bet: $5, Max. Bet: $100
+                                                        <td class="title gametextBrown">
+                                                            Blackjack / 6 deck<br />
+                                                           Min. Bet: $5, Max. Bet: $100
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -79,7 +77,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBrown">
+                                                        <td class="title gametextBrown">
                                                             Blackjack Switch<br>
                                                             Switch cards between 2 hands!<br>
                                                             Min. Bet: $1, Max. Bet: $50
@@ -100,7 +98,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBrown">
+                                                        <td class="title gametextBrown">
                                                             Blackjack Double Exposure<br>
                                                             See both dealer cards!<br>
                                                             Min. Bet: $1, Max. Bet: $50
@@ -119,7 +117,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBrown">
+                                                        <td class="title gametextBrown">
                                                             Spanish Blackjack<br>
                                                             Min. Bet: $1, Max. Bet: $50
                                                         </td>
@@ -137,7 +135,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextGreen">
+                                                        <td class="title gametextGreen">
                                                             Roulette<br>
                                                             Min. Bet: $1, Max. Bet: $50
                                                         </td>
@@ -157,7 +155,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextGreen">
+                                                        <td class="title gametextGreen">
                                                             Craps<br>
                                                             Min. Bet: $1, Max. Bet: $100
                                                         </td>
@@ -175,7 +173,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextGreen">
+                                                        <td class="title gametextGreen">
                                                             Baccarat<br>
                                                             Min. Bet: $1, Max. Bet: $50
                                                         </td>
@@ -193,7 +191,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextPurple">
+                                                        <td class="title gametextPurple">
                                                             Stud Poker<br>
                                                             Min. Bet: $1, Max. Bet: $25
                                                         </td>
@@ -213,7 +211,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextPurple">
+                                                        <td class="title gametextPurple">
                                                             <br>
                                                             Min. Bet: $1, Max. Bet: $50
                                                         </td>
@@ -231,7 +229,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextPurple">
+                                                        <td class="title gametextPurple">
                                                             Let It Ride Poker<br>
                                                             Min. Bet: $1, Max. Bet: $25
                                                         </td>
@@ -249,7 +247,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextPurple">
+                                                        <td class="title gametextPurple">
                                                             Dealer opens with single Q,<br>
                                                             otherwise Pays 1:1 ante &amp; play<br>
                                                             Min. Bet: $1, Max. Bet: $100
@@ -270,7 +268,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextRed">
+                                                        <td class="title gametextRed">
                                                             Jacks or Better<br>
                                                             Min. Bet: 25¢, Max. Bet: $25
                                                         </td>
@@ -288,7 +286,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextRed">
+                                                        <td class="title gametextRed">
                                                             Deuces Wild<br>
                                                             Min. Bet: 25¢, Max. Bet: $25
                                                         </td>
@@ -306,7 +304,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextRed">
+                                                        <td class="title gametextRed">
                                                             Jokers Wild<br>
                                                             Min. Bet: 25¢, Max. Bet: $25
                                                         </td>
@@ -326,7 +324,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextRed">
+                                                        <td class="title gametextRed">
                                                             Aces and Eights<br>
                                                             Min. Bet: 25¢, Max. Bet: $25
                                                         </td>
@@ -344,7 +342,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextRed">
+                                                        <td class="title gametextRed">
                                                             Double Bonus<br>
                                                             Min. Bet: 25¢, Max. Bet: $5
                                                         </td>
@@ -362,7 +360,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextRed">
+                                                        <td class="title gametextRed">
                                                             Double Double Bonus<br>
                                                             Min. Bet: 25¢, Max. Bet: $5
                                                         </td>
@@ -382,7 +380,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextRed">
+                                                        <td class="title gametextRed">
                                                             Jacks or Better<br>
                                                             25 Lines!<br>
                                                             Min. Bet: $2.50, Max. Bet: $31.25
@@ -401,7 +399,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextRed">
+                                                        <td class="title gametextRed">
                                                             Deuces Wild<br>
                                                             25 Lines!<br>
                                                             Min. Bet: $2.50, Max. Bet: $31.25
@@ -420,7 +418,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextRed">
+                                                        <td class="title gametextRed">
                                                             Jokers Wild<br>
                                                             25 Lines!<br>
                                                             Min. Bet: $2.50, Max. Bet: $31.25
@@ -441,7 +439,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             Touchdown Fever<br>
                                                             Dollar Slots<br>
                                                             Min. Bet: $1, Max. Bet: $3
@@ -460,7 +458,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             Jurassic Fire<br>
                                                             Quarter Slots<br>
                                                             Min. Bet: 25¢, Max. Bet: 75¢
@@ -479,7 +477,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             Slots - Wild 7s<br>
                                                             Min. Bet: $1, Max. Bet: $15
                                                         </td>
@@ -499,7 +497,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             Five-Reel Fruity Fortune Slots<br>
                                                             Min. Bet: 25¢, Max. Bet: $45
                                                         </td>
@@ -517,7 +515,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             Serpent's Treasure Slots<br>
                                                             Min. Bet: 25¢, Max. Bet: $45
                                                         </td>
@@ -535,7 +533,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             Pirate's Revenge Slots<br>
                                                             Min. Bet: 5¢, Max. Bet: $2.25
                                                         </td>
@@ -555,7 +553,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             3x3 Victory Lane Slots<br>
                                                             Min. Bet: 5¢, Max. Bet: $1
                                                         </td>
@@ -573,7 +571,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             Five-Reel Bounty Hunter Slots<br>
                                                             Min. Bet: 25¢, Max. Bet: $9
                                                         </td>
@@ -591,7 +589,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             Knight's Conquest Slots<br>
                                                             Min. Bet: 25¢, Max. Bet: $9
                                                         </td>
@@ -611,7 +609,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             Five-Reel Retro Sci-Fi Slots<br>
                                                             Min. Bet: 5¢, Max. Bet: $9
                                                         </td>
@@ -629,7 +627,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             Five-Reel Forest Fairies Slots<br>
                                                             Min. Bet: 5¢, Max. Bet: $45
                                                         </td>
@@ -647,7 +645,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             Five-Reel Lost Ruins Slots<br>
                                                             Min. Bet: 5¢, Max. Bet: $45
                                                         </td>
@@ -667,7 +665,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             5-Reel Fire Slots<br>
                                                             Min. Bet: 5¢, Max. Bet: $45
                                                         </td>
@@ -685,7 +683,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             Barnyard Bucks Slots<br>
                                                             Min. Bet: 5¢, Max. Bet: $45
                                                         </td>
@@ -703,7 +701,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             Video Keno<br>
                                                             Min. Bet: 10¢, Max. Bet: $5
                                                         </td>
@@ -723,7 +721,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr valign="middle" height="41">
-                                                        <td class="gametextBlue">
+                                                        <td class="title gametextBlue">
                                                             Video Bingo - 8 Cards<br>
                                                             Min. Bet: 25¢, Max. Bet: $40
                                                         </td>

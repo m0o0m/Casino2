@@ -477,6 +477,33 @@ strong,
 
 
 
+.casinogames {
+    padding: 7px;
+    vertical-align: top !important;
+}
+
+.casinogame img {
+    width: 100%;
+    height: 60px;
+}
+
+.casinogame .title {
+    background-image: url("../images/icons/gamesSelectButton.jpg");
+    background-size: auto 100%;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-style: none;
+    color: #efefd6;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    height: 60px;
+    margin: 0;
+    text-align: center;
+    vertical-align: top;
+}
+
+
 /* ===============================================
      FOOTER /////////////////////////////////////////////////////////// */
 
@@ -484,3 +511,6 @@ strong,
 /* ===============================================
      PAGES /////////////////////////////////////////////////////////// */
 
+.loadingChild {
+    color: #000;
+}

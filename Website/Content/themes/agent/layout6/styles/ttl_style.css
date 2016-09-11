@@ -1171,6 +1171,9 @@ a.nonunderline {
 /* ========================================
      Background Style //////////////////////////////////////////////// */
 
+.bg-black {
+    background: #000 !important;
+}
 
 /* ========================================
      Color Style /////////////////////////////////////////////////////////// */
@@ -1188,7 +1191,7 @@ a.nonunderline {
 }
 
 .clr-white {
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
 
 .clr-green {
