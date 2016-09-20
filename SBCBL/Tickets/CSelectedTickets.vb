@@ -383,10 +383,10 @@ Namespace Tickets
                 Next
 
                 '' renew the Tickets property
-                _olstTickets.AddRange(oGenTickets)
-                For Each oTicket As CTicket In oParlayTickets
-                    _olstTickets.RemoveByID(oTicket.TicketID)
-                Next
+                '_olstTickets.AddRange(oGenTickets)
+                'For Each oTicket As CTicket In oParlayTickets
+                '    _olstTickets.RemoveByID(oTicket.TicketID)
+                'Next
 
                 '' Update User's BalanceAmount
                 Dim oUpdate As New CSQLUpdateStringBuilder("Players", String.Format("WHERE PlayerID={0}", SQLString(psPlayerID)))

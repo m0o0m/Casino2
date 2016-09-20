@@ -1513,24 +1513,34 @@ Namespace Tickets
                 olstTickets.Add(Me)
             Else
                 '' Round robin
-                Dim nItems As Integer
-                If Right(_sTicketOption, 1) = "s" Then
-                    nItems = SafeInteger(Left(_sTicketOption, Len(_sTicketOption) - 1))
-                    LogDebug(_log, String.Format("Generate At Most {0} Parlays Amount", nItems))
-                Else
-                    nItems = SafeInteger(_sTicketOption)
-                    LogDebug(_log, String.Format("Generate Exactly {0} Parlays Amount", nItems))
-                End If
-
-                For i As Integer = nItems To 2 Step -1
+                'Dim nItems As Integer
+                'If Right(_sTicketOption, 1) = "s" Then
+                '    nItems = SafeInteger(Left(_sTicketOption, Len(_sTicketOption) - 1))
+                '    LogDebug(_log, String.Format("Generate At Most {0} Parlays Amount", nItems))
+                'Else
+                '    nItems = SafeInteger(_sTicketOption)
+                '    LogDebug(_log, String.Format("Generate Exactly {0} Parlays Amount", nItems))
+                'End If
+                
+                For Each i In _olstsTicketRoundRobinOption
                     LogDebug(_log, String.Format("Generate Round robin {0}s", i))
                     CreateParlayTickets(i, olstTickets, _nBetAmount)
 
-                    If Right(_sTicketOption, 1) <> "s" Then
-                        '' Exactly round robin
-                        Exit For
-                    End If
+                    'If Right(_sTicketOption, 1) <> "s" Then
+                    '    '' Exactly round robin
+                    '    Exit For
+                    'End If
                 Next
+
+                'For i As Integer = nItems To 2 Step -1
+                '    LogDebug(_log, String.Format("Generate Round robin {0}s", i))
+                '    CreateParlayTickets(i, olstTickets, _nBetAmount)
+
+                '    If Right(_sTicketOption, 1) <> "s" Then
+                '        '' Exactly round robin
+                '        Exit For
+                '    End If
+                'Next
             End If
 
             LogDebug(_log, "END Generate Parlay.")
@@ -1557,8 +1567,10 @@ Namespace Tickets
                 Dim oGenTicket As CTicket
                 If poTicket Is Nothing Then
                     oGenTicket = New CTicket(Me.TicketType, SuperAgentID, PlayerID)
+                    oGenTicket.TicketRoundRobinOption = _olstsTicketRoundRobinOption
                     oGenTicket.BetAmount = pnBetAmount
                     oGenTicket.TicketOption = "Parlay"
+                    
                 Else
                     oGenTicket = New CTicket(poTicket)
                 End If
