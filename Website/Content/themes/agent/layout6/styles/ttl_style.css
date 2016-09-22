@@ -1021,6 +1021,8 @@ ul.menu-style-3 {
     font-size: 14px;
     /*height: 34px;*/
     text-align: center;
+    display: inline-block;
+    text-decoration: none;
 }
 
     .button-style-3:hover {

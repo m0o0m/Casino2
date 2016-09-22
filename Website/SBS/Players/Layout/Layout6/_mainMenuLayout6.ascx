@@ -36,9 +36,6 @@
                     <li class="<%= SubMenuActive("Sport_IfBet")%>">
                         <a href="Default.aspx?bettype=IfBetReverse">If Bets / Reverses</a>
                     </li>
-                    <li class="<%= SubMenuActive("Sport_Prop")%>">
-                        <a href="Default.aspx?bettype=Prop">Future/ Props</a>
-                    </li>
                 </ul>
             </li>
             <li class="<%= MenuActive("Casino") %>"><a href="/SBS/Players/Casino.aspx?bettype=casino">Casino</a></li>

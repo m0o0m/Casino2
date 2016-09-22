@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="historyGrid.ascx.vb"
     Inherits="SBSWebsite.historyGrid" %>
 <asp:DataGrid ID="grdHistory" runat="server" Width="100%"  AutoGenerateColumns="false"  
-     CssClass="table table-hover table-bordered table-style-1" align="center">
+     CssClass="table table-hover table-bordered table-style-10" align="center">
     <HeaderStyle CssClass="tableheading row-caption" HorizontalAlign="Center"  />
     <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" CssClass="row-content" />
     <AlternatingItemStyle HorizontalAlign="Center" />

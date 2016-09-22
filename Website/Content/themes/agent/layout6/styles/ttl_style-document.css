@@ -514,3 +514,27 @@ strong,
 .loadingChild {
     color: #000;
 }
+
+.gamebetdetail .ticket-summary {
+    display: block;
+    background: #A0E1FF;
+    padding: 10px 0 10px 25px;
+    text-align: left;
+    font-size: 16px;
+    color: #000080;
+}
+
+    .gamebetdetail .ticket-summary b {
+        color: #0778C6;
+    }
+
+.gamebetdetail .confirmed-message {
+    background: #A5E0AA;
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.gamebetdetail .confirmed-actions {
+    text-align: center;
+}

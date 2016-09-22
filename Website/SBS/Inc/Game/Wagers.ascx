@@ -36,7 +36,7 @@
                                         <td style="width: 81px" id="tdRisk" runat="server"><%# FormatNumber(CType(Container.Parent.Parent, RepeaterItem).DataItem.RiskAmount, 2)%></td>
                                         <td style="width: 81px" id="tdWin" runat="server"><%# FormatNumber(CType(Container.Parent.Parent, RepeaterItem).DataItem.WinAmount, 2)%></td>
                                         <td style="width: 81px" id="tdActions" runat="server">
-                                            <asp:Label ID="lblTicketNumber" Text="<%# CType(Container.Parent.Parent, RepeaterItem).DataItem.TicketNumber%>" CssClass="ticket-number" Visible="False" runat="server"></asp:Label>
+                                            <asp:Label ID="lblTicketNumber" Text="<%# CType(Container.Parent.Parent, RepeaterItem).DataItem.TicketNumber%>" CssClass="ticket-number bold clr-blue" Visible="False" runat="server"></asp:Label>
                                             <asp:LinkButton ID="lbtDeleteTicket" runat="server" Text="Remove" CssClass="link-2 clr-red fz14" CommandName="DEL_TICKETBET" CommandArgument='<%# Container.DataItem.TicketID & "|" & Container.DataItem.TicketBetID%>'></asp:LinkButton>
                                             <asp:HiddenField ID="hfTicketID" Value="<%# Container.DataItem.TicketID%>" runat="server" />
                                         </td>
@@ -197,22 +197,22 @@
                 </table>
             </div>
             <!-- /#wager-print-->
-            <asp:Label ID="lblTicketSummary" CssClass="ticket-summary" runat="server"></asp:Label>
+            <asp:Label ID="lblTicketSummary" CssClass="ticket-summary baseline" runat="server"></asp:Label>
 
             <asp:Panel ID="pnWagerConfirmed" runat="server" Visible="False">
                 <div class="confirmed-message">
-                    <img src="/Content/themes/agent/layout6/images/icons/confirmed-wager.png" />
-                    <asp:Label ID="lblCountWagerConfirmed" runat="server"></asp:Label>
+                    <img class="w40px h40px mgR30" src="../../../Content/themes/agent/layout6/images/icons/checkmark-flat.png" />
+                    <asp:Label CssClass="fz16 bold clr-black" ID="lblCountWagerConfirmed" runat="server"></asp:Label>
                 </div>
                 <div class="confirmed-actions">
-                    <asp:Button ID="btnMainMenu" class="button-style-3 w110px h24px" runat="server" Text="Main Menu"></asp:Button>
-                    <a href="/SBS/Players/OpenBet.aspx">Pending Bets</a>
-                    <button class="button-style-3 w110px h24px" onclick="printContent('wager-print');">Print</button>
+                    <asp:Button ID="btnMainMenu" class="button-style-3 w110px h24px mgLR5" runat="server" Text="Wager Menu"></asp:Button>
+                    <a class="button-style-3 w110px h24px pdT4 mgLR5" href="/SBS/Players/OpenBet.aspx">Pending Bets</a>
+                    <button class="button-style-3 w110px h24px mgLR5" onclick="printContent('wager-print');">Print</button>
                 </div>
             </asp:Panel>
 
             <div id="pnWarningMessage" runat="server" class="pdTB10 pdLR25">
-                <span class="fz12 bold clr-black">Please Review Wagers Carefully! Enter Password and click 'Confirm Bet(s)' to confirm and receive Ticket Numbers.</span>
+                <span class="fz12 bold clr-black">Please Review Wagers Carefully! Enter Password and click 'Submit' to confirm and receive Ticket Numbers.</span>
             </div>
 
             <div id="tblBetTheboard" runat="server" visible="True" class="row pdTB10 pdL25 pdR50 text-center">

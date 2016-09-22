@@ -7,20 +7,20 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="cphBody" runat="Server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <div class="table-filter-style-1 pdTB10 pdLR10">
-                <div class="ly-fixed">
+            <div class="pdB25" style="padding-left: 150px">
+                <div class="">
                     <table class="full-w">
                         <tr>
-                            <td align="right">
-                                <asp:CheckBox ID="cbWin" Text="Win" Checked="True" AutoPostBack="False" runat="server" />
-                                <asp:CheckBox ID="cbLose" Text="Lose" Checked="True" AutoPostBack="False" runat="server" />
-                                <asp:CheckBox ID="cbCanceled" Text="Canceled" Checked="True" AutoPostBack="False" runat="server" />
+                            <td align="" class="v-top w40">
+                                <asp:CheckBox CssClass="mgR20" ID="cbWin" Text=" Win" Checked="True" AutoPostBack="False" runat="server" />
+                                <asp:CheckBox CssClass="mgR20" ID="cbLose" Text=" Lose" Checked="True" AutoPostBack="False" runat="server" />
+                                <asp:CheckBox CssClass="mgR20" ID="cbCanceled" Text=" Canceled" Checked="True" AutoPostBack="False" runat="server" />
                             </td>
-                            <td align="center">
+                            <td align="" class="v-top w35">
                                 <cc1:CDropDownList ID="ddlWeekly" runat="server" CssClass="select-field-3" AutoPostBack="true">
                                 </cc1:CDropDownList>
                             </td>
-                            <td align="center">
+                            <td align="" class="v-top">
                                 <asp:Button ID="btnRefreshHistory" CssClass="btn-refresh-history" runat="server" Text="" />
                             </td>
                         </tr>
