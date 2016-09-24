@@ -247,6 +247,9 @@ i {
         border-color: #EFEFEF;
     }
 
+.logo-main img {
+    max-height: 100%;
+}
 
 .collapsed {
     display: none;

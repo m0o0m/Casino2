@@ -8,7 +8,7 @@
     <div class="logo-account-info-area clear pdB20">
         <div class="logo-main h102px left mgT10">
             <a class="block full" href="#">
-                <img id="imgLogo" runat="server" src="/images/Winsb.png" alt="Player System" class="full" />
+                <img id="imgLogo" runat="server" src="/images/Winsb.png" alt="Player System"/>
             </a>
         </div>
         <div class="w360px right clear mgT10">

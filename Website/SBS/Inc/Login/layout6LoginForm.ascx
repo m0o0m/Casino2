@@ -7,9 +7,9 @@
         <!-- Header -->
         <div class="header">
             <div class="logo-login-info-area clear h110px overhidden pdLR10">
-                <div class="logo-main h120px left">
+                <div class="logo-main h110px left">
                     <a class="block full" href="#">
-                        <img id="imgLogo" runat="server" src="/Content/themes/agent/layout6/images/icons/logo_77ebet_h.png" visible="False" class="full" />
+                        <img id="imgLogo" runat="server" src="/Content/themes/agent/layout6/images/icons/logo_77ebet_h.png" visible="False"/>
                         <asp:Literal ID="ltrLogoName" runat="server">Sport <span>LOGO</span></asp:Literal>
                     </a>
                 </div>
@@ -154,14 +154,14 @@
                             </div>
                         </div>
 
-                        <div class="clear pdLR10 mgT10">
+                        <%--<div class="clear pdLR10 mgT10">
                             <div class="ly-w-1:3 left">
                                 <img src="/Content/themes/agent/layout6/images/contact.jpg" />
                             </div>
                             <div class="ly-w-2:3 left text-right">
                                 <img src="/Content/themes/agent/layout6/images/mobcomp.jpg" />
                             </div>
-                        </div>
+                        </div>--%>
 
 
                     </div>
