@@ -41,20 +41,34 @@
                         </li>
                         <% End If%>
                         <li>
-                            <a href="/SBS/Agents/Management/Settings/DisplayRule.aspx">Display Rule</a>
+                            <a href="/SBS/Agents/Management/Settings/DisplayRule.aspx">Sport Game Display</a>
                         </li>
+                        <% If UserSession.AgentUserInfo.ShowRiskControl Then%>
                         <li>
                             <a href="/SBS/Agents/Management/Settings/RiskControl.aspx">Risk Control</a>
                         </li>
+                        <% End If%>
+                        <li>
+                            <a href="/SBS/Agents/SportJuiceControl.aspx">Sport Juices Control</a>
+                        </li>
+                        <li>
+                            <a href="/SBS/Agents/PlayerJuiceControl.aspx">Player Juices Control</a>
+                        </li>
+                        <% If UserSession.AgentUserInfo.ShowParleySetup Then%>
                         <li>
                             <a href="/SBS/Agents/Management/Settings/ParplaySetup.aspx">Parplay Setup</a>
                         </li>
+                        <% End If%>
+                        <% If UserSession.AgentUserInfo.ShowParleyInGame Then%>
                         <li>
                             <a href="/SBS/Agents/Management/Settings/ParplayAllowanceInGames.aspx">Parplay Allowance(in Games)</a>
                         </li>
+                        <% End If%>
+                        <% If UserSession.AgentUserInfo.ShowParleyBetweenGame Then%>
                         <li>
                             <a href="/SBS/Agents/Management/Settings/ParplayAllowanceBWGame.aspx">Parplay Allowance(b/w Games)</a>
                         </li>
+                        <% End If%>
                     </ul>
                 </li>
                 <% End If%>

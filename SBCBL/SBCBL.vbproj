@@ -205,6 +205,7 @@
     <Compile Include="Utils\CSerializedObjectCloner.vb" />
     <Compile Include="Utils\CvioZip.vb" />
     <Compile Include="Utils\CZipCodeLookup.vb" />
+    <Compile Include="Utils\EnumUtils.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

@@ -211,6 +211,13 @@ Namespace SBCSuperAdmin
             chkIsEnableChangeBookmaker.Checked = False
             chkMaxCreditSetting.Checked = False
             chkSubAgentEnable.Checked = False
+            chkShowBetTicker.Checked = False
+            chkShowOddMonitor.Checked = False
+            chkShowScheduleScores.Checked = False
+            chkShowParleySetup.Checked = False
+            chkShowParleySetupAllowanceInGames.Checked = False
+            chkShowParleySetupAllowanceBetweenGames.Checked = False
+            chkShowRiskControl.Checked = False
         End Sub
 
         Public Function LoadAgentInfo(ByVal psAgentID As String) As Boolean
@@ -248,7 +255,13 @@ Namespace SBCSuperAdmin
                 chkIsEnableChangeBookmaker.Checked = SafeBoolean(.Rows(0)("IsEnableChangeBookmaker"))
                 chkMaxCreditSetting.Checked = SafeBoolean(.Rows(0)("HasCrediLimitSetting"))
                 chkSubAgentEnable.Checked = SafeBoolean(.Rows(0)("AddNewSubAgent"))
-
+                chkShowBetTicker.Checked = SafeString(.Rows(0)("ShowBetTicker")) = "Y"
+                chkShowOddMonitor.Checked = SafeString(.Rows(0)("ShowOddMonitor")) = "Y"
+                chkShowScheduleScores.Checked = SafeString(.Rows(0)("ShowGameScheduleScores")) = "Y"
+                chkShowParleySetup.Checked = SafeString(.Rows(0)("ShowParleySetup")) = "Y"
+                chkShowParleySetupAllowanceInGames.Checked = SafeString(.Rows(0)("ShowParleyInGame")) = "Y"
+                chkShowParleySetupAllowanceBetweenGames.Checked = SafeString(.Rows(0)("ShowParleyBetweenGame")) = "Y"
+                chkShowRiskControl.Checked = SafeString(.Rows(0)("ShowRiskControl")) = "Y"
             End With
 
             txtSpecialKey.Enabled = Not oAgentManager.NumOfSubPlayers(psAgentID) > 0
@@ -293,7 +306,14 @@ Namespace SBCSuperAdmin
                     SafeString(txtSpecialKey.Text), SafeInteger(txtCurrentPlayerNumber.Text), _
                      UserSession.UserID, SafeBoolean(chkEnablePlayerTemplate.Checked), SafeBoolean(chkEnablePlayerBlock.Checked), _
                      SafeBoolean(chkCasino.Checked), chkSubAgentEnable.Checked, SafeBoolean(chkMaxCreditSetting.Checked), IIf(chkIsEnableBettingProfile.Checked, "Y", "N"), SafeBoolean(chkHasGameManagement.Checked), _
-                    SafeBoolean(chkHasSystemManagement.Checked), SafeBoolean(chkIsEnableChangeBookmaker.Checked))
+                    SafeBoolean(chkHasSystemManagement.Checked), SafeBoolean(chkIsEnableChangeBookmaker.Checked),
+                    SafeBoolean(chkShowBetTicker.Checked),
+                    SafeBoolean(chkShowOddMonitor.Checked),
+                    SafeBoolean(chkShowScheduleScores.Checked),
+                    SafeBoolean(chkShowParleySetup.Checked),
+                    SafeBoolean(chkShowParleySetupAllowanceInGames.Checked),
+                    SafeBoolean(chkShowParleySetupAllowanceBetweenGames.Checked),
+                    SafeBoolean(chkShowRiskControl.Checked))
 
                 oAgentManager.UpdateSubAgentsPercent(sAgentID, SafeSingle(txtProfitPercentage.Text), _
                                                      SafeSingle(txtGrossPercentage.Text), UserSession.UserID)
@@ -310,7 +330,14 @@ Namespace SBCSuperAdmin
                     SafeString(txtSpecialKey.Text), SafeInteger(txtCurrentPlayerNumber.Text), _
                     UserSession.UserID, SiteType.ToString(), SafeBoolean(chkEnablePlayerTemplate.Checked), _
                     SafeBoolean(chkEnablePlayerBlock.Checked), chkRequireChangePass.Checked, SafeBoolean(chkCasino.Checked), chkSubAgentEnable.Checked, SafeBoolean(chkMaxCreditSetting.Checked), chkIsEnableBettingProfile.Checked, _
-                    SafeBoolean(chkHasGameManagement.Checked), SafeBoolean(chkHasSystemManagement.Checked), SafeBoolean(chkIsEnableChangeBookmaker.Checked))
+                    SafeBoolean(chkHasGameManagement.Checked), SafeBoolean(chkHasSystemManagement.Checked), SafeBoolean(chkIsEnableChangeBookmaker.Checked),
+                    SafeBoolean(chkShowBetTicker.Checked),
+                    SafeBoolean(chkShowOddMonitor.Checked),
+                    SafeBoolean(chkShowScheduleScores.Checked),
+                    SafeBoolean(chkShowParleySetup.Checked),
+                    SafeBoolean(chkShowParleySetupAllowanceInGames.Checked),
+                    SafeBoolean(chkShowParleySetupAllowanceBetweenGames.Checked),
+                    SafeBoolean(chkShowRiskControl.Checked))
                 Dim oCSysSettingManager As CSysSettingManager = New CSysSettingManager()
                 oCSysSettingManager.CopyParplayReverser(SafeString(sAgentID))
                 '  ClientAlert("Save user's info successfully", True)
@@ -427,7 +454,7 @@ Namespace SBCSuperAdmin
 
             End If
             UserSession.Cache.ClearSysSettings(psAgentID & "_Juice", psSportType)
-            UserSession.Cache.ClearJuiceControl(UCase(psAgentID), UCase(psSportType), UCase(psContext), "")
+            UserSession.Cache.ClearJuiceControl(UCase(psAgentID), UCase(psSportType), UCase(psContext), "", "")
         End Sub
 
         Public Sub MakeAgentFolder(ByVal psAgentID As String)

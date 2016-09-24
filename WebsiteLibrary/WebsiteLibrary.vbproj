@@ -103,9 +103,12 @@
     <Compile Include="Utils\CTripleDES.vb" />
     <Compile Include="Utils\CXlsImporter.vb" />
     <Compile Include="Utils\CXMLUtils.vb" />
+    <Compile Include="Utils\DateTimePrecise.vb" />
     <Compile Include="Utils\Exceptions.vb" />
+    <Compile Include="Utils\GuidGenerator.vb" />
     <Compile Include="Utils\IDBUtils.vb" />
     <Compile Include="Utils\IParentPagePostback.vb" />
+    <Compile Include="Utils\TimestampHelper.vb" />
     <Compile Include="webcontrols\CAutoCompleteTextbox.vb" />
     <Compile Include="webcontrols\CButtonConfirmer.vb" />
     <Compile Include="webcontrols\CCheckBoxController.vb" />

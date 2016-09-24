@@ -49,7 +49,7 @@ html {
 }
 body {
   font-family: 'Open Sans',sans-serif;
-  font-size: 13px;
+  font-size: 12pt;
   line-height: 1.42857143;
   color: #000;
   background: url(../images/bg/diag-w.png) #222;
@@ -6846,7 +6846,7 @@ background-color: #66b0ea;
   font-weight: normal;
   height: 30px;
   padding: 5px 10px;
-  font-size: 12px;
+  font-size: 12pt;
   line-height: 1.5;
 }
 .table select {

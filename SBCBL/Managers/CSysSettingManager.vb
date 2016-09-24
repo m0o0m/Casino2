@@ -229,13 +229,40 @@ Namespace Managers
             Return oExistSysSetting
         End Function
 
-        Public Function CheckExistSysSetting(ByVal psCategoryName As String, ByVal psSubCategoryName As String, ByVal psKey As String, ByVal psOther As String) As Boolean
+        'Public Function CheckExistSysSetting(ByVal psCategoryName As String, ByVal psSubCategoryName As String, ByVal psKey As String, ByVal psOther As String) As Boolean
+        '    Dim oExistSysSetting As Boolean = False
+        '    Dim oWhere As New CSQLWhereStringBuilder
+        '    oWhere.AppendANDCondition("[Key] = " & SQLString(psKey))
+        '    oWhere.AppendANDCondition("[Category]=" & SQLString(psCategoryName))
+        '    oWhere.AppendANDCondition("[SubCategory]=" & SQLString(psSubCategoryName))
+        '    oWhere.AppendOptionalANDCondition("[Orther]", SQLString(psOther), "=")
+
+        '    Dim sSQL As String = "SELECT count(SysSettingID) FROM SysSettings " & oWhere.SQL
+
+        '    log.Debug("Check Exist syssetting . SQL: " & sSQL)
+
+        '    Dim odbSQL As New CSQLDBUtils(SBC_CONNECTION_STRING, "")
+
+        '    Try
+        '        oExistSysSetting = SafeInteger(odbSQL.getScalerValue(sSQL)) > 0
+        '    Catch ex As Exception
+        '        log.Error("Cannot Check Exist syssetting . SQL: " & sSQL, ex)
+        '    Finally
+        '        odbSQL.closeConnection()
+        '    End Try
+
+        '    Return oExistSysSetting
+        'End Function
+
+        Public Function CheckExistSysSetting(ByVal psCategoryName As String, ByVal psSubCategoryName As String, ByVal psKey As String, _
+                                             ByVal psOther As String, ByVal psOtherType As String) As Boolean
             Dim oExistSysSetting As Boolean = False
             Dim oWhere As New CSQLWhereStringBuilder
             oWhere.AppendANDCondition("[Key] = " & SQLString(psKey))
             oWhere.AppendANDCondition("[Category]=" & SQLString(psCategoryName))
             oWhere.AppendANDCondition("[SubCategory]=" & SQLString(psSubCategoryName))
             oWhere.AppendOptionalANDCondition("[Orther]", SQLString(psOther), "=")
+            oWhere.AppendOptionalANDCondition("[OtherType]", SQLString(psOtherType), "=")
 
             Dim sSQL As String = "SELECT count(SysSettingID) FROM SysSettings " & oWhere.SQL
 
@@ -441,7 +468,8 @@ Namespace Managers
         End Function
 
         Public Function UpdateKeyValue(ByVal psSysSettingID As String, ByVal psNewKey As String, ByVal psNewValue As String, _
-                                       Optional ByVal psItemIndex As Integer = 0, Optional ByVal psSubCategory As String = "", Optional ByVal psOrther As String = "") As Boolean
+                                       Optional ByVal psItemIndex As Integer = 0, Optional ByVal psSubCategory As String = "", Optional ByVal psOrther As String = "", _
+                                       Optional ByVal psOtherType As String = "") As Boolean
             Dim bSuccess As Boolean = True
 
             Dim oUpdate As New CSQLUpdateStringBuilder("SysSettings", "WHERE SysSettingID=" & SQLString(psSysSettingID))
@@ -456,6 +484,9 @@ Namespace Managers
                 End If
                 If psOrther <> "" Then
                     .AppendString("[Orther]", SQLString(psOrther))
+                End If
+                If psOtherType <> "" Then
+                    .AppendString("[OtherType]", SQLString(psOtherType))
                 End If
             End With
 
@@ -473,7 +504,7 @@ Namespace Managers
         End Function
 
         Public Function UpdateValue(ByVal psCategoryName As String, ByVal psSubCategoryName As String, ByVal psKey As String, ByVal psNewValue As String, _
-                                       Optional ByVal psSysSettingID As String = "", Optional ByVal psOrther As String = "") As Boolean
+                                       Optional ByVal psSysSettingID As String = "", Optional ByVal psOrther As String = "", Optional ByVal psOtherType As String = "") As Boolean
             Dim bSuccess As Boolean = True
             Dim oWhere As New CSQLWhereStringBuilder
             oWhere.AppendANDCondition("[Category]=" & SQLString(psCategoryName))
@@ -486,6 +517,9 @@ Namespace Managers
                 .AppendString("[Value]", SQLString(psNewValue))
                 If psOrther <> "" Then
                     .AppendString("[Orther]", SQLString(psOrther))
+                End If
+                If psOtherType <> "" Then
+                    .AppendString("[OtherType]", SQLString(psOtherType))
                 End If
             End With
             Dim oDB As New CSQLDBUtils(SBC_CONNECTION_STRING, "")
@@ -500,6 +534,34 @@ Namespace Managers
                 oDB.closeConnection()
             End Try
 
+            Return bSuccess
+        End Function
+
+        Public Function UpdateByKey(ByVal psSysSettingID As String, ByVal psNewKey As String, ByVal psNewValue As String, _
+                                       ByVal psItemIndex As Integer, ByVal psSubCategory As String, ByVal psOrther As String, _
+                                       ByVal psOtherType As String) As Boolean
+            Dim bSuccess As Boolean = True
+
+            Dim oUpdate As New CSQLUpdateStringBuilder("SysSettings", "WHERE SysSettingID=" & SQLString(psSysSettingID))
+            With oUpdate
+                .AppendString("[Key]", SQLString(psNewKey))
+                .AppendString("[Value]", SQLString(StrConv(psNewValue, VbStrConv.ProperCase)))
+                .AppendString("[ItemIndex]", SQLString(psItemIndex))
+                .AppendString("[SubCategory]", SQLString(psSubCategory))
+                .AppendString("[Orther]", SQLString(psOrther))
+                .AppendString("[OtherType]", SQLString(psOtherType))
+            End With
+
+            Dim oDB As New CSQLDBUtils(SBC_CONNECTION_STRING, "")
+            Try
+                oDB.executeNonQuery(oUpdate.SQL)
+                ClearTimeOffCache()
+            Catch ex As Exception
+                bSuccess = False
+                log.Error("Cannot update new Key & Value for Category. Error: " & oUpdate.SQL, ex)
+            Finally
+                oDB.closeConnection()
+            End Try
             Return bSuccess
         End Function
 
@@ -539,7 +601,8 @@ Namespace Managers
         End Function
 
         Public Function AddSysSetting(ByVal psCategoryName As String, ByVal psKey As String, ByVal psValue As String, _
-                                      Optional ByVal psSubCategory As String = "", Optional ByVal psItemIndex As Integer = 0, Optional ByVal psOrther As String = "") As Boolean
+                                      Optional ByVal psSubCategory As String = "", Optional ByVal psItemIndex As Integer = 0, Optional ByVal psOrther As String = "", _
+                                      Optional ByVal psOtherType As String = "") As Boolean
             Dim bSuccess As Boolean = True
             Dim oInsert As New CSQLInsertStringBuilder("SysSettings")
             With oInsert
@@ -553,6 +616,9 @@ Namespace Managers
                 End If
                 If psOrther <> "" Then
                     .AppendString("[Orther]", SQLString(psOrther))
+                End If
+                If psOtherType <> "" Then
+                    .AppendString("[OtherType]", SQLString(psOtherType))
                 End If
             End With
 
@@ -800,6 +866,7 @@ Namespace Managers
         End Function
 
 #End Region
+
         Sub ClearTimeOffCache()
             Dim keys As New List(Of String)
             Dim CacheEnum As IDictionaryEnumerator = System.Web.HttpContext.Current.Cache.GetEnumerator()
@@ -809,5 +876,6 @@ Namespace Managers
                 End If
             End While
         End Sub
+
     End Class
 End Namespace

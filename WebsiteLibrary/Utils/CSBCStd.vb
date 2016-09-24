@@ -462,7 +462,7 @@ Public Class CSBCStd
 
     'returns nicer 32 char GUID w/ no '-'
     Public Shared Function newGUID() As String
-        Return System.Guid.NewGuid.ToString()
+        Return GuidGenerator.GenerateTimeBasedGuid().ToString() ' System.Guid.NewGuid.ToString()
     End Function
 
     Public Shared Function getThisFileName() As String

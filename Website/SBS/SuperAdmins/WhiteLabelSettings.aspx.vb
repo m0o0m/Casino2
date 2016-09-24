@@ -95,7 +95,7 @@ Namespace SBSSuperAdmin
         End Sub
       
         Protected Sub bnSave_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles bnSave.Click
-            Dim sURL As String = SafeString(txtSiteURL.Text)
+            Dim sURL As String = SafeString(txtSiteURL.Text).ToLower()
             If sURL.StartsWith("http://") Then
                 sURL = sURL.Substring("http://".Length)
             End If
@@ -187,7 +187,7 @@ Namespace SBSSuperAdmin
 
             ClientAlert("Successfully Saved")
             btnCancel_Click(Nothing, Nothing)
-            Dim sKey As String = "WHITE_LABEL_" & sURL
+            Dim sKey As String = "WHITE_LABEL_" & sURL.ToLower()
             Cache.Remove(sKey)
             BindWhteLabels()
             Response.Redirect(Request.Url.AbsoluteUri)

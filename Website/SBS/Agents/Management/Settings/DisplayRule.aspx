@@ -12,7 +12,7 @@
 <asp:content id="Content2" contentplaceholderid="cphBody" runat="Server">
     <div class="col-md-6">
         <div class="panel panel-grey">
-            <div class="panel-heading">1H , 2H & Teamtotal Display Setup</div>
+            <div class="panel-heading">1H , 2H & Team Total Display Setup</div>
             <div class="panel-body">
                 <uc1:GamePartTimeDisplaySetup ID="ucGamePartTimeDisplaySetup" runat="server" />
             </div>

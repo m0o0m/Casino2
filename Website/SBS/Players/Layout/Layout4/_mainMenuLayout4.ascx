@@ -6,13 +6,20 @@
         End If
         Return String.Empty
     End Function
+    
+    Public Function SessionMenuActive(ByVal pageName As String) As String
+        If String.Equals(Session("BetTypeActive"), pageName, StringComparison.OrdinalIgnoreCase) Then
+            Return "active"
+        End If
+        Return String.Empty
+    End Function
 </script>
 <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
     data-position="right" class="navbar-default navbar-static-side">
     <div class="sidebar-collapse menu-scroll">
         <ul id="side-menu" class="nav">
             <div class="clearfix"></div>
-            <li class="<%= MenuActive("Default.aspx?bettype=BetIfAll")%>">
+            <li class="<%= MenuActive("Default.aspx?bettype=BetIfAll")%> <%= SessionMenuActive("BetIfAll")%>">
                 <a href="Default.aspx?bettype=BetIfAll">
                     <i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
@@ -29,7 +36,7 @@
                     <span class="menu-title">Straight</span>
                 </a>
             </li>--%>
-            <li class="<%= MenuActive("Default.aspx?bettype=Parlay")%>">
+            <li class="<%= MenuActive("Default.aspx?bettype=Parlay")%> <%= SessionMenuActive("Parlay")%>">
                 <a href="Default.aspx?bettype=Parlay">
                     <i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
@@ -37,7 +44,7 @@
                     <span class="menu-title">Parlay</span>
                 </a>
             </li>
-            <li class="<%= MenuActive("Default.aspx?bettype=Teaser")%>">
+            <li class="<%= MenuActive("Default.aspx?bettype=Teaser")%> <%= SessionMenuActive("Teaser")%>">
                 <a href="Default.aspx?bettype=Teaser">
                     <i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
@@ -45,7 +52,7 @@
                     <span class="menu-title">Teaser</span>
                 </a>
             </li>
-            <li class="<%= MenuActive("Default.aspx?bettype=Reverse")%>">
+            <li class="<%= MenuActive("Default.aspx?bettype=Reverse")%> <%= SessionMenuActive("Reverse")%>">
                 <a href="Default.aspx?bettype=Reverse">
                     <i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
@@ -53,7 +60,7 @@
                     <span class="menu-title">Action Reverse</span>
                 </a>
             </li>
-            <li class="<%= MenuActive("Default.aspx?bettype=Prop")%>">
+            <li class="<%= MenuActive("Default.aspx?bettype=Prop")%> <%= SessionMenuActive("Prop")%>">
                 <a href="Default.aspx?bettype=Prop">
                     <i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
@@ -69,7 +76,7 @@
                     <span class="menu-title">Casino</span>
                 </a>
             </li>--%>
-            <li class="<%= MenuActive(Server.HtmlEncode("Default.aspx?bettype=If%20Win%20or%20Push"))%>">
+            <li class="<%= MenuActive(Server.HtmlEncode("Default.aspx?bettype=If%20Win%20or%20Push"))%> <%= SessionMenuActive("If%20Win%20or%20Push")%>">
                 <a href="Default.aspx?bettype=If Win or Push">
                     <i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
@@ -77,7 +84,7 @@
                     <span class="menu-title">If Win or Push</span>
                 </a>
             </li>
-            <li class="<%= MenuActive(Server.HtmlEncode("Default.aspx?bettype=If%20Win"))%>">
+            <li class="<%= MenuActive(Server.HtmlEncode("Default.aspx?bettype=If%20Win"))%> <%= SessionMenuActive("If%20Win")%>">
                 <a href="Default.aspx?bettype=If Win">
                     <i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>

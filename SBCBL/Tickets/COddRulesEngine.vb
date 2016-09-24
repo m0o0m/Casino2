@@ -9,11 +9,13 @@ Namespace Tickets
         'Private _oOddsRules As List(Of COddsRule)
         Private _SuperAgent As String
         Private _template As CPlayerTemplate
+        Private _PlayerId As String
 
         Public Sub New(ByVal plstConditions As List(Of String), _
-                     ByVal psSuperAdminID As String, ByVal pbGameType As Boolean, ByVal poPlayerTemplate As CPlayerTemplate, ByVal psSuperAgent As String)
+                     ByVal psSuperAdminID As String, ByVal pbGameType As Boolean, ByVal poPlayerTemplate As CPlayerTemplate, ByVal psSuperAgent As String, ByVal psPlayerId As String)
             ' _oOddsRules = plstOddsRules
             _SuperAgent = psSuperAgent
+            _PlayerId = psPlayerId
             Dim oTicketsManager As New CTicketManager
             '  _tblMain = oTicketsManager.GetRiskAmountsBySuperAdmin(plstConditions, psSuperAdminID, pbGameType)
             If Not String.IsNullOrEmpty(psSuperAgent) Then
@@ -67,13 +69,45 @@ Namespace Tickets
         '    Return False
         'End Function
 
-        Public Function Juice(ByVal psGameType As String, ByVal psContext As String) As Integer
+        Public Function Juice(ByVal psGameType As String, ByVal psContext As String, ByVal psBetType As CEnums.EBetType) As Integer
             Dim oCache As New CacheUtils.CCacheManager()
-            Dim nJuice As Integer = SafeInteger(oCache.GetJuiceControl(_SuperAgent, GetSportType(psGameType), psContext, psGameType))
-            If nJuice = 0 Then
-                nJuice = SafeInteger(oCache.GetJuiceControl(_SuperAgent, GetSportType(psGameType), psContext, String.Empty))
+            Dim sportType = GetSportType(psGameType)
+
+            Dim betType = EnumUtils.GetEnumInt(psBetType).ToString()
+            Dim spreadAndTotalType = EnumUtils.GetEnumInt(CEnums.EBetType.SpreadAndTotal).ToString()
+
+            ' PLAYER JUICE BY GAME TYPE
+            Dim nPlayerJuice As Integer = SafeInteger(oCache.GetPlayerJuiceControl(_PlayerId, sportType, psContext, psGameType, betType))
+            ' get by type : SpreadAndTotal
+            If (psBetType = CEnums.EBetType.Spread OrElse psBetType = CEnums.EBetType.Total) Then
+                nPlayerJuice += SafeInteger(oCache.GetPlayerJuiceControl(_PlayerId, sportType, psContext, psGameType, spreadAndTotalType))
             End If
-            Return nJuice
+            ' PLAYER JUICE BY ALL GAME TYPE
+            If nPlayerJuice = 0 Then
+                ' player juice
+                nPlayerJuice = SafeInteger(oCache.GetPlayerJuiceControl(_PlayerId, sportType, psContext, String.Empty, betType))
+                ' get by type : SpreadAndTotal
+                If (psBetType = CEnums.EBetType.Spread OrElse psBetType = CEnums.EBetType.Total) Then
+                    nPlayerJuice += SafeInteger(oCache.GetPlayerJuiceControl(_PlayerId, sportType, psContext, String.Empty, spreadAndTotalType))
+                End If
+            End If
+
+            ' JUICE (SPORT JUICE) BY GAME TYPE
+            Dim nJuice As Integer = SafeInteger(oCache.GetJuiceControl(_SuperAgent, sportType, psContext, psGameType, betType))
+            ' get by type : SpreadAndTotal
+            If (psBetType = CEnums.EBetType.Spread OrElse psBetType = CEnums.EBetType.Total) Then
+                nJuice += SafeInteger(oCache.GetJuiceControl(_SuperAgent, sportType, psContext, psGameType, spreadAndTotalType))
+            End If
+            ' JUICE (SPORT JUICE) BY ALL GAME TYPE
+            If nJuice = 0 Then
+                nJuice = SafeInteger(oCache.GetJuiceControl(_SuperAgent, sportType, psContext, String.Empty, betType))
+                ' get by type : SpreadAndTotal
+                If (psBetType = CEnums.EBetType.Spread OrElse psBetType = CEnums.EBetType.Total) Then
+                    nJuice += SafeInteger(oCache.GetJuiceControl(_SuperAgent, sportType, psContext, String.Empty, spreadAndTotalType))
+                End If
+            End If
+
+            Return nPlayerJuice + nJuice
         End Function
 
         ''' <summary>
@@ -89,7 +123,9 @@ Namespace Tickets
         ''' <remarks></remarks>
         Public Function GetMoneyLine(ByVal psGameID As String, ByVal psGameType As String, _
                                      ByVal psTeam As String, ByVal psContext As String, _
-                                     ByVal psBetType As String, ByVal pnOdds As Double, ByVal pbFavorite As Boolean, Optional ByVal psTeamTotalName As String = "", Optional ByVal pnIncreaseSpread As Integer = 0, Optional ByVal pbBuypoint As Boolean = False) As Double
+                                     ByVal psBetType As String, ByVal pnOdds As Double, ByVal pbFavorite As Boolean, _
+                                     Optional ByVal psTeamTotalName As String = "", Optional ByVal pnIncreaseSpread As Integer = 0, _
+                                     Optional ByVal pbBuypoint As Boolean = False) As Double
             Dim nMoneyLine As Double = 0
             Dim nDiffAmount As Double = 0
             Dim nJuice As Double = 0
@@ -104,10 +140,13 @@ Namespace Tickets
 
                 ' Trung Edit:
                 ' new rule: not apply juice for Totals if Sport Type is BaseBall or Hockey
-                Dim juiceVal As Integer = 0
-                If Not ((IsBaseball(psGameType) OrElse IsHockey(psGameType)) AndAlso psBetType.Equals("TotalPoints", StringComparison.CurrentCultureIgnoreCase)) Then
-                    juiceVal = Juice(psGameType, psContext)
-                End If
+                'Dim juiceVal As Integer = 0
+                'If Not ((IsBaseball(psGameType) OrElse IsHockey(psGameType)) AndAlso psBetType.Equals("TotalPoints", StringComparison.CurrentCultureIgnoreCase)) Then
+                '    juiceVal = Juice(psGameType, psContext, GetEBetType(psBetType))
+                'End If
+
+                ' TODO: get bet type and apply juice
+                Dim juiceVal As Integer = Juice(psGameType, psContext, GetEBetType(psBetType))
 
                 pnOdds += juiceVal
             End If
@@ -151,10 +190,10 @@ Namespace Tickets
             '' Check Game is not Lock
             'If Not IsLockGame(psGameID, psTeam, psContext, psBetType) Then
             ''check juice game
-            Dim oLOddsRules As New List(Of COddsRule)
-            If Not String.IsNullOrEmpty(_SuperAgent) Then
-                oLOddsRules = New CacheUtils.CCacheManager().GetGameOddRule(_SuperAgent)
-            End If
+            'Dim oLOddsRules As New List(Of COddsRule)
+            'If Not String.IsNullOrEmpty(_SuperAgent) Then
+            '    oLOddsRules = New CacheUtils.CCacheManager().GetGameOddRule(_SuperAgent)
+            'End If
             'Dim oFixSpreadMoney As CFixSpreadMoney = New CCacheManager().GetFixSpreadMoney(_SuperAgent)
             ''ClientAlert(pbBuypoint & ":" & nMoneyLine, True)
             'If Not pbBuypoint Then
@@ -163,37 +202,38 @@ Namespace Tickets
 
             'End If
             ' Trung: add get flat juice setup
-            nMoneyLine = getFixSpreadMoney(psGameType, nMoneyLine, _SuperAgent, pnIncreaseSpread, psContext, psBetType)
+            'nMoneyLine = getFixSpreadMoney(psGameType, nMoneyLine, _SuperAgent, pnIncreaseSpread, psContext, psBetType)
             ' ClientAlert(pbBuypoint & ":" & nMoneyLine, True)
             'ClientAlert(pnOdds & psContext & Juice(psGameType, psContext) & psBetType, True)
-            If Not psGameType.Equals("Other", StringComparison.CurrentCultureIgnoreCase) AndAlso Not psBetType.Equals("Draw", StringComparison.CurrentCultureIgnoreCase) Then
-                If pbFavorite Then
-                    nJuice = _template.PlayerJuice.GetFavConfig(psGameType, psContext & psBetType)
-                Else
-                    nJuice = _template.PlayerJuice.GetUndConfig(psGameType, psContext & psBetType)
-                End If
-                If nMoneyLine <> 0 Then
-                    nMoneyLine = nMoneyLine + nJuice 'CalValue(nMoneyLine, SafeInteger(nJuice))
-                End If
+            ' Trung : comment at 2016 - 08 - 23
+            'If Not psGameType.Equals("Other", StringComparison.CurrentCultureIgnoreCase) AndAlso Not psBetType.Equals("Draw", StringComparison.CurrentCultureIgnoreCase) Then
+            '    If pbFavorite Then
+            '        nJuice = _template.PlayerJuice.GetFavConfig(psGameType, psContext & psBetType)
+            '    Else
+            '        nJuice = _template.PlayerJuice.GetUndConfig(psGameType, psContext & psBetType)
+            '    End If
+            '    If nMoneyLine <> 0 Then
+            '        nMoneyLine = nMoneyLine + nJuice 'CalValue(nMoneyLine, SafeInteger(nJuice))
+            '    End If
 
-            End If
+            'End If
             '' Get difference amount
             ''0 because  load only show not bet not 
-            nDiffAmount = GetDiffAmountSuperAgent(psGameID, psTeam, psContext, psBetType, 0, psTeamTotalName)
-            ''increase spread bet for each player
-            For Each oOddsRules As COddsRule In oLOddsRules
-                '' Valid Condition
-                If oOddsRules.GreaterThan <= nDiffAmount AndAlso nDiffAmount <= oOddsRules.LowerThan Then
-                    If nDiffAmount > 0 Then '' Increase MoneyLine
-                        'If nMoneyLine > 0 AndAlso nMoneyLine < 100 Then
-                        '    nMoneyLine = nMoneyLine - 200
-                        'End If
-                        'nMoneyLine = CalIncrease(nMoneyLine, SafeInteger(oOddsRules.Increase))
-                        nMoneyLine = nMoneyLine - oOddsRules.Increase
-                    End If
-                    Exit For
-                End If
-            Next
+            'nDiffAmount = GetDiffAmountSuperAgent(psGameID, psTeam, psContext, psBetType, 0, psTeamTotalName)
+            ' ''increase spread bet for each player
+            'For Each oOddsRules As COddsRule In oLOddsRules
+            '    '' Valid Condition
+            '    If oOddsRules.GreaterThan <= nDiffAmount AndAlso nDiffAmount <= oOddsRules.LowerThan Then
+            '        If nDiffAmount > 0 Then '' Increase MoneyLine
+            '            'If nMoneyLine > 0 AndAlso nMoneyLine < 100 Then
+            '            '    nMoneyLine = nMoneyLine - 200
+            '            'End If
+            '            'nMoneyLine = CalIncrease(nMoneyLine, SafeInteger(oOddsRules.Increase))
+            '            nMoneyLine = nMoneyLine - oOddsRules.Increase
+            '        End If
+            '        Exit For
+            '    End If
+            'Next
             If nMoneyLine > 0 AndAlso nMoneyLine < 100 Then
                 nMoneyLine = nMoneyLine - 200
             End If
@@ -286,6 +326,23 @@ Namespace Tickets
             End If
             nDiffAmount += pnRiskAmount
             Return nDiffAmount
+        End Function
+
+        ''' <summary>
+        ''' 
+        ''' </summary>
+        ''' <param name="psBetType">MoneyLine|Spread|TotalPoints|Draw</param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Private Function GetEBetType(ByVal psBetType As String) As CEnums.EBetType
+            Select Case UCase(psBetType.Trim())
+                Case "TOTALPOINTS"
+                    Return CEnums.EBetType.Total
+                Case "SPREAD"
+                    Return CEnums.EBetType.Spread
+                Case Else ' "MONEYLINE", "DRAW"
+                    Return CEnums.EBetType.Money
+            End Select
         End Function
 
     End Class

@@ -37,14 +37,8 @@
                     <span class="menu-title">User Management</span>
                 </a>
             </li>
-            <li class="<%= MenuActive("SelectPlayers.aspx")%>">
-                <a href="/SBS/Agents/SelectPlayers.aspx">
-                    <i class="fa fa-ge fa-fw">
-                        <div class="icon-bg bg-orange"></div>
-                    </i>
-                    <span class="menu-title">Player Wagering</span>
-                </a>
-            </li>
+            
+            <% If UserSession.AgentUserInfo.ShowBetTicker Then%>
             <li class="<%= MenuActive("LiveTicker.aspx")%>">
                 <a href="/SBS/Agents/LiveTicker.aspx">
                     <i class="fa fa-openid fa-fw">
@@ -53,14 +47,9 @@
                     <span class="menu-title">Bet Ticker</span>
                 </a>
             </li>
-            <li class="<%= MenuActive("TicketManagement.aspx")%>">
-                <a href="/SBS/Agents/TicketManagement.aspx">
-                    <i class="fa fa-openid fa-fw">
-                        <div class="icon-bg bg-orange"></div>
-                    </i>
-                    <span class="menu-title">Ticket Management</span>
-                </a>
-            </li>
+            <% End If%>
+            
+            <% If UserSession.AgentUserInfo.ShowGameScheduleScores Then%>
             <li>
                 <a href="javascript:window.open('http://scores.sportsoptions.com/scores/archives.html','Game Schedule / Scores','width=900','height=600');">
                     <i class="fa fa-flag-checkered fa-fw">
@@ -69,12 +58,31 @@
                     <span class="menu-title">Game Schedule / Scores</span>
                 </a>
             </li>
+            <% End If%>
+            <% If UserSession.AgentUserInfo.ShowOddMonitor Then%>
             <li class="<%= MenuActive("OddSetting.aspx")%>">
                 <a href="/SBS/Agents/Management/OddSetting.aspx">
                     <i class="fa fa-steam fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i>
                     <span class="menu-title">Odd Monitor</span>
+                </a>
+            </li>
+            <% End If%>
+            <li class="<%= MenuActive("PlayersReports.aspx")%>">
+                <a href="/SBS/Agents/Management/PlayersReports.aspx">
+                    <i class="fa fa-money fa-fw">
+                        <div class="icon-bg bg-orange"></div>
+                    </i>
+                    <span class="menu-title">Player Balance</span>
+                </a>
+            </li>
+            <li class="<%= MenuActive("SubAgentReport.aspx")%>">
+                <a href="/SBS/Agents/Management/SubAgentReport.aspx">
+                    <i class="fa fa-qrcode fa-fw">
+                        <div class="icon-bg bg-orange"></div>
+                    </i>
+                    <span class="menu-title">Sub - Agent Balance</span>
                 </a>
             </li>
             <li class="<%= MenuActive("History.aspx")%>">
@@ -90,23 +98,23 @@
                     <i class="fa fa-stumbleupon fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i>
-                    <span class="menu-title">Transaction</span>
+                    <span class="menu-title">Acct Transaction History</span>
                 </a>
             </li>
-            <li class="<%= MenuActive("PlayersReports.aspx")%>">
-                <a href="/SBS/Agents/Management/PlayersReports.aspx">
-                    <i class="fa fa-money fa-fw">
+            <li class="<%= MenuActive("TicketManagement.aspx")%>">
+                <a href="/SBS/Agents/TicketManagement.aspx">
+                    <i class="fa fa-openid fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i>
-                    <span class="menu-title">Player Balance</span>
+                    <span class="menu-title">Ticket Management</span>
                 </a>
             </li>
-            <li class="<%= MenuActive("SubAgentReport.aspx")%>">
-                <a href="/SBS/Agents/Management/SubAgentReport.aspx">
-                    <i class="fa fa-qrcode fa-fw">
+            <li class="<%= MenuActive("SelectPlayers.aspx")%>">
+                <a href="/SBS/Agents/SelectPlayers.aspx">
+                    <i class="fa fa-ge fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i>
-                    <span class="menu-title">Sub - Agent Balance</span>
+                    <span class="menu-title">Wagering for Player</span>
                 </a>
             </li>
             <li class="<%= MenuActive("IPReports.aspx")%>">
@@ -173,6 +181,10 @@
                     <span class="menu-title">Inbox Mail</span>
                 </a>
             </li>
+
+            
+            
+            
         </ul>
     </div>
 </nav>

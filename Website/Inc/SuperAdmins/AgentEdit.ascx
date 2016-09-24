@@ -238,6 +238,62 @@
         </td>
     </tr>
     <tr>
+        <td class="fieldTitle">
+            <b>Show Bet Ticker?</b>
+        </td>
+        <td>
+            <asp:CheckBox ID="chkShowBetTicker" runat="server" />
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldTitle">
+            <b>Show Game Odd Monitor?</b>
+        </td>
+        <td>
+            <asp:CheckBox ID="chkShowOddMonitor" runat="server" />
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldTitle">
+            <b>Show Game Shchedule / Scores?</b>
+        </td>
+        <td>
+            <asp:CheckBox ID="chkShowScheduleScores" runat="server" />
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldTitle">
+            <b>Show Parley Setup?</b>
+        </td>
+        <td>
+            <asp:CheckBox ID="chkShowParleySetup" runat="server" />
+        </td>
+    </tr>
+    <tr>
+        <td class="fieldTitle">
+            <b>Show Parley Setup Allowance in Games?</b>
+        </td>
+        <td>
+            <asp:CheckBox ID="chkShowParleySetupAllowanceInGames" runat="server" />
+        </td>
+    </tr>
+     <tr>
+        <td class="fieldTitle">
+            <b>Show Parley Setup Allowance between Games?</b>
+        </td>
+        <td>
+            <asp:CheckBox ID="chkShowParleySetupAllowanceBetweenGames" runat="server" />
+        </td>
+    </tr>
+<tr>
+        <td class="fieldTitle">
+            <b>Show Risk Control?</b>
+        </td>
+        <td>
+            <asp:CheckBox ID="chkShowRiskControl" runat="server" />
+        </td>
+    </tr>
+    <tr>
         <td>
         </td>
         <td>

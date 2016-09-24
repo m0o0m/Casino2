@@ -1,14 +1,21 @@
-﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="JuiceControl.ascx.vb" Inherits="SBCSuperAdmin.JuiceControl" %>
+﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="PlayerJuiceControl.ascx.vb" Inherits="SBS_Inc_PlayerJuiceControl" %>
 <%@ Register Assembly="WebsiteLibrary" Namespace="WebsiteLibrary" TagPrefix="wlb" %>
 
 <div class="panel panel-grey">
-    <div class="panel-heading">Juice Control</div>
+    <div class="panel-heading">Player Juice Control</div>
     <div class="panel-body">
         <div id="trAgent" runat="server" class="form-group">
-            <label class="control-label col-md-3">Agents</label>
+            <label class="control-label col-md-3">Agent</label>
             <div class="col-md-6">
                 <wlb:CDropDownList ID="ddlAgents" runat="server" AutoPostBack="true" hasOptionalItem="false" CssClass="form-control">
-                    <asp:ListItem Value="All">All</asp:ListItem>
+                </wlb:CDropDownList>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="control-label col-md-3">Player</label>
+            <div class="col-md-6">
+                <wlb:CDropDownList ID="ddlPlayer" runat="server" AutoPostBack="true" hasOptionalItem="false" CssClass="form-control">
                 </wlb:CDropDownList>
             </div>
         </div>

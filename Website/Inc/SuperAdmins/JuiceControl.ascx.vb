@@ -15,10 +15,11 @@ Namespace SBCSuperAdmin
         Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
             If Not IsPostBack Then
                 bindSportType()
+                bindBetType()
                 BindGameType()
                 bindAgents()
                 bindJuice()
-                If UserSession.UserType = SBCBL.EUserType.Agent Then
+                If UserSession.UserType = EUserType.Agent Then
                     trAgent.Visible = False
                 End If
             End If
@@ -47,11 +48,18 @@ Namespace SBCSuperAdmin
             ddlSportType.DataBind()
         End Sub
 
+        Private Sub bindBetType()
+            ddlBetType.DataSource = EnumUtils.GetEnumDescriptions(Of CEnums.EBetType)()
+            ddlBetType.DataTextField = "Name"
+            ddlBetType.DataValueField = "Value"
+            ddlBetType.DataBind()
+        End Sub
+
         Private Sub bindJuice()
             If UserSession.UserType = SBCBL.EUserType.SuperAdmin Then
-                txtJuice.Text = UserSession.Cache.GetJuiceControl(ddlAgents.SelectedValue, ddlSportType.SelectedValue, ddlContext.SelectedValue, ddlGameType.SelectedValue)
+                txtJuice.Text = UserSession.Cache.GetJuiceControl(ddlAgents.SelectedValue, ddlSportType.SelectedValue, ddlContext.SelectedValue, ddlGameType.SelectedValue, ddlBetType.SelectedValue)
             Else
-                txtJuice.Text = UserSession.Cache.GetJuiceControl(UserSession.UserID, ddlSportType.SelectedValue, ddlContext.SelectedValue, ddlGameType.SelectedValue)
+                txtJuice.Text = UserSession.Cache.GetJuiceControl(UserSession.UserID, ddlSportType.SelectedValue, ddlContext.SelectedValue, ddlGameType.SelectedValue, ddlBetType.SelectedValue)
             End If
         End Sub
 
@@ -72,21 +80,21 @@ Namespace SBCSuperAdmin
                 End If
             End If
             
-            If oSysManager.CheckExistSysSetting(agentId & "_Juice", ddlSportType.SelectedValue, ddlContext.SelectedValue, ddlGameType.SelectedValue) Then
+            If oSysManager.CheckExistSysSetting(agentId & "_Juice", ddlSportType.SelectedValue, ddlContext.SelectedValue, ddlGameType.SelectedValue, ddlBetType.SelectedValue) Then
                 LogDebug(_log, "save")
                 'oGameTypeOnOff.UpdateJuiceControl(UserSession.UserID, ddlSportType.SelectedValue, SafeInteger(txtJuice.Text), ddlContext.SelectedValue)
-                oSysManager.UpdateValue(agentId & "_Juice", ddlSportType.SelectedValue, ddlContext.SelectedValue, SafeInteger(txtJuice.Text), psOrther:=ddlGameType.SelectedValue)
+                oSysManager.UpdateValue(agentId & "_Juice", ddlSportType.SelectedValue, ddlContext.SelectedValue, SafeInteger(txtJuice.Text), psOrther:=ddlGameType.SelectedValue, psOtherType:=ddlBetType.SelectedValue)
             Else
                 'oGameTypeOnOff.InsertJuiceControl(UserSession.UserID, ddlSportType.SelectedValue, SafeInteger(txtJuice.Text), ddlContext.SelectedValue)
                 LogDebug(_log, "insert")
-                oSysManager.AddSysSetting(agentId & "_Juice", ddlContext.SelectedValue, SafeInteger(txtJuice.Text), ddlSportType.SelectedValue, psOrther:=ddlGameType.SelectedValue)
+                oSysManager.AddSysSetting(agentId & "_Juice", ddlContext.SelectedValue, SafeInteger(txtJuice.Text), ddlSportType.SelectedValue, psOrther:=ddlGameType.SelectedValue, psOtherType:=ddlBetType.SelectedValue)
 
             End If
 
             'UserSession.Cache.ClearSysSettings(UCase(agentId) & UCase(ddlSportType.SelectedValue) & UCase(ddlContext.SelectedValue))
             'UserSession.Cache.ClearJuiceControl(agentId & "_Juice", ddlSportType.SelectedValue, ddlContext.SelectedValue)
             UserSession.Cache.ClearSysSettings(agentId & "_Juice", ddlSportType.SelectedValue)
-            UserSession.Cache.ClearJuiceControl(UCase(agentId), UCase(ddlSportType.SelectedValue), UCase(ddlContext.SelectedValue), ddlGameType.SelectedValue)
+            UserSession.Cache.ClearJuiceControl(UCase(agentId), UCase(ddlSportType.SelectedValue), UCase(ddlContext.SelectedValue), ddlGameType.SelectedValue, ddlBetType.SelectedValue)
             bindJuice()
             ClientAlert("Submit successfully", True)
         End Sub
@@ -101,7 +109,7 @@ Namespace SBCSuperAdmin
             bindJuice()
         End Sub
 
-        Protected Sub ddlGameType_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlContext.SelectedIndexChanged, ddlGameType.SelectedIndexChanged
+        Protected Sub ddlGameType_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlContext.SelectedIndexChanged, ddlGameType.SelectedIndexChanged, ddlBetType.SelectedIndexChanged
             bindJuice()
         End Sub
 
@@ -120,14 +128,14 @@ Namespace SBCSuperAdmin
                     'Else
                     '    oGameTypeOnOff.InsertJuiceControl(sAgentID, ddlSportType.SelectedValue, SafeInteger(txtJuice.Text), ddlContext.SelectedValue)
                     'End If
-                    If oSysManager.CheckExistSysSetting(sAgentID & "_Juice", ddlSportType.SelectedValue, ddlContext.SelectedValue, ddlGameType.SelectedValue) Then
-                        oSysManager.UpdateValue(sAgentID & "_Juice", ddlSportType.SelectedValue, ddlContext.SelectedValue, SafeInteger(txtJuice.Text), psOrther:=ddlGameType.SelectedValue)
+                    If oSysManager.CheckExistSysSetting(sAgentID & "_Juice", ddlSportType.SelectedValue, ddlContext.SelectedValue, ddlGameType.SelectedValue, ddlBetType.SelectedValue) Then
+                        oSysManager.UpdateValue(sAgentID & "_Juice", ddlSportType.SelectedValue, ddlContext.SelectedValue, SafeInteger(txtJuice.Text), psOrther:=ddlGameType.SelectedValue, psOtherType:=ddlBetType.SelectedValue)
                     Else
-                        oSysManager.AddSysSetting(sAgentID & "_Juice", ddlContext.SelectedValue, SafeInteger(txtJuice.Text), ddlSportType.SelectedValue, psOrther:=ddlGameType.SelectedValue)
+                        oSysManager.AddSysSetting(sAgentID & "_Juice", ddlContext.SelectedValue, SafeInteger(txtJuice.Text), ddlSportType.SelectedValue, psOrther:=ddlGameType.SelectedValue, psOtherType:=ddlBetType.SelectedValue)
 
                     End If
                     UserSession.Cache.ClearSysSettings(sAgentID & "_Juice", ddlSportType.SelectedValue)
-                    UserSession.Cache.ClearJuiceControl(UCase(sAgentID), UCase(ddlSportType.SelectedValue), UCase(ddlContext.SelectedValue), ddlGameType.SelectedValue)
+                    UserSession.Cache.ClearJuiceControl(UCase(sAgentID), UCase(ddlSportType.SelectedValue), UCase(ddlContext.SelectedValue), ddlGameType.SelectedValue, ddlBetType.SelectedValue)
                 Next
             Catch ex As Exception
                 ClientAlert("Save Fail", True)

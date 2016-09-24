@@ -128,7 +128,7 @@ Namespace Tickets
             Dim oTblPlayerBet As DataTable = Nothing
 
             '' Create OddsRulesEngine
-            Dim oOddsRulesEngine As New COddRulesEngine(getGameIDs(), psSuperAdminID, False, poPlayerTemplate, psSuperAgentID)
+            Dim oOddsRulesEngine As New COddRulesEngine(getGameIDs(), psSuperAdminID, False, poPlayerTemplate, psSuperAgentID, psPlayerID)
 
             '' Get All Player's Betting
             Dim oTicketManager As New Managers.CTicketManager()

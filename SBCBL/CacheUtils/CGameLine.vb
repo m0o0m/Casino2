@@ -50,6 +50,14 @@ Namespace CacheUtils
             _ManualSetting = SafeString(podrData("ManualSetting")).Equals("Y", StringComparison.CurrentCultureIgnoreCase)
             _GameLineOff = SafeString(podrData("GameLineOff")).Equals("Y", StringComparison.CurrentCultureIgnoreCase)
             _IsCircle = SafeString(podrData("IsCircle")).Equals("Y", StringComparison.CurrentCultureIgnoreCase)
+
+            AwayTeamTotalPoints = SafeDouble(podrData("AwayTeamTotalPoints"))
+            AwayTeamTotalPointsOverMoney = SafeDouble(podrData("AwayTeamTotalPointsOverMoney"))
+            AwayTeamTotalPointsUnderMoney = SafeDouble(podrData("AwayTeamTotalPointsUnderMoney"))
+
+            HomeTeamTotalPoints = SafeDouble(podrData("HomeTeamTotalPoints"))
+            HomeTeamTotalPointsOverMoney = SafeDouble(podrData("HomeTeamTotalPointsOverMoney"))
+            HomeTeamTotalPointsUnderMoney = SafeDouble(podrData("HomeTeamTotalPointsUnderMoney"))
         End Sub
 
 #End Region
@@ -216,6 +224,19 @@ Namespace CacheUtils
                 _DrawMoneyLine = value
             End Set
         End Property
+
+        Public Property AwayTeamTotalPoints() As Double
+
+        Public Property AwayTeamTotalPointsOverMoney() As Double
+
+        Public Property AwayTeamTotalPointsUnderMoney() As Double
+
+        Public Property HomeTeamTotalPoints() As Double
+
+        Public Property HomeTeamTotalPointsOverMoney() As Double
+
+        Public Property HomeTeamTotalPointsUnderMoney() As Double
+
 #End Region
 
 

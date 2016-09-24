@@ -205,6 +205,11 @@ Namespace SBCAgents
 
             txtAccountBalance.Text = SafeDouble(odrPlayer("BalanceAmount")) 'show on Account Balance textbox
 
+            If UserSession.UserType = EUserType.Agent Then
+                txtCreditMaxAmount.Enabled = False
+                btnUpdateOrginalAmount.Visible = False
+            End If
+
             ShowLimitsInfo()
             Return True
         End Function
@@ -592,7 +597,10 @@ Namespace SBCAgents
 
         Public Sub ClearLimits()
             txtAccountBalance.Text = ""
-            txtCreditMaxAmount.Text = ""
+            If Not UserSession.UserType = EUserType.Agent Then
+                txtCreditMaxAmount.Text = ""
+            End If
+
             txtCasinoMaxAmount.Text = ""
             txtCreditmaxSingle.Text = ""
             txtCreditMinBetPhone.Text = ""

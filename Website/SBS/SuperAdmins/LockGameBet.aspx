@@ -83,7 +83,7 @@
                                         <HeaderTemplate>
                                             <table class="<%# IIF(Container.ItemType = ListItemType.Item,"gametable_odd","gametable_even") %> table table-hover table-bordered">
                                                 <colgroup>
-                                                    <col width="80" />
+                                                    <col width="110" />
                                                     <col width="40" />
                                                     <col width="*" />
                                                     <col width="100" />

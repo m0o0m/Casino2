@@ -415,7 +415,7 @@ Partial Class Betting
 
                         Dim oCache As New CacheUtils.CCacheManager()
                         Dim oOddsRules As New COddRulesEngine(olstGameID, _
-                                                              oCache.GetPlayerInfo(psSelectedPlayerID).SuperAdminID, False, oCache.GetPlayerInfo(psSelectedPlayerID).Template, oCache.GetPlayerInfo(psSelectedPlayerID).SuperAgentID)
+                                                              oCache.GetPlayerInfo(psSelectedPlayerID).SuperAdminID, False, oCache.GetPlayerInfo(psSelectedPlayerID).Template, oCache.GetPlayerInfo(psSelectedPlayerID).SuperAgentID, psSelectedPlayerID)
 
                         If Not oTicketBet.ValidateStraightCircled(oOddsRules, psTeam) Then
                             SelectedTicket(psSelectedPlayerID).LastTicket.RemoveTicketBets(oTicketBet.TicketBetID)
@@ -595,7 +595,7 @@ Partial Class Betting
 
                         Dim oCache As New CacheUtils.CCacheManager()
                         Dim oOddsRules As New COddRulesEngine(olstGameID, _
-                                                              oCache.GetPlayerInfo(psSelectedPlayerID).SuperAdminID, False, oCache.GetPlayerInfo(psSelectedPlayerID).Template, oCache.GetPlayerInfo(psSelectedPlayerID).SuperAgentID)
+                                                              oCache.GetPlayerInfo(psSelectedPlayerID).SuperAdminID, False, oCache.GetPlayerInfo(psSelectedPlayerID).Template, oCache.GetPlayerInfo(psSelectedPlayerID).SuperAgentID, psSelectedPlayerID)
 
                         If Not oTicketBet.ValidateStraightCircled(oOddsRules, psTeam) Then
                             SelectedTicket(psSelectedPlayerID).LastTicket.RemoveTicketBets(oTicketBet.TicketBetID)

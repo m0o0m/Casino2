@@ -1,0 +1,52 @@
+﻿
+@media print
+{
+    @page {
+        margin: 1cm;
+    }
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+    html, body, .layout {
+        -webkit-print-color-adjust: exact;
+        width: 100% !important;
+    }
+
+    /* pending bet */
+   .open-bet-print td:first-child:not(.td-rowspan) {
+        display: none !important;
+    }
+
+    .open-bet-print tr.tableheading {
+        background-color: #aeaeae !important;
+    }
+    .open-bet-print tr.tableheading td {
+        color: #000 !important;
+    }
+
+    /* wager */
+    .wager-print{
+		border: 1px solid #000;
+		border-spacing: 0;
+		border-collapse: collapse;
+	}
+	.wager-print td, .wager-print th{
+		border: 1px solid #000;
+	    padding: 5px;
+	}
+    .wager-print tr {
+        display: none;
+    }
+    .wager-print tr.caption > td {
+        color: #000;
+    }
+    .wager-print tr.caption > td:first-child {
+        color: red;
+        text-align: center;
+    }
+    .wager-print tr.content, .wager-print tr.caption {
+        background: #fff !important;
+        display: table-row;
+    }
+}

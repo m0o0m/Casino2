@@ -12,8 +12,11 @@ Partial Class SBS_Agents_Layout_breadCrumbAgent
             Dim nAgentBalance As Double = 0
 
             Dim oAgentManager As New CAgentManager()
-            nAgentBalance = oAgentManager.GetAgentsBalance(userSession.AgentUserInfo.UserID)
+            nAgentBalance = oAgentManager.CalAgentsBalance(userSession.AgentUserInfo.UserID)
             lblAgentBalance.Text = FormatCurrency(nAgentBalance)
+            If (nAgentBalance < 0) Then
+                lblAgentBalance.ForeColor = Drawing.ColorTranslator.FromHtml("#bf4346")
+            End If
 
             Dim wcManager As New CWeeklyChargeManager()
             ltrRentalBalance.Text = FormatCurrency(wcManager.GetTotalWeeklyUnpaidChargeByAgent(userSession.AgentUserInfo.UserID))

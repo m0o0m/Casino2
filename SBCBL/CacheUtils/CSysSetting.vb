@@ -13,6 +13,7 @@ Namespace CacheUtils
         Private _Value As String
         Private _Orther As String
         Private _ItemIndex As Integer
+        Private _otherType As String
 #End Region
 
 #Region "Constructors"
@@ -29,6 +30,7 @@ Namespace CacheUtils
             _Value = SafeString(podrData("Value"))
             _ItemIndex = SafeInteger(podrData("ItemIndex"))
             _Orther = SafeString(podrData("Orther"))
+            _otherType = SafeString(podrData("OtherType"))
         End Sub
 
 #End Region
@@ -97,6 +99,17 @@ Namespace CacheUtils
                 _ItemIndex = value
             End Set
         End Property
+
+        Public Property OtherType() As String
+            Get
+                Return _otherType
+            End Get
+            Set(ByVal value As String)
+                _otherType = value
+            End Set
+        End Property
+
+
 #End Region
 
     End Class
@@ -113,6 +126,10 @@ Namespace CacheUtils
 
         Public Function GetSysSetting(ByVal psKey As String, ByVal psOrther As String) As CSysSetting
             Return Me.Find(Function(oSetting) UCase(oSetting.Key) = UCase(psKey) AndAlso UCase(oSetting.Orther) = UCase(psOrther))
+        End Function
+
+        Public Function GetSysSetting(ByVal psKey As String, ByVal psOrther As String, ByVal psOtherType As String) As CSysSetting
+            Return Me.Find(Function(oSetting) UCase(oSetting.Key) = UCase(psKey) AndAlso UCase(oSetting.Orther) = UCase(psOrther) AndAlso UCase(oSetting.OtherType) = UCase(psOtherType))
         End Function
 
         ''' <summary>
@@ -134,6 +151,15 @@ Namespace CacheUtils
 
         Public Function GetValue(ByVal psKey As String, ByVal psOrther As String) As String
             Dim oSetting As CSysSetting = GetSysSetting(psKey, psOrther)
+            If oSetting IsNot Nothing Then
+                Return oSetting.Value
+            End If
+
+            Return ""
+        End Function
+
+        Public Function GetValue(ByVal psKey As String, ByVal psOrther As String, ByVal psOtherType As String) As String
+            Dim oSetting As CSysSetting = GetSysSetting(psKey, psOrther, psOtherType)
             If oSetting IsNot Nothing Then
                 Return oSetting.Value
             End If
@@ -164,6 +190,10 @@ Namespace CacheUtils
 
         Public Function GetIntegerValue(ByVal psKey As String, ByVal psOrther As String) As Integer
             Return SafeInteger(GetValue(psKey, psOrther))
+        End Function
+
+        Public Function GetIntegerValue(ByVal psKey As String, ByVal psOrther As String, ByVal psOtherType As String) As Integer
+            Return SafeInteger(GetValue(psKey, psOrther, psOtherType))
         End Function
 
     End Class

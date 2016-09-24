@@ -311,7 +311,14 @@ Namespace Managers
                                      ByVal pbIsEnablePlayerTemplate As Boolean, ByVal pbIsEnableBlockPlayer As Boolean, _
                                      ByVal pbRequirePasswordChange As Boolean, ByVal pbHasCasino As Boolean, ByVal pbAddNewSubAgent As Boolean, Optional ByVal pnHasCrediLimitSetting As Boolean = False, Optional ByVal pbIsEnableBettingProfile As Boolean = False, _
                                      Optional ByVal pbHasGameManagement As Boolean = False, Optional ByVal pbHasSystemManagement As Boolean = False, _
-                                     Optional ByVal pbIsEnableChangeBookmaker As Boolean = False) As Boolean
+                                     Optional ByVal isEnableChangeBookmaker As Boolean = False, _
+                                     Optional ByVal isShowBetTicker As Boolean = False, _
+                                     Optional ByVal isShowOddMonitor As Boolean = False, _
+                                     Optional ByVal isShowScheduleScores As Boolean = False, _
+                                     Optional ByVal isShowParleySetup As Boolean = False, _
+                                     Optional ByVal isShowParleySetupAllowanceInGames As Boolean = False, _
+                                     Optional ByVal isShowParleySetupAllowanceBetweenGames As Boolean = False, _
+                                     Optional ByVal isShowRiskControl As Boolean = False) As Boolean
 
             Dim bSuccess As Boolean = False
 
@@ -319,6 +326,20 @@ Namespace Managers
             Dim odbSQL As New CSQLDBUtils(SBC_CONNECTION_STRING, SBC2_CONNECTION_STRING)
 
             Try
+                If psParentID <> "" Then
+                    Dim parent = GetAgentByAgentID(psParentID, Nothing)
+                    If parent IsNot Nothing Then
+                        isEnableChangeBookmaker = SafeString(parent("IsEnableChangeBookmaker")) = "Y"
+                        isShowBetTicker = SafeString(parent("ShowBetTicker")) = "Y"
+                        isShowOddMonitor = SafeString(parent("ShowOddMonitor")) = "Y"
+                        isShowScheduleScores = SafeString(parent("ShowGameScheduleScores")) = "Y"
+                        isShowParleySetup = SafeString(parent("ShowParleySetup")) = "Y"
+                        isShowParleySetupAllowanceInGames = SafeString(parent("ShowParleyInGame")) = "Y"
+                        isShowParleySetupAllowanceBetweenGames = SafeString(parent("ShowParleyBetweenGame")) = "Y"
+                        isShowRiskControl = SafeString(parent("ShowRiskControl")) = "Y"
+                    End If
+                End If
+
                 With oInsert
                     .AppendString("AgentID", SQLString(psAgentID))
                     .AppendString("Name", SQLString(psName))
@@ -339,12 +360,19 @@ Namespace Managers
                     .AppendString("IsEnableBlockPlayer", SQLString(IIf(pbIsEnableBlockPlayer, "Y", "N")))
                     .AppendString("RequirePasswordChange", SQLString(IIf(pbRequirePasswordChange, "Y", "N")))
                     .AppendString("IsEnableBettingProfile", SQLString(IIf(pbIsEnableBettingProfile, "Y", "N")))
-                    .AppendString("IsEnableChangeBookmaker", SQLString(IIf(pbIsEnableChangeBookmaker, "Y", "N")))
+                    .AppendString("IsEnableChangeBookmaker", SQLString(IIf(isEnableChangeBookmaker, "Y", "N")))
                     .AppendString("HasCasino", SQLString(IIf(pbHasCasino, "Y", "N")))
                     .AppendString("HasGameManagement", SQLString(IIf(pbHasGameManagement, "Y", "N")))
                     .AppendString("HasSystemManagement", SQLString(IIf(pbHasSystemManagement, "Y", "N")))
                     .AppendString("HasCrediLimitSetting", SQLString(IIf(pnHasCrediLimitSetting, "Y", "N")))
                     .AppendString("AddNewSubAgent", SQLString(IIf(pbAddNewSubAgent, "Y", "N")))
+                    .AppendString("ShowBetTicker", SQLString(IIf(isShowBetTicker, "Y", "N")))
+                    .AppendString("ShowGameScheduleScores", SQLString(IIf(isShowScheduleScores, "Y", "N")))
+                    .AppendString("ShowOddMonitor", SQLString(IIf(isShowOddMonitor, "Y", "N")))
+                    .AppendString("ShowParleySetup", SQLString(IIf(isShowParleySetup, "Y", "N")))
+                    .AppendString("ShowParleyInGame", SQLString(IIf(isShowParleySetupAllowanceInGames, "Y", "N")))
+                    .AppendString("ShowParleyBetweenGame", SQLString(IIf(isShowParleySetupAllowanceBetweenGames, "Y", "N")))
+                    .AppendString("ShowRiskControl", SQLString(IIf(isShowRiskControl, "Y", "N")))
                     If psParentID <> "" Then
                         .AppendString("ParentID", SQLString(psParentID))
                         .AppendString("SuperAdminID", "NULL")
@@ -358,7 +386,7 @@ Namespace Managers
 
                 log.Debug("Insert Agent.SQL: " & oInsert.SQL)
                 odbSQL.executeNonQuery(oInsert, psCreatedBy)
-               ClearAgentCache()
+                ClearAgentCache()
                 bSuccess = True
             Catch ex As Exception
                 log.Error("Error trying to insert Agent. SQL: " & oInsert.SQL, ex)
@@ -376,7 +404,14 @@ Namespace Managers
                                       ByVal pnPlayerNumber As Integer, ByVal psChangedBy As String, ByVal pbIsEnablePlayerTemplate As Boolean, _
                                       ByVal pbIsEnableBlockPlayer As Boolean, ByVal pbHasCasino As Boolean, Optional ByVal pbAddNewSubAgent As Boolean = False, Optional ByVal pnHasCrediLimitSetting As Boolean = False, Optional ByVal psIsEnableBettingProfile As String = "", _
                                       Optional ByVal pbHasGameManagement As Boolean = False, Optional ByVal pbHasSystemManagement As Boolean = False, _
-                                      Optional ByVal pbIsEnableChangeBookmaker As Boolean = False) As Boolean
+                                      Optional ByVal isEnableChangeBookmaker As Boolean = False, _
+                                      Optional ByVal isShowBetTicker As Boolean = False, _
+                                      Optional ByVal isShowOddMonitor As Boolean = False, _
+                                      Optional ByVal isShowScheduleScores As Boolean = False, _
+                                      Optional ByVal isShowParleySetup As Boolean = False, _
+                                      Optional ByVal isShowParleySetupAllowanceInGames As Boolean = False, _
+                                      Optional ByVal isShowParleySetupAllowanceBetweenGames As Boolean = False, _
+                                      Optional ByVal isShowRiskControl As Boolean = False) As Boolean
 
             Dim bSuccess As Boolean = False
 
@@ -384,6 +419,34 @@ Namespace Managers
             Dim odbSQL As New CSQLDBUtils(SBC_CONNECTION_STRING, "")
 
             Try
+
+                If psParentID <> "" Then
+                    Dim parent = GetAgentByAgentID(psParentID, Nothing)
+                    If parent IsNot Nothing Then
+                        isEnableChangeBookmaker = SafeString(parent("IsEnableChangeBookmaker")) = "Y"
+                        isShowBetTicker = SafeString(parent("ShowBetTicker")) = "Y"
+                        isShowOddMonitor = SafeString(parent("ShowOddMonitor")) = "Y"
+                        isShowScheduleScores = SafeString(parent("ShowGameScheduleScores")) = "Y"
+                        isShowParleySetup = SafeString(parent("ShowParleySetup")) = "Y"
+                        isShowParleySetupAllowanceInGames = SafeString(parent("ShowParleyInGame")) = "Y"
+                        isShowParleySetupAllowanceBetweenGames = SafeString(parent("ShowParleyBetweenGame")) = "Y"
+                        isShowRiskControl = SafeString(parent("ShowRiskControl")) = "Y"
+                    End If
+                Else
+                    Dim oChildUpdate As New CSQLUpdateStringBuilder("Agents", "WHERE ParentID= " & SQLString(psAgentID))
+                    With oChildUpdate
+                        .AppendString("IsEnableChangeBookmaker", SQLString(IIf(isEnableChangeBookmaker, "Y", "N")))
+                        .AppendString("ShowBetTicker", SQLString(IIf(isShowBetTicker, "Y", "N")))
+                        .AppendString("ShowGameScheduleScores", SQLString(IIf(isShowScheduleScores, "Y", "N")))
+                        .AppendString("ShowOddMonitor", SQLString(IIf(isShowOddMonitor, "Y", "N")))
+                        .AppendString("ShowParleySetup", SQLString(IIf(isShowParleySetup, "Y", "N")))
+                        .AppendString("ShowParleyInGame", SQLString(IIf(isShowParleySetupAllowanceInGames, "Y", "N")))
+                        .AppendString("ShowParleyBetweenGame", SQLString(IIf(isShowParleySetupAllowanceBetweenGames, "Y", "N")))
+                        .AppendString("ShowRiskControl", SQLString(IIf(isShowRiskControl, "Y", "N")))
+                    End With
+                    odbSQL.executeNonQuery(oChildUpdate, psChangedBy)
+                End If
+
                 With oUpdate
                     .AppendString("Name", SQLString(psName))
                     .AppendString("Login", SQLString(psLogin))
@@ -402,12 +465,19 @@ Namespace Managers
                     '.AppendString("CurrentPlayerNumber", SQLString(pnPlayerNumber))
                     .AppendString("IsEnablePlayerTemplate", SQLString(IIf(pbIsEnablePlayerTemplate, "Y", "N")))
                     .AppendString("IsEnableBlockPlayer", SQLString(IIf(pbIsEnableBlockPlayer, "Y", "N")))
-                    .AppendString("IsEnableChangeBookmaker", SQLString(IIf(pbIsEnableChangeBookmaker, "Y", "N")))
+                    .AppendString("IsEnableChangeBookmaker", SQLString(IIf(isEnableChangeBookmaker, "Y", "N")))
                     .AppendString("HasCasino", SQLString(IIf(pbHasCasino, "Y", "N")))
                     .AppendString("HasGameManagement", SQLString(IIf(pbHasGameManagement, "Y", "N")))
                     .AppendString("HasSystemManagement", SQLString(IIf(pbHasSystemManagement, "Y", "N")))
                     .AppendString("HasCrediLimitSetting", SQLString(IIf(pnHasCrediLimitSetting, "Y", "N")))
                     .AppendString("AddNewSubAgent", SQLString(IIf(pbAddNewSubAgent, "Y", "N")))
+                    .AppendString("ShowBetTicker", SQLString(IIf(isShowBetTicker, "Y", "N")))
+                    .AppendString("ShowGameScheduleScores", SQLString(IIf(isShowScheduleScores, "Y", "N")))
+                    .AppendString("ShowOddMonitor", SQLString(IIf(isShowOddMonitor, "Y", "N")))
+                    .AppendString("ShowParleySetup", SQLString(IIf(isShowParleySetup, "Y", "N")))
+                    .AppendString("ShowParleyInGame", SQLString(IIf(isShowParleySetupAllowanceInGames, "Y", "N")))
+                    .AppendString("ShowParleyBetweenGame", SQLString(IIf(isShowParleySetupAllowanceBetweenGames, "Y", "N")))
+                    .AppendString("ShowRiskControl", SQLString(IIf(isShowRiskControl, "Y", "N")))
                     If psIsEnableBettingProfile <> "" Then
                         .AppendString("IsEnableBettingProfile", SQLString(psIsEnableBettingProfile))
                     End If
@@ -481,9 +551,6 @@ Namespace Managers
             End Try
             Return bSuccess
         End Function
-
-        
-
 
         Public Function UpdateSubAgentsPercent(ByVal psAgentID As String, ByVal piProfitPercentage As Single, _
                                                ByVal piGrossPercentage As Single, ByVal psChangedBy As String) As Boolean
@@ -1611,6 +1678,31 @@ Namespace Managers
 #End Region
 
 #Region "Agent's SubAgents dashboard"
+
+        Public Function CalAgentsBalance(ByVal psAgentId As String) As Double
+            
+            Dim oSubAgents As DataTable
+            'oSubAgents = GetAgentsByAgentID(psAgentId, Nothing)
+            oSubAgents = GetAgentsByAgentID(psAgentId, Nothing)
+            Dim agentbalance As Double
+            Dim oMainTable As DataTable = getSubAgentsBalanceBet(psAgentId, GetMondayOfCurrentWeek(), False)
+            'Dim oLstSubAgentIDs As List(Of String) = GetAllSubAgentIDs(psAgentId)
+            'oLstSubAgentIDs.Add(psAgentId)
+
+
+            'Dim sWhere As String = "ISNULL(TicketStatus,'Open') IN ('WIN','LOSE') AND AgentID IN ('{0}')"
+            'sWhere = String.Format(sWhere, Join(oLstSubAgentIDs.ToArray(), "','"))
+
+            Dim sBalanceAmount As String = "BalanceAmt"
+            'Dim sBalanceAmount As String = "NetAmount"
+
+            '' Get NetAmount greater than 0 first
+            agentbalance = SafeDouble(oMainTable.Compute(String.Format("SUM({0})", sBalanceAmount), Nothing))
+
+            
+            Return agentbalance
+        End Function
+
         Public Function GetAgentsBalance(ByVal psUserID As String) As Double
             ' Create Standard table
             'Dim oTable As New DataTable
@@ -1630,7 +1722,7 @@ Namespace Managers
             Dim oMainTable As DataTable = getSubAgentsBet(psUserID, GetMondayOfCurrentWeek(), False)
             Dim oLstSubAgentIDs As List(Of String) = GetAllSubAgentIDs(psUserID)
             oLstSubAgentIDs.Add(psUserID)
-            
+
 
             Dim sWhere As String = "ISNULL(TicketStatus,'Open') NOT IN ('Open', 'Pending') AND AgentID IN ('{0}')"
             sWhere = String.Format(sWhere, Join(oLstSubAgentIDs.ToArray(), "','"))
@@ -1850,6 +1942,48 @@ Namespace Managers
                 End If
             Catch ex As Exception
                 log.Error("Fails to get AgentsDashboard.SQL: " & sSQL, ex)
+            Finally
+                If oDB IsNot Nothing Then oDB.closeConnection()
+            End Try
+
+            Return Nothing
+        End Function
+
+        Private Function getSubAgentsBalanceBet(ByVal psAgentId As String, Optional ByVal poStartDate As Date = Nothing, Optional ByVal pbSuperAdmin As Boolean = False) As DataTable
+
+            Dim oDB As CSQLDBUtils = Nothing
+            Dim sSQL As String = "SELECT Convert(varchar(40),t.AgentID) AS AgentID, " & _
+            " t.NetAmount - t.RiskAmount as BalanceAmt, " & _
+            " CAST(CONVERT(NVARCHAR(10), t.TicketCompletedDate, 101) AS SMALLDATETIME) AS TicketCompletedDate, " & _
+            " CAST(CONVERT(NVARCHAR(10), t.TransactionDate, 101) AS SMALLDATETIME) AS TransactionDate, t.TicketStatus " & vbCrLf & _
+            " FROM Tickets t " & vbCrLf & " {0} " & vbCrLf & _
+            ""
+
+            '" GROUP BY t.AgentID, t.TransactionDate, t.TicketCompletedDate, t.TicketStatus"
+
+            Try
+                Dim oListSubAgentIDs As List(Of String) = GetAllSubAgentIDs(psAgentId, pbSuperAdmin)
+
+                If oListSubAgentIDs.Count > 0 Then
+                    Dim oWhere As New CSQLWhereStringBuilder()
+                    oWhere.AppendANDCondition(String.Format("t.AgentID IN ('{0}')", Join(oListSubAgentIDs.ToArray(), "','")))
+
+                    If poStartDate = Nothing Then
+                        oWhere.AppendANDCondition(String.Format("(t.TicketCompletedDate >= {0} AND ISNULL(t.TicketStatus, 'Open') IN ('WIN','LOSE'))", _
+                                                                SQLString(Format(GetMondayOfCurrentWeek, "yyyy-MM-dd"))))
+                    Else
+                        oWhere.AppendANDCondition("( " & getSQLDateRange("t.TicketCompletedDate", SafeString(poStartDate), SafeString(poStartDate.AddDays(6))) & _
+                                                  " AND ISNULL(t.TicketStatus, 'Open') IN ('WIN','LOSE'))")
+                    End If
+
+                    sSQL = String.Format(sSQL, oWhere.SQL)
+
+                    log.Debug("Get main datatable for SubAgentsBalanceBet. SQL: " & sSQL)
+                    oDB = New CSQLDBUtils(SBC_CONNECTION_STRING, "")
+                    Return oDB.getDataTable(sSQL)
+                End If
+            Catch ex As Exception
+                log.Error("Fails to get SubAgentsBalanceBet. SQL: " & sSQL, ex)
             Finally
                 If oDB IsNot Nothing Then oDB.closeConnection()
             End Try

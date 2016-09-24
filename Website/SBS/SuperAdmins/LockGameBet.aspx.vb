@@ -216,7 +216,7 @@ Namespace SBSSuperAdmin
                             oGameLine.FeedSource = SBCBL.CFileDBKeys.TIGER_SB_BOOKMAKER
                             oGameLine.Bookmaker = oItem.Key  'SBCBL.CFileDBKeys.TIGER_SB_BOOKMAKER
 
-                            oGameLine.HomeSpread = -SafeDouble(txtAwaySpread.Text)
+                            oGameLine.HomeSpread = -SafeDouble(txtHomeSpread.Text)
                             oGameLine.HomeSpreadMoney = SafeDouble(txtHomeSpreadMoney.Text)
 
                             oGameLine.AwaySpread = SafeDouble(txtAwaySpread.Text)
@@ -262,7 +262,7 @@ Namespace SBSSuperAdmin
                         oGameLine.FeedSource = SBCBL.CFileDBKeys.TIGER_SB_BOOKMAKER
                         oGameLine.Bookmaker = SBCBL.CFileDBKeys.TIGER_SB_BOOKMAKER
 
-                        oGameLine.HomeSpread = -SafeDouble(txtAwaySpread.Text)
+                        oGameLine.HomeSpread = -SafeDouble(txtHomeSpread.Text)
                         oGameLine.HomeSpreadMoney = SafeDouble(txtHomeSpreadMoney.Text)
 
                         oGameLine.AwaySpread = SafeDouble(txtAwaySpread.Text)

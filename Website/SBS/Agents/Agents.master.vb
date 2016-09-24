@@ -47,9 +47,9 @@ Partial Class SBS_Agents_Agent
             Dim userSession As New CSBCSession()
             Session("BackAgentID") = Nothing
             Session("BackAgentName") = Nothing
-            Dim nAgentBalance As Double = 0
-            Dim oAgentManager As New CAgentManager()
-            nAgentBalance = oAgentManager.GetAgentsBalance(userSession.AgentUserInfo.UserID)
+            'Dim nAgentBalance As Double = 0
+            'Dim oAgentManager As New CAgentManager()
+            'nAgentBalance = oAgentManager.GetAgentsBalance(userSession.AgentUserInfo.UserID)
         End If
     End Sub
 End Class

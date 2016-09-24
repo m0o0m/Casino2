@@ -2,7 +2,7 @@
 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
     <div class="page-header pull-left">
         <div class="page-title">
-            <a href="/SBS/Players/Default.aspx?bettype=BetTheBoard">SPORT</a> 
+            <a href="/SBS/Players/Default.aspx?bettype=BetTheBoard">Figures</a> 
             <%--| <a href="/SBS/Players/Casino.aspx?bettype=casino">CASINO</a>--%>
         </div>
     </div>

@@ -449,6 +449,79 @@ Namespace Managers
             Return bResult
         End Function
 
+        Public Function SaveTeamTotalLine(ByVal poGameLine As CGameLine) As Boolean
+            Dim bResult As Boolean = False
+
+
+            Dim oDB As New CSQLDBUtils(SBC_CONNECTION_STRING, SBC2_CONNECTION_STRING)
+            Dim oEdit As ISQLEditStringBuilder
+
+            Try
+
+                'For Each bmker As CSysSetting In bookmarkers
+
+                Dim oWhere As New CSQLWhereStringBuilder()
+                oWhere.AppendANDCondition("GameID=" & SQLString(poGameLine.GameID))
+                'oWhere.AppendANDCondition("FeedSource=" & SQLString(poGameLine.FeedSource))
+                oWhere.AppendANDCondition("Context=" & SQLString(poGameLine.Context))
+                'oWhere.AppendANDCondition("Bookmaker=" & SQLString(SafeString(bmker.Value)))
+
+                oEdit = New CSQLUpdateStringBuilder("GameLines", oWhere.SQL)
+
+                'Dim sID As String = SafeString(oDB.getScalerValue("SELECT GameLineID FROM GameLines " & oWhere.SQL))
+                'If sID <> "" Then
+                '    oEdit = New CSQLUpdateStringBuilder("GameLines", oWhere.SQL)
+                'Else
+
+                '    oEdit = New CSQLInsertStringBuilder("GameLines")
+                '    oEdit.AppendString("GameLineID", SQLString(Guid.NewGuid()))
+                '    oEdit.AppendString("GameID", SQLString(poGameLine.GameID))
+                '    oEdit.AppendString("FeedSource", SQLString(poGameLine.FeedSource))
+                '    oEdit.AppendString("Bookmaker", SQLString(SafeString(bmker.Value)))
+                '    oEdit.AppendString("Context", SQLString(poGameLine.Context))
+                'End If
+
+                With oEdit
+                    .AppendString("LastUpdated", SQLDate(Date.Now.ToUniversalTime()))
+
+                    '.AppendString("HomeSpread", SQLDouble(poGameLine.HomeSpread))
+                    '.AppendString("HomeSpreadMoney", SQLDouble(poGameLine.HomeSpreadMoney))
+
+                    '.AppendString("AwaySpread", SQLDouble(poGameLine.AwaySpread))
+                    '.AppendString("AwaySpreadMoney", SQLDouble(poGameLine.AwaySpreadMoney))
+
+                    '.AppendString("HomeMoneyLine", SQLDouble(poGameLine.HomeMoneyLine))
+                    '.AppendString("AwayMoneyLine", SQLDouble(poGameLine.AwayMoneyLine))
+
+                    '.AppendString("TotalPoints", SQLDouble(poGameLine.TotalPoints))
+                    '.AppendString("TotalPointsOverMoney", SQLDouble(poGameLine.TotalPointsOverMoney))
+                    '.AppendString("TotalPointsUnderMoney", SQLDouble(poGameLine.TotalPointsUnderMoney))
+
+                    .AppendString("AwayTeamTotalPoints", SQLDouble(poGameLine.AwayTeamTotalPoints))
+                    .AppendString("AwayTeamTotalPointsOverMoney", SQLDouble(poGameLine.AwayTeamTotalPointsOverMoney))
+                    .AppendString("AwayTeamTotalPointsUnderMoney", SQLDouble(poGameLine.AwayTeamTotalPointsUnderMoney))
+
+                    .AppendString("HomeTeamTotalPoints", SQLDouble(poGameLine.HomeTeamTotalPoints))
+                    .AppendString("HomeTeamTotalPointsOverMoney", SQLDouble(poGameLine.HomeTeamTotalPointsOverMoney))
+                    .AppendString("HomeTeamTotalPointsUnderMoney", SQLDouble(poGameLine.HomeTeamTotalPointsUnderMoney))
+
+                End With
+
+                log.Debug("Save TeamTotalLine GameLine. SQL: " & oEdit.SQL)
+                oDB.executeNonQuery(oEdit, "")
+                bResult = True
+                'Next
+
+            Catch ex As Exception
+                log.Error("Fail to Save TeamTotalLine GameLine: " & ex.Message, ex)
+
+            Finally
+                If oDB IsNot Nothing Then oDB.closeConnection()
+            End Try
+
+            Return bResult
+        End Function
+
         Public Function RemoveWarning(ByVal psGameLineID As String) As Boolean
             Dim sSQL As String = "update gamelines set Iswarn= null,WarnReason= null where gamelineid= " & SQLString(psGameLineID)
             Dim oDB As New CSQLDBUtils(SBC_CONNECTION_STRING, SBC2_CONNECTION_STRING)

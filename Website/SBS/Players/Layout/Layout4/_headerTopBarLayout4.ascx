@@ -53,7 +53,7 @@
                 <li class="dropdown topbar-user pull-right">
                     <a data-hover="dropdown" href="#" class="dropdown-toggle">
                         <i class="fa fa-user"></i>
-                        <span class="hidden-xs">Welcome:<asp:Literal ID="lblUser" runat="server"></asp:Literal>
+                        <span class="hidden-xs"><span style="color: #fff;">Welcome:</span> <asp:Literal ID="lblUser" runat="server"></asp:Literal>
                         </span>
                         &nbsp;<span class="caret"></span>
                     </a>

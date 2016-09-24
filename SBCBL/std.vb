@@ -597,6 +597,31 @@ Public Class std
 
         Return oGameType
     End Function
+
+     Public Shared Function GetTeamTotalSettingGameType() As System.Collections.Generic.Dictionary(Of String, String)
+
+        Dim oGameType As New Dictionary(Of String, String)()
+
+        '' Football
+        oGameType("NFL Football") = "NFL Football"
+        'oGameType("NFL Football Live") = "NFL Football Live"
+        oGameType("NFL Preseason") = "NFL Preseason"
+
+        '' Basketball
+        oGameType("NBA Basketball") = "NBA Basketball"
+
+        '' Baseball
+        'oGameType("MLB AL Baseball") = "MLB AL Baseball"
+        'oGameType("MLB NL Baseball") = "MLB NL Baseball"
+        oGameType("MLB Baseball") = "MLB Baseball"
+        'oGameType("MLB Baseball Live") = "MLB Baseball Live"
+
+        '' Hockey
+        oGameType("NHL Hockey") = "NHL Hockey"
+
+        Return oGameType
+    End Function
+
 #End Region
 
 #Region "SiteType"

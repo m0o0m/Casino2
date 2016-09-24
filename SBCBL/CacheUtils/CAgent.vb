@@ -78,6 +78,13 @@ Namespace CacheUtils
             _IsEnableChangeBookmaker = SafeString(podrData("IsEnableChangeBookmaker")) = "Y"
             _HasCrediLimitSetting = SafeString(podrData("HasCrediLimitSetting")) = "Y"
             _AddNewSubAgent = SafeString(podrData("AddNewSubAgent")) = "Y"
+            _showBetTicker = SafeString(podrData("ShowBetTicker")) = "Y"
+            _showOddMonitor = SafeString(podrData("ShowOddMonitor")) = "Y"
+            _showGameScheduleScores = SafeString(podrData("ShowGameScheduleScores")) = "Y"
+            _showParleySetup = SafeString(podrData("ShowParleySetup")) = "Y"
+            _showParleyInGame = SafeString(podrData("ShowParleyInGame")) = "Y"
+            _showParleyBetweenGame = SafeString(podrData("ShowParleyBetweenGame")) = "Y"
+            _showRiskControl = SafeString(podrData("ShowRiskControl")) = "Y"
             Dim odrSuperAgent As DataRow = New CAgentManager().GetSuperAgent(_UserID)
             If odrSuperAgent IsNot Nothing Then
                 _ColorScheme = SafeString(odrSuperAgent("ColorScheme"))
@@ -298,6 +305,77 @@ Namespace CacheUtils
             End Get
             Set(ByVal value As Boolean)
                 _IsEnableChangeBookmaker = value
+            End Set
+        End Property
+
+
+        Private _showBetTicker As Boolean
+        Public Property ShowBetTicker() As Boolean
+            Get
+                Return _showBetTicker
+            End Get
+            Set(ByVal value As Boolean)
+                _showBetTicker = value
+            End Set
+        End Property
+
+        Private _showGameScheduleScores As Boolean
+        Public Property ShowGameScheduleScores() As Boolean
+            Get
+                Return _showGameScheduleScores
+            End Get
+            Set(ByVal value As Boolean)
+                _showGameScheduleScores = value
+            End Set
+        End Property
+
+        Private _showOddMonitor As Boolean
+        Public Property ShowOddMonitor() As Boolean
+            Get
+                Return _showOddMonitor
+            End Get
+            Set(ByVal value As Boolean)
+                _showOddMonitor = value
+            End Set
+        End Property
+
+        Private _showParleySetup As Boolean
+        Public Property ShowParleySetup() As Boolean
+            Get
+                Return _showParleySetup
+            End Get
+            Set(ByVal value As Boolean)
+                _showParleySetup = value
+            End Set
+        End Property
+
+        Private _showParleyInGame As Boolean
+        Public Property ShowParleyInGame() As Boolean
+            Get
+                Return _showParleyInGame
+            End Get
+            Set(ByVal value As Boolean)
+                _showParleyInGame = value
+            End Set
+        End Property
+
+        Private _showParleyBetweenGame As Boolean
+        Public Property ShowParleyBetweenGame() As Boolean
+            Get
+                Return _showParleyBetweenGame
+            End Get
+            Set(ByVal value As Boolean)
+                _showParleyBetweenGame = value
+            End Set
+        End Property
+
+        Private _showRiskControl As Boolean
+        Public Property ShowRiskControl() As Boolean
+            Get
+                Return _showRiskControl
+            End Get
+            Set(ByVal value As Boolean)
+                _showRiskControl = value
             End Set
         End Property
 

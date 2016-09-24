@@ -99,6 +99,9 @@ Partial Class SBS_SuperAdmins_Main
             'Manual Quarter Line
             oSubMenu.Rows.Add(New Object() {"Quarter Lines", "Manual Muti Game Lines", "MANUAL_LINE", "ManualLines.aspx"})
 
+            ' Team Total Settings
+            oSubMenu.Rows.Add(New Object() {"Team Total Settings", "Team Total Settings", "TEAM_TOTAL_SETTINGS", "TeamTotalSettings.aspx"})
+
             '    oMenu.Add("GAME MANAGEMENT", oSubMenu)
         End If
         If MenuType.Equals("report", StringComparison.CurrentCultureIgnoreCase) Then

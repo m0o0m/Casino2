@@ -492,7 +492,7 @@ Partial Class SBS_Inc_Game_BetActions
 
         '' Create Private 
         'OddsRulesEngine_oOddsRuleEngine = New COddRulesEngine(UserSession.Cache.GetAllOddsRules(SBCBL.std.GetSiteType), olstGameType, SelectedPlayer.SuperAdminID, True, SelectedPlayer.Template, SelectedPlayer.SuperAgentID)
-        _oOddsRuleEngine = New COddRulesEngine(olstGameType, SelectedPlayer.SuperAdminID, True, SelectedPlayer.Template, SelectedPlayer.SuperAgentID)
+        _oOddsRuleEngine = New COddRulesEngine(olstGameType, SelectedPlayer.SuperAdminID, True, SelectedPlayer.Template, SelectedPlayer.SuperAgentID, SelectedPlayer.UserID)
 
         LoadGameTypes(olstGameType)
 
@@ -1673,7 +1673,7 @@ Partial Class SBS_Inc_Game_BetActions
 
     Protected Sub BetGame(ByVal bSetWinAmount As Boolean, ByVal sender As Object, ByVal pbFavorite As Boolean, ByVal poData As DataRow, ByVal ddlBuyPoint As CDropDownList, ByVal pbIsCheckPitcher As Boolean, Optional ByVal pbPropGame As Boolean = False)
         Dim olstGameType As List(Of String) = UserSession.SelectedGameTypes(Me.SelectedPlayerID)
-        _oOddsRuleEngine = New COddRulesEngine(olstGameType, SelectedPlayer.SuperAdminID, True, SelectedPlayer.Template, SelectedPlayer.SuperAgentID)
+        _oOddsRuleEngine = New COddRulesEngine(olstGameType, SelectedPlayer.SuperAdminID, True, SelectedPlayer.Template, SelectedPlayer.SuperAgentID, SelectedPlayer.UserID)
 
         StraightError = False
         '' Item Checked
@@ -1921,7 +1921,7 @@ PropGame:
                 Dim sActionType = BetTypeActive.Replace(_sBetTheBoard, _sStraight).Replace(__BetIfAll, _sStraight)
                 olstGameID.Add(oTicketBet.GameID)
                 'Dim oOddsRules As New COddRulesEngine(UserSession.Cache.GetAllOddsRules(SBCBL.std.GetSiteType), olstGameID, SelectedPlayer.SuperAdminID, False, SelectedPlayer.Template, SelectedPlayer.SuperAgentID)
-                Dim oOddsRules As New COddRulesEngine(olstGameID, SelectedPlayer.SuperAdminID, False, SelectedPlayer.Template, SelectedPlayer.SuperAgentID)
+                Dim oOddsRules As New COddRulesEngine(olstGameID, SelectedPlayer.SuperAdminID, False, SelectedPlayer.Template, SelectedPlayer.SuperAgentID, SelectedPlayer.UserID)
 
                 If UCase(sActionType) <> "STRAIGHT" Then
                     If UserSession.SelectedTicket(SelectedPlayerID).LastTicket IsNot Nothing AndAlso _

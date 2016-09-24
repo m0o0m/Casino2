@@ -23,6 +23,10 @@ Namespace CacheUtils
             If HttpContext.Current.Cache(sKey) Is Nothing Then
                 Dim oDB As CSQLDBUtils = Nothing
                 Try
+                    If String.IsNullOrEmpty(psAgentID) Then
+                        Throw New Exception("Agent ID cannot be empty")
+                    End If
+
                     Dim oAgentInfo As CAgent
                     If psAgentID = "Test" Then
                         oAgentInfo = New CAgent()
@@ -539,24 +543,39 @@ Namespace CacheUtils
         End Sub
 
 
-        Public Function GetJuiceControl(ByVal psAgentID As String, ByVal psSportType As String, ByVal psContext As String, ByVal psGameType As String) As Integer
-            Dim sKey As String = "JUICE_CONTROL" & UCase(psAgentID) & UCase(psSportType) & UCase(psContext) & UCase(psGameType)
+        Public Function GetJuiceControl(ByVal psAgentID As String, ByVal psSportType As String, ByVal psContext As String, ByVal psGameType As String, ByVal psBetType As String) As Integer
+            Dim sKey As String = "JUICE_CONTROL" & UCase(psAgentID) & UCase(psSportType) & UCase(psContext) & UCase(psGameType) & UCase(psBetType)
             'Dim oGameTypeOnOffManager As New CGameTypeOnOffManager()
             If HttpContext.Current.Cache(sKey) Is Nothing Then
                 'Dim nJuice As Integer = oGameTypeOnOffManager.GetJuiceControlByID(psAgentID, psSportType, psContext)
-                Dim oSettings As New CSysSettingList
-                Dim nJuice As Integer = GetSysSettings(psAgentID & "_Juice", psSportType).GetIntegerValue(psContext, psGameType) '(New CSysSettingManager).GetSysSettings("").get
+                Dim nJuice As Integer = GetSysSettings(psAgentID & "_Juice", psSportType).GetIntegerValue(psContext, psGameType, psBetType) '(New CSysSettingManager).GetSysSettings("").get
 
                 HttpContext.Current.Cache.Add(sKey, nJuice, Nothing, Date.Now.AddMinutes(CACHE_TIME), Nothing, Caching.CacheItemPriority.Default, Nothing)
             End If
             Return CType(HttpContext.Current.Cache(sKey), Integer)
         End Function
 
-        Public Sub ClearJuiceControl(ByVal psAgentID As String, ByVal psSportType As String, ByVal psContext As String, ByVal psGameType As String)
-            Dim sKey As String = "JUICE_CONTROL" & UCase(psAgentID) & UCase(psSportType) & UCase(psContext) & UCase(psGameType)
+        Public Sub ClearJuiceControl(ByVal psAgentID As String, ByVal psSportType As String, ByVal psContext As String, ByVal psGameType As String, ByVal psBetType As String)
+            Dim sKey As String = "JUICE_CONTROL" & UCase(psAgentID) & UCase(psSportType) & UCase(psContext) & UCase(psGameType) & UCase(psBetType)
             HttpContext.Current.Cache.Remove(sKey)
         End Sub
 
+        Public Function GetPlayerJuiceControl(ByVal psPlayerID As String, ByVal psSportType As String, ByVal psContext As String, ByVal psGameType As String, ByVal psBetType As String) As Integer
+            Dim sKey As String = "PLAYER_JUICE_CONTROL" & UCase(psPlayerID) & UCase(psSportType) & UCase(psContext) & UCase(psGameType) & UCase(psBetType)
+            'Dim oGameTypeOnOffManager As New CGameTypeOnOffManager()
+            If HttpContext.Current.Cache(sKey) Is Nothing Then
+                'Dim nJuice As Integer = oGameTypeOnOffManager.GetJuiceControlByID(psAgentID, psSportType, psContext)
+                Dim nJuice As Integer = GetSysSettings(psPlayerID & "_Juice", psSportType).GetIntegerValue(psContext, psGameType, psBetType) '(New CSysSettingManager).GetSysSettings("").get
+
+                HttpContext.Current.Cache.Add(sKey, nJuice, Nothing, Date.Now.AddMinutes(CACHE_TIME), Nothing, Caching.CacheItemPriority.Default, Nothing)
+            End If
+            Return CType(HttpContext.Current.Cache(sKey), Integer)
+        End Function
+
+        Public Sub ClearPlayerJuiceControl(ByVal psPlayerID As String, ByVal psSportType As String, ByVal psContext As String, ByVal psGameType As String, ByVal psBetType As String)
+            Dim sKey As String = "PLAYER_JUICE_CONTROL" & UCase(psPlayerID) & UCase(psSportType) & UCase(psContext) & UCase(psGameType) & UCase(psBetType)
+            HttpContext.Current.Cache.Remove(sKey)
+        End Sub
 
 #End Region
 

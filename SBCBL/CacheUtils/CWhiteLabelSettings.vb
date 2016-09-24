@@ -52,6 +52,7 @@ Namespace CacheUtils
             Dim oDB As New CSQLDBUtils(SBC_CONNECTION_STRING, "")
             Try
                 oDB.executeNonQuery(oInsert.SQL)
+                HttpContext.Current.Cache.Remove(GetCacheKey(SQLString(SiteURL)))
                 Return True
             Catch ex As Exception
                 _log.Error("Cannot Insert New Whitelabel setting. SQL: " & oInsert.SQL, ex)
@@ -76,61 +77,62 @@ Namespace CacheUtils
         End Function
 
         Public Function Update(Optional ByVal bremove As Boolean = False) As Boolean
-            Dim oInsert As New WebsiteLibrary.DBUtils.CSQLUpdateStringBuilder("WhiteLabelSettings", "where WhiteLabelSettingID = " & SQLString(WhiteLabelSettingID))
-            oInsert.AppendString("SiteURL", SQLString(SiteURL))
-            oInsert.AppendString("CopyrightName", SQLString(CopyrightName))
-            oInsert.AppendString("ColorScheme", SQLString(ColorScheme))
-            oInsert.AppendString("LoginTemplate", SQLString(LoginTemplate))
+            Dim oUpdate As New WebsiteLibrary.DBUtils.CSQLUpdateStringBuilder("WhiteLabelSettings", "where WhiteLabelSettingID = " & SQLString(WhiteLabelSettingID))
+            oUpdate.AppendString("SiteURL", SQLString(SiteURL))
+            oUpdate.AppendString("CopyrightName", SQLString(CopyrightName))
+            oUpdate.AppendString("ColorScheme", SQLString(ColorScheme))
+            oUpdate.AppendString("LoginTemplate", SQLString(LoginTemplate))
             If LogoFileName <> "" Then
-                oInsert.AppendString("LogoFileName", SQLString(LogoFileName))
+                oUpdate.AppendString("LogoFileName", SQLString(LogoFileName))
             End If
             If WelComeImage <> "" Then
-                oInsert.AppendString("WelComeImage", SQLString(WelComeImage))
+                oUpdate.AppendString("WelComeImage", SQLString(WelComeImage))
             End If
             If Favicon <> "" Then
-                oInsert.AppendString("Favicon", SQLString(Favicon))
+                oUpdate.AppendString("Favicon", SQLString(Favicon))
             End If
 
             If BackgroundImage <> "" Then
-                oInsert.AppendString("BackgroundImage", SQLString(BackgroundImage))
+                oUpdate.AppendString("BackgroundImage", SQLString(BackgroundImage))
             End If
 
             If BackgroundLoginImage <> "" Then
-                oInsert.AppendString("BackgroundLoginImage", SQLString(BackgroundLoginImage))
+                oUpdate.AppendString("BackgroundLoginImage", SQLString(BackgroundLoginImage))
             End If
             If LoginLogo <> "" Then
-                oInsert.AppendString("LogoLoginImage", SQLString(LoginLogo))
+                oUpdate.AppendString("LogoLoginImage", SQLString(LoginLogo))
             End If
 
-            oInsert.AppendString("SuperAgentPhone", SQLString(SuperAgentPhone))
+            oUpdate.AppendString("SuperAgentPhone", SQLString(SuperAgentPhone))
 
             If LeftBackgroundLoginImage <> "" Then
-                oInsert.AppendString("LeftBackgroundLoginImage", SQLString(LeftBackgroundLoginImage))
+                oUpdate.AppendString("LeftBackgroundLoginImage", SQLString(LeftBackgroundLoginImage))
             End If
             If RightBackgroundLoginImage <> "" Then
-                oInsert.AppendString("RightBackgroundLoginImage", SQLString(RightBackgroundLoginImage))
+                oUpdate.AppendString("RightBackgroundLoginImage", SQLString(RightBackgroundLoginImage))
             End If
             If BottomBackgroundLoginImage <> "" Then
-                oInsert.AppendString("BottomBackgroundLoginImage", SQLString(BottomBackgroundLoginImage))
+                oUpdate.AppendString("BottomBackgroundLoginImage", SQLString(BottomBackgroundLoginImage))
             End If
             If BackupURL <> "" Then
-                oInsert.AppendString("BackupURL", SQLString(BackupURL))
+                oUpdate.AppendString("BackupURL", SQLString(BackupURL))
             End If
 
             If bremove Then
-                oInsert.AppendString("BackgroundImage", SQLString(BackgroundImage))
-                oInsert.AppendString("BackgroundLoginImage", SQLString(BackgroundLoginImage))
-                oInsert.AppendString("LogoLoginImage", SQLString(LoginLogo))
-                oInsert.AppendString("LeftBackgroundLoginImage", SQLString(LeftBackgroundLoginImage))
-                oInsert.AppendString("RightBackgroundLoginImage", SQLString(RightBackgroundLoginImage))
-                oInsert.AppendString("BottomBackgroundLoginImage", SQLString(BottomBackgroundLoginImage))
+                oUpdate.AppendString("BackgroundImage", SQLString(BackgroundImage))
+                oUpdate.AppendString("BackgroundLoginImage", SQLString(BackgroundLoginImage))
+                oUpdate.AppendString("LogoLoginImage", SQLString(LoginLogo))
+                oUpdate.AppendString("LeftBackgroundLoginImage", SQLString(LeftBackgroundLoginImage))
+                oUpdate.AppendString("RightBackgroundLoginImage", SQLString(RightBackgroundLoginImage))
+                oUpdate.AppendString("BottomBackgroundLoginImage", SQLString(BottomBackgroundLoginImage))
             End If
             Dim oDB As New CSQLDBUtils(SBC_CONNECTION_STRING, "")
             Try
-                oDB.executeNonQuery(oInsert.SQL)
+                oDB.executeNonQuery(oUpdate.SQL)
+                HttpContext.Current.Cache.Remove(GetCacheKey(SQLString(SiteURL)))
                 Return True
             Catch ex As Exception
-                _log.Error("Cannot Update Whitelabel setting. SQL: " & oInsert.SQL, ex)
+                _log.Error("Cannot Update Whitelabel setting. SQL: " & oUpdate.SQL, ex)
             Finally
                 oDB.closeConnection()
             End Try
@@ -142,7 +144,7 @@ Namespace CacheUtils
                 psURL = psURL.Substring("www.".Length)
             End If
 
-            Dim sKey As String = "WHITE_LABEL_" & psURL
+            Dim sKey As String = GetCacheKey(psURL)
             If HttpContext.Current.Cache(sKey) IsNot Nothing Then
                 Return CType(HttpContext.Current.Cache(sKey), CWhiteLabelSettings)
             End If
@@ -169,6 +171,7 @@ Namespace CacheUtils
                     oSetting.BottomBackgroundLoginImage = SafeString(oDT.Rows(0)("BottomBackgroundLoginImage"))
                     oSetting.SuperAgentPhone = SafeString(oDT.Rows(0)("SuperAgentPhone"))
                     oSetting.BackupURL = SafeString(oDT.Rows(0)("BackupURL"))
+
                     HttpContext.Current.Cache.Add(sKey, oSetting, Nothing, Date.Now.AddMinutes(CACHE_TIME), Nothing, Caching.CacheItemPriority.Default, Nothing)
                     Return oSetting
                 End If
@@ -249,5 +252,10 @@ Namespace CacheUtils
             End Try
             Return False
         End Function
+
+        Private Shared Function GetCacheKey(ByVal psURL As String) As String
+            Return "WHITE_LABEL_" & psURL.ToLower().Trim()
+        End Function
+
     End Class
 End Namespace
