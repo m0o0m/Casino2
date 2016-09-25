@@ -26,9 +26,11 @@
                             <%--<button class="button-style-4 h30px pdLR10">Login</button>--%>
                             <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Login" ValidationGroup="Login1" CssClass="button-style-4 h30px pdLR10" />
                             <div class="errortxt">
+                                <span class="lblipmsg"><asp:Literal ID="FailureText" runat="server" EnableViewState="False"  /></span>
+                                <br/>
                                 <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName"  ForeColor="#FFFFFF" 
                             ErrorMessage="User name is required" ToolTip="User name is required" ValidationGroup="Login1" CssClass="lblipmsg"></asp:RequiredFieldValidator>
-                                <br/>
+                                &nbsp;&nbsp;&nbsp;
                                 <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" ForeColor="#FFFFFF" 
                             ErrorMessage="Password is required" ToolTip="Password is required" ValidationGroup="Login1" CssClass="lblipmsg"></asp:RequiredFieldValidator>
                             </div>
