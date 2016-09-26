@@ -53,7 +53,8 @@
                 <ItemStyle Width="45%" HorizontalAlign="Left" CssClass="td-rowspan"></ItemStyle>
                 <ItemTemplate>
                     <div class="gm-type">
-                        <asp:Literal ID="ltrIfBet" runat="server"></asp:Literal></div>
+                        <asp:Literal ID="ltrIfBet" runat="server"></asp:Literal>
+                    </div>
                     <div class="gm-sportname-team baseline">
                         <asp:Literal ID="ltrSportGameTeam" runat="server"></asp:Literal>
                     </div>
@@ -82,9 +83,21 @@
                     <asp:Label ID="lblWin" runat="server" />
                 </ItemTemplate>
             </asp:TemplateColumn>
+            <asp:TemplateColumn HeaderText="Status" ItemStyle-HorizontalAlign="Center" ItemStyle-Wrap="false">
+                <ItemTemplate>
+                    <asp:Label ID="lblAction" runat="server" />
+                </ItemTemplate>
+            </asp:TemplateColumn>
+            <asp:TemplateColumn HeaderText="<nobr>Score (A/H)</nobr>" ItemStyle-HorizontalAlign="Center"
+                ItemStyle-Wrap="false">
+                <ItemTemplate>
+                    <asp:Label ID="lblScore" runat="server" />
+                </ItemTemplate>
+            </asp:TemplateColumn>
         </Columns>
     </asp:DataGrid>
-</div><!-- /#open-bet-print-->
+</div>
+<!-- /#open-bet-print-->
 <table id="pnColor" visible="False" runat="server" class="table table-hover table-bordered">
     <tr>
         <td style="background: #FFCC66; width: 20px"></td>

@@ -73,6 +73,7 @@ Namespace SBSWebsite
             grdHistory.DataSource = poHistoryTickets
             grdHistory.Columns(0).Visible = ShowCAgentName
             grdHistory.Columns(4).Visible = ShowPlayerName
+            grdHistory.Columns(12).Visible = ShowPlayerName
             grdHistory.Columns(5).Visible = Not String.IsNullOrEmpty(AgentName)
             grdHistory.DataBind()
 
@@ -197,7 +198,7 @@ Namespace SBSWebsite
                     alternateCount = 1
                 ElseIf Not ticketIdforAlternate.Equals(sTicketID) And (betTypeForAlternate.Equals(sBetType) Or (sBetType.Contains("If Win") And betTypeForAlternate.Contains("Reverse")) Or (sBetType.Contains("Reverse") And betTypeForAlternate.Contains("If Win")))
                     If sBetType.Contains("Straight") Then
-                        If Not (contextForAlternate.Equals(sContext) Or (sContext.Contains(contextForAlternate)) ) Then
+                        If Not (contextForAlternate.Equals(sContext) Or (sContext.Contains(contextForAlternate))) Then
                             alternateCount = 1
                         Else
                             alternateCount += 1
@@ -212,7 +213,7 @@ Namespace SBSWebsite
                 betTypeForAlternate = SafeString(IIf(sBetType.Contains("Reverse"), "If Win", sBetType))
                 ticketIdforAlternate = sTicketID
                 contextForAlternate = SafeString(IIf(sContext.Contains("q"), "q", sContext))
-                
+
 
                 ' Row color
                 Select Case True
@@ -375,7 +376,6 @@ Namespace SBSWebsite
                 CType(e.Item.FindControl("lblTicketDate"), Label).Text = SafeDate(oTicketBet("TransactionDate")) & "<br /> ET"
                 CType(e.Item.FindControl("lblTicketNumber"), Label).Text = SafeString(oTicketBet("TicketNumber"))
                 CType(e.Item.FindControl("lblMethod"), Label).Text = SafeString(oTicketBet("TypeOfBet")).FirstOrDefault() '.Substring(0, 1)
-                CType(e.Item.FindControl("lblTicketStatus"), Label).Text = CustomUpperTitleCase(SafeString(oTicketBet("TicketBetStatus")))
 
                 ' Game
                 Dim gameType = SafeString(oTicketBet("GameType"))
@@ -395,6 +395,9 @@ Namespace SBSWebsite
 
                 CType(e.Item.FindControl("lblRisk"), Label).Text = FormatNumber(SafeDouble(oTicketBet("RiskAmount")), 2)
                 CType(e.Item.FindControl("lblWin"), Label).Text = FormatNumber(SafeDouble(oTicketBet("WinAmount")), 2)
+
+                Dim sStatus As String = SafeString(oTicketBet("TicketBetStatus"))
+                CType(e.Item.FindControl("lblResult"), Label).Text = IIf(String.IsNullOrEmpty(SafeString(oTicketBet("TicketBetPush"))), IIf(UCase(sStatus) = "LOSE", "LOSS", sStatus), SafeString(oTicketBet("TicketBetPush")))
 
                 If UserSession.UserType = SBCBL.EUserType.SuperAdmin Or UserSession.UserType = SBCBL.EUserType.Agent Then
                     CType(e.Item.FindControl("lblPlayer"), Label).Text = SafeString(oTicketBet("PlayerName"))
@@ -434,6 +437,35 @@ Namespace SBSWebsite
                     Me.TotalWin += nWin
                 End If
 
+                Dim sScores As String = "<b>{0}</b> - <b>{1}</b>"
+                Select Case LCase(SafeString(oTicketBet("Context")))
+                    Case "current"
+                        sScores = String.Format(sScores, SafeString(oTicketBet("AwayScore")), SafeString(oTicketBet("HomeScore")))
+
+                    Case "1h"
+                        sScores = String.Format(sScores, SafeString(oTicketBet("AwayFirstHalfScore")), SafeString(oTicketBet("HomeFirstHalfScore")))
+
+                    Case "2h"
+                        sScores = String.Format(sScores, SafeString(SafeInteger(oTicketBet("AwayScore")) - SafeInteger(oTicketBet("AwayFirstHalfScore"))), SafeString(SafeInteger(oTicketBet("HomeScore")) - SafeInteger(oTicketBet("HomeFirstHalfScore"))))
+
+                    Case "1q"
+                        sScores = String.Format(sScores, SafeString(oTicketBet("AwayFirstQScore")), SafeString(oTicketBet("HomeFirstQScore")))
+
+                    Case "2q"
+                        sScores = String.Format(sScores, SafeString(oTicketBet("AwaySecondQScore")), SafeString(oTicketBet("HomeSecondQScore")))
+
+                    Case "3q"
+                        sScores = String.Format(sScores, SafeString(oTicketBet("AwayThirdQScore")), SafeString(oTicketBet("HomeThirdQScore")))
+
+                    Case "4q"
+                        sScores = String.Format(sScores, SafeString(oTicketBet("AwayFourQScore")), SafeString(oTicketBet("HomeFourQScore")))
+
+                    Case Else
+                        sScores = ""
+                End Select
+
+                CType(e.Item.FindControl("lblScore"), Label).Text = sScores
+
                 ''description
                 Dim sHomeTeam As String = SafeString(oTicketBet("HomeTeam")) '& " - H"
                 Dim sAwayTeam As String = SafeString(oTicketBet("AwayTeam")) '& " - A"
@@ -456,6 +488,17 @@ Namespace SBSWebsite
                     Select Case UCase(SafeString(oTicketBet("BetType")))
                         Case "SPREAD"
                             sDescription = getDetailBySpread(sHomeTeam, sAwayTeam, oTicketBet)
+
+                            If IsSoccer(oTicketBet("GameType")) AndAlso SafeInteger(oTicketBet("AwayScore")) = SafeInteger(oTicketBet("HomeScore")) Then
+                                Dim nHomeSpread As Double = SafeDouble(oTicketBet("HomeSpread"))
+                                Dim nAwaySpread As Double = SafeDouble(oTicketBet("AwaySpread"))
+                                Dim nHomeSpreadMoney As Double = SafeDouble(oTicketBet("HomeSpreadMoney"))
+
+                                Dim nSpread As Double = SafeDouble(IIf(nHomeSpreadMoney <> 0, nHomeSpread, nAwaySpread)) + SafeDouble(oTicketBet("AddPoint"))
+                                If nSpread = 0 Then
+                                    CType(e.Item.FindControl("lblResult"), Label).Text = "Push"
+                                End If
+                            End If
                         Case "TOTALPOINTS"
                             If SafeString(oTicketBet("HomePitcher_TicketBets")) <> "" AndAlso SafeString(oTicketBet("AwayPitcher_TicketBets")) <> "" Then
                                 sHomeTeam = SafeString(oTicketBet("AwayTeam")) & "/" & sHomeTeam
@@ -468,6 +511,9 @@ Namespace SBSWebsite
                             sDescription = getDetailByTeamTotalPoints(IIf(SafeString(oTicketBet("TeamTotalName")).Equals("away"), sAwayTeam, sHomeTeam), "", oTicketBet)
                         Case "MONEYLINE"
                             sDescription = getDetailByMoneyLine(sHomeTeam, sAwayTeam, oTicketBet)
+                            If IsSoccer(oTicketBet("GameType")) AndAlso SafeInteger(oTicketBet("AwayScore")) = SafeInteger(oTicketBet("HomeScore")) Then
+                                CType(e.Item.FindControl("lblResult"), Label).Text = "LOSS"
+                            End If
                         Case "DRAW"
                             sDescription = getDetailByDraw(sHomeTeam, sAwayTeam, oTicketBet)
                     End Select

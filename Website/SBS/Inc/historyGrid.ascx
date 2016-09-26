@@ -58,9 +58,9 @@
             </ItemTemplate>
         </asp:TemplateColumn>
         <asp:TemplateColumn HeaderText="Status">
-             <ItemStyle Width="5%" HorizontalAlign="Left"></ItemStyle>
+             <ItemStyle Width="5%" HorizontalAlign="Center"></ItemStyle>
             <ItemTemplate>
-                <asp:Label ID="lblTicketStatus" runat="server" />
+                 <asp:Label ID="lblResult" runat="server" />
             </ItemTemplate>
         </asp:TemplateColumn>
         <asp:TemplateColumn HeaderText="Game">
@@ -94,6 +94,12 @@
             <ItemStyle Width="10%"></ItemStyle>
             <ItemTemplate>
                 <asp:Label ID="lblWin" runat="server" />
+            </ItemTemplate>
+        </asp:TemplateColumn>
+        <asp:TemplateColumn HeaderText="Score (A/H)" ItemStyle-HorizontalAlign="Center"
+            ItemStyle-Wrap="false">
+            <ItemTemplate>
+                <asp:Label ID="lblScore" runat="server" />
             </ItemTemplate>
         </asp:TemplateColumn>
     </Columns>

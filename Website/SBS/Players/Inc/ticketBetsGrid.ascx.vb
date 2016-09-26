@@ -34,6 +34,8 @@ Namespace SBSPlayer
             Set(ByVal value As Boolean)
                 ViewState("__SHOWPLAYERCOLUMN") = value
                 dgTicketBets.Columns(3).Visible = value
+                dgTicketBets.Columns(9).Visible = value
+                dgTicketBets.Columns(10).Visible = value
             End Set
         End Property
 
@@ -271,6 +273,7 @@ Namespace SBSPlayer
 
                     If UserSession.UserType = SBCBL.EUserType.SuperAdmin Or UserSession.UserType = SBCBL.EUserType.Agent Then
                         CType(e.Item.FindControl("lblPlayer"), Label).Text = SafeString(oTicketBet("PlayerName"))
+                        CType(e.Item.FindControl("lblAction"), Label).Text = SafeString(oTicketBet("GameStatus"))
                     Else
                         'CType(e.Item.FindControl("lblPlayer"), Label).Visible = False
                         ShowPlayerColumn = False
@@ -296,34 +299,34 @@ Namespace SBSPlayer
                         End If
                     End If
 
-                    'Dim sScores As String = "<b>{0}</b> - <b>{1}</b>"
-                    'Select Case LCase(SafeString(oTicketBet("Context")))
-                    '    Case "current"
-                    '        sScores = String.Format(sScores, SafeString(oTicketBet("AwayScore")), SafeString(oTicketBet("HomeScore")))
+                    Dim sScores As String = "<b>{0}</b> - <b>{1}</b>"
+                    Select Case LCase(SafeString(oTicketBet("Context")))
+                        Case "current"
+                            sScores = String.Format(sScores, SafeString(oTicketBet("AwayScore")), SafeString(oTicketBet("HomeScore")))
 
-                    '    Case "1h"
-                    '        sScores = String.Format(sScores, SafeString(oTicketBet("AwayFirstHalfScore")), SafeString(oTicketBet("HomeFirstHalfScore")))
+                        Case "1h"
+                            sScores = String.Format(sScores, SafeString(oTicketBet("AwayFirstHalfScore")), SafeString(oTicketBet("HomeFirstHalfScore")))
 
-                    '    Case "2h"
-                    '        sScores = String.Format(sScores, SafeString(SafeInteger(oTicketBet("AwayScore")) - SafeInteger(oTicketBet("AwayFirstHalfScore"))), SafeString(SafeInteger(oTicketBet("HomeScore")) - SafeInteger(oTicketBet("HomeFirstHalfScore"))))
+                        Case "2h"
+                            sScores = String.Format(sScores, SafeString(SafeInteger(oTicketBet("AwayScore")) - SafeInteger(oTicketBet("AwayFirstHalfScore"))), SafeString(SafeInteger(oTicketBet("HomeScore")) - SafeInteger(oTicketBet("HomeFirstHalfScore"))))
 
-                    '    Case "1q"
-                    '        sScores = String.Format(sScores, SafeString(oTicketBet("AwayFirstQScore")), SafeString(oTicketBet("HomeFirstQScore")))
+                        Case "1q"
+                            sScores = String.Format(sScores, SafeString(oTicketBet("AwayFirstQScore")), SafeString(oTicketBet("HomeFirstQScore")))
 
-                    '    Case "2q"
-                    '        sScores = String.Format(sScores, SafeString(oTicketBet("AwaySecondQScore")), SafeString(oTicketBet("HomeSecondQScore")))
+                        Case "2q"
+                            sScores = String.Format(sScores, SafeString(oTicketBet("AwaySecondQScore")), SafeString(oTicketBet("HomeSecondQScore")))
 
-                    '    Case "3q"
-                    '        sScores = String.Format(sScores, SafeString(oTicketBet("AwayThirdQScore")), SafeString(oTicketBet("HomeThirdQScore")))
+                        Case "3q"
+                            sScores = String.Format(sScores, SafeString(oTicketBet("AwayThirdQScore")), SafeString(oTicketBet("HomeThirdQScore")))
 
-                    '    Case "4q"
-                    '        sScores = String.Format(sScores, SafeString(oTicketBet("AwayFourQScore")), SafeString(oTicketBet("HomeFourQScore")))
+                        Case "4q"
+                            sScores = String.Format(sScores, SafeString(oTicketBet("AwayFourQScore")), SafeString(oTicketBet("HomeFourQScore")))
 
-                    '    Case Else
-                    '        sScores = ""
-                    'End Select
+                        Case Else
+                            sScores = ""
+                    End Select
 
-                    'CType(e.Item.FindControl("lblScore"), Label).Text = sScores
+                    CType(e.Item.FindControl("lblScore"), Label).Text = sScores
 
                     ''total bet
                     Dim sTicketID As String = CType(e.Item.FindControl("hfTicketID"), HiddenField).Value
