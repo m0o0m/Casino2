@@ -552,34 +552,45 @@ strong,
 
 /*RESPONSIVE*/
 
+@media (max-width: 970px) {
+    .layout-small {
+        width: auto;
+    }
+}
+
 @media (max-width: 767px) {
-    .home .login-main-area {
-        margin-top: 0;
+    .navigation-area {
+        display: none;
     }
 
-        .home .login-main-area > table {
-            width: auto !important;
-            float: right;
-        }
+    .home .login-main-area {
+        margin-top: 0;
+        padding-right: 0;
+    }
+
+    .home .login-main-area > table {
+        width: 100%;
+        float: right;
+    }
 
     .home .main-menu-area {
         background: #0E2431;
     }
 
-        .home .main-menu-area ul.main-menu,
-        .home .main-menu-area ul.main-menu > li {
-            display: block;
-        }
-}
+    .home .main-menu-area ul.main-menu,
+    .home .main-menu-area ul.main-menu > li {
+        display: block;
+    }
 
-
-
-
-@media (max-width: 479px) {
     .home .login-main-area > table input[type="text"],
     .home .login-main-area > table input[type="password"],
     .home .login-main-area > table input[type="submit"] {
         width: 100%;
-        margin: 5px 0;
+        margin: 7px 0;
+    }
+
+    .logo-main {
+        text-align: center;
     }
 }
+
