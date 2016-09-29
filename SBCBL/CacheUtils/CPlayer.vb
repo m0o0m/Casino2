@@ -341,13 +341,14 @@ Namespace CacheUtils
 
         Public ReadOnly Property PendingAmount() As Double
             Get
-                'Dim oEndDate As Date = Date.Now.ToUniversalTime
-                'Dim oStartDate As Date = GetLastMondayOfDate(oEndDate)
-                'If oEndDate.DayOfWeek = DayOfWeek.Monday Or oEndDate.DayOfWeek = DayOfWeek.Tuesday Then
-                '    oStartDate.AddDays(-7)
-                'End If
-                'Return (New CTicketManager()).GetPlayerPendingAmount(_UserID, oStartDate.AddDays(6))
-                Return _PendingAmount
+                Dim oEndDate As Date = Date.Now.ToUniversalTime
+                Dim oStartDate As Date = GetLastMondayOfDate(oEndDate)
+                If oEndDate.DayOfWeek = DayOfWeek.Monday Or oEndDate.DayOfWeek = DayOfWeek.Tuesday Then
+                    oStartDate.AddDays(-7)
+                End If
+                Return (New CTicketManager()).GetPlayerPendingAmount(_UserID, oStartDate.AddDays(6))
+              
+               ' Return _PendingAmount
             End Get
         End Property
 

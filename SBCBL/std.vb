@@ -521,8 +521,8 @@ Public Class std
         oGameType("Olympics Basketball") = "Olympics Basketball"
 
         '' Baseball
-        oGameType("MLB AL Baseball") = "MLB AL Baseball"
-        oGameType("MLB NL Baseball") = "MLB NL Baseball"
+        ''oGameType("MLB AL Baseball") = "MLB AL Baseball"
+        ''oGameType("MLB NL Baseball") = "MLB NL Baseball"
         oGameType("MLB Baseball") = "MLB Baseball"
         'oGameType("MLB Baseball Live") = "MLB Baseball Live"
         oGameType("NCAA Baseball") = "NCAA Baseball"
