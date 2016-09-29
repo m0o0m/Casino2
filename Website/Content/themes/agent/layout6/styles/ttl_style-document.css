@@ -31,6 +31,7 @@ body {
 
 .layout-small {
     width: 970px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -536,4 +537,49 @@ strong,
 
 .gamebetdetail .confirmed-actions {
     text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*RESPONSIVE*/
+
+@media (max-width: 767px) {
+    .home .login-main-area {
+        margin-top: 0;
+    }
+
+        .home .login-main-area > table {
+            width: auto !important;
+            float: right;
+        }
+
+    .home .main-menu-area {
+        background: #0E2431;
+    }
+
+        .home .main-menu-area ul.main-menu,
+        .home .main-menu-area ul.main-menu > li {
+            display: block;
+        }
+}
+
+
+
+
+@media (max-width: 479px) {
+    .home .login-main-area > table input[type="text"],
+    .home .login-main-area > table input[type="password"],
+    .home .login-main-area > table input[type="submit"] {
+        width: 100%;
+        margin: 5px 0;
+    }
 }

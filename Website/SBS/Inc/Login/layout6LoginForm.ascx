@@ -6,14 +6,14 @@
     <div>
         <!-- Header -->
         <div class="header">
-            <div class="logo-login-info-area clear h110px overhidden pdLR10">
-                <div class="logo-main h110px left">
-                    <a class="block full" href="#">
-                        <img id="imgLogo" runat="server" src="/Content/themes/agent/layout6/images/icons/logo_77ebet_h.png" visible="False"/>
+            <div class="logo-login-info-area clear h110px overhidden pdLR10 ly-uw-768-h-auto">
+                <div class="logo-main h110px left ly-uw-768-1:1">
+                    <a class="block full-h" href="#">
+                        <img id="imgLogo" runat="server" src="~/Content/themes/agent/layout6/images/icons/logo_77ebet_h.png" visible="False"/>
                         <asp:Literal ID="ltrLogoName" runat="server">Sport <span>LOGO</span></asp:Literal>
                     </a>
                 </div>
-                <div class="login-main-area right mgT40 pdR10">
+                <div class="login-main-area right mgT40 pdR10 ly-uw-768-1:1">
                     <asp:Login ID="Login1" runat="server" DisplayRememberMe="False" TitleText="" PasswordRequiredErrorMessage="Password is required"
                         UserNameRequiredErrorMessage="User name is required" Width="100%">
                         <LayoutTemplate>
@@ -44,7 +44,7 @@
             <!-- Main menu -->
             <div class="navigation-area pdLR10">
                 <div class="main-menu-area">
-                    <ul class="main-menu menu-style-3">
+                    <ul class="main-menu menu-style-3 ly-uw-768-block">
                         <li class="selected"><a href="#">Home</a></li>
                         <li><a href="#">Sportbook</a></li>
                         <li><a href="#">Racebook</a></li>
@@ -100,7 +100,7 @@
                         </div>
 
                         <div class="clear pd5">
-                            <div class="ly-w-1:3 left pd5">
+                            <div class="ly-w-1:3 ly-uw-768-1:2 ly-uw-480-1:1 left pd5">
                                 <div class="box-present-1 pd10">
                                     <div class="thumnail">
                                         <img class="full-w" src="/Content/themes/agent/layout6/images/boxgame/sports.jpg" />
@@ -118,7 +118,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="ly-w-1:3 left pd5">
+                            <div class="ly-w-1:3 ly-uw-768-1:2 ly-uw-480-1:1 left pd5">
                                 <div class="box-present-1 pd10">
                                     <div class="thumnail">
                                         <img class="full-w" src="/Content/themes/agent/layout6/images/boxgame/casino.jpg" />
@@ -136,7 +136,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="ly-w-1:3 left pd5">
+                            <div class="ly-w-1:3 ly-uw-768-1:1 left pd5">
                                 <div class="box-present-1 pd10">
                                     <div class="thumnail">
                                         <img class="full-w" src="/Content/themes/agent/layout6/images/boxgame/horse.jpg" />
@@ -172,8 +172,8 @@
                 <div id="footer">
                     <div class="">
                         <div class="sp-1 mgT20"></div>
-                        <div class="clear h120px pdT20">
-                            <div class="left pdL10">
+                        <div class="clear h120px">
+                            <div class="left pdT20 pdL10 ly-uw-768-1:1 ly-uw-768-text-center">
                                 <div class="link-nav-1">
                                     <a href="">home</a> <span>|</span>
                                     <a href="">sportsbook</a> <span>|</span>
@@ -181,7 +181,7 @@
                                     <a href="">online casino</a>
                                 </div>
                             </div>
-                            <div class="right text-right pdR10">
+                            <div class="right text-right pdT20 pdR10 ly-uw-768-1:1 ly-uw-768-text-center">
                                 <div class="fz10 clr-gray-1">Copyright © 2010. Online Casino & Racebook</div>
                                 <div class="fz10 clr-gray-1 mgT1">All Rights Reserved</div>
                             </div>
