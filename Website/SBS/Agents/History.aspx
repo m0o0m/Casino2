@@ -57,7 +57,7 @@
                         </div>
                 </div>
             </div>
-            <div class="panel panel-grey">
+            <div class="panel panel-grey" style="overflow: visible">
                 <div class="panel-heading"></div>
                 <div class="panel-body">
                      <uc1:historyGrid ID="ucHistoryGrid" runat="server" ShowPlayerName="true" />
