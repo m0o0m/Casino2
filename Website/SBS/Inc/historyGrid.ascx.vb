@@ -72,6 +72,7 @@ Namespace SBSWebsite
 
             grdHistory.DataSource = poHistoryTickets
             grdHistory.Columns(0).Visible = ShowCAgentName
+            grdHistory.Columns(1).Visible = Not ShowPlayerName
             grdHistory.Columns(4).Visible = ShowPlayerName
             grdHistory.Columns(12).Visible = ShowPlayerName
             grdHistory.Columns(5).Visible = Not String.IsNullOrEmpty(AgentName)
@@ -345,8 +346,10 @@ Namespace SBSWebsite
                 'End If
             End While
 
-            ''total row
-            'Dim oTotalItem As DataGridItem = grdHistory.Items(grdHistory.Items.Count - 1)
+            'total row
+            Dim oTotalItem As DataGridItem = grdHistory.Items(grdHistory.Items.Count - 1)
+            oTotalItem.Cells(1).Text = ""
+
             'If ShowPlayerName Then
             '    oTotalItem.Cells(1).ColumnSpan = 1
             'Else
@@ -365,13 +368,15 @@ Namespace SBSWebsite
             If e.Item.ItemType = ListItemType.AlternatingItem OrElse e.Item.ItemType = ListItemType.Item Then
                 Dim oTicketBet As DataRowView = CType(e.Item.DataItem, DataRowView)
 
-                'If e.Item.ItemIndex = Me.HistoryTicketsCount - 1 Then
-                '    e.Item.CssClass = "tableheading"
-                '    e.Item.Cells(1).Text = "TOTAL"
-                '    e.Item.Cells(8).Text = FormatNumber(Me.TotalBets, 0) & " BETS"
-                '    e.Item.Cells(12).Text = SafeString(IIf(Me.TotalBalance >= 0, "", "-")) & FormatNumber(Math.Abs(Me.TotalBalance), Me.RoundMidPoint)
-                'Else
-                Dim sTicketType = GetTicketType(oTicketBet)
+                If e.Item.ItemIndex = Me.HistoryTicketsCount - 1 Then
+                    e.Item.CssClass = "row-total"
+                    e.Item.Cells(2).Text = "Total"
+                    e.Item.Cells(8).Text = FormatNumber(Me.TotalBets, 0) & " BETS"
+                    e.Item.Cells(10).Text = FormatNumber(Me.TotalRisk + SafeDouble(oTicketBet("RiskAmount")), 2)
+                    e.Item.Cells(11).Text = FormatNumber(Me.TotalWin + SafeDouble(oTicketBet("WinAmount")), 2)
+                    'e.Item.Cells(12).Text = SafeString(IIf(Me.TotalBalance >= 0, "", "-")) & FormatNumber(Math.Abs(Me.TotalBalance), Me.RoundMidPoint)
+                Else
+                    Dim sTicketType = GetTicketType(oTicketBet)
 
                 CType(e.Item.FindControl("lblTicketDate"), Label).Text = SafeDate(oTicketBet("TransactionDate")) & "<br /> ET"
                 CType(e.Item.FindControl("lblTicketNumber"), Label).Text = SafeString(oTicketBet("TicketNumber"))
@@ -522,7 +527,7 @@ Namespace SBSWebsite
 
                 CType(e.Item.FindControl("ltrGameTeam"), Literal).Text = sDescription
 
-                'End If
+                End If
             End If
         End Sub
 

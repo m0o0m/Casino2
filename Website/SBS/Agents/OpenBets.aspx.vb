@@ -150,16 +150,16 @@ Namespace SBSAgents
             Dim oTicketBets As DataTable
             If Request.QueryString("AwayTeam") IsNot Nothing AndAlso Request.QueryString("HomeTeam") IsNot Nothing Then
                 oTicketBets = (New CTicketManager).GetOpenTicketsByAgentPosition(Request.QueryString("Context"), SelectedSubAgent, EDate, Request.QueryString("AwayTeam"), Request.QueryString("HomeTeam"), Request.QueryString("BetType"), SelectedTypeOfBet)
-                ucTicketBetsGridAgent.LoadTicketBets(oTicketBets, ddlContext.SelectedValue)
-                ucTicketBetsGridAgent.ShowPlayerColumn = SelectedPlayer.Equals(ALL)
+                ucTicketBetsGrid.LoadTicketBets(oTicketBets, ddlContext.SelectedValue)
+                ucTicketBetsGrid.ShowPlayerColumn = SelectedPlayer.Equals(ALL)
                 Return
             End If
             If ddlSubAgent.SelectedValue.Equals(ALL) AndAlso Not ddlPlayers.SelectedValue.Equals(ALL) Then 'ALL - ""
-                ucTicketBetsGridAgent.LoadTicketBets((New CTicketManager).GetOpenTicketsByAgent(UserSession.UserID, EDate, ddlPlayers.Value, SelectedTypeOfBet), ddlContext.SelectedValue)
+                ucTicketBetsGrid.LoadTicketBets((New CTicketManager).GetOpenTicketsByAgent(UserSession.UserID, EDate, ddlPlayers.Value, SelectedTypeOfBet), ddlContext.SelectedValue)
                 Return
             End If
             If ddlSubAgent.SelectedValue.Equals(ALL) AndAlso ddlPlayers.SelectedValue.Equals(ALL) Then 'ALL - ALL
-                ucTicketBetsGridAgent.LoadTicketBets((New CTicketManager).GetOpenTicketsByAllSubAgent(getListSubAgentID(UserSession.UserID), EDate, SelectedTypeOfBet), ddlContext.SelectedValue)
+                ucTicketBetsGrid.LoadTicketBets((New CTicketManager).GetOpenTicketsByAllSubAgent(getListSubAgentID(UserSession.UserID), EDate, SelectedTypeOfBet), ddlContext.SelectedValue)
                 Return
             End If
             If SelectedPlayer.Equals(ALL) Then
@@ -168,7 +168,7 @@ Namespace SBSAgents
                 oTicketBets = (New CTicketManager).GetOpenTicketsByAgent(SelectedSubAgent, EDate, ddlPlayers.Value, SelectedTypeOfBet)
             End If
 
-            ucTicketBetsGridAgent.LoadTicketBets(oTicketBets, ddlContext.SelectedValue)
+            ucTicketBetsGrid.LoadTicketBets(oTicketBets, ddlContext.SelectedValue)
         End Sub
 
 #End Region
@@ -184,21 +184,21 @@ Namespace SBSAgents
 
 
             If SelectedSubAgent.Equals(ALL) Then
-                ucTicketBetsGridAgent.Visible = True
+                ucTicketBetsGrid.Visible = True
                 Return
             ElseIf SelectedSubAgent <> "" AndAlso Not SelectedSubAgent.Equals(ALL) Then
-                ucTicketBetsGridAgent.Visible = True
+                ucTicketBetsGrid.Visible = True
             Else 'selectedvalue is ""
-                ucTicketBetsGridAgent.Visible = False
+                ucTicketBetsGrid.Visible = False
                 ddlTypeOfBet.SelectedIndex = 0
                 Return
             End If
         End Sub
 
         Protected Sub ddlPlayers_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlPlayers.SelectedIndexChanged
-            ucTicketBetsGridAgent.ResultGrid.CurrentPageIndex = 0
+            ucTicketBetsGrid.ResultGrid.CurrentPageIndex = 0
             bindTickets()
-            ucTicketBetsGridAgent.ShowPlayerColumn = ddlPlayers.Value = ALL
+            'ucTicketBetsGrid.ShowPlayerColumn = ddlPlayers.Value = ALL
         End Sub
 
         Protected Sub ddlTypeOfBet_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlTypeOfBet.SelectedIndexChanged

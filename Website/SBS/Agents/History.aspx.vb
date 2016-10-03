@@ -184,7 +184,7 @@ Namespace SBSAgents
 
             End If
 
-            ucHistoryGrid.ShowPlayerName = SelectedPlayer = ALL
+            'ucHistoryGrid.ShowPlayerName = SelectedPlayer = ALL
             ucHistoryGrid.LoadHistoryTickets(odtHistoryTickets)
             If PlayerID <> "" Or Me.AgentID <> "" Then
                 'ucHistoryGrid.ResultGrid.Columns(5).Visible = PlayerID = ""

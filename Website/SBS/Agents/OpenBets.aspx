@@ -3,8 +3,9 @@
 
 <%@ Register Assembly="WebsiteLibrary" Namespace="WebsiteLibrary" TagPrefix="cc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<%@ Register Src="~/SBS/Inc/ticketBetsGridAgent.ascx" TagName="ticketBetsGridAgent"
-    TagPrefix="uc1" %>
+<%--<%@ Register Src="~/SBS/Inc/ticketBetsGridAgent.ascx" TagName="ticketBetsGridAgent"
+    TagPrefix="uc1" %>--%>
+<%@ Register Src="~/SBS/Players/Inc/ticketBetsGrid.ascx" TagName="ticketBetsGrid" TagPrefix="uc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphBody" runat="Server">
     <div class="panel panel-grey">
@@ -57,7 +58,8 @@
                     </triggers>
                 <contenttemplate>
                     <asp:Timer ID="tmrRefresh" runat="server" Interval="1500" Enabled="false" />
-                    <uc1:ticketBetsGridAgent ID="ucTicketBetsGridAgent" runat="server" />
+                    <%--<uc1:ticketBetsGridAgent ID="ucTicketBetsGridAgent" runat="server" />--%>
+                    <uc1:ticketBetsGrid ID="ucTicketBetsGrid" runat="server" />
                 </contenttemplate>
             </asp:UpdatePanel>
         </div>

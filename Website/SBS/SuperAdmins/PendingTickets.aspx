@@ -2,7 +2,7 @@
     CodeFile="PendingTickets.aspx.vb" Inherits="SBSSuperAdmin.PendingTickets" %>
 
 <%@ Register Assembly="WebsiteLibrary" Namespace="WebsiteLibrary" TagPrefix="wlb" %>
-<%@ Register Src="~/SBS/Players/Inc/ticketBetsGrid.ascx" TagName="ticketBetsGrid" TagPrefix="uc1" %>
+<%@ Register Src="~/SBS/SuperAdmins/Inc/ticketBetsGrid.ascx" TagName="ticketBetsGrid" TagPrefix="uc1" %>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphContent" runat="Server">
     <div class="row">
         <div id="historypanel" runat="server" class="col-lg-12">

@@ -8,7 +8,7 @@
         <AlternatingItemStyle HorizontalAlign="Center" />
         <FooterStyle CssClass="tableheading" HorizontalAlign="Center" />
         <Columns>
-            <asp:TemplateColumn HeaderText="**" ItemStyle-HorizontalAlign="Center">
+            <asp:TemplateColumn HeaderText="**" ItemStyle-HorizontalAlign="Center" Visible="False">
                 <ItemStyle Width="3%" />
                 <ItemTemplate>
                     <span class="btn-show-game-details toggle-detail icon-toggle-1 h14px w14px mgR10" data-ticket-id="<%# Container.DataItem("TicketID") %>"></span>
