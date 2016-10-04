@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="historyGridDetail.ascx.vb"
     Inherits="SBSWebsite.historyGridDetail" %>
 <asp:DataGrid ID="grdHistory" runat="server" Width="100%"  AutoGenerateColumns="false"  
-     CssClass="table table-hover table-bordered table-style-1" align="center">
+     CssClass="table table-hover table-bordered table-style-10" align="center">
     <HeaderStyle CssClass="tableheading row-caption" HorizontalAlign="Center"  />
     <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" CssClass="row-content" />
     <AlternatingItemStyle HorizontalAlign="Center" />
@@ -129,10 +129,9 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        var borderColor = $tr.css("background-color");
+                        var backgroundColor = $tr.css("background-color");
                         $tr.after('<tr id="game-detail-' + ticketId + '" class="row-detail"><td colspan="9"></td></tr>');
-                        $("#game-detail-" + ticketId + " > td").html(response.d).css("border-color", borderColor);
-                        $("#game-detail-" + ticketId + " > td td, #game-detail-" + ticketId + " > td table").css("border-color", borderColor);
+                        $("#game-detail-" + ticketId + " > td").html(response.d).css("background-color", backgroundColor);
                         $this.addClass("open");
                         ticketIds.removeTicketId(ticketId, false);
                     }

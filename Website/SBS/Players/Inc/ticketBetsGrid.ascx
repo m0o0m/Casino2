@@ -208,7 +208,6 @@
                         $tr.after('<tr id="game-detail-' + ticketId + '" class="row-detail"><td colspan="8"></td></tr>');
                         $("#game-detail-" + ticketId + " > td").css("background-color", backgroundColor);
                         $("#game-detail-" + ticketId + " > td").html(response.d);
-                        $("#game-detail-" + ticketId + " > td td, #game-detail-" + ticketId + " > td table");
                         $this.addClass("open");
                         ticketIds.removeTicketId(ticketId, false);
                     }
