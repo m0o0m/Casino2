@@ -98,7 +98,7 @@ Namespace SBSWebsite
                 Dim oItem As DataGridItem = grdHistory.Items(nIndex)
                 oItem.BackColor = oBackColor
 
-                Dim sBetType As String = SafeString(CType(oItem.FindControl("hfBetType"), HiddenField).Value)
+                Dim sBetType As String = SafeString(CType(oItem.FindControl("hfTicketType"), HiddenField).Value)
                 Dim sContext As String = SafeString(CType(oItem.FindControl("hfContext"), HiddenField).Value)
                 Dim sTicketID As String = SafeString(CType(oItem.FindControl("hfTicketID"), HiddenField).Value)
                 Dim oCountByTicketID As CItemCount = oCountByTicketIDs.Find(Function(x) x.ItemID = sTicketID)
@@ -231,7 +231,9 @@ Namespace SBSWebsite
                         oItemRowSpan.Cells(7).Visible = False
 
                         Dim ltrIfBet As Literal = CType(oItemRowSpan.FindControl("ltrIfBet"), Literal)
-                        ltrIfBet.Visible = False
+                        If ltrIfBet IsNot Nothing Then
+                            ltrIfBet.Visible = False
+                        End If
                     Next
 
                     nIndex += nRowSpan

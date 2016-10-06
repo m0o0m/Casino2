@@ -17,6 +17,7 @@
             <asp:TemplateColumn HeaderText="Date Time Accepted" ItemStyle-HorizontalAlign="Center">
                 <ItemStyle Width="10%"></ItemStyle>
                 <ItemTemplate>
+                    <asp:HiddenField ID="hfTicketType" runat="server" Value='<%# Container.DataItem("TicketType") %>' />
                     <asp:Label ID="lblTicketDate" runat="server" />
                     <asp:Label ID="lblUserPhone" runat="server" />
                     <asp:HiddenField ID="hfTicketID" runat="server" Value='<%# Container.DataItem("TicketID") %>' />

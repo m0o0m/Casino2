@@ -132,7 +132,7 @@ Namespace SBSPlayer
             While nIndex < dgTicketBets.Items.Count - 1
                 Dim oItem As DataGridItem = dgTicketBets.Items(nIndex)
 
-                Dim betType As String = SafeString(CType(oItem.FindControl("hfBetType"), HiddenField).Value)
+                Dim betType As String = SafeString(CType(oItem.FindControl("hfTicketType"), HiddenField).Value)
                 Dim sTicketID As String = SafeString(CType(oItem.FindControl("hfTicketID"), HiddenField).Value)
                 Dim oCountByTicketID As CItemCount = oCountByTicketIDs.Find(Function(x) x.ItemID = sTicketID)
 
@@ -211,7 +211,9 @@ Namespace SBSPlayer
                         oItemRowSpan.Cells(10).Visible = False
 
                         Dim ltrIfBet As Literal = CType(oItemRowSpan.FindControl("ltrIfBet"), Literal)
-                        ltrIfBet.Visible = False
+                        If ltrIfBet IsNot Nothing Then
+                            ltrIfBet.Visible = False
+                        End If
                     Next
 
                     nIndex += nRowSpan
